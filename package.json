@@ -1,0 +1,21 @@
+{
+  "name": "hrm-fe",
+  "version": "1.0.0",
+  "description": "Nal Solution - Human Resoures Management",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/nal-solutions/hrm-fe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/nal-solutions/hrm-fe#readme",
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "webpack": "^5.2.0"
+  }
+}
