@@ -1,6 +1,8 @@
 node_modules/
 build/
+# Extension 
 .history
+.prettierignore
 # Compiled Java class files
 *.class
 
