@@ -1,7 +1,7 @@
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
-import { get } from './apiMethods';
+import { loadAction } from '../actions/commonAction';
 
 function userFetch(props) {
   const type = props.type.toLowerCase();
@@ -14,7 +14,7 @@ function userFetch(props) {
   }, shallowEqual);
 
   const boundAction = useCallback(() => {
-    return dispatch(get(type));
+    return dispatch(loadAction(type));
   }, [dispatch]);
 
   useEffect(() => {
