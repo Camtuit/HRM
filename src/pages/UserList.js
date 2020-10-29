@@ -15,11 +15,8 @@ function UserList() {
         <UserSearchBox />
         <UserTable />
       </div>
-
     </div>
   );
 }
 
 export default UserList;
-
-

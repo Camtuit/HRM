@@ -1,15 +1,8 @@
 import React, { useState, useRef } from 'react';
 import '../css/UserSearchBox.css';
-import {
-  Form,
-  Input,
-  Button,
-  Select,
-  DatePicker,
-} from 'antd';
+import { Form, Input, Button, Select, DatePicker } from 'antd';
 
 function UserSearchBox() {
-
   const [componentSize, setComponentSize] = useState('default');
 
   const onFormLayoutChange = ({ size }) => {
@@ -31,7 +24,6 @@ function UserSearchBox() {
         onValuesChange={onFormLayoutChange}
         size={componentSize}
       >
-
         <Form.Item label="Name">
           <Input />
         </Form.Item>
@@ -41,7 +33,6 @@ function UserSearchBox() {
             <Select.Option value="demo">Signed</Select.Option>
           </Select>
         </Form.Item>
-
 
         <Form.Item label="Contract">
           <DatePicker />
@@ -60,11 +51,9 @@ function UserSearchBox() {
           <Button>Cancel</Button>
           <Button type="primary">Search</Button>
         </div>
-
       </Form>
     </div>
-  )
+  );
 }
 
-export default UserSearchBox
-
+export default UserSearchBox;

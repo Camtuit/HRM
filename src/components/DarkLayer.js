@@ -1,10 +1,8 @@
-import React from 'react'
+import React from 'react';
 import '../css/DarkLayer.css';
 
 function DarkLayer() {
-    return (
-      <div className="dark-layer" />
-    )
+  return <div className="dark-layer" />;
 }
 
-export default DarkLayer
+export default DarkLayer;

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import './App.css';
 import 'antd/dist/antd.css';
@@ -19,7 +14,6 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-
           <Route exact="true" path="/">
             <Login />
           </Route>
@@ -27,7 +21,7 @@ function App() {
           <Route path="/userlist">
             <UserList />
           </Route>
-          
+
           <Route path="/userregist">
             <UserRegist />
           </Route>

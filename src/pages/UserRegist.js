@@ -1,17 +1,17 @@
-import React from 'react'
+import React from 'react';
 import '../css/UserRegist.css';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 
 function UserRegist() {
-    return (
-      <div className="user-regist">
-        <Header />
-        <SideBar />
+  return (
+    <div className="user-regist">
+      <Header />
+      <SideBar />
 
-        <div className="user-regist-content" />
-      </div>
-    )
+      <div className="user-regist-content" />
+    </div>
+  );
 }
 
-export default UserRegist
+export default UserRegist;

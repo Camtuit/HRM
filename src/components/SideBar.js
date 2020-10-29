@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 import '../css/SideBar.css';
 import SideBarItem from './SideBarItem';
-
 
 function SideBar() {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
@@ -24,7 +20,14 @@ function SideBar() {
     >
       <div className="side-bar-header">
         <div className="side-bar-item-icon">
-          <i onClick={showMenu} className="fas fa-bars" onKeyDown={()=>{}} role="button" tabIndex={0} aria-label="Icon" />
+          <i
+            onClick={showMenu}
+            className="fas fa-bars"
+            onKeyDown={() => {}}
+            role="button"
+            tabIndex={0}
+            aria-label="Icon"
+          />
         </div>
 
         <div style={{ display: isSideBarOpen ? 'block' : 'none' }}>HRM</div>
@@ -37,7 +40,7 @@ function SideBar() {
           isSideBarOpen={isSideBarOpen}
         />
       </Link>
-      
+
       <Link to="dayofflist">
         <SideBarItem
           icon="far fa-calendar-alt"
@@ -45,7 +48,7 @@ function SideBar() {
           isSideBarOpen={isSideBarOpen}
         />
       </Link>
-     
+
       <Link to="holidaylist">
         <SideBarItem
           icon="fas fa-table"
@@ -53,15 +56,15 @@ function SideBar() {
           isSideBarOpen={isSideBarOpen}
         />
       </Link>
-     
+
       <Link to="skilllist">
         <SideBarItem
           icon="fas fa-code"
           title="Skill List"
           isSideBarOpen={isSideBarOpen}
-        />  
+        />
       </Link>
-    
+
       <Link to="devicelist">
         <SideBarItem
           icon="fas fa-laptop-code"
@@ -69,7 +72,7 @@ function SideBar() {
           isSideBarOpen={isSideBarOpen}
         />
       </Link>
-     
+
       <Link to="devicelist">
         <SideBarItem
           icon="fas fa-laptop-medical"
@@ -77,7 +80,6 @@ function SideBar() {
           isSideBarOpen={isSideBarOpen}
         />
       </Link>
-     
     </div>
   );
 }
