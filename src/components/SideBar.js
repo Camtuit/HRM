@@ -1,23 +1,22 @@
-import React, { useRef, useState } from 'react';
-import '../css/SideBar.css';
-import SideBarItem from './SideBarItem';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Link
 } from "react-router-dom";
 
+import '../css/SideBar.css';
+import SideBarItem from './SideBarItem';
+
+
 function SideBar() {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const sideBar = useRef(null);
 
   function showMenu() {
-    console.log('true');
     setIsSideBarOpen(!isSideBarOpen);
   }
 
   return (
     <div
-      ref={sideBar}
       style={{
         width: isSideBarOpen ? '230px' : '56px',
       }}
@@ -25,7 +24,7 @@ function SideBar() {
     >
       <div className="side-bar-header">
         <div className="side-bar-item-icon">
-          <i onClick={showMenu} class="fas fa-bars"></i>
+          <i onClick={showMenu} className="fas fa-bars" onKeyDown={()=>{}} role="button" tabIndex={0} aria-label="Icon" />
         </div>
 
         <div style={{ display: isSideBarOpen ? 'block' : 'none' }}>HRM</div>

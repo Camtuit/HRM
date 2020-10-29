@@ -51,7 +51,8 @@ function UserTable() {
             key: 'operation',
             fixed: 'right',
             width: 100,
-            render: () => <a>Edit</a>,
+            // eslint-disable-next-line react/display-name
+            render: () => <a href="/#">Edit</a>,
           }
       ];
       
@@ -177,25 +178,24 @@ function UserTable() {
       ];
       
       function onChange(pagination, filters, sorter, extra) {
-        console.log('params', pagination, filters, sorter, extra);
       }
     return (
-        <div className="user-table">
-            <h2>User list</h2>
+      <div className="user-table">
+        <h2>User list</h2>
 
-            <Link to="/userregist">
-                <Button className="user-table-button" type="primary">Add new user</Button>
-            </Link>
+        <Link to="/userregist">
+          <Button className="user-table-button" type="primary">Add new user</Button>
+        </Link>
 
-            <Button className="user-table-button" type="primary">Export file</Button>
+        <Button className="user-table-button" type="primary">Export file</Button>
 
-            <Button className="user-table-button" type="primary">Export workdays</Button>
+        <Button className="user-table-button" type="primary">Export workdays</Button>
 
-            <Table columns={columns} dataSource={data} onChange={onChange} />
+        <Table columns={columns} dataSource={data} onChange={onChange} />
 
            
            
-        </div>
+      </div>
     )
 }
 

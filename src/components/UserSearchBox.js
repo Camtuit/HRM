@@ -7,6 +7,7 @@ import {
   Select,
   DatePicker,
 } from 'antd';
+
 function UserSearchBox() {
 
   const [componentSize, setComponentSize] = useState('default');
@@ -56,7 +57,7 @@ function UserSearchBox() {
         </Form.Item>
 
         <div className="user-search-box-button">
-          <Button >Cancel</Button>
+          <Button>Cancel</Button>
           <Button type="primary">Search</Button>
         </div>
 

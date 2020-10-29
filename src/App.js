@@ -1,16 +1,17 @@
-
-import './App.css';
-import 'antd/dist/antd.css';
-import DarkLayer from './components/DarkLayer';
-import UserList from './pages/UserList.js';
-import Login from './pages/Login';
-
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+
+import './App.css';
+import 'antd/dist/antd.css';
+import DarkLayer from './components/DarkLayer';
+import UserList from './pages/UserList';
+import Login from './pages/Login';
+
 import UserRegist from './pages/UserRegist';
 
 function App() {
@@ -20,14 +21,14 @@ function App() {
         <Switch>
 
           <Route exact="true" path="/">
-              <Login/>
+            <Login />
           </Route>
 
-          <Route  path="/userlist">
+          <Route path="/userlist">
             <UserList />
           </Route>
           
-          <Route  path="/userregist">
+          <Route path="/userregist">
             <UserRegist />
           </Route>
         </Switch>

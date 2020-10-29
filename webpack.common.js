@@ -37,7 +37,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(jsx|js)$/,
+        test: /\.js|\.jsx$/,
         exclude: /node_modules/,
         use: [
           {
@@ -49,7 +49,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(scss|sass)$/,
+        test: /\.(scss|sass|css)$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {

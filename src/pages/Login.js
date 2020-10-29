@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import '../css/Login.css';
@@ -20,34 +21,32 @@ function Login() {
     };
   
     const onFinish = values => {
-        console.log('Success:', values);
       };
     
     const onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
     };
 
     return (
-        <div className="login">
+      <div className="login">
             
-            <div className="login-form">
-                <h3>Human Resources Management</h3>
-                <h1>NALS</h1>
+        <div className="login-form">
+          <h3>Human Resources Management</h3>
+          <h1>NALS</h1>
 
-                <Form
-                {...layout}
-                name="basic"
-                initialValues={{
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{
                     remember: true,
                 }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                >
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
 
-                    <Form.Item
-                        label="Email"
-                        name="email"
-                        rules={[
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
                         {
                             required: true,
                             message: 'Please input your email!',
@@ -58,36 +57,33 @@ function Login() {
                             message: 'The input is not valid E-mail!',
                         },
                         ]}
-                    >
-                        <Input />
-                    </Form.Item>
+            >
+              <Input />
+            </Form.Item>
 
-                    <Form.Item
-                        label="Password"
-                        name="password"
-                        rules={[
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
                         {
                             required: true,
                             message: 'Please input your password!',
                         },
                         ]}
-                    >
-                        <Input.Password />
-                    </Form.Item>
-
-                    <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                        <Checkbox>Remember me</Checkbox>
-                    </Form.Item>
-
-                    <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit" >
-                        Login
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </div>
-            
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+            <Form.Item {...tailLayout}>
+              <Button type="primary" htmlType="submit">
+                Login
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
+      </div>
     )
 }
 

@@ -13,7 +13,7 @@ function UserList() {
       <Header />
       <div className="user-list-content">
         <UserSearchBox />
-        <UserTable/>
+        <UserTable />
       </div>
 
     </div>

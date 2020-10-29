@@ -3,9 +3,7 @@ import '../css/DarkLayer.css';
 
 function DarkLayer() {
     return (
-        <div className="dark-layer">
-
-        </div>
+      <div className="dark-layer" />
     )
 }
 
