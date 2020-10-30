@@ -8,6 +8,7 @@ import UserList from './pages/UserList';
 import Login from './pages/Login';
 
 import UserRegist from './pages/UserRegist';
+import SkillRegist from './pages/SkillRegist';
 
 function App() {
   return (
@@ -26,7 +27,10 @@ function App() {
             <UserRegist />
           </Route>
 
-    
+          <Route exact path="/skillregist">   
+            <SkillRegist />
+          </Route>
+          
         </Switch>
       </Router>
     </div>
