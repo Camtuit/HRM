@@ -8,25 +8,20 @@ import UserList from './pages/UserList';
 import Login from './pages/Login';
 
 import UserRegist from './pages/UserRegist';
+import HolidayList from './pages/HolidayList';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/">
-            <Login />
-          </Route>
+          <Route exact path="/" component={Login} />
 
-          <Route exact path="/userlist">
-            <UserList />
-          </Route>
-
-          <Route path="/userregist">
-            <UserRegist />
-          </Route>
-
-    
+          <Route exact path="/userlist" component={UserList} />
+          
+          <Route exact path="/userregist" component={UserRegist} />
+           
+          <Route exact path="/holidaylist" component={HolidayList} /> 
         </Switch>
       </Router>
     </div>

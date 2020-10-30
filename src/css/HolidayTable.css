@@ -1,0 +1,16 @@
+.holiday-table {
+    margin: 20px;
+}
+
+.holiday-table-action > i {
+    color:#a0a0a0;
+}
+
+.holiday-table-action > i:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.holiday-table-action > i:nth-child(2) {
+    margin-left: 15px;
+}
