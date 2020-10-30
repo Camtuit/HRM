@@ -26,9 +26,7 @@ function App() {
             <UserRegist />
           </Route>
 
-          <Route exact path="/holidaylist">
-            <HolidayList />
-          </Route>
+    
         </Switch>
       </Router>
     </div>
