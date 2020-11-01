@@ -3,7 +3,6 @@ build/
 # Extension 
 .history
 .prettierignore
-webpack.dev.js
 .eslintrc
 .eslintignore
 .prettierrc
