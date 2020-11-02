@@ -42,9 +42,11 @@ function SkillRegistInput() {
         onValuesChange={handleChangeLayoutForm}
         size={componentSize}
       >
-        <Form.Item label="Name">
-          <Input placeholder="Skill name" value={skillName} ref={skillNameInput} onChange={handleChangeSkillName} />
-        </Form.Item> 
+        <div className="skill-regist-field">
+          <Form.Item label="Name">
+            <Input placeholder="Skill name" value={skillName} ref={skillNameInput} onChange={handleChangeSkillName} />
+          </Form.Item> 
+        </div>
         <div className="skill-regist-button">
           <Button 
             size="large" 
