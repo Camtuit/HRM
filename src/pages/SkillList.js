@@ -4,6 +4,7 @@ import SideBar from '../components/SideBar';
 import SkillSearchBox from '../components/SkillSearchBox';
 import SkillTable from '../components/SkillTable';
 import { useSelector } from 'react-redux';
+import '../css/SkillList.css';
 function SkillList(){
     const isSideBarOpen = useSelector(state => state.sideBarReducer.isSideBarOpen);
     return(

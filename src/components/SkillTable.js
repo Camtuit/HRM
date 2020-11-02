@@ -20,16 +20,14 @@ function SkillTable(){
           key: 'updated',
         },
         {
-            title: ' ',
+            title: 'Action',
             key: 'empty',
             fixed: 'right',
             width: 100,
             render: () =>(
                 <div className="skill-table-action">
-                    <a href = "#" className="skill-table-button" >
-                        <Link to="/skillregist">Edit</Link>
-                    </a>
-                    <a href = "#" >Remove</a>
+                    <i class="fas fa-edit"> </i>
+                    <i class="fas fa-trash-alt"></i>
                 </div>   
             )
         },
