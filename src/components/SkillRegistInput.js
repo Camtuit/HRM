@@ -9,20 +9,20 @@ function SkillRegistInput() {
   const skillNameInput = useRef(null);
   const history = useHistory();
   
-  const onFormLayoutChange = ({ size }) => {
+  const handleChangeLayoutForm = ({ size }) => {
     setComponentSize(size);
   };
 
-  const onChangeSkillName = (e) => {
+  const handleChangeSkillName = (e) => {
     setSkillName(e.target.value);
   };
 
-  const onContinueRegistSkill = () => {
+  const handleContinueRegistSkill = () => {
     setSkillName('');
     skillNameInput.current.focus();
   };
 
-  const onSubmitRegistSkill = () => {
+  const handleSubmitRegistSkill = () => {
     setSkillName('');
     history.push('/skilllist');
   };
@@ -39,23 +39,23 @@ function SkillRegistInput() {
         initialValues={{
           size: componentSize,
         }}
-        onValuesChange={onFormLayoutChange}
+        onValuesChange={handleChangeLayoutForm}
         size={componentSize}
       >
         <Form.Item label="Name">
-          <Input placeholder="Skill name" value={skillName} ref={skillNameInput} onChange={onChangeSkillName} />
+          <Input placeholder="Skill name" value={skillName} ref={skillNameInput} onChange={handleChangeSkillName} />
         </Form.Item> 
         <div className="skill-regist-button">
           <Button 
             size="large" 
-            onClick={onContinueRegistSkill}
+            onClick={handleContinueRegistSkill}
           >
             Continue
           </Button>
           <Button 
             type="primary" 
             size="large"
-            onClick={onSubmitRegistSkill}
+            onClick={handleSubmitRegistSkill}
           >
             Submit
           </Button>

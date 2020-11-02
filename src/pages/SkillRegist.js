@@ -6,13 +6,13 @@ import '../css/SkillRegist.css';
 
 function SkillRegist() {
   return (
-    <div>
+    <>
       <Header />
       <SideBar />
       <div className="skill-registration-content">
         <SkillRegistInput />
       </div>
-    </div>
+    </>
   );
 }
 
