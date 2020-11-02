@@ -10,6 +10,7 @@ import UserRegist from './pages/UserRegist';
 import HolidayList from './pages/HolidayList';
 import SkillList from './pages/SkillList';
 import SkillRegist from './pages/SkillRegist';
+import HolidayRegist from './pages/HolidayRegist';
 
 function App() {
   return (
