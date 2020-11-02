@@ -4,7 +4,7 @@
   "description": "Nal Solution - Human Resoures Management",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --color --hot --config webpack.dev.js",
+    "start": "webpack serve --color --hot --config --port 80 webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
   "repository": {
