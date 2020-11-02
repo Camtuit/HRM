@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import UserRegist from './pages/UserRegist';
 import HolidayList from './pages/HolidayList';
 import SkillList from './pages/SkillList';
+
 function App() {
   return (
     <div className="App">
@@ -17,14 +18,13 @@ function App() {
         <Switch>
           <Route exact path="/" component={Login} />
 
-          <Route exact path="/userlist" component={UserList} />
+          <Route exact path="/users" component={UserList} />
           
           <Route exact path="/userregist" component={UserRegist} />
            
-          <Route exact path="/holidaylist" component={HolidayList} />
-
-          <Route exact path="/skilllist" component={SkillList} />
-
+          <Route exact path="/holiday" component={HolidayList} />
+           
+          <Route exact path="/skills" component={SkillList} /> 
         </Switch>
       </Router>
     </div>

@@ -1,57 +1,67 @@
 import React from 'react';
 import { Table, Button } from 'antd';
 import '../css/SkillTable.css';
-
+import { Link } from 'react-router-dom';
 function SkillTable(){
     const columns = [
         {
-            id: 1,
-            columnName: 'No'
+          title: 'No',
+          dataIndex: 'no',
+          key: 'no',
         },
         {
-            id:2,
-            columnName: 'Name'
+          title: 'Name',
+          dataIndex: 'name',
+          key: 'name',
         },
         {
-            id:3,
-            columnName: 'Updated at'
+          title: 'Updated at',
+          dataIndex: 'updated',
+          key: 'updated',
         },
         {
-            id:4,
-            columnName: '',
+            title: ' ',
+            key: 'empty',
             fixed: 'right',
             width: 100,
-            render: () => (
-                <div className = "skill-table-action">
-                    <a href = "#">Edit</a> 
-                    <a href = "#">Remove</a>
-                </div>
+            render: () =>(
+                <div className="skill-table-action">
+                    <a href = "#" className="skill-table-button" >
+                        <Link to="/skillregist">Edit</Link>
+                    </a>
+                    <a href = "#" >Remove</a>
+                </div>   
             )
-        }
-    ];
+        },
+       
+      ];
     const data = [
         {
-            no: 1,
+            key: '1',
+            no: '1',
             name: 'PHP',
             updated: '10/10/2020 15:10:15',
         },
         {
-            no: 2,
+            key: '2',
+            no: '2',
             name: 'Angular',
             updated: '10/10/2020 15:10:15',
         },
         {
-            no: 4,
+            key: '3',
+            no: '3',
             name: 'Reactjs',
             updated: '10/10/2020 15:10:15',
-        }
+        },
+      
     ];
     return(
         <div className = "skill-table">
-            <Button className = "skill-table-button" type = "primary">
-                Add new
+            <Button className = "skill-table-add" type = "primary">
+                <Link to="/skillregist">Add new</Link>
             </Button>
-            <Table columns = {columns} dataSource ={data}/>
+            <Table className = "table" columns={columns} dataSource={data} />
         </div>    
     )
 }
