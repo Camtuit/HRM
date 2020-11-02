@@ -7,13 +7,19 @@
   background-color: #202d3f;
   z-index: 20;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> 47994254dc8ad22144452bb7d8ba0baffb2d09ca
   transition: width 0.3s;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
 >>>>>>> 54012ea... fix SideBar
+=======
+>>>>>>> 47994254dc8ad22144452bb7d8ba0baffb2d09ca
 }
 
 /* side-bar-header */
@@ -21,6 +27,7 @@
   color: #c7d3df;
   white-space: nowrap;
   padding: 14px 0;
+<<<<<<< HEAD
   border-bottom: 1px solid #374455;
 }
 
@@ -54,16 +61,23 @@
   color: #c7d3df;
   white-space: nowrap;
   padding: 14px 0 ;
+=======
+>>>>>>> 47994254dc8ad22144452bb7d8ba0baffb2d09ca
   border-bottom: 1px solid #374455;
 }
 
 .side-bar-header > i {
   font-size: 24px;
+<<<<<<< HEAD
   width: 56px;  
+=======
+  width: 56px;
+>>>>>>> 47994254dc8ad22144452bb7d8ba0baffb2d09ca
   text-align: center;
 }
 
 .side-bar-header > i:hover {
+<<<<<<< HEAD
   cursor: pointer;
 }
 
@@ -81,6 +95,8 @@
 }
 
 .side-bar-item:hover {
+=======
+>>>>>>> 47994254dc8ad22144452bb7d8ba0baffb2d09ca
   cursor: pointer;
   background-color: #33445a;
 }
@@ -95,4 +111,25 @@
   width: 56px;
   text-align: center;
 }
+<<<<<<< HEAD
 >>>>>>> 54012ea... fix SideBar
+=======
+
+/* side-bar-item */
+.side-bar-item {
+  color: #c7d3df;
+  white-space: nowrap;
+  padding: 10px 0;
+}
+
+.side-bar-item:hover {
+  cursor: pointer;
+  background-color: #33445a;
+}
+
+.side-bar-item > i {
+  font-size: 24px;
+  width: 56px;
+  text-align: center;
+}
+>>>>>>> 47994254dc8ad22144452bb7d8ba0baffb2d09ca
