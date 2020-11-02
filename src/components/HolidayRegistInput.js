@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 function HolidayRegistInput() {
   const [componentSize, setComponentSize] = useState('default');
   const [holidayDate, setHolidayDate] = useState(new Date());
+  const [holidayDay, setHolidayDay] = useState(new Date());
   const [holidayName, setHolidayName] = useState('');
   const dateFormat = 'DD/MM/YYYY';
   const history = useHistory();
@@ -62,6 +63,12 @@ function HolidayRegistInput() {
                 value={holidayName} 
                 onChange={handleChangeHolidayName} 
               />
+                defaultValue={moment(holidayDay, dateFormat)}
+                format={dateFormat}
+              />
+            </Form.Item>
+            <Form.Item label="Notes">
+              <Input placeholder="Notes" value={holidayName} onChange={handleChangeHolidayName} />
             </Form.Item> 
           </div>
           <div className="holiday-regist-button">
