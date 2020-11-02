@@ -1,4 +1,6 @@
 .user-list-content {
     margin-top: 70px;
     margin-left: 56px;
+    transition: margin-left 0.3s;
 }
+
