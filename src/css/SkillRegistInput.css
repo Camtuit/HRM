@@ -1,0 +1,26 @@
+.ant-form-item-control-input-content {
+    margin-left: 40px;
+}
+
+.skill-regist-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 15%;
+}
+
+.skill-regist-button > button {
+    margin-left: 10px;
+}
+
+.ant-btn {
+    height: 50px;
+    width: 250px;
+}
+
+.ant-input {
+    height: 50px;
+}
+
+.ant-form-item-label > label {
+    height: 50px;
+}
