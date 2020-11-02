@@ -1,5 +1,3 @@
-store.js
-
 import { createStore, combineReducers } from "redux";
 import sideBarReducer from '../reducers/sideBarReducer';
 
