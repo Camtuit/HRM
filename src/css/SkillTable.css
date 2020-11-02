@@ -7,3 +7,6 @@
 .skill-table-button {
   margin-right: 4px;
 }
+a:hover {
+  color: red;
+}
