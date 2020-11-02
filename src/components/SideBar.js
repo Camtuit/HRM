@@ -20,7 +20,14 @@ function SideBar() {
     >
       <div className="side-bar-header">
         <div className="side-bar-item-icon">
-          <i onClick={showMenu} className="fas fa-bars" />
+          <i
+            onClick={showMenu}
+            className="fas fa-bars"
+            onKeyDown={() => {}}
+            role="button"
+            tabIndex={0}
+            aria-label="Icon"
+          />
         </div>
 
         <div style={{ display: isSideBarOpen ? 'block' : 'none' }}>HRM</div>
