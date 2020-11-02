@@ -13,7 +13,6 @@ function SkillSearchBox() {
         e.preventDefault();
     }
     const handleSearch = () => {
-
         console.log('ok');
     }
     return (
