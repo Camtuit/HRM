@@ -8,6 +8,7 @@ import Login from './pages/Login';
 
 import UserRegist from './pages/UserRegist';
 import HolidayList from './pages/HolidayList';
+import SkillList from './pages/SkillList';
 import SkillRegist from './pages/SkillRegist';
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
           <Route exact path="/holiday" component={HolidayList} /> 
 
           <Route exact path="/skillregist" component={SkillRegist} />   
+          
+          <Route exact path="/skills" component={SkillList} />   
           
         </Switch>
       </Router>
