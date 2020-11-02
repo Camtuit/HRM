@@ -11,16 +11,3 @@
 .skill-regist-button > button {
     margin-left: 10px;
 }
-
-.ant-btn {
-    height: 50px;
-    width: 250px;
-}
-
-.ant-input {
-    height: 50px;
-}
-
-.ant-form-item-label > label {
-    height: 50px;
-}
