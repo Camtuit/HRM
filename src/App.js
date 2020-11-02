@@ -28,6 +28,8 @@ function App() {
           <Route exact path="/skillregist" component={SkillRegist} />   
           
           <Route exact path="/skills" component={SkillList} />   
+
+          <Route exact path="/holidayregist" component={HolidayRegist} />   
           
         </Switch>
       </Router>
