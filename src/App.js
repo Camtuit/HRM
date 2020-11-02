@@ -9,7 +9,7 @@ import Login from './pages/Login';
 
 import UserRegist from './pages/UserRegist';
 import HolidayList from './pages/HolidayList';
-
+import SkillList from './pages/SkillList';
 function App() {
   return (
     <div className="App">
@@ -21,7 +21,10 @@ function App() {
           
           <Route exact path="/userregist" component={UserRegist} />
            
-          <Route exact path="/holidaylist" component={HolidayList} /> 
+          <Route exact path="/holidaylist" component={HolidayList} />
+
+          <Route exact path="/skilllist" component={SkillList} />
+
         </Switch>
       </Router>
     </div>
