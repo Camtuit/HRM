@@ -31,7 +31,6 @@ function HolidayRegistInput() {
     setHolidayName('');
     history.push('/holiday');
   };
-
   return (
       <>
         <Form
