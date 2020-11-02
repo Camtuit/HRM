@@ -80,6 +80,14 @@ function SideBar() {
           isSideBarOpen={isSideBarOpen}
         />
       </Link>
+
+      <Link to="devicelist">
+        <SideBarItem
+          icon="fas fa-laptop-medical"
+          title="Request Device List"
+          isSideBarOpen={isSideBarOpen}
+        />
+      </Link>
     </div>
   );
 }
