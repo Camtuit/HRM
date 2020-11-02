@@ -1,6 +1,9 @@
 .skill-table {
-  margin: 20px;
+  padding: 20px 65px;
+}
+.skill-table-add {
+  float: right;
 }
 .skill-table-button {
-  float: right;
+  margin-right: 4px;
 }
