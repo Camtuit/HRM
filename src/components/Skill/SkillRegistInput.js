@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Form, Input, Button } from 'antd';
-import '../css/SkillRegistInput.css';
+import '../../css/SkillRegistInput.css';
 import { useHistory } from 'react-router';
 
 function SkillRegistInput() {

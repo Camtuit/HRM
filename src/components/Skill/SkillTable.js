@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Button } from 'antd';
-import '../css/SkillTable.css';
+import '../../css/SkillTable.css';
 import { Link } from 'react-router-dom';
 
 function SkillTable() {

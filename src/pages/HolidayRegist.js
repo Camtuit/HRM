@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Header from '../components/Header';
-import HolidayRegistInput from '../components/HolidayRegistInput';
-import SideBar from '../components/SideBar';
+import Header from '../layouts/Header';
+import HolidayRegistInput from '../components/Holiday/HolidayRegistInput';
+import SideBar from '../layouts/SideBar';
 import '../css/HolidayRegist.css';
 
 function HolidayRegist() {

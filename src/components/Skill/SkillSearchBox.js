@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Select, DatePicker } from 'antd';
-import '../css/SkillSearchBox.css';
+import '../../css/SkillSearchBox.css';
 
 function SkillSearchBox() {
   const [componentSize, setComponentSize] = useState('default');

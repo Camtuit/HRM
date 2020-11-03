@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Button } from 'antd';
 import { Link } from 'react-router-dom';
-import '../css/HolidayTable.css';
+import '../../css/HolidayTable.css';
 
 function HolidayTable() {
   const columns = [

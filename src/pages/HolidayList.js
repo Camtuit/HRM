@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import Header from '../components/Header';
-import HolidaySearchBox from '../components/HolidaySearchBox';
-import HolidayTable from '../components/HolidayTable';
-import SideBar from '../components/SideBar';
+import Header from '../layouts/Header';
+import HolidaySearchBox from '../components/Holiday/HolidaySearchBox';
+import HolidayTable from '../components/Holiday/HolidayTable';
+import SideBar from '../layouts/SideBar';
 import '../css/HolidayList.css';
 
 function HolidayList() {

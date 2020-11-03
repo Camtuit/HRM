@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Header from '../components/Header';
-import SideBar from '../components/SideBar';
-import SkillSearchBox from '../components/SkillSearchBox';
-import SkillTable from '../components/SkillTable';
+import Header from '../layouts/Header';
+import SideBar from '../layouts/SideBar';
+import SkillSearchBox from '../components/Skill/SkillSearchBox';
+import SkillTable from '../components/Skill/SkillTable';
 import '../css/SkillList.css';
 
 function SkillList() {
