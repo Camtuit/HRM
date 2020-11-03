@@ -1,17 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { Form, Input, Button, DatePicker } from 'antd';
 import moment from 'moment';
-<<<<<<< HEAD
-import '../css/HolidayRegistInput.css';
-=======
 // import '../css/HolidayRegistInput.css';
->>>>>>> d6cfe1d... fix Search box layout
 import { useHistory } from 'react-router-dom';
 
 function HolidayRegistInput() {
   const [componentSize, setComponentSize] = useState('default');
-  const today = new Date();
-  const [holidayDate, setHolidayDate] = useState(today);
+  const [holidayDate, setHolidayDate] = useState(new Date());
   const [holidayName, setHolidayName] = useState('');
   const dateFormat = 'DD/MM/YYYY';
   const holidayDateInput = useRef(null);
@@ -30,7 +25,7 @@ function HolidayRegistInput() {
   };
 
   const handleContinueRegistHoliday = () => {
-    setHolidayDate(today);
+    setHolidayDate(new Date());
     setHolidayName('');
     holidayDateInput.current.focus();
   };
@@ -59,7 +54,7 @@ function HolidayRegistInput() {
             <Form.Item label="Date">
               <DatePicker 
                 ref={holidayDateInput}
-                value={moment(holidayDate === '' ? today : holidayDate, dateFormat)}
+                value={moment(holidayDate, dateFormat)}
                 defaultValue={moment(holidayDate, dateFormat)}
                 format={dateFormat}
                 onChange={handleChangeHolidayDate}
