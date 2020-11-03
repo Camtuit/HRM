@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import '../css/SideBar.css';
-
-import {
-  Link
-} from "react-router-dom";
-
+import { Link} from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { showSideBar, hideSideBar } from '../reducers/sideBarReducer';
 import { useSelector } from 'react-redux';

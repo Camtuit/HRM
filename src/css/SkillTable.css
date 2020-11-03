@@ -1,0 +1,19 @@
+.skill-table {
+  padding: 20px 20px;
+}
+.skill-table-add {
+  float: left;
+  margin-bottom: 10px;
+}
+.skill-table-action > i {
+  color: #a0a0a0;
+}
+
+.skill-table-action > i:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.skill-table-action > i:nth-child(2) {
+  margin-left: 15px;
+}
