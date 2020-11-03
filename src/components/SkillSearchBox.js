@@ -19,25 +19,29 @@ function SkillSearchBox() {
         <div className="skill-search-box">
             <Form
                 labelCol={{
-                span: 9,
-                }}
-                wrapperCol={{
                 span: 6,
                 }}
-                layout="horizontal"
+                wrapperCol={{
+                span: 20,
+                }}
+                layout="inline"
                 initialValues={{
                 size: componentSize,
                 }}
                 onValuesChange={onFormLayoutChange}
                 size={componentSize}
+                style ={{padding: "25px 205px"}}
             >
                 <Form.Item label="Name">
                     <Input onChange={(e)=>{handleChange(e)}} placeholder= "Skill name"/>
+                    
+
                 </Form.Item>
 
                 <div className="user-search-box-button">
-                <Button>Cancel</Button>
-                <Button type="primary" onClick = {handleSearch}>Search</Button>
+                    <Button>Cancel</Button>
+                    <Button type="primary" onClick = {handleSearch}>Search</Button>
+              
                 </div>
             </Form>
         </div>

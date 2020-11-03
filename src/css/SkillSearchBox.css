@@ -3,4 +3,8 @@
   padding: 20px;
   margin: 20px 20px;
   margin-top: 76px;
+  height: 125px;
+}
+.user-search-box-button {
+  float: right;
 }

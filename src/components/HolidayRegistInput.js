@@ -1,7 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { Form, Input, Button, DatePicker } from 'antd';
 import moment from 'moment';
+<<<<<<< HEAD
 import '../css/HolidayRegistInput.css';
+=======
+// import '../css/HolidayRegistInput.css';
+>>>>>>> d6cfe1d... fix Search box layout
 import { useHistory } from 'react-router-dom';
 
 function HolidayRegistInput() {

@@ -1,5 +1,12 @@
 .holiday-registration-content {
+<<<<<<< HEAD
     padding-top: 350px;
     margin-left: 56px;
     transition: margin-left 0.3s;
 }
+=======
+  padding-top: 350px;
+  margin-left: 56px;
+  transition: margin-left 0.3s;
+}
+>>>>>>> d6cfe1d... fix Search box layout
