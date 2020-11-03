@@ -1,14 +1,14 @@
-import React, { useRef, useState } from 'react'
-import { Form, Input, Button } from 'antd';
-import '../css/SkillRegistInput.css';
-import { useHistory } from 'react-router';
+import React, { useRef, useState } from "react";
+import { Form, Input, Button } from "antd";
+import "../css/SkillRegistInput.css";
+import { useHistory } from "react-router";
 
 function SkillRegistInput() {
-  const [componentSize, setComponentSize] = useState('default');
-  const [skillName, setSkillName] = useState('');
+  const [componentSize, setComponentSize] = useState("default");
+  const [skillName, setSkillName] = useState("");
   const skillNameInput = useRef(null);
   const history = useHistory();
-  
+
   const handleChangeLayoutForm = ({ size }) => {
     setComponentSize(size);
   };
@@ -18,13 +18,13 @@ function SkillRegistInput() {
   };
 
   const handleContinueRegistSkill = () => {
-    setSkillName('');
+    setSkillName("");
     skillNameInput.current.focus();
   };
 
   const handleSubmitRegistSkill = () => {
-    setSkillName('');
-    history.push('/skills');
+    setSkillName("");
+    history.push("/skills");
   };
   return (
     <div>
@@ -44,21 +44,19 @@ function SkillRegistInput() {
       >
         <div className="skill-regist-field">
           <Form.Item label="Name">
-            <Input placeholder="Skill name" value={skillName} ref={skillNameInput} onChange={handleChangeSkillName} />
-          </Form.Item> 
+            <Input
+              placeholder="Skill name"
+              value={skillName}
+              ref={skillNameInput}
+              onChange={handleChangeSkillName}
+            />
+          </Form.Item>
         </div>
         <div className="skill-regist-button">
-          <Button 
-            size="large" 
-            onClick={handleContinueRegistSkill}
-          >
+          <Button size="large" onClick={handleContinueRegistSkill}>
             Continue
           </Button>
-          <Button 
-            type="primary" 
-            size="large"
-            onClick={handleSubmitRegistSkill}
-          >
+          <Button type="primary" size="large" onClick={handleSubmitRegistSkill}>
             Submit
           </Button>
         </div>

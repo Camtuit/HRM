@@ -1,7 +1,7 @@
-import React from 'react';
-import '../css/UserRegist.css';
-import Header from '../components/Header';
-import SideBar from '../components/SideBar';
+import React from "react";
+import "../css/UserRegist.css";
+import Header from "../components/Header";
+import SideBar from "../components/SideBar";
 
 function UserRegist() {
   return (
