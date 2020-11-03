@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Form, Input, Button, DatePicker } from 'antd';
 import moment from 'moment';
 import '../css/HolidayRegistInput.css';
@@ -9,6 +9,7 @@ function HolidayRegistInput() {
   const [holidayDate, setHolidayDate] = useState(new Date());
   const [holidayName, setHolidayName] = useState('');
   const dateFormat = 'DD/MM/YYYY';
+  const holidayDateInput = useRef(null);
   const history = useHistory();
 
   const handleChangeLayoutForm = ({ size }) => {
@@ -24,7 +25,9 @@ function HolidayRegistInput() {
   };
 
   const handleContinueRegistHoliday = () => {
+    setHolidayDate(new Date());
     setHolidayName('');
+    holidayDateInput.current.focus();
   };
 
   const handleSubmitRegistHoliday = () => {
@@ -50,6 +53,8 @@ function HolidayRegistInput() {
           <div className="holiday-regist-field">
             <Form.Item label="Date">
               <DatePicker 
+                ref={holidayDateInput}
+                value={moment(holidayDate, dateFormat)}
                 defaultValue={moment(holidayDate, dateFormat)}
                 format={dateFormat}
                 onChange={handleChangeHolidayDate}
