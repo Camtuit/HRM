@@ -24,7 +24,7 @@ function SkillRegistInput() {
 
   const handleSubmitRegistSkill = () => {
     setSkillName('');
-    history.push('/skilllist');
+    history.push('/skills');
   };
   return (
     <div>

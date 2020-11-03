@@ -25,24 +25,12 @@ function App() {
            
           <Route exact path="/holiday" component={HolidayList} /> 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
           <Route exact path="/skillregist" component={SkillRegist} />   
           
           <Route exact path="/skills" component={SkillList} />   
 
           <Route exact path="/holidayregist" component={HolidayRegist} />   
           
-=======
-          <Route exact path="/skillregist" component={SkillRegist} />  
-
-          <Route exact path="/holidayregist" component={HolidayRegist} />   
->>>>>>> 25433eb ([HRM-37] Created holiday ui)
-=======
-          <Route exact path="/skillregist" component={SkillRegist} />  
-
-          <Route exact path="/holidayregist" component={HolidayRegist} />   
->>>>>>> b1a2c49 ([HRM-37] Created holiday ui)
         </Switch>
       </Router>
     </div>
