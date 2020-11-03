@@ -10,7 +10,8 @@ import { useHistory } from 'react-router-dom';
 
 function HolidayRegistInput() {
   const [componentSize, setComponentSize] = useState('default');
-  const [holidayDate, setHolidayDate] = useState(new Date());
+  const today = new Date();
+  const [holidayDate, setHolidayDate] = useState(today);
   const [holidayName, setHolidayName] = useState('');
   const dateFormat = 'DD/MM/YYYY';
   const holidayDateInput = useRef(null);
@@ -29,7 +30,7 @@ function HolidayRegistInput() {
   };
 
   const handleContinueRegistHoliday = () => {
-    setHolidayDate(new Date());
+    setHolidayDate(today);
     setHolidayName('');
     holidayDateInput.current.focus();
   };
@@ -58,7 +59,7 @@ function HolidayRegistInput() {
             <Form.Item label="Date">
               <DatePicker 
                 ref={holidayDateInput}
-                value={moment(holidayDate, dateFormat)}
+                value={moment(holidayDate === '' ? today : holidayDate, dateFormat)}
                 defaultValue={moment(holidayDate, dateFormat)}
                 format={dateFormat}
                 onChange={handleChangeHolidayDate}
