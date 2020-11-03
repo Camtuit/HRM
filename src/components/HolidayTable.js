@@ -1,34 +1,34 @@
-import React from "react";
-import { Table, Button } from "antd";
-import { Link } from "react-router-dom";
-import "../css/HolidayTable.css";
+import React from 'react';
+import { Table, Button } from 'antd';
+import { Link } from 'react-router-dom';
+import '../css/HolidayTable.css';
 
 function HolidayTable() {
   const columns = [
     {
-      title: "No",
-      dataIndex: "no",
+      title: 'No',
+      dataIndex: 'no',
     },
 
     {
-      title: "Date",
-      dataIndex: "date",
+      title: 'Date',
+      dataIndex: 'date',
     },
 
     {
-      title: "Note",
-      dataIndex: "note",
+      title: 'Note',
+      dataIndex: 'note',
     },
 
     {
-      title: "Action",
-      key: "operation",
-      fixed: "right",
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
       width: 100,
       render: () => (
         <div className="holiday-table-action">
-          <i class="fas fa-edit"> </i>
-          <i class="fas fa-trash-alt"></i>
+          <i className="fas fa-edit" />
+          <i className="fas fa-trash-alt" />
         </div>
       ),
     },
@@ -36,17 +36,17 @@ function HolidayTable() {
 
   const data = [
     {
-      key: "1",
-      no: "1",
-      date: "2/9/2020",
-      note: "lễ quốc khánh",
+      key: '1',
+      no: '1',
+      date: '2/9/2020',
+      note: 'lễ quốc khánh',
     },
 
     {
-      key: "2",
-      no: "2",
-      date: "2/9/2020",
-      note: "lễ quốc khánh",
+      key: '2',
+      no: '2',
+      date: '2/9/2020',
+      note: 'lễ quốc khánh',
     },
   ];
 

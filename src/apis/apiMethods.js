@@ -1,5 +1,5 @@
 import { callApi } from './axiosService';
-import types from '../constrants/apiResourceTypes';
+import types from '../constants/apiResourceTypes';
 
 const getUrl = (type) => types[type].toLowerCase();
 

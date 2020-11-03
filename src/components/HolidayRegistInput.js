@@ -1,14 +1,14 @@
-import React, { useRef, useState } from "react";
-import { Form, Input, Button, DatePicker } from "antd";
-import moment from "moment";
+import React, { useRef, useState } from 'react';
+import { Form, Input, Button, DatePicker } from 'antd';
+import moment from 'moment';
 // import '../css/HolidayRegistInput.css';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 function HolidayRegistInput() {
-  const [componentSize, setComponentSize] = useState("default");
+  const [componentSize, setComponentSize] = useState('default');
   const [holidayDate, setHolidayDate] = useState(new Date());
-  const [holidayName, setHolidayName] = useState("");
-  const dateFormat = "DD/MM/YYYY";
+  const [holidayName, setHolidayName] = useState('');
+  const dateFormat = 'DD/MM/YYYY';
   const holidayDateInput = useRef(null);
   const history = useHistory();
 
@@ -26,13 +26,13 @@ function HolidayRegistInput() {
 
   const handleContinueRegistHoliday = () => {
     setHolidayDate(new Date());
-    setHolidayName("");
+    setHolidayName('');
     holidayDateInput.current.focus();
   };
 
   const handleSubmitRegistHoliday = () => {
-    setHolidayName("");
-    history.push("/holiday");
+    setHolidayName('');
+    history.push('/holiday');
   };
   return (
     <>

@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
-import "../css/UserSearchBox.css";
-import { Form, Input, Button, Select, DatePicker } from "antd";
+import React, { useState, useRef } from 'react';
+import '../css/UserSearchBox.css';
+import { Form, Input, Button, Select, DatePicker } from 'antd';
 
 function UserSearchBox() {
-  const [componentSize, setComponentSize] = useState("default");
+  const [componentSize, setComponentSize] = useState('default');
 
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);

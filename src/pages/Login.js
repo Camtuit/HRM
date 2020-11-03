@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
-import "../css/Login.css";
+import React from 'react';
+import { Form, Input, Button, Checkbox } from 'antd';
+import '../css/Login.css';
 
 function Login() {
   const layout = {
@@ -44,12 +44,12 @@ function Login() {
             rules={[
               {
                 required: true,
-                message: "Please input your email!",
+                message: 'Please input your email!',
               },
 
               {
-                type: "email",
-                message: "The input is not valid E-mail!",
+                type: 'email',
+                message: 'The input is not valid E-mail!',
               },
             ]}
           >
@@ -62,7 +62,7 @@ function Login() {
             rules={[
               {
                 required: true,
-                message: "Please input your password!",
+                message: 'Please input your password!',
               },
             ]}
           >

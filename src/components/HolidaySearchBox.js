@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Form, Input, Button, Select, DatePicker } from "antd";
-import "../css/HolidaySearchBox.css";
+import React, { useState } from 'react';
+import { Form, Input, Button, Select, DatePicker } from 'antd';
+import '../css/HolidaySearchBox.css';
 
 function HolidaySearchBox() {
-  const [componentSize, setComponentSize] = useState("default");
+  const [componentSize, setComponentSize] = useState('default');
 
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);

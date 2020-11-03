@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
-import { Form, Input, Button } from "antd";
-import "../css/SkillRegistInput.css";
-import { useHistory } from "react-router";
+import React, { useRef, useState } from 'react';
+import { Form, Input, Button } from 'antd';
+import '../css/SkillRegistInput.css';
+import { useHistory } from 'react-router';
 
 function SkillRegistInput() {
-  const [componentSize, setComponentSize] = useState("default");
-  const [skillName, setSkillName] = useState("");
+  const [componentSize, setComponentSize] = useState('default');
+  const [skillName, setSkillName] = useState('');
   const skillNameInput = useRef(null);
   const history = useHistory();
 
@@ -18,13 +18,13 @@ function SkillRegistInput() {
   };
 
   const handleContinueRegistSkill = () => {
-    setSkillName("");
+    setSkillName('');
     skillNameInput.current.focus();
   };
 
   const handleSubmitRegistSkill = () => {
-    setSkillName("");
-    history.push("/skills");
+    setSkillName('');
+    history.push('/skills');
   };
   return (
     <div>

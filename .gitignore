@@ -3,10 +3,6 @@ build/
 # Extension 
 .history
 .prettierignore
-.eslintrc
-.eslintignore
-.prettierrc
-.gitignore
 # Compiled Java class files
 *.class
 

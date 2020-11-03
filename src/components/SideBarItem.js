@@ -1,5 +1,5 @@
-import React from "react";
-import "../css/SideBarItem.css";
+import React from 'react';
+import '../css/SideBarItem.css';
 
 function SideBarItem({ icon, title, isSideBarOpen }) {
   return (
@@ -8,7 +8,7 @@ function SideBarItem({ icon, title, isSideBarOpen }) {
         <i className={icon} />
       </div>
 
-      <div style={{ display: isSideBarOpen ? "block" : "none" }}>{title}</div>
+      <div style={{ display: isSideBarOpen ? 'block' : 'none' }}>{title}</div>
     </div>
   );
 }
