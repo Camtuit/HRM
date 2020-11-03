@@ -10,6 +10,7 @@ import UserRegist from './pages/UserRegist';
 import HolidayList from './pages/HolidayList';
 import SkillList from './pages/SkillList';
 import SkillRegist from './pages/SkillRegist';
+import HolidayRegist from './pages/HolidayRegist';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
           <Route exact path="/skillregist" component={SkillRegist} />   
           
           <Route exact path="/skills" component={SkillList} />   
+
+          <Route exact path="/holidayregist" component={HolidayRegist} />   
           
         </Switch>
       </Router>
