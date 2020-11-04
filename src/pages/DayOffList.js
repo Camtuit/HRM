@@ -4,6 +4,7 @@ import DayoffSearchBox from '../components/Dayyoff/DayOffSearchBox';
 import Header from '../layouts/Header';
 import SideBar from '../layouts/SideBar';
 import '../css/DayOffList.css';
+import DayOffTable from '../components/Dayyoff/DayOffTable';
 
 function DayOffList() {
   const isSideBarOpen = useSelector(
@@ -19,6 +20,7 @@ function DayOffList() {
         className="dayoff-list-content"
       >
         <DayoffSearchBox />
+        <DayOffTable />
       </div>
     </>
   );

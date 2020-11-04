@@ -1,0 +1,12 @@
+.dayoff-table {
+    margin: 20px;
+}
+
+.dayoff-table-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dayoff-table-button {
+    margin-left: 10px;
+}
