@@ -1,13 +1,13 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Header from "../components/Header";
-import SideBar from "../components/SideBar";
-import SkillRegistInput from "../components/SkillRegistInput";
-import "../css/SkillRegist.css";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Header from '../layouts/Header';
+import SideBar from '../layouts/SideBar';
+import SkillRegistInput from '../components/Skill/SkillRegistInput';
+import '../css/SkillRegist.css';
 
 function SkillRegist() {
   const isSideBarOpen = useSelector(
-    (state) => state.sideBarReducer.isSideBarOpen
+    (state) => state.sideBarReducer.isSideBarOpen,
   );
 
   return (
@@ -15,7 +15,7 @@ function SkillRegist() {
       <Header />
       <SideBar />
       <div
-        style={{ marginLeft: isSideBarOpen ? "230px" : "56px" }}
+        style={{ marginLeft: isSideBarOpen ? '230px' : '56px' }}
         className="skill-registration-content"
       >
         <SkillRegistInput />
