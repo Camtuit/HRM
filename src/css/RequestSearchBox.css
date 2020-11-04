@@ -1,0 +1,19 @@
+.request-search-box {
+  border: 1px solid #e3e3e3;
+  padding: 20px;
+  margin: 20px 20px;
+  margin-top: 76px;
+  height: 180px;
+}
+.request-search-box .request-input {
+  padding-right: 15px;
+}
+.request-search-box .request-input-second {
+  padding-top: 10px;
+}
+.request-search-box .request-search-box-button {
+  float: right;
+}
+.request-search-box .request-search-box-button .btn-cancel {
+  margin-right: 12px;
+}

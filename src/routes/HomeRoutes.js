@@ -8,8 +8,11 @@ import HolidayList from '../pages/HolidayList';
 import SkillList from '../pages/SkillList';
 import SkillRegist from '../pages/SkillRegist';
 import HolidayRegist from '../pages/HolidayRegist';
+import RequestList from '../pages/RequestList';
 
 import AuthenticatedGuard from '../guards/AuthenticatedGuard';
+import DayOffList from '../pages/DayOffList';
+import DayOffRegist from '../pages/DayOffRegist';
 
 export default function HomeRoutes() {
   return (
@@ -23,6 +26,9 @@ export default function HomeRoutes() {
         <Route path="/skillregist" component={SkillRegist} />
         <Route path="/skills" component={SkillList} />
         <Route path="/holidayregist" component={HolidayRegist} />
+        <Route path="/dayoffs" component={DayOffList} />
+        <Route path="/dayoffregist" component={DayOffRegist} />
+        <Route path="/requestdevice" component={RequestList} />
       </Switch>
       <SideBar />
     </>
