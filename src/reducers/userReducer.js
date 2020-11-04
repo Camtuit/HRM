@@ -3,9 +3,9 @@ import {
   UPDATE_USER_SUCCESS,
   DELETE_USER_OPTIMISTIC,
   LOAD_USER_SUCCESS,
-} from '../constrants/actionTypes';
+} from '../constants/actionTypes';
 
-import initialState from '../constrants/initialState';
+import initialState from '../constants/initialState';
 
 export default function userReducer(state = initialState.users, action) {
   switch (action.type) {

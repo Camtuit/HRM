@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/UserTable.css';
+import '../../css/UserTable.css';
 import { Table, Button } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -48,7 +48,6 @@ function UserTable() {
       key: 'operation',
       fixed: 'right',
       width: 100,
-      // eslint-disable-next-line react/display-name
       render: () => <a href="/#">Edit</a>,
     },
   ];

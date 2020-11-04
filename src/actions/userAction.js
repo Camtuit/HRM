@@ -2,8 +2,8 @@ import {
   CREATE_USER_SUCCESS,
   UPDATE_USER_SUCCESS,
   DELETE_USER_OPTIMISTIC,
-} from '../constrants/actionTypes';
-import types from '../constrants/apiResourceTypes';
+} from '../constants/actionTypes';
+import types from '../constants/apiResourceTypes';
 import { updateAction, removeAction, createAction } from './commonAction';
 
 export const createUser = (user) =>

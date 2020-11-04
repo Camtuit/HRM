@@ -1,5 +1,5 @@
 const { merge } = require('webpack-merge');
-// const EslintPlugin = require('eslint-webpack-plugin');
+const EslintPlugin = require('eslint-webpack-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
@@ -12,5 +12,5 @@ module.exports = merge(common, {
     overlay: true,
     port: 3000,
   },
-  // plugins: [new EslintPlugin()],
+  plugins: [new EslintPlugin()],
 });

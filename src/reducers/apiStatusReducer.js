@@ -1,5 +1,5 @@
-import { BEGIN_API_CALL, API_CALL_ERROR } from '../constrants/actionTypes';
-import initialState from '../constrants/initialState';
+import { BEGIN_API_CALL, API_CALL_ERROR } from '../constants/actionTypes';
+import initialState from '../constants/initialState';
 
 function actionTypeEndsInSuccess(type) {
   return type.substring(type.length - 8) === '_SUCCESS';

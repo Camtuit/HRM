@@ -3,7 +3,7 @@ import { useCallback, useEffect } from 'react';
 
 import { loadAction } from '../actions/commonAction';
 
-function userFetch(props) {
+function useFetch(props) {
   const type = props.type.toLowerCase();
   const dispatch = useDispatch();
   const { data, apiCallStatus } = useSelector((state) => {
@@ -15,7 +15,7 @@ function userFetch(props) {
 
   const boundAction = useCallback(() => {
     return dispatch(loadAction(type));
-  }, [dispatch]);
+  }, [dispatch, type]);
 
   useEffect(() => {
     if (!data || data.length === 0) {
@@ -23,11 +23,7 @@ function userFetch(props) {
     }
   }, [boundAction, data]);
 
-  return {
-    [type]: data,
-    fetchData: boundAction,
-    apiCallStatus,
-  };
+  return [type, boundAction, apiCallStatus];
 }
 
-export default userFetch;
+export default useFetch;
