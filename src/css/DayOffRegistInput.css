@@ -1,0 +1,14 @@
+.dayoff-regist-input {
+    border: 1px solid #e3e3e3;
+    padding: 20px;
+    margin: 20px;
+}
+
+.dayoff-regist-button {
+    display: flex;
+    justify-content: center;
+}
+
+.dayoff-regist-button > button {
+    margin-left: 10px;
+}
