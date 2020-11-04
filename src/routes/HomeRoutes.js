@@ -11,6 +11,7 @@ import HolidayRegist from '../pages/HolidayRegist';
 
 import AuthenticatedGuard from '../guards/AuthenticatedGuard';
 import DayOffList from '../pages/DayOffList';
+import DayOffRegist from '../pages/DayOffRegist';
 
 export default function HomeRoutes() {
   return (
@@ -25,6 +26,7 @@ export default function HomeRoutes() {
         <Route path="/skills" component={SkillList} />
         <Route path="/holidayregist" component={HolidayRegist} />
         <Route path="/dayoffs" component={DayOffList} />
+        <Route path="/dayoffregist" component={DayOffRegist} />
       </Switch>
       <SideBar />
     </>
