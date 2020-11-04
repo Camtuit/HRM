@@ -1,0 +1,17 @@
+.request-table {
+  padding: 20px 20px;
+  font-size: 30px;
+}
+.request-table-add {
+  float: right;
+  margin-right: 1px;
+  margin-bottom: 41px;
+  width: 94px;
+}
+
+.request-table-action i {
+  color: #80baef;
+}
+.request-table-action i:hover {
+  color: #0483f7;
+}
