@@ -1,0 +1,24 @@
+.dayoff-search-box {
+    border: 1px solid #e3e3e3;
+    padding: 20px;
+    margin: 20px;
+}
+
+
+.dayoff-search-box-input span {
+    padding: 0px 20px;
+}
+
+.dayoff-search-box-input .ant-form-item-label {
+    text-align: left;
+}
+
+.dayoff-search-box-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -50px;
+}
+
+.dayoff-search-box-button > button {
+    margin-left: 10px;
+}
