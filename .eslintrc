@@ -6,7 +6,9 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-unused-vars": 0,
     "react/prop-types": 0,
-    "no-underscore-dangle": 0
+    "no-underscore-dangle": 0,
+    "react/jsx-props-no-spreading": 0,
+    "import/no-extraneous-dependencies": 1
   },
   "env": {
     "browser": true,
