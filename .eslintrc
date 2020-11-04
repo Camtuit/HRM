@@ -2,7 +2,7 @@
   "extends": ["airbnb-base", "react-app", "prettier"],
   "plugins": ["prettier", "react"],
   "rules": {
-    "prettier/prettier": ["error"],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-unused-vars": 0,
     "react/prop-types": 0,
