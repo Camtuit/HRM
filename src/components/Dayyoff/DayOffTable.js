@@ -1,8 +1,17 @@
 import React from 'react';
 import { Button, Table } from 'antd';
 import '../../css/DayOffTable.css';
+import { useHistory } from 'react-router';
 
 function DayOffTable() {
+  const history = useHistory();
+  const handleChangeAddNewDayOff = () => {
+    history.push('/dayoffregist');
+  };
+  const handleChangeEditDayOff = () => {
+    history.push('/dayoffregist');
+  };
+  const handleChangeRemoveDayOff = () => {};
   const PAGINATION_POSITION = {
     top: 'topRight',
     bottom: 'bottomRight',
@@ -53,8 +62,8 @@ function DayOffTable() {
       width: 100,
       render: () => (
         <div className="skill-table-action">
-          <i className="fas fa-edit"> </i>
-          <i className="fas fa-trash-alt" />
+          <i className="fas fa-edit" onClick={handleChangeEditDayOff} />
+          <i className="fas fa-trash-alt" onClick={handleChangeRemoveDayOff} />
         </div>
       ),
     },
@@ -179,12 +188,17 @@ function DayOffTable() {
     },
   ];
   const handleChangeTable = (pagination, filters, sorter, extra) => {};
+
   return (
     <div className="dayoff-table">
       <div className="dayoff-table-header">
         <h2>Dayoff List</h2>
         <div className="dayoff-table-button">
-          <Button className="dayoff-table-button" type="primary">
+          <Button
+            className="dayoff-table-button"
+            type="primary"
+            onClick={handleChangeAddNewDayOff}
+          >
             Add new dayoff
           </Button>
           <Button className="dayoff-table-button" type="primary">
