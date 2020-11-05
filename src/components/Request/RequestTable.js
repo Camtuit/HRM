@@ -74,7 +74,7 @@ export default function RequestTable() {
           </Tooltip>
 
           <RemovePopupCommon
-            title="Delete skill"
+            title="Delete request"
             content="Are you sure delete"
             onOk={() => console.log('true')}
           />
