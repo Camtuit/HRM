@@ -4,9 +4,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  entry: path.join(__dirname, 'src/index.js'),
+  entry: [path.join(__dirname, 'src/index.js')],
   output: {
     filename: '[name].bundle.js',
     path: path.join(__dirname, 'build'),
@@ -18,21 +19,7 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
       },
     }),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
-      inject: true,
-      minify: {
-        // see https://github.com/kangax/html-minifier#options-quick-reference
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-      },
-    }),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
   ],
   module: {
     rules: [
@@ -44,6 +31,9 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: [`@babel/preset-react`],
+              plugins: [
+                isDevelopment && require.resolve('react-refresh/babel'),
+              ].filter(Boolean),
             },
           },
         ],
