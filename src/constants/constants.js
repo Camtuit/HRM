@@ -64,17 +64,6 @@ const constant = {
     WEDDING_VACATION: 'Wedding vacation',
     FUNERAL_LEAVE: 'Funeral leave',
   },
-  // MESSAGE_ERROR_VALIDATE: {
-  //   REQUIRED: {
-  //     REQUIRED_PO_NAME: "Please input your PO's Name!",
-  //     REQUIRED_PO_EMAIL: "Please input your PO's Email!",
-  //     REQUIRED_VACATION_DATE_FROM: 'Please choose your vacation date from!',
-  //     REQUIRED_VACATION_DATE_TO: 'Please choose your vacation date to!',
-  //   },
-  //   TYPES: {
-  //     EMAIL: 's not validate email!',
-  //   },
-  // },
 };
 
 export default constant;
