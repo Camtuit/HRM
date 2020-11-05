@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Table, Button, Tooltip, DeleteOutlined } from 'antd';
 import '../../css/RequestTable.css';
 import { Link } from 'react-router-dom';
+import RemovePopupCommon from '../RemovePopupCommon';
 
 export default function RequestTable() {
   const [panigationtop, setPanigationtop] = useState('topRight');
@@ -52,14 +53,13 @@ export default function RequestTable() {
       width: 100,
       render: () => (
         <div className="request-table-action">
-          <Link to="/skillregist" style={{ paddingRight: '6px' }}>
-            <Tooltip placement="top" title="Approve">
-              <span>
-                <i class="fas fa-check-square"></i>
-              </span>
-            </Tooltip>
-          </Link>
-          <Link to="/requestdevicedetail" style={{ paddingRight: '6px' }}>
+          <Tooltip placement="top" title="Approve">
+            <span>
+              <i class="fas fa-check-square"></i>
+            </span>
+          </Tooltip>
+
+          <Link to="/requestdevicedetail">
             <Tooltip placement="top" title="View">
               <span>
                 <i class="far fa-eye"></i>
@@ -68,18 +68,16 @@ export default function RequestTable() {
           </Link>
 
           <Tooltip placement="top" title="Reject">
-            <span style={{ paddingRight: '6px' }}>
+            <span>
               <i class="fas fa-window-close"></i>
             </span>
           </Tooltip>
 
-          <Link to="/skillregist" style={{ paddingRight: '6px' }}>
-            <Tooltip placement="top" title="Delete">
-              <span>
-                <i class="fas fa-trash-alt"></i>
-              </span>
-            </Tooltip>
-          </Link>
+          <RemovePopupCommon
+            title="Delete skill"
+            content="Are you sure delete"
+            onOk={() => console.log('true')}
+          />
         </div>
       ),
     },
@@ -197,18 +195,17 @@ export default function RequestTable() {
   return (
     <div className="request-table">
       <Button className="request-table-add" type="primary">
-        <Link to="/skillregist">Add new</Link>
+        <Link to="/">Add new</Link>
+      </Button>
+      <Button className="request-table-add" type="primary">
+        Export
       </Button>
       <Table
         className="table-data"
         columns={columns}
         dataSource={data}
         size="small"
-        pagination={{ position: [panigationtop, panigationbottom] }}
       />
-      <Button className="request-table-add" type="primary">
-        Export
-      </Button>
     </div>
   );
 }

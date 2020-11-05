@@ -3,12 +3,15 @@
   font-size: 30px;
 }
 .request-table-add {
-  float: right;
-  margin-right: 1px;
-  margin-bottom: 41px;
+  margin-right: 10px;
+  margin-bottom: 12px;
+  /* float: left; */
   width: 94px;
 }
-
+.request-table-action {
+  display: flex;
+  justify-content: space-around;
+}
 .request-table-action i {
   color: #80baef;
 }
