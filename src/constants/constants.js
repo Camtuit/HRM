@@ -25,6 +25,12 @@ const constant = {
     VACATION_TYPE: 'Vacation Type',
     REASONS: 'Reasons',
     NOTES: 'Notes',
+    YOUR_PROJECT: 'Your project',
+    DEVICE_NAME: 'Device name',
+    EXPECTED_DELIVERY_DATE: 'Expected delivery date',
+    TECHNICAL_SPECIFICATIONS: 'Technical specifications',
+    NUMBER_OF_DEVICE: 'Number of device',
+    EQUIPMENT_REQUIRED_REASON: 'Equipment required reason',
   },
   GRID_COL: {
     GRID_COL_4: 4,
@@ -43,6 +49,7 @@ const constant = {
     CANCEL: 'Cancel',
     SEARCH: 'Search',
     SUBMIT: 'Submit',
+    BACK: 'Back',
   },
   FORMAT_DATE: 'DD-MM-YYYY',
   QUICK_CHOOSE: {

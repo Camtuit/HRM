@@ -1,0 +1,14 @@
+.request-detail-form {
+    border: 1px solid #e3e3e3;
+    padding: 20px;
+    margin: 20px;
+}
+
+.request-detail-form .ant-form-item-label {
+    text-align: left;
+}
+
+.request-detail-form-button {
+    display: flex;
+    justify-content: center;
+}

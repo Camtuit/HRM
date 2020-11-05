@@ -59,7 +59,7 @@ export default function RequestTable() {
               </span>
             </Tooltip>
           </Link>
-          <Link to="/skillregist" style={{ paddingRight: '6px' }}>
+          <Link to="/requestdevicedetail" style={{ paddingRight: '6px' }}>
             <Tooltip placement="top" title="View">
               <span>
                 <i class="far fa-eye"></i>
