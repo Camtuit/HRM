@@ -16,7 +16,7 @@ function DayOffSearchBox() {
           span: constant.LABEL_COL.LABEL_COL_2,
         }}
         wrapperCol={{
-          span: constant.WRAPPER_COL.WRAPPER_COL_10,
+          span: constant.WRAPPER_COL.WRAPPER_COL_15,
         }}
         layout={constant.LAYOUT.HORIZONTAL}
         initialValues={{
