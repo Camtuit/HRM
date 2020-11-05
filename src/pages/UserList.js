@@ -7,6 +7,7 @@ import SideBar from '../layouts/SideBar';
 import UserSearchBox from '../components/User/UserSearchBox';
 import UserTable from '../components/User/UserTable';
 import AddDevicePopup from '../components/AddDevicePopup';
+import RemovePopupCommon from '../components/RemovePopupCommon';
 
 function UserList() {
   // get state from redux
@@ -21,6 +22,12 @@ function UserList() {
     >
       <UserSearchBox />
       <UserTable />
+
+      <RemovePopupCommon
+        title="Delete device"
+        content="Are you sure delete this device?"
+        onOk={() => console.log('true')}
+      />
     </div>
   );
 }
