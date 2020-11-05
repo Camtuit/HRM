@@ -1,34 +1,10 @@
 import React, { useState } from 'react';
 import '../css/SideBar.css';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { showSideBar, hideSideBar } from '../reducers/sideBarReducer';
 
 function SideBar() {
-  // const [isSideBarOpen, setIsSideBarOpen] = useState(true);
-  const isSideBarOpen = useSelector(
-    (state) => state.sideBarReducer.isSideBarOpen,
-  );
-  const dispatch = useDispatch();
-
-  function handleClick() {
-    if (isSideBarOpen) {
-      dispatch(hideSideBar());
-    } else {
-      dispatch(showSideBar());
-    }
-  }
-
   return (
-    <div
-      style={{ width: isSideBarOpen ? '230px' : '56px' }}
-      className="side-bar"
-    >
-      <div className="side-bar-header">
-        <i onClick={handleClick} className="fas fa-bars" />
-        <span>HRM</span>
-      </div>
-
+    <div className="side-bar">
       <Link to="/users">
         <div className="side-bar-item">
           <i className="fas fa-users" />

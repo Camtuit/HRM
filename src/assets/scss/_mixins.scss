@@ -1,0 +1,51 @@
+@mixin box($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin centerAbsolute($pos) {
+  position: absolute;
+  @if $pos == 'both' {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if $pos == 'left' {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else if $pos == 'top' {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@mixin tablet {
+  @media only screen and (min-width: $md) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media only screen and (min-width: $lg) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: $xl) {
+    @content;
+  }
+}
+
+@mixin flex($direction: row, $justify: null, $align: null, $wrap: null) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}

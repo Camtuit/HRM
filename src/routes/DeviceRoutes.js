@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import {} from 'react-router';
 
 import DeviceList from '../pages/Device/DeviceList';
 import DeviceDetails from '../pages/Device/DeviceDetail';

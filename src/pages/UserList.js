@@ -2,8 +2,6 @@ import React from 'react';
 import '../css/UserList.css';
 import { Button, DatePicker, Checkbox } from 'antd';
 import { useSelector } from 'react-redux';
-import Header from '../layouts/Header';
-import SideBar from '../layouts/SideBar';
 import UserSearchBox from '../components/User/UserSearchBox';
 import UserTable from '../components/User/UserTable';
 import AddDevicePopup from '../components/AddDevicePopup';
