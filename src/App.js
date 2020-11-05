@@ -19,3 +19,7 @@ function App() {
 }
 
 export default App;
+
+if (module.hot) {
+  module.hot.accept();
+}

@@ -1,35 +1,29 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const { merge } = require('webpack-merge');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const EslintPlugin = require('eslint-webpack-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const common = require('./webpack.common.js');
 
-module.exports = merge(common, {
+const config = merge(common, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'eval-cheap-source-map',
   devServer: {
     hot: true,
     contentBase: './build',
-    // liveReload: false,
-    // watchContentBase: false,
-    inline: false,
     historyApiFallback: true,
     port: 3000,
     watchOptions: {
-      ignored: ['node_modules', './build'],
+      ignored: ['node_modules'],
     },
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
-      inject: true,
-    }),
-    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
     new ReactRefreshWebpackPlugin(),
-    new EslintPlugin(),
-  ],
+  ].filter(Boolean),
 });
+config.module.rules[1].use[0].options.plugins = [
+  require.resolve('react-refresh/babel'),
+].filter(Boolean);
+module.exports = config;

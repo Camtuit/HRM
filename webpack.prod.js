@@ -1,8 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const { merge } = require('webpack-merge');
 
@@ -10,7 +11,7 @@ process.env.NODE_ENV = 'production';
 
 const common = require('./webpack.common.js');
 
-module.exports = merge(common, {
+const config = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   optimization: {
@@ -37,7 +38,6 @@ module.exports = merge(common, {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: './index.html',
-      inject: true,
       minify: {
         // see https://github.com/kangax/html-minifier#options-quick-reference
         removeComments: true,
@@ -48,10 +48,15 @@ module.exports = merge(common, {
         keepClosingSlash: true,
       },
     }),
-    new WebpackBundleAnalyzer.BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: '[name].[fullhash].css',
       chunkFilename: '[name].[contenthash:8].chunk.css',
     }),
+    new CleanWebpackPlugin(),
+    new WebpackBundleAnalyzer.BundleAnalyzerPlugin({ analyzerMode: 'static' }),
   ],
 });
+
+config.module.rules[0].use[0] = MiniCssExtractPlugin.loader;
+
+module.exports = config;
