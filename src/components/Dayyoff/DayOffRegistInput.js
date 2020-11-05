@@ -1,58 +1,13 @@
-import { Button, DatePicker, Form, Input, Radio, Select } from 'antd';
-import React, { useRef, useState } from 'react';
+import { Button, Col, DatePicker, Form, Input, Radio, Row, Select } from 'antd';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+
+import constant from '../../constants/constants';
+import validation from '../../constants/validation';
 import '../../css/DayOffRegistInput.css';
 
-const LABEL_COL = 3;
-const WRAPPER_COL = 10;
-const LAYOUT = 'horizontal';
-const LABEL = {
-  DAY_OFF: 'Day off',
-  PO_NAME: "PO's Name",
-  PO_EMAIL: "PO's Email",
-  VACATION_FROM: 'Vacation Days From',
-  VACATION_TO: 'Vacation Days To',
-  MORINING_AFTERNOON_ALLDAY: 'Morning|Afternoon|All day',
-  VACATION_TYPE: 'Vacation Type',
-  REASONS: 'Reasons',
-  NOTES: 'Notes',
-};
-const RADIO = {
-  MORNING: 'Morning',
-  AFTERNOON: 'Afternoon',
-  All_DAY: 'All day',
-};
-const VACATION_TYPE = {
-  ANNUAL_LEAVE: 'Annual leave',
-  UNPAID_LEAVE: 'Unpaid leave',
-  MATERNITY_LEAVE: 'Maternity leave',
-  WEDDING_VACATION: 'Wedding vacation',
-  FUNERAL_LEAVE: 'Funeral leave',
-};
-const BUTTON = {
-  CANCEL: 'Cancel',
-  SUBMIT: 'Submit',
-};
-const FORMAT_DATE = 'DD-MM-YYYY';
-
 function DayOffRegistInput(props) {
-  const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 12,
-    },
-  };
-  const tailLayout = {
-    wrapperCol: {
-      offset: 8,
-      span: 16,
-    },
-  };
   const [componentSize, setComponentSize] = useState('default');
-  const poNameInput = useRef(null);
-  const poEmailInput = useRef(null);
   const history = useHistory();
 
   const onFormLayoutChange = ({ size }) => {
@@ -67,101 +22,149 @@ function DayOffRegistInput(props) {
   const onFinish = (values) => {
     history.push('/dayoffs');
   };
-  const onFinishFailed = (errorInfo) => {
-    if (errorInfo.values.poName === undefined) {
-      poNameInput.current.focus();
-    } else {
-      poEmailInput.current.focus();
-    }
-  };
+  const onFinishFailed = (errorInfo) => {};
   return (
     <div className="dayoff-regist-input">
-      <Form
-        {...layout}
-        labelCol={{
-          span: LABEL_COL,
-        }}
-        wrapperCol={{
-          span: WRAPPER_COL,
-        }}
-        layout={{ LAYOUT }}
-        initialValues={{
-          size: componentSize,
-        }}
-        onValuesChange={onFormLayoutChange}
-        size={componentSize}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        <Form.Item
-          label={LABEL.PO_NAME}
-          name="poName"
-          rules={[
-            {
-              required: true,
-              message: "Please input your PO's Name!",
-            },
-          ]}
-        >
-          <Input ref={poNameInput} />
-        </Form.Item>
-        <Form.Item
-          label={LABEL.PO_EMAIL}
-          name="poEmail"
-          rules={[
-            {
-              required: true,
-              message: "Please input your PO's Email!",
-            },
-          ]}
-        >
-          <Input ref={poEmailInput} />
-        </Form.Item>
-        <Form.Item label={LABEL.VACATION_FROM}>
-          <DatePicker placeholder={FORMAT_DATE} format={FORMAT_DATE} />
-        </Form.Item>
-        <Form.Item label={LABEL.VACATION_TO}>
-          <DatePicker placeholder={FORMAT_DATE} format={FORMAT_DATE} />
-        </Form.Item>
-        <Form.Item label={LABEL.MORINING_AFTERNOON_ALLDAY}>
-          <Radio.Group onChange={handleChangeRadioValue}>
-            <Radio value={1}>{RADIO.MORNING}</Radio>
-            <Radio value={2}>{RADIO.AFTERNOON}</Radio>
-            <Radio value={3}>{RADIO.All_DAY}</Radio>
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label={LABEL.VACATION_TYPE}>
-          <Select>
-            <Select.Option value="demo">
-              {VACATION_TYPE.ANNUAL_LEAVE}
-            </Select.Option>
-            <Select.Option value="demo">
-              {VACATION_TYPE.UNPAID_LEAVE}
-            </Select.Option>
-            <Select.Option value="demo">
-              {VACATION_TYPE.MATERNITY_LEAVE}
-            </Select.Option>
-            <Select.Option value="demo">
-              {VACATION_TYPE.WEDDING_VACATION}
-            </Select.Option>
-            <Select.Option value="demo">
-              {VACATION_TYPE.FUNERAL_LEAVE}
-            </Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label={LABEL.REASONS}>
-          <Input />
-        </Form.Item>
-        <Form.Item label={LABEL.NOTES}>
-          <Input />
-        </Form.Item>
-        <div className="dayoff-regist-button">
-          <Button onClick={handleContinueRegistHoliday}>{BUTTON.CANCEL}</Button>
-          <Button type="primary" htmlType="submit">
-            {BUTTON.SUBMIT}
-          </Button>
-        </div>
-      </Form>
+      <Row>
+        <Col span={constant.GRID_COL.GRID_COL_4}></Col>
+        <Col span={constant.GRID_COL.GRID_COL_16}>
+          <Form
+            {...constant.LAYOUT_ERROR_TEXT}
+            labelCol={{
+              span: constant.LABEL_COL.LABEL_COL_5,
+            }}
+            wrapperCol={{
+              span: constant.WRAPPER_COL.WRAPPER_COL_19,
+            }}
+            layout={constant.LAYOUT.HORIZONTAL}
+            initialValues={{
+              size: componentSize,
+            }}
+            onValuesChange={onFormLayoutChange}
+            validateMessages={validation}
+            size={componentSize}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
+            <Form.Item
+              label={constant.LABEL.PO_NAME}
+              name="poName"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label={constant.LABEL.PO_EMAIL}
+              name="poEmail"
+              rules={[
+                {
+                  required: true,
+                  type: 'email',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label={constant.LABEL.VACATION_FROM}
+              name="vacationDateFrom"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <DatePicker
+                placeholder={constant.FORMAT_DATE}
+                format={constant.FORMAT_DATE}
+              />
+            </Form.Item>
+            <Form.Item
+              label={constant.LABEL.VACATION_TO}
+              name="vacationDateTo"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <DatePicker
+                placeholder={constant.FORMAT_DATE}
+                format={constant.FORMAT_DATE}
+              />
+            </Form.Item>
+            <Form.Item
+              label={constant.LABEL.MORINING_AFTERNOON_ALLDAY}
+              name="timeRequestOff"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Radio.Group onChange={handleChangeRadioValue}>
+                <Radio value={1}>{constant.RADIO_CHOOSE.MORNING}</Radio>
+                <Radio value={2}>{constant.RADIO_CHOOSE.AFTERNOON}</Radio>
+                <Radio value={3}>{constant.RADIO_CHOOSE.All_DAY}</Radio>
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item
+              label={constant.LABEL.VACATION_TYPE}
+              name="vacationType"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Select>
+                <Select.Option value="demo">
+                  {constant.VACATION_TYPE.ANNUAL_LEAVE}
+                </Select.Option>
+                <Select.Option value="demo">
+                  {constant.VACATION_TYPE.UNPAID_LEAVE}
+                </Select.Option>
+                <Select.Option value="demo">
+                  {constant.VACATION_TYPE.MATERNITY_LEAVE}
+                </Select.Option>
+                <Select.Option value="demo">
+                  {constant.VACATION_TYPE.WEDDING_VACATION}
+                </Select.Option>
+                <Select.Option value="demo">
+                  {constant.VACATION_TYPE.FUNERAL_LEAVE}
+                </Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label={constant.LABEL.REASONS}
+              name="reason"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item label={constant.LABEL.NOTES}>
+              <Input />
+            </Form.Item>
+            <div className="dayoff-regist-button">
+              <Button onClick={handleContinueRegistHoliday}>
+                {constant.BUTTON.CANCEL}
+              </Button>
+              <Button type="primary" htmlType="submit">
+                {constant.BUTTON.SUBMIT}
+              </Button>
+            </div>
+          </Form>
+        </Col>
+        <Col span={constant.GRID_COL.GRID_COL_4}></Col>
+      </Row>
     </div>
   );
 }
