@@ -14,6 +14,7 @@ import RequestList from '../pages/RequestList';
 import AuthenticatedGuard from '../guards/AuthenticatedGuard';
 import DayOffList from '../pages/DayOffList';
 import DayOffRegist from '../pages/DayOffRegist';
+import RequestDetail from '../pages/RequestDetail';
 
 export default function HomeRoutes() {
   return (
@@ -37,6 +38,7 @@ export default function HomeRoutes() {
         <Route path="/dayoffs" component={DayOffList} />
         <Route path="/dayoffregist" component={DayOffRegist} />
         <Route path="/requestdevice" component={RequestList} />
+        <Route path="/requestdevicedetail" component={RequestDetail} />
       </Switch>
       <SideBar />
     </>
