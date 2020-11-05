@@ -6,7 +6,7 @@
   width: 56px;
   background-color: #202d3f;
   z-index: 20;
-  transition: width 0.3s;
+  transition: all 0.2s ease;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;

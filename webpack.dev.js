@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const { merge } = require('webpack-merge');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
@@ -14,6 +15,8 @@ module.exports = merge(common, {
     contentBase: './build',
     // liveReload: false,
     // watchContentBase: false,
+    inline: false,
+    historyApiFallback: true,
     port: 3000,
     watchOptions: {
       ignored: ['node_modules', './build'],

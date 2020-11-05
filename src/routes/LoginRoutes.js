@@ -3,5 +3,5 @@ import { Route } from 'react-router-dom';
 import Login from '../pages/Login';
 
 export default function HomeRoutes() {
-  return <Route path="/login" component={Login} />;
+  return <Route exact path="/login" component={Login} />;
 }

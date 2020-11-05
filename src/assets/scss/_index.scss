@@ -1,0 +1,15 @@
+.wrapper-content {
+  width: calc(100% - 56px);
+  margin-left: auto;
+  transition: width 0.2s ease;
+  @include laptop() {
+    width: calc(100% - 230px);
+  }
+}
+.wrapper-content.toggled {
+  width: calc(100% - 56px);
+}
+
+.container-search-bar {
+  @include flex(row, stretch, center, wrap);
+}

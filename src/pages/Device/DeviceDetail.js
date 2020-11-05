@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import QRCode from 'qrcode.react';
 import { Button } from 'antd';
-import '../css/DeviceDetail.css';
+import '../../css/DeviceDetail.css';
 
 function DeviceDetail() {
+  console.log(111);
   const isSideBarOpen = useSelector(
     (state) => state.sideBarReducer.isSideBarOpen,
   );

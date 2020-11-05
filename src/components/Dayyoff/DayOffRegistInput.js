@@ -13,9 +13,7 @@ function DayOffRegistInput(props) {
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
-  const handleChangeRadioValue = (e) => {
-    console.log('radio checked', e.target.value);
-  };
+  const handleChangeRadioValue = (e) => {};
   const handleContinueRegistHoliday = () => {
     history.push('/dayoffs');
   };

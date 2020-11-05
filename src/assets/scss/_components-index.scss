@@ -1,0 +1,98 @@
+@import 'header/header-index';
+
+/* Devices Page*/
+.container-device {
+  @include flex(column);
+  margin: 0 20px;
+  h2 {
+    @include flex(row, center, center);
+    height: 50px;
+  }
+  .devices-table {
+    .ant-table {
+      border-left: 1px solid $platinum;
+      border-right: 1px solid $platinum;
+    }
+  }
+  .button {
+    justify-content: flex-end;
+    margin-right: 30px;
+    align-self: flex-end;
+  }
+  .button.new-device {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  .button.export-day {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .search-bar {
+    padding: 20px;
+    border: 1px solid $platinum;
+    border-radius: 5px;
+    box-shadow: 8px 8px 5px -5px $platinum;
+    &__item {
+      width: 30%;
+    }
+    .search-input {
+      min-width: 60px;
+    }
+    &__name {
+      margin-right: 30px;
+    }
+    &__date {
+      width: 70%;
+      margin-right: 0;
+      .input-date {
+        @include flex(row, center, center);
+        span {
+          margin: 0 5px;
+        }
+      }
+    }
+    &__status {
+      min-width: 20%;
+      margin-left: auto;
+      margin-right: 0;
+      overflow: auto;
+      @include laptop() {
+        width: 20%;
+        min-width: unset;
+      }
+    }
+    &__quick-choose {
+      margin-right: 0;
+    }
+    &__buttons {
+      margin: 0 auto;
+      .button__cancel {
+        margin-right: 20px;
+      }
+    }
+    @include laptop() {
+      &__item.input-text {
+        width: 35%;
+      }
+      &__date {
+        width: 35%;
+        margin-right: 30px;
+      }
+      &__quick-choose {
+        width: 35%;
+      }
+      &__buttons {
+        justify-content: flex-end;
+        @include flex(row, center, center, nowrap);
+        margin: 0 0 0 auto;
+        @include flex(row, center, null, nowrap);
+        .button__search {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  .device-buttons {
+    @include flex(row, flex-end, center);
+  }
+}
