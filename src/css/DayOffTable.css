@@ -5,8 +5,11 @@
 .dayoff-table-header {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 .dayoff-table-button {
-    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: -40px;
+    z-index: 999;
 }
