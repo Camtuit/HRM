@@ -1,18 +1,18 @@
 .dayoff-regist-input {
-    border: 1px solid #e3e3e3;
-    padding: 20px;
-    margin: 20px;
+  border: 1px solid #e3e3e3;
+  padding: 20px;
+  margin: 20px;
 }
 
 .dayoff-regist-button {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .dayoff-regist-button > button {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .dayoff-regist-input .ant-form-item-label {
-    text-align: left;
+  text-align: left;
 }

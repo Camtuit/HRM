@@ -1,7 +1,10 @@
-import React from 'react';
-import { Table, Button } from 'antd';
+import React, { useState } from 'react';
+import { Form, Table, Button, Modal, Input } from 'antd';
 import '../../css/SkillTable.css';
 import { Link } from 'react-router-dom';
+import SkillRegistInput from './SkillRegistInput';
+import SkillEditPopup from './SkillEditPopup';
+import RemovePopupCommon from '../RemovePopupCommon';
 
 function SkillTable() {
   const columns = [
@@ -27,8 +30,12 @@ function SkillTable() {
       width: 100,
       render: () => (
         <div className="skill-table-action">
-          <i className="fas fa-edit"> </i>
-          <i className="fas fa-trash-alt" />
+          <SkillEditPopup />
+          <RemovePopupCommon
+            title="Delete skill"
+            content="Are you sure delete"
+            onOk={() => console.log('true')}
+          />
         </div>
       ),
     },
@@ -53,11 +60,10 @@ function SkillTable() {
       updated: '10/10/2020 15:10:15',
     },
   ];
+
   return (
     <div className="skill-table">
-      <Button className="skill-table-add" type="primary">
-        <Link to="/skillregist">Add new</Link>
-      </Button>
+      <SkillRegistInput />
       <Table className="table" columns={columns} dataSource={data} />
     </div>
   );

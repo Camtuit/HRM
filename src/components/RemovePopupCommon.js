@@ -11,6 +11,7 @@ function RemovePopupCommon({ title, content, onOk }) {
   function handleCancel() {
     setVisible(false);
   }
+
   return (
     <div className="remove-popup-common">
       <Tooltip title="Delete">

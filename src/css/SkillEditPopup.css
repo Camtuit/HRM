@@ -1,0 +1,7 @@
+.skill-regist-input .skill-popup-common-icon {
+  color: #80baef;
+}
+.skill-regist-input .skill-popup-common-icon:hover {
+  color: #0483f7;
+  cursor: pointer;
+}

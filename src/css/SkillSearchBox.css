@@ -4,7 +4,10 @@
   margin: 20px 20px;
   margin-top: 76px;
   height: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.user-search-box-button {
+.skill-search-box .user-search-box-button {
   float: right;
 }

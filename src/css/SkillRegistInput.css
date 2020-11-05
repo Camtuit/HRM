@@ -1,14 +1,3 @@
-.skill-regist-field {
-    position: relative;
-    left: 25%;
-}
-
-.skill-regist-button {
-    display: flex;
-    justify-content: center;
-    margin-top: 15%;
-}
-
-.skill-regist-button > button {
-    margin-left: 10px;
+.skill-regist-input {
+  float: right;
 }

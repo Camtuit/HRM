@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Modal, Button, DatePicker, Form, Input } from 'antd';
-import '../../css/SkillRegistInput.css';
+import { Modal, Button, DatePicker, Form, Input, Tooltip } from 'antd';
+import '../../css/SkillEditPopup.css';
 
-function SkillRegistInput() {
+function SkillEditPopup() {
   const [visible, setVisible] = useState(false);
 
   function showModal() {
@@ -19,16 +19,21 @@ function SkillRegistInput() {
 
   return (
     <div className="skill-regist-input">
-      <Button type="primary" onClick={showModal}>
-        Add new
-      </Button>
+      <Tooltip title="Edit">
+        <span>
+          <i
+            onClick={showModal}
+            class="fas fa-edit skill-popup-common-icon"
+          ></i>
+        </span>
+      </Tooltip>
       <Modal
-        title="Add New"
+        title="Update name"
         visible={visible}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText="Save & Continue"
-        cancelText="Save & Close"
+        okText="Save"
+        cancelText="Cancel"
       >
         <Form
           layout="horizontal"
@@ -44,4 +49,4 @@ function SkillRegistInput() {
   );
 }
 
-export default SkillRegistInput;
+export default SkillEditPopup;
