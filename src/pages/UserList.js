@@ -6,6 +6,7 @@ import Header from '../layouts/Header';
 import SideBar from '../layouts/SideBar';
 import UserSearchBox from '../components/User/UserSearchBox';
 import UserTable from '../components/User/UserTable';
+import AddDevicePopup from '../components/AddDevicePopup';
 
 function UserList() {
   // get state from redux
