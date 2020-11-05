@@ -8,6 +8,7 @@ import HolidayList from '../pages/HolidayList';
 import SkillList from '../pages/SkillList';
 import SkillRegist from '../pages/SkillRegist';
 import HolidayRegist from '../pages/HolidayRegist';
+import DeviceDetail from '../pages/DeviceDetail';
 
 import AuthenticatedGuard from '../guards/AuthenticatedGuard';
 
@@ -17,12 +18,13 @@ export default function HomeRoutes() {
       <Header />
       <Switch>
         <AuthenticatedGuard exact path="/" component={UserList} />
-        <Route path="/users" component={UserList} />
-        <Route path="/userregist" component={UserRegist} />
-        <Route path="/holiday" component={HolidayList} />
-        <Route path="/skillregist" component={SkillRegist} />
-        <Route path="/skills" component={SkillList} />
-        <Route path="/holidayregist" component={HolidayRegist} />
+        <Route exact path="/users" component={UserList} />
+        <Route exact path="/userregist" component={UserRegist} />
+        <Route exact path="/holiday" component={HolidayList} />
+        <Route exact path="/skillregist" component={SkillRegist} />
+        <Route exact path="/skills" component={SkillList} />
+        <Route exact path="/holidayregist" component={HolidayRegist} />
+        <Route exact path="/devices" component={DeviceDetail} />
       </Switch>
       <SideBar />
     </>
