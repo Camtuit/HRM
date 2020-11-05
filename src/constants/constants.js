@@ -43,6 +43,7 @@ const constant = {
   },
   WRAPPER_COL: {
     WRAPPER_COL_10: 10,
+    WRAPPER_COL_15: 15,
     WRAPPER_COL_19: 19,
   },
   BUTTON: {
