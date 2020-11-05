@@ -13,6 +13,7 @@
 }
 .request-search-box .request-search-box-button {
   float: right;
+  margin: -12px 0;
 }
 .request-search-box .request-search-box-button .btn-cancel {
   margin-right: 12px;
