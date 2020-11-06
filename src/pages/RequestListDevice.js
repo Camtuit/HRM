@@ -4,7 +4,7 @@ import '../css/SkillList.css';
 import RequestSearchBox from '../components/Request/RequestSearchBox';
 import RequestTable from '../components/Request/RequestTable';
 
-export default function RequestList() {
+export default function RequestListDevice() {
   const isSideBarOpen = useSelector(
     (state) => state.sideBarReducer.isSideBarOpen,
   );

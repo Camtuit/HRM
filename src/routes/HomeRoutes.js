@@ -9,14 +9,15 @@ import HolidayList from '../pages/HolidayList';
 import SkillList from '../pages/SkillList';
 import SkillRegist from '../pages/SkillRegist';
 import HolidayRegist from '../pages/HolidayRegist';
-import RequestList from '../pages/RequestList';
+import DeviceDetail from '../pages/DeviceDetail';
+import RequestListDevice from '../pages/RequestListDevice';
+
 import DayOffList from '../pages/DayOffList';
 import DayOffRegist from '../pages/DayOffRegist';
 import RequestDetail from '../pages/RequestDetail';
 import DeviceRoute from './DeviceRoutes';
 
 export default function HomeRoutes() {
-  console.log(22);
   return (
     <>
       <Header />
@@ -35,7 +36,7 @@ export default function HomeRoutes() {
         <Route exact path="/dayoff" component={DayOffRegist} />
         <Route exact path="/dayoffs" component={DayOffList} />
         {/* Request Device */}
-        <Route exact path="/request-device" component={RequestList} />
+        <Route exact path="/request-device" component={RequestListDevice} />
         <Route
           exact
           path="/request-device/:id/detail"

@@ -17,6 +17,8 @@ const constant = {
   LABEL: {
     DAY_OFF: 'Day off',
     NAME: 'Name',
+    HOLDER: 'Holder',
+    STATUS: 'Status',
     PO_NAME: "PO's Name",
     PO_EMAIL: "PO's Email",
     VACATION_FROM: 'Vacation Days From',
@@ -51,6 +53,8 @@ const constant = {
     SEARCH: 'Search',
     SUBMIT: 'Submit',
     BACK: 'Back',
+    ADD: 'Add new',
+    EXPORT_FILE: 'Export File',
   },
   FORMAT_DATE: 'DD-MM-YYYY',
   QUICK_CHOOSE: {
@@ -64,6 +68,9 @@ const constant = {
     MORNING: 'Morning',
     AFTERNOON: 'Afternoon',
     All_DAY: 'All day',
+    ALL: 'All',
+    ASSIGNED: 'Assigned',
+    AVAILABLE: 'Available',
   },
   VACATION_TYPE: {
     ANNUAL_LEAVE: 'Annual leave',

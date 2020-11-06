@@ -3,6 +3,7 @@ import { Table, Button, Tooltip, DeleteOutlined } from 'antd';
 import '../../css/RequestTable.css';
 import { Link } from 'react-router-dom';
 import RemovePopupCommon from '../RemovePopupCommon';
+import constant from '../../constants/constants';
 
 export default function RequestTable() {
   const [panigationtop, setPanigationtop] = useState('topRight');
@@ -194,17 +195,21 @@ export default function RequestTable() {
   ];
   return (
     <div className="request-table">
-      <Button className="request-table-add" type="primary">
-        <Link to="/">Add new</Link>
-      </Button>
-      <Button className="request-table-add" type="primary">
-        Export
-      </Button>
+      <div className="request-table-button">
+        <h2>Request list</h2>
+        <Button className="request-button-add" type="primary">
+          <Link to="/">{constant.BUTTON.ADD}</Link>
+        </Button>
+        <Button className="request-button-add" type="primary">
+          {constant.BUTTON.EXPORT_FILE}
+        </Button>
+      </div>
       <Table
         className="table-data"
         columns={columns}
         dataSource={data}
         size="small"
+        pagination={{ position: [panigationtop, panigationbottom] }}
       />
     </div>
   );

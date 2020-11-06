@@ -1,13 +1,20 @@
 .request-table {
-  padding: 20px 20px;
-  font-size: 30px;
+  padding: 0 20px;
+  margin-top: -35px;
 }
-.request-table-add {
+.request-table-button {
+  position: relative;
+  top: 52px;
+  left: 0;
+  z-index: 999;
+  width: fit-content;
+}
+.request-table-button .request-button-add {
   margin-right: 10px;
   margin-bottom: 12px;
-  /* float: left; */
   width: 94px;
 }
+
 .request-table-action {
   display: flex;
   justify-content: space-around;
@@ -17,4 +24,10 @@
 }
 .request-table-action i:hover {
   color: #0483f7;
+}
+.request-table .ant-table-content th {
+  text-align: center;
+}
+.request-table .ant-table-tbody .ant-table-row td {
+  text-align: center;
 }
