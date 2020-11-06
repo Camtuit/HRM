@@ -9,7 +9,6 @@ import HolidayList from '../pages/HolidayList';
 import SkillList from '../pages/SkillList';
 import SkillRegist from '../pages/SkillRegist';
 import HolidayRegist from '../pages/HolidayRegist';
-import DeviceDetail from '../pages/DeviceDetail';
 import RequestListDevice from '../pages/RequestListDevice';
 
 import DayOffList from '../pages/DayOffList';
