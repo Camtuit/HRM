@@ -15,9 +15,6 @@ function HolidayList() {
 
   return (
     <div>
-      <Header />
-      <SideBar />
-
       <div
         style={{ marginLeft: isSideBarOpen ? '230px' : '56px' }}
         className="holiday-list-content"

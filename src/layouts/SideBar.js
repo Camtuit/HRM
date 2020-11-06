@@ -19,7 +19,7 @@ function SideBar() {
         </div>
       </Link>
 
-      <Link to="/holiday">
+      <Link to="/holidays">
         <div className="side-bar-item">
           <i className="fas fa-table" />
           <span>Holiday List</span>
@@ -40,7 +40,7 @@ function SideBar() {
         </div>
       </Link>
 
-      <Link to="/requestdevice">
+      <Link to="/request-device">
         <div className="side-bar-item">
           <i className="fas fa-laptop-medical" />
           <span>Request Device List</span>

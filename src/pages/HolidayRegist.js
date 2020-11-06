@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Header from '../layouts/Header';
 import HolidayRegistInput from '../components/Holiday/HolidayRegistInput';
-import SideBar from '../layouts/SideBar';
 import '../css/HolidayRegist.css';
 
 function HolidayRegist() {
@@ -12,8 +10,6 @@ function HolidayRegist() {
 
   return (
     <>
-      <Header />
-      <SideBar />
       <div
         style={{ marginLeft: isSideBarOpen ? '230px' : '56px' }}
         className="holiday-registration-content"

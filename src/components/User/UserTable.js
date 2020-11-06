@@ -176,7 +176,7 @@ function UserTable() {
     <div className="user-table">
       <h2>User list</h2>
 
-      <Link to="/userregist">
+      <Link to="/user">
         <Button className="user-table-button" type="primary">
           Add new user
         </Button>
