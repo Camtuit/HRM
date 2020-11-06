@@ -1,0 +1,28 @@
+.user-regist-content {
+  margin-left: 250px;
+  /* border: 1px solid black; */
+  margin-right: 20px;
+  /* border: 1px solid #d6d6d6; */
+}
+
+.user-regist-form {
+  /* border: 1px solid #d6d6d6; */
+  width: 80%;
+  margin-left: 10%;
+  padding: 20px;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+}
+
+.user-regist-form-button {
+  display: flex;
+  justify-content: center;
+}
+
+.user-regist-form-button button {
+  width: 120px;
+  margin-right: 20px;
+}
+
+.user-regist-form-avatar {
+  padding: 0 40%;
+}
