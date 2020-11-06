@@ -15,7 +15,6 @@ function UserRegist() {
     <div className="user-regist">
       <div className="user-regist-content">
         <div className="user-regist-form">
-          <h2>User Registration</h2>
           <div className="user-regist-form-avatar">
             <AvatarUpload />
           </div>

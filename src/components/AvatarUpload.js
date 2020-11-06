@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Upload } from 'antd';
+import ImgCrop from 'antd-img-crop';
 
 const AvatarUpload = () => {
   const [fileList, setFileList] = useState([]);
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
+  useEffect(() => {
+    console.log(fileList);
+  }, [fileList]);
 
   const onPreview = async (file) => {
     let src = file.url;
@@ -24,11 +28,12 @@ const AvatarUpload = () => {
 
   return (
     <Upload
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      action="http://3.138.207.155:8080/api/upload"
       listType="picture-card"
       fileList={fileList}
       onChange={onChange}
       onPreview={onPreview}
+      name="image"
     >
       {fileList.length < 1 && '+ Avatar'}
     </Upload>
