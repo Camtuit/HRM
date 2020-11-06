@@ -7,6 +7,9 @@ import SkillEditPopup from './SkillEditPopup';
 import RemovePopupCommon from '../RemovePopupCommon';
 
 function SkillTable() {
+  const [currentRecord, setCurrentRecord] = useState({});
+  const [panigationtop, setPanigationtop] = useState('topRight');
+  const [panigationbottom, setpanigationbottom] = useState('bottomRight');
   const columns = [
     {
       title: 'No',
@@ -30,7 +33,7 @@ function SkillTable() {
       width: 100,
       render: () => (
         <div className="skill-table-action">
-          <SkillEditPopup />
+          <SkillEditPopup record={currentRecord} />
           <RemovePopupCommon
             title="Delete skill"
             content="Are you sure delete"
@@ -59,12 +62,73 @@ function SkillTable() {
       name: 'Reactjs',
       updated: '10/10/2020 15:10:15',
     },
+    {
+      key: '4',
+      no: '4',
+      name: 'Node',
+      updated: '10/10/2020 15:10:15',
+    },
+    {
+      key: '5',
+      no: '5',
+      name: 'Vuje',
+      updated: '10/10/2020 15:10:15',
+    },
+    {
+      key: '6',
+      no: '6',
+      name: 'Nodej',
+      updated: '10/10/2020 15:10:15',
+    },
+    {
+      key: '7',
+      no: '7',
+      name: 'css',
+      updated: '10/10/2020 15:10:15',
+    },
+    {
+      key: '8',
+      no: '8',
+      name: 'css',
+      updated: '10/10/2020 15:10:15',
+    },
+    {
+      key: '9',
+      no: '9',
+      name: 'css',
+      updated: '10/10/2020 15:10:15',
+    },
+    {
+      key: '10',
+      no: '10',
+      name: 'css',
+      updated: '10/10/2020 15:10:15',
+    },
+    {
+      key: '11',
+      no: '11',
+      name: 'css',
+      updated: '10/10/2020 15:10:15',
+    },
   ];
 
   return (
     <div className="skill-table">
       <SkillRegistInput />
-      <Table className="table" columns={columns} dataSource={data} />
+      <Table
+        className="table"
+        columns={columns}
+        dataSource={data}
+        size="small"
+        pagination={{ position: [panigationtop, panigationbottom] }}
+        onRow={(record) => {
+          return {
+            onClick: () => {
+              setCurrentRecord(record);
+            },
+          };
+        }}
+      />
     </div>
   );
 }

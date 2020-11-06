@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Select, DatePicker, Row, Col } from 'antd';
 import '../../css/SkillSearchBox.css';
+import constant from '../../constants/constants';
 
 function SkillSearchBox() {
   const [componentSize, setComponentSize] = useState('default');
@@ -18,9 +19,7 @@ function SkillSearchBox() {
       <Row>
         <Col span={24}>
           <Form
-            labelCol={{
-              span: 6,
-            }}
+            labelCol={constant.LAYOUT_ERROR_TEXT.labelCol}
             wrapperCol={{
               span: 20,
             }}
@@ -31,7 +30,7 @@ function SkillSearchBox() {
             onValuesChange={onFormLayoutChange}
             size={componentSize}
           >
-            <Form.Item label="Name">
+            <Form.Item label={constant.LABEL.NAME}>
               <Input
                 onChange={(e) => {
                   handleChange(e);
@@ -41,9 +40,9 @@ function SkillSearchBox() {
             </Form.Item>
 
             <div className="user-search-box-button">
-              <Button>Cancel</Button>
+              <Button>{constant.BUTTON.CANCEL}</Button>
               <Button type="primary" onClick={handleSearch}>
-                Search
+                {constant.BUTTON.SEARCH}
               </Button>
             </div>
           </Form>

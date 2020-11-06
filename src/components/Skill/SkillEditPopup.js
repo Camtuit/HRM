@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, Button, DatePicker, Form, Input, Tooltip } from 'antd';
 import '../../css/SkillEditPopup.css';
+import constant from '../../constants/constants';
 
-function SkillEditPopup() {
+function SkillEditPopup({ record }) {
   const [visible, setVisible] = useState(false);
 
   function showModal() {
@@ -28,7 +29,7 @@ function SkillEditPopup() {
         </span>
       </Tooltip>
       <Modal
-        title="Update name"
+        title="Edit name"
         visible={visible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -36,12 +37,12 @@ function SkillEditPopup() {
         cancelText="Cancel"
       >
         <Form
-          layout="horizontal"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 12 }}
+          layout={constant.LAYOUT.HORIZONTAL}
+          labelCol={constant.LAYOUT_ERROR_TEXT.labelCol}
+          wrapperCol={constant.LAYOUT_ERROR_TEXT.wrapperCol}
         >
-          <Form.Item label="Name">
-            <Input placeholder="Skill name" />
+          <Form.Item label={constant.LABEL.NAME}>
+            <Input defaultValue={record.name} placeholder="Skill name" />
           </Form.Item>
         </Form>
       </Modal>

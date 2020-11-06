@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, DatePicker, Form, Input } from 'antd';
 import '../../css/SkillRegistInput.css';
+import constant from '../../constants/constants';
 
 function SkillRegistInput() {
   const [visible, setVisible] = useState(false);
@@ -19,11 +20,14 @@ function SkillRegistInput() {
 
   return (
     <div className="skill-regist-input">
-      <Button type="primary" onClick={showModal}>
-        Add new
-      </Button>
+      <div className="skill-regist-button">
+        <h2>Skill list</h2>
+        <Button type="primary" onClick={showModal}>
+          {constant.BUTTON.ADD}
+        </Button>
+      </div>
       <Modal
-        title="Add New"
+        title={constant.BUTTON.ADD}
         visible={visible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -31,11 +35,11 @@ function SkillRegistInput() {
         cancelText="Save & Close"
       >
         <Form
-          layout="horizontal"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 12 }}
+          layout={constant.LAYOUT.HORIZONTAL}
+          labelCol={constant.LAYOUT_ERROR_TEXT.labelCol}
+          wrapperCol={constant.LAYOUT_ERROR_TEXT.wrapperCol}
         >
-          <Form.Item label="Name">
+          <Form.Item label={constant.LABEL.NAME}>
             <Input placeholder="Skill name" />
           </Form.Item>
         </Form>

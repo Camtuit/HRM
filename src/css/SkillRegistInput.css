@@ -1,3 +1,10 @@
 .skill-regist-input {
-  float: right;
+  float: left;
+}
+.skill-regist-input .skill-regist-button {
+  position: relative;
+  top: 40px;
+  left: 0;
+  z-index: 999;
+  width: fit-content;
 }
