@@ -1,15 +1,17 @@
 import React from 'react';
-import { Button, Table } from 'antd';
+import { Button, Table, Tooltip } from 'antd';
 import '../../css/DayOffTable.css';
 import { useHistory } from 'react-router';
+import RemovePopupCommon from '../RemovePopupCommon';
+import constant from '../../constants/constants';
 
 function DayOffTable() {
   const history = useHistory();
   const handleChangeAddNewDayOff = () => {
-    history.push('/dayoffregist');
+    history.push('/dayoff');
   };
   const handleChangeEditDayOff = () => {
-    history.push('/dayoffregist');
+    history.push('/dayoff');
   };
   const handleChangeRemoveDayOff = () => {};
   const PAGINATION_POSITION = {
@@ -18,12 +20,12 @@ function DayOffTable() {
   };
   const COLUMNS = [
     {
-      title: 'No',
+      title: constant.TABLE.COLUMN_TITLE.NO,
       dataIndex: 'no',
     },
 
     {
-      title: 'Name',
+      title: constant.TABLE.COLUMN_TITLE.NAME,
       dataIndex: 'name',
       sorter: {
         compare: (a, b) => a.name - b.name,
@@ -32,12 +34,12 @@ function DayOffTable() {
     },
 
     {
-      title: 'Email',
+      title: constant.TABLE.COLUMN_TITLE.EMAIL,
       dataIndex: 'email',
     },
 
     {
-      title: 'Date Off',
+      title: constant.TABLE.COLUMN_TITLE.DATE_OFF,
       dataIndex: 'dateOff',
       sorter: {
         compare: (a, b) => a.dayOff - b.dayOff,
@@ -46,24 +48,33 @@ function DayOffTable() {
     },
 
     {
-      title: 'Type',
+      title: constant.TABLE.COLUMN_TITLE.TYPE,
       dataIndex: 'type',
     },
 
     {
-      title: "PO's Name",
+      title: constant.TABLE.COLUMN_TITLE.PO_NAME,
       dataIndex: 'poName',
     },
 
     {
-      title: 'Action',
+      title: constant.TABLE.COLUMN_TITLE.ACTION,
       key: 'empty',
-      fixed: 'right',
+      fixed: constant.TABLE.COLUMN_FIXED.RIGHT,
       width: 100,
       render: () => (
-        <div className="skill-table-action">
-          <i className="fas fa-edit" onClick={handleChangeEditDayOff} />
-          <i className="fas fa-trash-alt" onClick={handleChangeRemoveDayOff} />
+        <div className="dayoff-table-action">
+          <Tooltip
+            placement={constant.TOOLTIP.PLACEMENT.TOP}
+            title={constant.TOOLTIP.TITLE.EDIT}
+          >
+            <i className="fas fa-edit" onClick={handleChangeEditDayOff} />
+          </Tooltip>
+          <RemovePopupCommon
+            title="Delete request"
+            content="Are you sure delete"
+            onOk={() => console.log('true')}
+          />
         </div>
       ),
     },
@@ -199,10 +210,10 @@ function DayOffTable() {
             type="primary"
             onClick={handleChangeAddNewDayOff}
           >
-            Add new dayoff
+            {constant.BUTTON.ADD_NEW_DATE_OFF}
           </Button>
           <Button className="dayoff-table-button" type="primary">
-            Export
+            {constant.BUTTON.EXPORT}
           </Button>
         </div>
       </div>

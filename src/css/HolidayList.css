@@ -1,5 +1,4 @@
 .holiday-list-content {
-    margin-top: 56px;
-    margin-left: 56px;
-    transition: margin-left 0.3s;
+  margin-left: 56px;
+  transition: margin-left 0.3s;
 }

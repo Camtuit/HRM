@@ -1,0 +1,9 @@
+.holiday-regist-button .holiday-popup-common-icon {
+  align-self: center;
+  color: #80baef;
+}
+
+.holiday-regist-button .holiday-popup-common-icon:hover {
+  color: #0483f7;
+  cursor: pointer;
+}

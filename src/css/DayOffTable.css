@@ -1,15 +1,29 @@
 .dayoff-table {
-    margin: 20px;
+  margin: 20px;
 }
 
 .dayoff-table-header {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .dayoff-table-button {
-    margin-right: 10px;
-    margin-bottom: -40px;
-    z-index: 999;
+  margin: 10px 10px -40px 0px;
+  z-index: 999;
+  width: fit-content;
+}
+
+.dayoff-table-action {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dayoff-table-action i {
+  align-self: center;
+  color: #80baef;
+}
+.dayoff-table-action i:hover {
+  color: #0483f7;
+  cursor: pointer;
 }

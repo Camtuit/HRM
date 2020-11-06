@@ -1,16 +1,17 @@
 .holiday-table {
-    margin: 20px;
+  margin: 20px;
 }
 
-.holiday-table-action > i {
-    color:#a0a0a0;
+.holiday-table > button {
+  margin-top: 10px;
 }
 
-.holiday-table-action > i:hover {
-    color: black;
-    cursor: pointer;
+.holiday-table-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .holiday-table-action > i:nth-child(2) {
-    margin-left: 15px;
+  margin-left: 15px;
 }

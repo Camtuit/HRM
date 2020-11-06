@@ -7,8 +7,6 @@ import UserList from '../pages/UserList';
 import UserRegist from '../pages/UserRegist';
 import HolidayList from '../pages/HolidayList';
 import SkillList from '../pages/SkillList';
-import SkillRegist from '../pages/SkillRegist';
-import HolidayRegist from '../pages/HolidayRegist';
 import RequestListDevice from '../pages/RequestListDevice';
 
 import DayOffList from '../pages/DayOffList';
@@ -27,9 +25,7 @@ export default function HomeRoutes() {
         <Route exact path="/user" component={UserRegist} />
         {/* Holiday */}
         <Route exact path="/holidays" component={HolidayList} />
-        <Route exact path="/holiday" component={HolidayRegist} />
         {/* Skill */}
-        <Route exact path="/skill" component={SkillRegist} />
         <Route exact path="/skills" component={SkillList} />
         {/* Day Off */}
         <Route exact path="/dayoff" component={DayOffRegist} />

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Table, Button } from 'antd';
-import { Link } from 'react-router-dom';
+import { Table, Button, Tooltip } from 'antd';
 import '../../css/HolidayTable.css';
+import RemovePopupCommon from '../RemovePopupCommon';
+import HolidayRegistPopup from './HolidayRegistPopup';
+import constant from '../../constants/constants';
 
 function HolidayTable() {
   const columns = [
@@ -27,8 +29,12 @@ function HolidayTable() {
       width: 100,
       render: () => (
         <div className="holiday-table-action">
-          <i className="fas fa-edit" />
-          <i className="fas fa-trash-alt" />
+          <HolidayRegistPopup />
+          <RemovePopupCommon
+            title="Delete request"
+            content="Are you sure delete"
+            onOk={() => console.log('true')}
+          />
         </div>
       ),
     },
@@ -57,7 +63,7 @@ function HolidayTable() {
       <h2>Holiday list</h2>
 
       <Button className="user-table-button" type="primary">
-        Export file
+        {constant.BUTTON.EXPORT_FILE}
       </Button>
 
       <Table columns={columns} dataSource={data} onChange={onChange} />
