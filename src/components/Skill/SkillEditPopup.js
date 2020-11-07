@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, DatePicker, Form, Input, Tooltip } from 'antd';
 import '../../css/SkillEditPopup.css';
-import constant from '../../constants/constants';
+import constant from '../../constants/htmlConstants';
 
 function SkillEditPopup({ record }) {
   const [visible, setVisible] = useState(false);

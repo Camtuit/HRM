@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Header from '../layouts/Header';
-import SideBar from '../layouts/SideBar';
-import SkillRegistInput from '../components/Skill/SkillRegistInput';
+import Header from '../../layouts/Header';
+import SideBar from '../../layouts/SideBar';
+import SkillRegistInput from '../../components/Skill/SkillRegistInput';
 // import '../css/SkillRegist.css';
 
 function SkillRegist() {

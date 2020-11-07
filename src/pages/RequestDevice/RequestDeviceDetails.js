@@ -6,6 +6,7 @@ import { deviceSizeFixed } from '../../constants/deviceSize';
 import RequestDeviceForm from '../../components/RequestDevice/RequestDeviceForm';
 import { request } from '../../helpers/dumbData';
 import { BUTTON } from '../../constants/textLabel';
+import WrapperContent from '../../components/commons/WrapperContentPage';
 
 export default function RequestDeviceDetails({ history }) {
   const screenWidth = useSelector((state) => state.screenWidth);
@@ -16,7 +17,7 @@ export default function RequestDeviceDetails({ history }) {
     history.push('/');
   };
   return (
-    <div className="wrapper-content">
+    <WrapperContent>
       <div className="request-device-container request-device-details">
         <h2 className="request-device-form__title">Request Device Details</h2>
         <RequestDeviceForm
@@ -34,6 +35,6 @@ export default function RequestDeviceDetails({ history }) {
           </div>
         </Col>
       </Row>
-    </div>
+    </WrapperContent>
   );
 }

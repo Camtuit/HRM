@@ -9,7 +9,7 @@ function HolidaySearchBox() {
     setComponentSize(size);
   };
   return (
-    <div className="holiday-search-box">
+    <div className="search-box holiday-search-box">
       <Form
         labelCol={{
           span: 9,

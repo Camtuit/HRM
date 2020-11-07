@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Radio, DatePicker } from 'antd';
 import { Link } from 'react-router-dom';
-import '../css/UserRegist.css';
-import AvatarUpload from '../components/AvatarUpload';
+import '../../css/UserRegist.css';
+import AvatarUpload from '../../components/AvatarUpload';
+import WrapperContent from '../../components/commons/WrapperContentPage';
 
 function UserRegist() {
   const [value, setValue] = useState(1);

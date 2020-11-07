@@ -1,7 +1,7 @@
 import { Button, DatePicker, Form, Input, Select } from 'antd';
 import React, { useState } from 'react';
 
-import constant from '../../constants/constants';
+import constant from '../../constants/htmlConstants';
 import '../../css/DayOffSearchBox.css';
 
 function DayOffSearchBox() {
@@ -10,7 +10,7 @@ function DayOffSearchBox() {
     setComponentSize(size);
   };
   return (
-    <div className="dayoff-search-box">
+    <div className="search-box dayoff-search-box">
       <Form
         labelCol={{
           span: constant.LABEL_COL.LABEL_COL_2,

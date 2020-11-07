@@ -3,7 +3,7 @@ import { Button, Table, Tooltip } from 'antd';
 import '../../css/DayOffTable.css';
 import { useHistory } from 'react-router';
 import RemovePopupCommon from '../RemovePopupCommon';
-import constant from '../../constants/constants';
+import constant from '../../constants/htmlConstants';
 
 function DayOffTable() {
   const history = useHistory();
@@ -203,7 +203,7 @@ function DayOffTable() {
   return (
     <div className="dayoff-table">
       <div className="dayoff-table-header">
-        <h2>Dayoff List</h2>
+        <h2 className="list-title">Dayoff List</h2>
         <div className="dayoff-table-button">
           <Button
             className="dayoff-table-button"

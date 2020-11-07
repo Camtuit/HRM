@@ -3,7 +3,7 @@ import { Table, Button, Tooltip } from 'antd';
 import '../../css/HolidayTable.css';
 import RemovePopupCommon from '../RemovePopupCommon';
 import HolidayRegistPopup from './HolidayRegistPopup';
-import constant from '../../constants/constants';
+import constant from '../../constants/htmlConstants';
 
 function HolidayTable() {
   const columns = [
@@ -60,7 +60,7 @@ function HolidayTable() {
 
   return (
     <div className="holiday-table">
-      <h2>Holiday list</h2>
+      <h2 className="list-title">Holiday list</h2>
 
       <Button className="user-table-button" type="primary">
         {constant.BUTTON.EXPORT_FILE}

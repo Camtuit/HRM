@@ -2,14 +2,13 @@ import { Button, Col, DatePicker, Form, Input, Radio, Row, Select } from 'antd';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
-import constant from '../../constants/constants';
+import constant from '../../constants/htmlConstants';
 import validation from '../../constants/validation';
 import '../../css/DayOffRegistInput.css';
 
 function DayOffRegistInput(props) {
   const [componentSize, setComponentSize] = useState('default');
   const history = useHistory();
-
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };

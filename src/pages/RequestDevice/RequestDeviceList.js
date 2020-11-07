@@ -1,16 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import RequestDeviceSearchBox from '../../components/RequestDevice/RequestDeviceSearchBox';
 import RequestDeviceTable from '../../components/RequestDevice/RequestDeviceTable';
+import WrapperContent from '../../components/commons/WrapperContentPage';
 
 export default function RequestDeviceList(props) {
-  const isSideBarOpen = useSelector(
-    (state) => state.sideBarReducer.isSideBarOpen,
-  );
   return (
-    <div className="wrapper-content">
+    <WrapperContent>
       <RequestDeviceSearchBox />
       <RequestDeviceTable {...props} />
-    </div>
+    </WrapperContent>
   );
 }

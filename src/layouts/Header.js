@@ -1,19 +1,18 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Avatar } from 'antd';
 
-function Header() {
-  const handleToggleSidebar = () => {
-    const [sideBar] = document.getElementsByClassName('side-bar');
-    const [content] = document.getElementsByClassName('wrapper-content');
-    if (sideBar && sideBar.classList.contains('toggled'))
-      sideBar.classList.remove('toggled');
-    else sideBar.classList.add('toggled');
-    if (content && content.classList.contains('toggled'))
-      content.classList.remove('toggled');
-    else content && content.classList.add('toggled');
-  };
+import { toggleSideBar } from '../actions/utilsAction';
+import { deviceSizeFixed } from '../constants/deviceSize';
 
+function Header() {
+  const isLaptop = window.innerWidth >= deviceSizeFixed.laptop;
+  const dispatch = useDispatch(toggleSideBar(true));
+
+  const handleToggleSidebar = () => {
+    dispatch(toggleSideBar());
+  };
   return (
     <header className="header">
       <div className="logo">

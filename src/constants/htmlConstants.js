@@ -1,7 +1,7 @@
-const constant = {
-  CHANGE_LAYOUT: {
-    MARGIN_LEFT_230: '230px',
-    MARGIN_LEFT_56: '56px',
+const constants = {
+  WIDTH_SIDE_BAR: {
+    FULL: '200px',
+    SHORT: '56px',
   },
   LAYOUT: {
     HORIZONTAL: 'horizontal',
@@ -37,7 +37,13 @@ const constant = {
   },
   GRID_COL: {
     GRID_COL_4: 4,
+    GRID_COL_5: 5,
+    GRID_COL_8: 8,
+    GRID_COL_9: 9,
+    GRID_COL_12: 12,
+    GRID_COL_13: 8,
     GRID_COL_16: 16,
+    GRID_COL_21: 21,
   },
   LABEL_COL: {
     LABEL_COL_2: 2,
@@ -114,4 +120,4 @@ const constant = {
   },
 };
 
-export default constant;
+export default constants;

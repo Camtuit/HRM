@@ -4,17 +4,17 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../layouts/Header';
 import SideBar from '../layouts/SideBar';
 // User
-import UserList from '../pages/UserList';
-import UserRegist from '../pages/UserRegist';
+import UserList from '../pages/User/UserList';
+import UserRegist from '../pages/User/UserRegist';
 // Holiday
-import HolidayList from '../pages/HolidayList';
-import HolidayRegist from '../pages/HolidayRegist';
+import HolidayList from '../pages/Holiday/HolidayList';
+import HolidayRegist from '../pages/Holiday/HolidayRegist';
 // Skill List
-import SkillList from '../pages/SkillList';
-import SkillRegist from '../pages/SkillRegist';
+import SkillList from '../pages/Skill/SkillList';
+import SkillRegist from '../pages/Skill/SkillRegist';
 // Day Off
-import DayOffList from '../pages/DayOffList';
-import DayOffRegist from '../pages/DayOffRegist';
+import DayOffList from '../pages/DayOff/DayOffList';
+import DayOffRegist from '../pages/DayOff/DayOffRegist';
 // Request Device
 import RequestDeviceRegister from '../pages/RequestDevice/RequestDeviceRegister';
 import RequestDeviceRoutes from './RequestDeviceRoutes';

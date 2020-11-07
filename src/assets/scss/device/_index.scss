@@ -6,12 +6,6 @@
     @include flex(row, center, center);
     height: 50px;
   }
-  .devices-table {
-    .ant-table {
-      border-left: 1px solid $platinum;
-      border-right: 1px solid $platinum;
-    }
-  }
   .button {
     justify-content: flex-end;
     margin-right: 30px;

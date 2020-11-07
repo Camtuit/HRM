@@ -1,31 +1,14 @@
 import React, { useState } from 'react';
 import { Modal, Button, DatePicker, Form, Input } from 'antd';
 
-function AddDevicePopup() {
-  const [visible, setVisible] = useState(false);
-
-  function showModal() {
-    setVisible(true);
-  }
-
-  function handleOk(event) {
-    setVisible(false);
-  }
-
-  function handleCancel() {
-    setVisible(false);
-  }
-
+function AddDevicePopup({ onClickAddNew = () => {}, toggled }) {
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
-        Add device
-      </Button>
       <Modal
         title="Add Device"
-        visible={visible}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        visible={toggled}
+        onOk={() => {}}
+        onCancel={onClickAddNew}
         okText="Save & Continue"
         cancelText="Save & Close"
       >

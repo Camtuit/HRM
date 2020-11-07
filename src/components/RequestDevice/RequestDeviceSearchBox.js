@@ -23,7 +23,7 @@ export default function RequestDeviceSearchBox() {
     return current && current < moment().endOf('day');
   };
   return (
-    <div className="request-search-box">
+    <div className="search-box request-search-box">
       <Row>
         <Form.Item
           className="request-search-box__item request-search-box__item--name"

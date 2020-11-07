@@ -1,15 +1,28 @@
 .wrapper-content {
-  width: calc(100% - 56px);
+  width: calc(100% - 30px);
   margin-left: auto;
   transition: width 0.2s ease;
   @include laptop() {
     width: calc(100% - 230px);
   }
 }
-.wrapper-content.toggled {
-  width: calc(100% - 56px);
-}
 
 .container-search-bar {
   @include flex(row, stretch, center, wrap);
+}
+
+.container {
+  background-color: $background;
+}
+.search-box {
+  background-color: #ffffff;
+}
+
+.list-title {
+  color: $green;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.ant-table {
+  border: 1px solid $platinum;
 }

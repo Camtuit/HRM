@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { deviceSizeFixed } from '../../constants/deviceSize';
 
-import constant from '../../constants/constants';
+import constant from '../../constants/htmlConstants';
 
 function RequestDeviceForm({ request = {}, spanLabelCol, spanWrapperCol }) {
   const {

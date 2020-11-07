@@ -1,7 +1,6 @@
 import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 
-import './App.css';
 import 'antd/dist/antd.css';
 import './assets/scss/_base-index.scss';
 import Routes from './routes/index';
@@ -12,9 +11,11 @@ const store = configureStore();
 
 function App() {
   return (
-    <ReduxProvider store={store}>
-      <Routes />
-    </ReduxProvider>
+    <div className="container">
+      <ReduxProvider store={store}>
+        <Routes />
+      </ReduxProvider>
+    </div>
   );
 }
 

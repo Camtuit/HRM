@@ -1,0 +1,60 @@
+.side-bar {
+  position: fixed;
+  top: 0;
+  padding-top: 70px;
+  height: 100vh;
+  width: $width-sidebar;
+  background-color: $dark;
+  z-index: 20;
+  transition: all 0.2s ease;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  &__icon {
+    margin-left: auto;
+    margin-right: 20px;
+    color: #e5e5e5;
+    cursor: pointer;
+    .open {
+      color: $orange;
+    }
+    svg {
+      font-size: 20px;
+    }
+    svg:hover {
+      color: $orange;
+    }
+  }
+  &__item {
+    color: #e5e5e5;
+    white-space: nowrap;
+    height: 50px;
+    padding: 20px;
+    cursor: pointer;
+    svg {
+      font-size: 20px;
+      text-align: center;
+      margin-left: auto;
+    }
+    span {
+      font-size: 16px;
+      margin-left: 20px;
+    }
+    .icon-25 {
+      display: inline-block;
+      width: 25px;
+    }
+  }
+  &__item:hover {
+    color: $orange;
+    svg {
+      color: $orange;
+    }
+  }
+}
+@media only screen and (min-width: 64em) {
+  .side-bar {
+    left: 0;
+  }
+}

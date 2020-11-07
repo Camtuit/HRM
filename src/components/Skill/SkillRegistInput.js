@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, DatePicker, Form, Input } from 'antd';
 import '../../css/SkillRegistInput.css';
-import constant from '../../constants/constants';
+import constant from '../../constants/htmlConstants';
 
 function SkillRegistInput() {
   const [visible, setVisible] = useState(false);
@@ -21,7 +21,7 @@ function SkillRegistInput() {
   return (
     <div className="skill-regist-input">
       <div className="skill-regist-button">
-        <h2>Skill list</h2>
+        <h2 className="list-title">Skill list</h2>
         <Button type="primary" onClick={showModal}>
           {constant.BUTTON.ADD}
         </Button>
