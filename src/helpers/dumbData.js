@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const devices = [
   {
     id: '1122aac',
@@ -33,3 +32,110 @@ export const devices = [
     holder: 'Nguyen Van B',
   },
 ];
+export const requestDevices = [
+  {
+    id: 'lalfjahsjdf',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: '2iouda2',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 1',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: '2iwu2232',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: '2iwukjwlkjklw',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: '123124',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: 'mwjkh9a',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: 'm2k2j',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: 'kljaklsjf',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: 'jfklsjkfs',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: 'fkjklsf',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: 'fasfa',
+    email: 'balsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+  {
+    id: 'wrwrwrwrw',
+    email: 'nalsolution@nal.com',
+    projectName: 'HRM',
+    deviceName: 'iPhone 12',
+    numberOfDevice: '01',
+    equipmentRequiredReason: 'for testing',
+  },
+];
+
+export const request = {
+  project_name: 'Testing Project',
+  name: 'Macbook pro 15',
+  delivery_date: '01-01-2020',
+  technical_specification: 'Macbook pro 15',
+  number: '1',
+  reason: 'Test',
+};

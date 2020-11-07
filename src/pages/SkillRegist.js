@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Header from '../layouts/Header';
 import SideBar from '../layouts/SideBar';
 import SkillRegistInput from '../components/Skill/SkillRegistInput';
-import '../css/SkillRegist.css';
+// import '../css/SkillRegist.css';
 
 function SkillRegist() {
   const isSideBarOpen = useSelector(
@@ -12,8 +12,6 @@ function SkillRegist() {
 
   return (
     <>
-      <Header />
-      <SideBar />
       <div
         style={{ marginLeft: isSideBarOpen ? '230px' : '56px' }}
         className="skill-registration-content"

@@ -40,7 +40,7 @@ function SideBar() {
         </div>
       </Link>
 
-      <Link to="/request-device">
+      <Link to="/request-devices">
         <div className="side-bar-item">
           <i className="fas fa-laptop-medical" />
           <span>Request Device List</span>

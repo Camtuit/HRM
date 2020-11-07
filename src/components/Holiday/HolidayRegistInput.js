@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Form, Input, Button, DatePicker } from 'antd';
 import moment from 'moment';
-import '../../css/HolidayRegistInput.css';
 import { useHistory } from 'react-router-dom';
 
 function HolidayRegistInput() {

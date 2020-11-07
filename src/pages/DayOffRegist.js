@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import DayOffRegistInput from '../components/Dayyoff/DayOffRegistInput';
+import DayOffRegistInput from '../components/Dayoff/DayOffRegistInput';
 import '../css/DayOffRegist.css';
 
 function DayOffRegist() {

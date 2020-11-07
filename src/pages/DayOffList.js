@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import DayoffSearchBox from '../components/Dayyoff/DayOffSearchBox';
+import DayoffSearchBox from '../components/Dayoff/DayOffSearchBox';
 import '../css/DayOffList.css';
-import DayOffTable from '../components/Dayyoff/DayOffTable';
+import DayOffTable from '../components/Dayoff/DayOffTable';
 
 function DayOffList() {
   const isSideBarOpen = useSelector(
@@ -10,15 +10,13 @@ function DayOffList() {
   );
 
   return (
-    <>
-      <div
-        style={{ marginLeft: isSideBarOpen ? '230px' : '56px' }}
-        className="dayoff-list-content"
-      >
-        <DayoffSearchBox />
-        <DayOffTable />
-      </div>
-    </>
+    <div
+      style={{ marginLeft: isSideBarOpen ? '230px' : '56px' }}
+      className="dayoff-list-content"
+    >
+      <DayoffSearchBox />
+      <DayOffTable />
+    </div>
   );
 }
 

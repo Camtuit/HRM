@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useSelector } from 'react';
 import { Form, Input, Button, Select, DatePicker } from 'antd';
 
 import SearchBarContainer from '../../components/commons/SearchBarContainer';
-import { windowInnerWidth } from '../../helpers/responsive';
 import { deviceSizeFixed } from '../../constants/deviceSize';
 
 function SearchBarDevice() {
   const { Option, OptGroup } = Select;
-  const isLaptop = windowInnerWidth >= deviceSizeFixed.laptop;
+  const screenWidth = useSelector((state) => state.screenWidth);
+  const isLaptop = screenWidth >= deviceSizeFixed.laptop;
   return (
     <div className="wrapper wrapper-search-bar">
       <Form
