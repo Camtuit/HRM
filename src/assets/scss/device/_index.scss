@@ -84,6 +84,20 @@
       }
     }
   }
+  .device-table {
+    td,
+    tr {
+      padding: 10px 4px 10px 8px;
+    }
+    @include laptop {
+      td {
+        padding: 16px 16px;
+      }
+    }
+    .button-action {
+      @include flex(row, space-between, center);
+    }
+  }
   .device-buttons {
     @include flex(row, flex-end, center);
   }

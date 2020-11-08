@@ -5,6 +5,7 @@
   @include laptop() {
     width: calc(100% - 230px);
   }
+  background-color: $background;
 }
 
 .container-search-bar {
@@ -25,4 +26,21 @@
 }
 .ant-table {
   border: 1px solid $platinum;
+}
+
+.fas.fa-edit {
+  color: #80baef;
+}
+fas.fa-trash-alt {
+  color: #80baef;
+}
+
+.fas.fa-plus-square {
+  color: #80baef;
+}
+.fas:hover {
+  color: #0483f7;
+}
+.fas {
+  cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Button, Tooltip } from 'antd';
 import '../../css/HolidayTable.css';
-import RemovePopupCommon from '../RemovePopupCommon';
+import RemovePopupCommon from '../commons/RemovePopup';
 import HolidayRegistPopup from './HolidayRegistPopup';
 import constant from '../../constants/htmlConstants';
 

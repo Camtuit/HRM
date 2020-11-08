@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Table, Tooltip } from 'antd';
 import '../../css/DayOffTable.css';
 import { useHistory } from 'react-router';
-import RemovePopupCommon from '../RemovePopupCommon';
+import RemovePopupCommon from '../commons/RemovePopup';
 import constant from '../../constants/htmlConstants';
 
 function DayOffTable() {

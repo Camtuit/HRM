@@ -1,33 +1,42 @@
 .side-bar {
   position: fixed;
   top: 0;
-  padding-top: 70px;
   height: 100vh;
   width: $width-sidebar;
-  background-color: $dark;
+  background-color: $green;
   z-index: 20;
   transition: all 0.2s ease;
   overflow-x: hidden;
-  display: flex;
+  @include flex(column, center);
   flex-direction: column;
-  border-radius: 5px;
+  .side-bar-container {
+    padding-top: 56px;
+    position: relative;
+    height: 100%;
+    background-color: $dark;
+    @include flex(column, null, flex-start);
+  }
   &__icon {
-    margin-left: auto;
-    margin-right: 20px;
-    color: #e5e5e5;
+    position: absolute;
+    right: 0px;
+    top: 20px;
+    margin-top: 10px;
+    padding-right: 19px;
+    // width: 100%;
     cursor: pointer;
     .open {
       color: $orange;
     }
     svg {
       font-size: 20px;
+      color: $platinum;
     }
     svg:hover {
       color: $orange;
     }
   }
   &__item {
-    color: #e5e5e5;
+    color: $platinum;
     white-space: nowrap;
     height: 50px;
     padding: 20px;

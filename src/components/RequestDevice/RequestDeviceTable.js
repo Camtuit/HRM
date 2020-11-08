@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Table, Button, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 
-import RemovePopupCommon from '../RemovePopupCommon';
+import RemovePopupCommon from '../commons/RemovePopup';
 import { requestDevices } from '../../helpers/dumbData';
 import { BUTTON } from '../../constants/textLabel';
 

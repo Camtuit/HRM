@@ -3,25 +3,48 @@
   width: 100%;
   height: 56px;
   background-color: $platinum;
-  .logo {
-    background-color: $primary;
+  transition: all 0.2s ease;
+  .nav_logo {
+    // background: linear-gradient(45deg, $secondary, $green);
+    background-color: $dark;
     position: relative;
     z-index: 30;
     width: 200px;
     height: 100%;
     text-align: center;
+    transition: all 0.2s ease;
+    @include border($orange);
+    .wrapper-logo {
+      @include flex(row, space-evenly, center);
+      height: 100%;
+      svg {
+        height: 54px;
+        width: 54px;
+      }
+      image {
+        height: 54px;
+        width: 54px;
+      }
+      span,
+      bold {
+        text-align: center;
+        display: inline-block;
+      }
+    }
     a {
-      color: $white;
-      display: block;
+      @include flex(row, center);
+      color: $platinum;
+      display: inline-block;
       line-height: 100%;
-      width: 100%;
-      @include centerAbsolute('both');
+      font-size: 20px;
+      @include cover();
     }
   }
   .nav-bar {
     padding-right: 20px;
     flex-grow: 1;
     @include flex(row, space-between, center, nowrap);
+    @include border($dark);
     .sidebar-toggle {
       @include flex(row, center, center);
       height: 100%;
@@ -32,10 +55,8 @@
       }
     }
   }
-  @include laptop() {
-    .logo {
-      width: 200px;
-    }
+  .user-menu {
+    cursor: pointer;
   }
 }
 
