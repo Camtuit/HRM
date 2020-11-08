@@ -4,20 +4,12 @@ import { Link } from 'react-router-dom';
 import { Avatar } from 'antd';
 
 import { toggleSideBar } from '../actions/utilsAction';
-<<<<<<< HEAD
-import { deviceSizeFixed } from '../constants/deviceSize';
-=======
->>>>>>> fix-sidebar
 import constanst from '../constants/htmlConstants';
 import ReactLogo from '../assets/images/nal_logo.svg';
 
 function Header() {
   const toggledSideBar = useSelector((state) => state.toggledSideBar);
-<<<<<<< HEAD
-  const dispatch = useDispatch(toggleSideBar(true));
-=======
   const dispatch = useDispatch();
->>>>>>> fix-sidebar
   const {
     WIDTH_SIDE_BAR: { FULL, SHORT },
   } = constanst;
