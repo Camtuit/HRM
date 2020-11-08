@@ -13,7 +13,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import SideBarItem from '../components/commons/SideBarItem';
-import constanst from '../constants/htmlConstants';
 import { LIST } from '../constants/textLabel';
 import { toggleSideBar } from '../actions/utilsAction';
 
@@ -23,15 +22,10 @@ function SideBar() {
   const handleToggleSidebar = () => {
     dispatch(toggleSideBar());
   };
-  const {
-    WIDTH_SIDE_BAR: { FULL, SHORT },
-  } = constanst;
-  const style = {
-    width: toggledSideBar ? FULL : SHORT,
-  };
+
   return (
-    <div className="side-bar" style={style}>
-      <div className="side-bar-container">
+    <div className={`side-bar ${toggledSideBar ? 'expanded' : 'collapsed'}`}>
+      <div className="side-bar-container ">
         <div className="side-bar__icon">
           <FontAwesomeIcon
             className={!toggledSideBar ? 'open' : ''}

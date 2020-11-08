@@ -2,7 +2,6 @@
   position: fixed;
   top: 0;
   height: 100vh;
-  width: $width-sidebar;
   background-color: $green;
   z-index: 20;
   transition: all 0.2s ease;
@@ -15,6 +14,9 @@
     height: 100%;
     background-color: $dark;
     @include flex(column, null, flex-start);
+  }
+  a {
+    width: 100%;
   }
   &__icon {
     position: absolute;
@@ -36,19 +38,26 @@
     }
   }
   &__item {
+    @include flex(row, null, center);
     color: $platinum;
     white-space: nowrap;
     height: 50px;
     padding: 20px;
+    width: 100%;
     cursor: pointer;
+    transition: all 0.15s ease-out;
     svg {
       font-size: 20px;
       text-align: center;
       margin-left: auto;
     }
     span {
+      display: table;
+      font-weight: 500;
       font-size: 16px;
+      margin: auto;
       margin-left: 20px;
+      height: 25px;
     }
     .icon-25 {
       display: inline-block;
@@ -56,10 +65,32 @@
     }
   }
   &__item:hover {
-    color: $orange;
+    color: $dark;
+    background-color: $orange;
     svg {
-      color: $orange;
+      color: $dark;
     }
+  }
+  &__title {
+    transition-duration: 0.15s, 25ms;
+    transition-timing-function: ease;
+    transition-delay: 0s, 90ms;
+    transition-property: transform, opacity, -webkit-transform;
+  }
+}
+.collapsed {
+  width: $width-sidebar;
+  .side-bar__title {
+    opacity: 0;
+    transition-delay: 0s, 0s;
+    transform: translate3d(-200px, 0, 0);
+  }
+}
+.expanded {
+  width: $width-sidebar-toggled;
+  .side-bar__title {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 @media only screen and (min-width: 64em) {
