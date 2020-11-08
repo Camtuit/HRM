@@ -7,6 +7,7 @@ import { devices } from '../../helpers/dumbData';
 import SearchBarDevice from './SearchBarDevice';
 import WrapperContent from '../../components/commons/WrapperContentPage';
 import AddDevicePopup from '../../components/AddDevicePopup';
+import DeviceActionsBar from '../../components/Device/DeviceActionsBar';
 import { BUTTON } from '../../constants/textLabel';
 
 function DeviceList({ match }) {
@@ -52,15 +53,7 @@ function DeviceList({ match }) {
     {
       title: 'Action',
       dataIndex: 'action',
-      render: (value) => (
-        <Space size="middle">
-          <Link to={`${match.url}/${value.id}`}>Edit</Link>
-          <Link role="button">Delete</Link>
-          {value.status ? (
-            <Link to={`${match.url}/${value.id}/details`}>Details</Link>
-          ) : undefined}
-        </Space>
-      ),
+      render: (value) => <DeviceActionsBar item={value} path={match.url} />,
     },
   ];
   return (
@@ -78,7 +71,7 @@ function DeviceList({ match }) {
               {BUTTON.ADD}
             </Button>
           </div>
-          <div className="table devices-table">
+          <div className="table device-table">
             <Table columns={columnsDevice} dataSource={data} />
           </div>
           <div className="device-buttons">

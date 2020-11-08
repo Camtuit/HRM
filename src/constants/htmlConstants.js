@@ -41,7 +41,7 @@ const constants = {
     GRID_COL_8: 8,
     GRID_COL_9: 9,
     GRID_COL_12: 12,
-    GRID_COL_13: 8,
+    GRID_COL_13: 13,
     GRID_COL_16: 16,
     GRID_COL_21: 21,
   },
@@ -100,6 +100,7 @@ const constants = {
     },
     TITLE: {
       EDIT: 'Edit',
+      ADD: 'Add',
     },
   },
   TABLE: {

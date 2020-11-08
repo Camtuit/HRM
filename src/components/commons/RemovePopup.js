@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Modal, Tooltip } from 'antd';
-import '../css/RemovePopupCommon.css';
+import '../../css/RemovePopupCommon.css';
 
 function RemovePopupCommon({ title, content, onOk }) {
   const [visible, setVisible] = useState(false);
@@ -13,7 +13,7 @@ function RemovePopupCommon({ title, content, onOk }) {
   }
 
   return (
-    <div className="remove-popup-common">
+    <>
       <Tooltip title="Delete">
         <span>
           <i
@@ -22,7 +22,6 @@ function RemovePopupCommon({ title, content, onOk }) {
           ></i>
         </span>
       </Tooltip>
-
       <Modal
         title={title}
         visible={visible}
@@ -34,7 +33,7 @@ function RemovePopupCommon({ title, content, onOk }) {
       >
         <p style={{ textAlign: 'center' }}>{content}</p>
       </Modal>
-    </div>
+    </>
   );
 }
 

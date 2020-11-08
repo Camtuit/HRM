@@ -4,7 +4,7 @@ import '../../css/SkillTable.css';
 import { Link } from 'react-router-dom';
 import SkillRegistInput from './SkillRegistInput';
 import SkillEditPopup from './SkillEditPopup';
-import RemovePopupCommon from '../RemovePopupCommon';
+import RemovePopupCommon from '../commons/RemovePopup';
 
 function SkillTable() {
   const [currentRecord, setCurrentRecord] = useState({});

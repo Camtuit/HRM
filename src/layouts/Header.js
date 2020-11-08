@@ -1,23 +1,40 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Avatar } from 'antd';
 
 import { toggleSideBar } from '../actions/utilsAction';
 import { deviceSizeFixed } from '../constants/deviceSize';
+import constanst from '../constants/htmlConstants';
+import ReactLogo from '../assets/images/nal_logo.svg';
 
 function Header() {
-  const isLaptop = window.innerWidth >= deviceSizeFixed.laptop;
+  const toggledSideBar = useSelector((state) => state.toggledSideBar);
   const dispatch = useDispatch(toggleSideBar(true));
-
+  const {
+    WIDTH_SIDE_BAR: { FULL, SHORT },
+  } = constanst;
+  const styleLogo = {
+    width: toggledSideBar ? FULL : SHORT,
+  };
+  const styleWrapperLogo = {
+    width: `transform: translateX(${toggledSideBar ? 0 : `-110%`}px)`,
+  };
   const handleToggleSidebar = () => {
     dispatch(toggleSideBar());
   };
   return (
     <header className="header">
-      <div className="logo">
+      <div className="nav_logo" style={styleLogo}>
         <Link to="/">
-          <b>Nals</b>HRM
+          <div className="wrapper-logo" style={styleWrapperLogo}>
+            <ReactLogo className="logo" alt="Logo" />
+            {toggledSideBar && (
+              <span>
+                <b>NAL</b>Hrm
+              </span>
+            )}
+          </div>
         </Link>
       </div>
       <div className="nav nav-bar">

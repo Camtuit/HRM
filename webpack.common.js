@@ -6,7 +6,7 @@ const ASSET_PATH = process.env.ASSET_PATH || '/';
 module.exports = {
   entry: [path.join(__dirname, 'src/index.js')],
   output: {
-    filename: 'bundle.[chunkhash].js',
+    filename: 'bundle.[name].[contenthash:8].js',
     path: path.join(__dirname, 'build'),
     publicPath: ASSET_PATH,
   },
@@ -37,20 +37,32 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|svg)$/i,
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
         use: [
           {
             loader: 'url-loader',
             options: {
               limit: 8192, // 8*1024
-              name: 'static/media/[name].[hash:8].[ext]',
+              name: 'static/assets/[name].[hash:8].[ext]',
             },
           },
         ],
       },
       {
-        test: /\.(png|jpg|gif|svg)$/i,
-        use: [{ loader: 'file-loader' }],
+        test: /\.(eot|otf|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'static/assets/',
+              name: 'static/assets/[name].[ext]',
+            },
+          },
+        ],
       },
     ],
   },

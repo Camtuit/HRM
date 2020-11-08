@@ -29,7 +29,9 @@ export default function RequestDeviceRegister({ history }) {
   return (
     <WrapperContent>
       <div className="request-device-container request-device-details">
-        <h2 className="request-device-form__title">Request Device</h2>
+        <h2 className="list-title request-device-form__title">
+          Request Device
+        </h2>
         <RequestDeviceForm
           spanLabelCol={spanLabelCol}
           spanWrapperCol={spanWrapperCol}
