@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import rootReducer from '../reducers';
 import initialState from '../constants/initialState';
-import { screenResize } from '../actions/utilsAction';
+import { screenResize, toggleSideBar } from '../actions/utilsAction';
 
 export default function configureStore(initialStore = initialState) {
   const composeEnhencers =

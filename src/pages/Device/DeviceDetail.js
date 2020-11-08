@@ -5,7 +5,6 @@ import { Button } from 'antd';
 import '../../css/DeviceDetail.css';
 
 function DeviceDetail() {
-  console.log(111);
   const isSideBarOpen = useSelector(
     (state) => state.sideBarReducer.isSideBarOpen,
   );

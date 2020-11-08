@@ -13,7 +13,7 @@ export function screenWidth(state = initialState.screenWidth, action) {
 export function toggledSideBar(state = initialState.toggledSideBar, action) {
   switch (action.type) {
     case TOGGLE_SIDE_BAR:
-      if (action.payload) return state;
+      if (!action.payload) return state;
       return !state;
     default:
       return state;
