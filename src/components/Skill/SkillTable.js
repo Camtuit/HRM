@@ -37,7 +37,7 @@ function SkillTable() {
           <RemovePopupCommon
             title="Delete skill"
             content="Are you sure delete"
-            onOk={() => console.log('true')}
+            onOk={() => {}}
           />
         </div>
       ),

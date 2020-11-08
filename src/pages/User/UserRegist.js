@@ -9,7 +9,6 @@ function UserRegist() {
   const [value, setValue] = useState(1);
 
   function onChange(e) {
-    console.log('radio checked', e.target.value);
     setValue(e.target.value);
   }
   return (

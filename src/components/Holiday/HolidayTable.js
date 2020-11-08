@@ -33,7 +33,7 @@ function HolidayTable() {
           <RemovePopupCommon
             title="Delete request"
             content="Are you sure delete"
-            onOk={() => console.log('true')}
+            onOk={() => {}}
           />
         </div>
       ),
