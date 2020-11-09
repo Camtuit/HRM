@@ -25,6 +25,7 @@
   &__buttons {
     .btn-cancel {
       margin-left: auto;
+      margin-right: 15px;
     }
   }
   @include laptop() {
