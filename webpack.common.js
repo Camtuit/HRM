@@ -2,6 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
+process.env.API_URL = 'localhost:8080';
+const API_URL =
+  (process.env.API_URL &&
+    (process.env.API_URL.endsWith('api') || `${process.env.API_URL}/api`)) ||
+  'http://api-php.dev-hrm.nals.vn/api';
 
 module.exports = {
   entry: [path.join(__dirname, 'src/index.js')],
@@ -14,6 +19,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+        API_URL: JSON.stringify(API_URL),
       },
     }),
   ],
