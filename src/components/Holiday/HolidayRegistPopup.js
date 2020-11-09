@@ -3,30 +3,24 @@ import React, { useState } from 'react';
 import constant from '../../constants/constants';
 import '../../css/HolidayRegistPopup.css';
 
-function HolidayRegistPopup() {
-  const [visible, setVisible] = useState(false);
-
-  const showModal = () => {
-    setVisible(true);
-  };
-
+function HolidayRegistPopup({ visible }) {
   const handleOk = (event) => {
-    setVisible(false);
+    // setVisible(false);
   };
 
   const handleCancel = () => {
-    setVisible(false);
+    // setVisible(false);
   };
   return (
     <div className="holiday-regist-button">
-      <Tooltip title={constant.TOOLTIP.TITLE.EDIT}>
+      {/* <Tooltip title={constant.TOOLTIP.TITLE.EDIT}>
         <span>
           <i
             onClick={showModal}
             class="fas fa-edit holiday-popup-common-icon"
           ></i>
         </span>
-      </Tooltip>
+      </Tooltip> */}
       <Modal
         title="Registration Holiday"
         visible={visible}

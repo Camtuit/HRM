@@ -5,6 +5,13 @@
 .holiday-table > button {
   margin-top: 10px;
 }
+.hodiday-table-button {
+  margin: 10px 0px;
+}
+
+.hodiday-table-button > button {
+  margin-right: 10px;
+}
 
 .holiday-table-action {
   display: flex;
@@ -14,4 +21,14 @@
 
 .holiday-table-action > i:nth-child(2) {
   margin-left: 15px;
+}
+
+.holiday-table-action .holiday-popup-common-icon {
+  align-self: center;
+  color: #80baef;
+}
+
+.holiday-table-action .holiday-popup-common-icon:hover {
+  color: #0483f7;
+  cursor: pointer;
 }

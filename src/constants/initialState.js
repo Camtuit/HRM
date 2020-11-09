@@ -1,4 +1,5 @@
 const initialState = {
+  toggledModal: false,
   users: [],
   apiCallStatus: 0,
 };
