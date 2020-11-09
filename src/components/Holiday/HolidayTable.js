@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Button, Tooltip } from 'antd';
+import axios from 'axios';
 import RemovePopupCommon from '../commons/RemovePopup';
 
 import HolidayRegistPopup from './HolidayRegistPopup';
@@ -8,13 +9,41 @@ import constant from '../../constants/htmlConstants';
 
 import '../../css/HolidayTable.css';
 
-function HolidayTable() {
+function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
+  const [data, setData] = useState(null);
+  const [totalRecord, setTotalRecord] = useState(null);
   const isModalOpen = useSelector((state) => state.modalReducer);
-  // const showModal = () => {
-  //   setVisible(true);
-  // };
   const dispatch = useDispatch();
-  console.log(isModalOpen);
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: ' http://api-java.dev-hrm.nals.vn/api/holidays',
+      params: {
+        page: currentPage,
+        year: currentYear,
+      },
+    })
+      .then(function (res) {
+        const currentData = res.data.data.map(function (element, index) {
+          return {
+            key: element.id,
+            no: index + 1,
+            date: element.date,
+            note: element.notes,
+          };
+        });
+        setData(currentData);
+        setTotalRecord(res.data.meta.pagination.total);
+      })
+      .catch(function (error) {
+        setData(null);
+      });
+  }, [data, currentYear]);
+
+  async function onChange(pagination) {
+    await setCurrentPage(pagination.current - 1);
+    console.log(pagination);
+  }
   const columns = [
     {
       title: 'No',
@@ -54,24 +83,6 @@ function HolidayTable() {
     },
   ];
 
-  const data = [
-    {
-      key: '1',
-      no: '1',
-      date: '2/9/2020',
-      note: 'lễ quốc khánh',
-    },
-
-    {
-      key: '2',
-      no: '2',
-      date: '2/9/2020',
-      note: 'lễ quốc khánh',
-    },
-  ];
-
-  function onChange(pagination, filters, sorter, extra) {}
-
   return (
     <div className="holiday-table">
       <h2 className="list-title">Holiday list</h2>
@@ -80,7 +91,15 @@ function HolidayTable() {
         {constant.BUTTON.EXPORT_FILE}
       </Button>
 
-      <Table columns={columns} dataSource={data} onChange={onChange} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        onChange={onChange}
+        pagination={{
+          total: totalRecord,
+          current: currentPage + 1,
+        }}
+      />
     </div>
   );
 }
