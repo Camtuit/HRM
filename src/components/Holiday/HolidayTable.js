@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Button, Tooltip } from 'antd';
 import axios from 'axios';
@@ -21,12 +21,18 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
     setValueHoliday();
     dispatch(togglePopup());
   };
-  const handleTogglePopupEdit = () => {
-    setValueHoliday({
-      date: '2020-06-01',
-      notes: 'Ngày Quốc tế thiếu nhi',
-    });
-    dispatch(togglePopup());
+  const handleTogglePopupEdit = (id) => {
+    callApi({
+      url: `/holidays/${id}`,
+      method: 'GET',
+    })
+      .then((res) => {
+        setValueHoliday(res.data);
+        dispatch(togglePopup());
+      })
+      .catch((err) => {
+        return err;
+      });
   };
   useEffect(() => {
     axios({
@@ -99,7 +105,7 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
           <Tooltip title={constant.TOOLTIP.TITLE.EDIT}>
             <span>
               <i
-                onClick={handleTogglePopupEdit}
+                onClick={(id) => handleTogglePopupEdit(value.key)}
                 className="fas fa-edit holiday-popup-common-icon"
               ></i>
             </span>

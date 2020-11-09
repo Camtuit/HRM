@@ -1,6 +1,8 @@
 import { Button, DatePicker, Form, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import parse from 'date-fns/parse';
+import moment from 'moment';
 
 import { togglePopup } from '../../actions/utilsAction';
 import constant from '../../constants/htmlConstants';
@@ -9,10 +11,20 @@ import '../../css/HolidayRegistPopup.css';
 
 function HolidayRegistPopup(props) {
   const { active, value } = props;
-  const [holidayDate, setHolidayDate] = useState('');
-  const [notes, setNotes] = useState('');
+  const [holidayDate, setHolidayDate] = useState();
+  const [notes, setNotes] = useState();
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (value !== undefined) {
+      setHolidayDate(value.date);
+      setNotes(value.notes);
+      form.setFieldsValue({
+        date: moment(value.date, 'DD-MM-YYYY'),
+        notes: value.notes,
+      });
+    }
+  }, [value, form]);
 
   const handleChangeDatePicker = (date) => {
     setHolidayDate(date);
@@ -77,6 +89,38 @@ function HolidayRegistPopup(props) {
         return errorInfo;
       });
   };
+  const handleEditHoliday = (values) => {
+    if (value !== undefined) {
+      form
+        .validateFields()
+        .then(() => {
+          callApi({
+            url: '/holidays',
+            method: 'PUT',
+            data: {
+              id: value ? value.id : '',
+              date: holidayDate,
+              notes,
+              updated_by: null,
+            },
+          })
+            .then((res) => {
+              if (res.data !== null) {
+                form.resetFields();
+                dispatch(togglePopup());
+                setHolidayDate('');
+                setNotes('');
+              }
+            })
+            .catch((err) => {
+              return err;
+            });
+        })
+        .catch((errorInfo) => {
+          return errorInfo;
+        });
+    }
+  };
   const handleCancel = () => {
     form.resetFields();
     setHolidayDate('');
@@ -89,14 +133,33 @@ function HolidayRegistPopup(props) {
         title={value === undefined ? 'Add New Holiday' : 'Edit Holiday'}
         visible={active}
         onCancel={handleCancel}
-        footer={[
-          <Button htmlType="submit" onClick={handleSaveAndContinue}>
-            {constant.BUTTON.SAVE_AND_CONTINUE}
-          </Button>,
-          <Button htmlType="submit" type="primary" onClick={handleSaveAndQuit}>
-            {constant.BUTTON.SAVE_AND_QUIT}
-          </Button>,
-        ]}
+        footer={
+          value === undefined
+            ? [
+                <Button htmlType="submit" onClick={handleSaveAndQuit}>
+                  {constant.BUTTON.SAVE_AND_QUIT}
+                </Button>,
+                <Button
+                  htmlType="submit"
+                  type="primary"
+                  onClick={handleSaveAndContinue}
+                >
+                  {constant.BUTTON.SAVE_AND_CONTINUE}
+                </Button>,
+              ]
+            : [
+                <Button htmlType="submit" onClick={handleCancel}>
+                  {constant.BUTTON.CANCEL}
+                </Button>,
+                <Button
+                  htmlType="submit"
+                  type="primary"
+                  onClick={handleEditHoliday}
+                >
+                  {constant.BUTTON.SUBMIT}
+                </Button>,
+              ]
+        }
       >
         <Form
           layout="horizontal"
@@ -115,7 +178,6 @@ function HolidayRegistPopup(props) {
             ]}
           >
             <DatePicker
-              value={holidayDate}
               onChange={handleChangeDatePicker}
               format={constant.FORMAT_DATE}
             />
@@ -130,7 +192,6 @@ function HolidayRegistPopup(props) {
             ]}
           >
             <Input
-              value={notes}
               onChange={handleChangeNote}
               placeholder={constant.LABEL.NOTES}
             />
