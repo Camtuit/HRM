@@ -51,7 +51,7 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
       .catch(function (error) {
         setData(null);
       });
-  }, [data, currentYear]);
+  }, [currentYear]);
 
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);

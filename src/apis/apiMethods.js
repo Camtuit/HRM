@@ -1,32 +1,38 @@
 import { callApi } from './axiosService';
-import types from '../constants/apiResourceTypes';
+import { getQuerry } from '../helpers/apiHelper';
 
-const getUrl = (type) => types[type].toLowerCase();
-
-export function get(type) {
+export function getMany(url, objectQuerry) {
+  const querry = objectQuerry ? getQuerry(objectQuerry) : '';
   return callApi({
-    url: getUrl(type),
+    url: `${url + querry}`,
     method: 'GET',
   });
 }
-export function post(type, data) {
+
+export function get(url, id) {
   return callApi({
-    url: getUrl(type),
-    method: 'POST',
-    data,
+    url: `${url}/${id}`,
+    method: 'GET',
   });
 }
-export function remove(type, id) {
+
+export function post(url) {
   return callApi({
-    url: getUrl(type),
+    url,
+    method: 'POST',
+  });
+}
+export function remove(url, id) {
+  return callApi({
+    url,
     method: 'DELETE',
     data: id,
   });
 }
-export function put(type, data) {
+export function put(url, data) {
   const { id, ...body } = data;
   return callApi({
-    url: getUrl(type),
+    url: `${url}/${id}`,
     method: 'PUT',
     data: body,
   });

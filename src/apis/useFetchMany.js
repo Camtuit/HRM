@@ -1,22 +1,22 @@
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useCallback, useEffect } from 'react';
 
-import { getAction } from '../actions/commonAction';
+import { getManyAction } from '../actions/commonAction';
 import { toLower } from '../helpers/apiHelper';
 
-function useFetch({ type, querry }) {
+function useFetchMany({ type, querry }) {
   const dispatch = useDispatch();
   const typeState = toLower(type);
   const { data, apiCallStatus } = useSelector((state) => {
     return {
-      data: state.typeState, // Exclude: request-devices
+      data: state[typeState], // Exclude: request-devices
       apiCallStatus: state.apiCallStatus,
     };
   }, shallowEqual);
 
   const boundAction = useCallback(() => {
-    return dispatch(getAction(type));
-  }, [dispatch, type]);
+    return dispatch(getManyAction(type, querry));
+  }, [dispatch, type, querry]);
 
   useEffect(() => {
     if (!data || data.length === 0) {
@@ -27,4 +27,4 @@ function useFetch({ type, querry }) {
   return [data, boundAction, apiCallStatus];
 }
 
-export default useFetch;
+export default useFetchMany;

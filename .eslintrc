@@ -18,7 +18,8 @@
     "import/no-extraneous-dependencies": 0,
     "no-debugger": 0,
     "import/prefer-default-export": 0,
-    "camelcase": 0
+    "camelcase": 0,
+    "func-names": 0
   },
   "env": {
     "browser": true,
