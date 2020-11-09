@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Button, Tooltip } from 'antd';
 import axios from 'axios';
@@ -9,6 +9,7 @@ import constant from '../../constants/htmlConstants';
 
 import '../../css/HolidayTable.css';
 import { togglePopup } from '../../actions/utilsAction';
+import { callApi } from '../../apis/axiosService';
 
 function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
   const [data, setData] = useState(null);
@@ -51,12 +52,27 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
       .catch(function (error) {
         setData(null);
       });
-  }, [data, currentYear]);
+  }, [currentYear]);
 
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
     console.log(pagination);
   }
+
+  const handleDeleteHoliday = (id) => {
+    callApi({
+      url: `/holidays/${id}`,
+      method: 'DELETE',
+    })
+      .then((res) => {
+        const idIndex = data.findIndex((x) => x.key === id);
+        data.splice(idIndex, 1);
+      })
+      .catch((err) => {
+        return err;
+      });
+  };
+
   const columns = [
     {
       title: 'No',
@@ -78,7 +94,7 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
       key: 'operation',
       fixed: 'right',
       width: 100,
-      render: () => (
+      render: (value) => (
         <div className="holiday-table-action">
           <Tooltip title={constant.TOOLTIP.TITLE.EDIT}>
             <span>
@@ -91,7 +107,9 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
           <RemovePopupCommon
             title="Delete request"
             content="Are you sure delete"
-            onOk={() => {}}
+            onOk={(id) => {
+              handleDeleteHoliday(value.key);
+            }}
           />
         </div>
       ),
