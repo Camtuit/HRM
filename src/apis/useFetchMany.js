@@ -3,20 +3,21 @@ import { useCallback, useEffect } from 'react';
 
 import { getManyAction } from '../actions/commonAction';
 import { toLower } from '../helpers/apiHelper';
+import types from '../constants/apiResourceTypes';
 
-function useFetchMany({ type, querry }) {
+function useFetchMany(type = '', query) {
   const dispatch = useDispatch();
-  const typeState = toLower(type);
+  const stringType = toLower(type);
   const { data, apiCallStatus } = useSelector((state) => {
     return {
-      data: state[typeState], // Exclude: request-devices
+      data: state[stringType], // Exclude: request-devices
       apiCallStatus: state.apiCallStatus,
     };
   }, shallowEqual);
 
   const boundAction = useCallback(() => {
-    return dispatch(getManyAction(type, querry));
-  }, [dispatch, type, querry]);
+    return dispatch(getManyAction(type, query));
+  }, [dispatch, type, query]);
 
   useEffect(() => {
     if (!data || data.length === 0) {

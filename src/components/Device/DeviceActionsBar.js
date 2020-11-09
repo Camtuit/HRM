@@ -8,7 +8,6 @@ import constants from '../../constants/htmlConstants';
 import { deviceSizeFixed } from '../../constants/deviceSize';
 
 function DeviceActionsBar({ item, path }) {
-  console.log(item, path);
   const screenWidth = useSelector((state) => state.screenWidth);
   const isLaptop = screenWidth >= deviceSizeFixed.laptop;
   return (

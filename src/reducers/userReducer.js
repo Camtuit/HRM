@@ -1,4 +1,5 @@
 import {
+  LOAD_USERS_SUCCESS,
   CREATE_USER_SUCCESS,
   UPDATE_USER_SUCCESS,
   DELETE_USER_OPTIMISTIC,
@@ -9,7 +10,7 @@ import initialState from '../constants/initialState';
 
 export default function userReducer(state = initialState.users, action) {
   switch (action.type) {
-    case LOAD_USER_SUCCESS:
+    case LOAD_USERS_SUCCESS:
       return action.payload;
     case CREATE_USER_SUCCESS: {
       return [...state, { ...action.payload }];

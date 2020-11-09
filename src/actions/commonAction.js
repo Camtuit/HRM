@@ -4,35 +4,37 @@ import { apiCallError, beginApiCall } from './apiStatusAction';
 import types from '../constants/apiResourceTypes';
 import { toLower } from '../helpers/apiHelper';
 
-export function getManyAction(type, objectQuerry) {
+export function getManyAction(type, objectQuery) {
   return function (dispatch) {
-    const typeAction = `LOAD_${types}_SUCCESS`;
-    const url = toLower(types.type);
+    const typeAction = `LOAD_${type}_SUCCESS`;
+    const url = toLower(type);
     dispatch(beginApiCall());
-    return getMany(url, objectQuerry)
-      .then((data) => dispatch({ type: typeAction, payload: data }))
+    return getMany(url, objectQuery)
+      .then((res) => {
+        return dispatch({ type: typeAction, payload: res.data });
+      })
       .catch((err) => dispatch(apiCallError(err)));
   };
 }
 
 export function getAction(type) {
   return function (dispatch) {
-    const typeAction = `LOAD_${types}_SUCCESS`;
-    const url = toLower(types.type);
+    const typeAction = `LOAD_${type}_SUCCESS`;
+    const url = toLower(type);
     dispatch(beginApiCall());
     return get(url)
-      .then((data) => dispatch({ type: typeAction, payload: data }))
+      .then((res) => dispatch({ type: typeAction, payload: res.data }))
       .catch((err) => dispatch(apiCallError(err)));
   };
 }
 
-export function createAction(type, objectQuerry, body) {
+export function createAction(type, body) {
   return function (dispatch) {
-    const typeAction = `CREATE_${types}_SUCCESS`;
-    const url = toLower(types.type);
+    const typeAction = `CREATE_${type}_SUCCESS`;
+    const url = toLower(type);
     dispatch(beginApiCall());
     return post(typeAction, body)
-      .then((response) => dispatch({ type: typeAction, payload: response }))
+      .then((res) => dispatch({ type: typeAction, payload: res.data }))
       .catch((err) => dispatch(apiCallError(err)));
   };
 }
@@ -40,10 +42,10 @@ export function createAction(type, objectQuerry, body) {
 export function updateAction(type, data) {
   return function (dispatch) {
     const typeAction = `UPDATE_${types}_SUCCESS`;
-    const url = toLower(types.type);
+    const url = toLower(type);
     dispatch(beginApiCall());
     return put(url, data)
-      .then((response) => dispatch({ type: typeAction, payload: response }))
+      .then((res) => dispatch({ type: typeAction, payload: res.data }))
       .catch((err) => dispatch(apiCallError(err)));
   };
 }
@@ -51,7 +53,7 @@ export function updateAction(type, data) {
 export function removeAction(type, id) {
   return function (dispatch) {
     const typeAction = `DELETE_${types}_OPTIMISTIC`;
-    const url = toLower(types.type);
+    const url = toLower(types[typeAction]);
     dispatch({ type: typeAction, payload: id });
     return remove(url, id);
   };
