@@ -4,7 +4,7 @@ import '../../css/HolidaySearchBox.css';
 
 function HolidaySearchBox({ setCurrentYear, setCurrentPage }) {
   const [componentSize, setComponentSize] = useState('default');
-  const [currentValue, setCurrentValue] = useState(null);
+  const [currentValue, setCurrentValue] = useState('2020');
   const [defaultYear, setDefaultYear] = useState('2020');
 
   const onFormLayoutChange = ({ size }) => {
