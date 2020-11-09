@@ -8,12 +8,25 @@ import HolidayRegistPopup from './HolidayRegistPopup';
 import constant from '../../constants/htmlConstants';
 
 import '../../css/HolidayTable.css';
+import { togglePopup } from '../../actions/utilsAction';
 
 function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
   const [data, setData] = useState(null);
   const [totalRecord, setTotalRecord] = useState(null);
-  const isModalOpen = useSelector((state) => state.modalReducer);
+  const toggledPopup = useSelector((state) => state.toggledPopup);
+  const [valueHoliday, setValueHoliday] = useState();
   const dispatch = useDispatch();
+  const handleTogglePopupAdd = () => {
+    setValueHoliday();
+    dispatch(togglePopup());
+  };
+  const handleTogglePopupEdit = () => {
+    setValueHoliday({
+      date: '2020-06-01',
+      notes: 'Ngày Quốc tế thiếu nhi',
+    });
+    dispatch(togglePopup());
+  };
   useEffect(() => {
     axios({
       method: 'get',
@@ -69,10 +82,12 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
         <div className="holiday-table-action">
           <Tooltip title={constant.TOOLTIP.TITLE.EDIT}>
             <span>
-              <i class="fas fa-edit holiday-popup-common-icon"></i>
+              <i
+                onClick={handleTogglePopupEdit}
+                className="fas fa-edit holiday-popup-common-icon"
+              ></i>
             </span>
           </Tooltip>
-
           <RemovePopupCommon
             title="Delete request"
             content="Are you sure delete"
@@ -86,7 +101,13 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
   return (
     <div className="holiday-table">
       <h2 className="list-title">Holiday list</h2>
-
+      <Button
+        className="user-table-button"
+        type="primary"
+        onClick={handleTogglePopupAdd}
+      >
+        {constant.BUTTON.ADD}
+      </Button>
       <Button className="user-table-button" type="primary">
         {constant.BUTTON.EXPORT_FILE}
       </Button>
@@ -100,6 +121,7 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
           current: currentPage + 1,
         }}
       />
+      <HolidayRegistPopup active={toggledPopup} value={valueHoliday} />
     </div>
   );
 }
