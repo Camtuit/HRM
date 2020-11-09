@@ -1,24 +1,39 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Avatar } from 'antd';
 
-function Header() {
-  const handleToggleSidebar = () => {
-    const [sideBar] = document.getElementsByClassName('side-bar');
-    const [content] = document.getElementsByClassName('wrapper-content');
-    if (sideBar && sideBar.classList.contains('toggled'))
-      sideBar.classList.remove('toggled');
-    else sideBar.classList.add('toggled');
-    if (content && content.classList.contains('toggled'))
-      content.classList.remove('toggled');
-    else content && content.classList.add('toggled');
-  };
+import { toggleSideBar } from '../actions/utilsAction';
+import constanst from '../constants/htmlConstants';
+import ReactLogo from '../assets/images/nal_logo.svg';
 
+function Header() {
+  const toggledSideBar = useSelector((state) => state.toggledSideBar);
+  const dispatch = useDispatch();
+  const {
+    WIDTH_SIDE_BAR: { FULL, SHORT },
+  } = constanst;
+  const styleLogo = {
+    width: toggledSideBar ? FULL : SHORT,
+  };
+  const styleWrapperLogo = {
+    width: `transform: translateX(${toggledSideBar ? 0 : `-110%`}px)`,
+  };
+  const handleToggleSidebar = () => {
+    dispatch(toggleSideBar());
+  };
   return (
     <header className="header">
-      <div className="logo">
+      <div className="nav_logo" style={styleLogo}>
         <Link to="/">
-          <b>Nals</b>HRM
+          <div className="wrapper-logo" style={styleWrapperLogo}>
+            <ReactLogo className="logo" alt="Logo" />
+            {toggledSideBar && (
+              <span>
+                <b>NAL</b>Hrm
+              </span>
+            )}
+          </div>
         </Link>
       </div>
       <div className="nav nav-bar">

@@ -1,18 +1,28 @@
 /* eslint-disable no-param-reassign */
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Table, Space } from 'antd';
 
 import { devices } from '../../helpers/dumbData';
 import SearchBarDevice from './SearchBarDevice';
+import WrapperContent from '../../components/commons/WrapperContentPage';
+import AddDevicePopup from '../../components/AddDevicePopup';
+import DeviceActionsBar from '../../components/Device/DeviceActionsBar';
+import { BUTTON } from '../../constants/textLabel';
 
 function DeviceList({ match }) {
+  const [toggledAddPopup, setToggleAddPopup] = useState(false);
   const data = devices.map((device, index) => {
     device.key = device.id;
     device.number = index + 1;
     device.action = { id: device.id, status: device.status };
     return device;
   });
+
+  const handleOnClickAdd = () => {
+    setToggleAddPopup(!toggledAddPopup);
+  };
+
   const columnsDevice = [
     {
       title: 'No.',
@@ -43,37 +53,39 @@ function DeviceList({ match }) {
     {
       title: 'Action',
       dataIndex: 'action',
-      render: (value) => (
-        <Space size="middle">
-          <Link to={`${match.url}/${value.id}`}>Edit</Link>
-          <Link role="button">Delete</Link>
-          {value.status ? (
-            <Link to={`${match.url}/${value.id}/details`}>Details</Link>
-          ) : undefined}
-        </Space>
-      ),
+      render: (value) => <DeviceActionsBar item={value} path={match.url} />,
     },
   ];
   return (
-    <div className="wrapper-content">
-      <div className="container container-device">
-        <h2>Device List</h2>
-        <SearchBarDevice />
-        <div className="device-buttons">
-          <Button className="button new-device" type="primary">
-            Add new
-          </Button>
+    <>
+      <WrapperContent>
+        <div className="container container-device">
+          <h2 className="list-title">Device List</h2>
+          <SearchBarDevice />
+          <div className="device-buttons">
+            <Button
+              className="button new-device"
+              type="primary"
+              onClick={handleOnClickAdd}
+            >
+              {BUTTON.ADD}
+            </Button>
+          </div>
+          <div className="table device-table">
+            <Table columns={columnsDevice} dataSource={data} />
+          </div>
+          <div className="device-buttons">
+            <Button className="button export-device" type="primary">
+              Export
+            </Button>
+          </div>
         </div>
-        <div className="table devices-table">
-          <Table columns={columnsDevice} dataSource={data} />
-        </div>
-        <div className="device-buttons">
-          <Button className="button export-device" type="primary">
-            Export
-          </Button>
-        </div>
-      </div>
-    </div>
+      </WrapperContent>
+      <AddDevicePopup
+        onClickAddNew={handleOnClickAdd}
+        toggled={toggledAddPopup}
+      />
+    </>
   );
 }
 

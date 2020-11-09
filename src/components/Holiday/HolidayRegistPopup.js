@@ -1,6 +1,6 @@
 import { DatePicker, Form, Input, Modal, Tooltip } from 'antd';
 import React, { useState } from 'react';
-import constant from '../../constants/constants';
+import constant from '../../constants/htmlConstants';
 import '../../css/HolidayRegistPopup.css';
 
 function HolidayRegistPopup({ visible }) {

@@ -37,7 +37,8 @@ const config = merge(common, {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      filename: './index.html',
+      filename: 'index.html',
+      favicon: './src/favicon.ico',
       minify: {
         // see https://github.com/kangax/html-minifier#options-quick-reference
         removeComments: true,

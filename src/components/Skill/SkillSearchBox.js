@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Select, DatePicker, Row, Col } from 'antd';
 import '../../css/SkillSearchBox.css';
-import constant from '../../constants/constants';
+import constant from '../../constants/htmlConstants';
 
 function SkillSearchBox() {
   const [componentSize, setComponentSize] = useState('default');
@@ -15,7 +15,7 @@ function SkillSearchBox() {
   };
   const handleSearch = () => {};
   return (
-    <div className="skill-search-box">
+    <div className="search-box skill-search-box">
       <Row>
         <Col span={24}>
           <Form

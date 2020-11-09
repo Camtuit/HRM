@@ -3,13 +3,14 @@ import { combineReducers } from 'redux';
 import apiCallStatus from './apiStatusReducer';
 import users from './userReducer';
 import sideBarReducer from './sideBarReducer';
-import modalReducer from './modalReducer';
+import { screenWidth, toggledSideBar } from './utilsReducer';
 
 const rootReducer = combineReducers({
   sideBarReducer,
-  modalReducer,
   users,
   apiCallStatus,
+  screenWidth,
+  toggledSideBar,
 });
 
 export default rootReducer;

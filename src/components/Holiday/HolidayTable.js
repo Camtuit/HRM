@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Button, Tooltip } from 'antd';
-import RemovePopupCommon from '../RemovePopupCommon';
+import RemovePopupCommon from '../commons/RemovePopup';
+
 import HolidayRegistPopup from './HolidayRegistPopup';
-import constant from '../../constants/constants';
+import constant from '../../constants/htmlConstants';
 
 import '../../css/HolidayTable.css';
-import { toggleModal } from '../../actions/showModal';
 
 function HolidayTable() {
   const isModalOpen = useSelector((state) => state.modalReducer);
@@ -40,19 +40,14 @@ function HolidayTable() {
         <div className="holiday-table-action">
           <Tooltip title={constant.TOOLTIP.TITLE.EDIT}>
             <span>
-              <i
-                onClick={() => {
-                  dispatch(toggleModal);
-                }}
-                class="fas fa-edit holiday-popup-common-icon"
-              ></i>
+              <i class="fas fa-edit holiday-popup-common-icon"></i>
             </span>
           </Tooltip>
 
           <RemovePopupCommon
             title="Delete request"
             content="Are you sure delete"
-            onOk={() => console.log('true')}
+            onOk={() => {}}
           />
         </div>
       ),
@@ -79,11 +74,11 @@ function HolidayTable() {
 
   return (
     <div className="holiday-table">
-      <h2>Holiday list</h2>
-      <div className="hodiday-table-button">
-        <Button type="primary">{constant.BUTTON.ADD}</Button>
-        <Button type="primary">{constant.BUTTON.EXPORT_FILE}</Button>
-      </div>
+      <h2 className="list-title">Holiday list</h2>
+
+      <Button className="user-table-button" type="primary">
+        {constant.BUTTON.EXPORT_FILE}
+      </Button>
 
       <Table columns={columns} dataSource={data} onChange={onChange} />
     </div>

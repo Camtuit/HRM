@@ -174,7 +174,7 @@ function UserTable() {
   function onChange(pagination, filters, sorter, extra) {}
   return (
     <div className="user-table">
-      <h2>User list</h2>
+      <h2 className="list-title">User list</h2>
 
       <Link to="/user">
         <Button className="user-table-button" type="primary">

@@ -1,0 +1,111 @@
+.request-search-box {
+  border: 1px solid #e3e3e3;
+  padding: 30px;
+  &__item {
+    width: 20%;
+  }
+  &__item--name,
+  &__item--input {
+    width: 40%;
+  }
+  &__item--holder,
+  &__item--quick-choose {
+    margin-left: 20px;
+    width: 30%;
+  }
+  &__item--quick-choose {
+    justify-self: flex-end;
+  }
+  &__item--status {
+    margin-left: 20px;
+  }
+  .input-picker {
+    width: 100%;
+  }
+  &__buttons {
+    .btn-cancel {
+      margin-left: auto;
+    }
+  }
+  @include laptop() {
+    &__item {
+      width: 30%;
+    }
+    &__item--name,
+    &__item--input {
+      width: 40%;
+    }
+    &__item--status {
+      width: 25%;
+      margin-left: auto;
+    }
+    &__item--holder {
+      width: 25%;
+    }
+  }
+}
+/* Request Device Register/Details Form*/
+.request-device-container {
+  width: 100%;
+  margin-right: auto;
+  .request-device-form__title {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+.request-device-details {
+  &__form {
+    padding: 20px;
+    width: 100%;
+  }
+  &__buttons {
+    margin: 0 15px;
+    display: flex;
+    justify-content: flex-end;
+    > * {
+      width: 100px;
+    }
+    > :last-child {
+      margin-left: 20px;
+      text-align: center;
+    }
+  }
+}
+
+/* Request Device Table*/
+.request-device-table {
+  padding: 0 20px;
+  margin-top: 30px;
+  &__buttons {
+    margin-bottom: 20px;
+  }
+  &__add {
+    margin-right: 20px;
+  }
+}
+.request-table-button .request-button-add {
+  margin-right: 10px;
+  margin-bottom: 12px;
+  width: 94px;
+}
+
+.request-table-action {
+  display: flex;
+  justify-content: space-around;
+}
+.request-table-action i {
+  color: #80baef;
+}
+.request-table-action i:hover {
+  color: #0483f7;
+}
+.request-table .ant-table-content th {
+  text-align: center;
+}
+.request-table .ant-table-tbody .ant-table-row td {
+  text-align: center;
+}
+.request-device-detail-form {
+  width: 100%;
+}

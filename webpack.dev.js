@@ -19,7 +19,11 @@ const config = merge(common, {
     },
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+      favicon: './src/favicon.ico',
+    }),
     new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
 });

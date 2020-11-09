@@ -9,7 +9,7 @@ function UserSearchBox() {
     setComponentSize(size);
   };
   return (
-    <div className="user-search-box">
+    <div className="search-box user-search-box">
       <Form
         labelCol={{
           span: 4,

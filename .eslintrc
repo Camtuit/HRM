@@ -1,6 +1,13 @@
 {
   "extends": ["airbnb-base", "react-app", "prettier"],
   "plugins": ["prettier", "react"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "rules": {
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -8,7 +15,10 @@
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
     "react/jsx-props-no-spreading": 0,
-    "import/no-extraneous-dependencies": 0
+    "import/no-extraneous-dependencies": 0,
+    "no-debugger": 0,
+    "import/prefer-default-export": 0,
+    "camelcase": 0
   },
   "env": {
     "browser": true,
