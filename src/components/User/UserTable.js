@@ -71,7 +71,9 @@ function UserTable({ querry, onSearch = () => {}, match }) {
       fixed: 'right',
       dataIndex: 'action',
       width: 100,
-      render: (value) => <Link to={`${match.url}/${value.id}`}>Edit</Link>,
+      render: (value) => (
+        <Link to={`${match.url !== '/' ? match.url : '/users'}/${value.id}`} />
+      ),
     },
   ];
 
