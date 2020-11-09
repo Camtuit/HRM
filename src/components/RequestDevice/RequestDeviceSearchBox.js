@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Row, Col, Select, DatePicker } from 'antd';
 import moment from 'moment';
-
+import '../../css/RequestSearchBox.css';
 import { BUTTON } from '../../constants/textLabel';
+import constant from '../../constants/htmlConstants';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -48,9 +49,9 @@ export default function RequestDeviceSearchBox() {
             style={{ width: 200 }}
             placeholder="Select a person"
           >
-            <Option value="all">All</Option>
-            <Option value="assigned">Assigned</Option>
-            <Option value="available">Available</Option>
+            <Option value="all">{constant.RADIO_CHOOSE.ALL}</Option>
+            <Option value="assigned">{constant.RADIO_CHOOSE.ASSIGNED}</Option>
+            <Option value="available">{constant.RADIO_CHOOSE.AVAILABLE}</Option>
           </Select>
         </Form.Item>
       </Row>
@@ -68,11 +69,15 @@ export default function RequestDeviceSearchBox() {
             style={{ width: 200 }}
             placeholder="Select a person"
           >
-            <Option value="today">Today</Option>
-            <Option value="thisWeek">This week</Option>
-            <Option value="lastWeek">Last week</Option>
-            <Option value="thisMonth">This month</Option>
-            <Option value="lastMonth">Last month</Option>
+            <Option value="today">{constant.QUICK_CHOOSE.TODAY}</Option>
+            <Option value="thisWeek">{constant.QUICK_CHOOSE.THIS_WEEK}</Option>
+            <Option value="lastWeek">{constant.QUICK_CHOOSE.LAST_WEEK}</Option>
+            <Option value="thisMonth">
+              {constant.QUICK_CHOOSE.THIS_MONTH}h
+            </Option>
+            <Option value="lastMonth">
+              {constant.QUICK_CHOOSE.LAST_MONTH}
+            </Option>
           </Select>
         </Form.Item>
       </Row>
