@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import UserSearchBox from '../../components/User/UserSearchBox';
 import UserTable from '../../components/User/UserTable';
-import AddDevicePopup from '../../components/AddDevicePopup';
 import WrapperContent from '../../components/commons/WrapperContentPage';
+
 import '../../css/UserList.css';
 
-function UserList() {
+function UserList({ match }) {
+  const [query, setQuery] = useState(undefined);
+
+  function handleSearchUsers(queryObject) {
+    setQuery(queryObject);
+  }
+
   return (
     <WrapperContent className="user-list-content">
-      <UserSearchBox />
-      <UserTable />
+      <UserSearchBox onSearch={handleSearchUsers} />
+      <UserTable query={query} onSearch={handleSearchUsers} match={match} />
     </WrapperContent>
   );
 }

@@ -4,12 +4,12 @@ import { useCallback, useEffect } from 'react';
 import { getAction } from '../actions/commonAction';
 import { toLower } from '../helpers/apiHelper';
 
-function useFetch({ type, querry }) {
+function useFetch(type = '') {
   const dispatch = useDispatch();
-  const typeState = toLower(type);
+  const stringType = toLower(type);
   const { data, apiCallStatus } = useSelector((state) => {
     return {
-      data: state.typeState, // Exclude: request-devices
+      data: state[stringType], // Exclude: request-devices
       apiCallStatus: state.apiCallStatus,
     };
   }, shallowEqual);

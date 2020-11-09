@@ -1,10 +1,10 @@
 import { callApi } from './axiosService';
-import { getQuerry } from '../helpers/apiHelper';
+import { getQuery } from '../helpers/apiHelper';
 
-export function getMany(url, objectQuerry) {
-  const querry = objectQuerry ? getQuerry(objectQuerry) : '';
+export function getMany(url, objectQuery) {
+  const query = objectQuery ? getQuery(objectQuery) : '';
   return callApi({
-    url: `${url + querry}`,
+    url: `${url + query}`,
     method: 'GET',
   });
 }

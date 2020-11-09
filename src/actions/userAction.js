@@ -9,15 +9,15 @@ import { get, getMany, remove, post, put } from '../apis/apiMethods';
 import { apiCallError, beginApiCall } from './apiStatusAction';
 
 /*
-  Example object querry: { full_name: 'Juliet',  status: 1}
+  Example object query: { full_name: 'Juliet',  status: 1}
 */
 
 // IT IS BACK UP FILE
 
-export function getUsers(url, objectQuerry) {
+export function getUsers(url, objectQuery) {
   return function (dispatch) {
     dispatch(beginApiCall());
-    return getMany(url, objectQuerry)
+    return getMany(url, objectQuery)
       .then((data) => dispatch({ type: LOAD_USERS_SUCCESS, payload: data }))
       .catch((err) => dispatch(apiCallError(err)));
   };

@@ -4,8 +4,8 @@ const initialState = {
   toggledModal: false,
   toggledPopup: false,
   // User
-  user: undefined,
-  currentUser: undefined,
+  user: {},
+  currentUser: {},
   users: [],
   apiCallStatus: 0,
   screenWidth: typeof window === 'object' ? window.innerWidth : undefined,
