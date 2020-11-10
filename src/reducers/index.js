@@ -2,16 +2,17 @@ import { combineReducers } from 'redux';
 
 import apiCallStatus from './apiStatusReducer';
 import users from './userReducer';
-import sideBarReducer from './sideBarReducer';
-import { screenWidth, toggledSideBar, toggledPopup } from './utilsReducer';
+import holidays from './holidayReducer';
+import meta from './metaReducer';
+import { screenWidth, toggledSideBar } from './utilsReducer';
 
 const rootReducer = combineReducers({
-  sideBarReducer,
   users,
+  holidays,
   apiCallStatus,
+  meta,
   screenWidth,
   toggledSideBar,
-  toggledPopup,
 });
 
 export default rootReducer;

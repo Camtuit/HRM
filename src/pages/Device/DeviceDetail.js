@@ -5,10 +5,6 @@ import { Button } from 'antd';
 import '../../css/DeviceDetail.css';
 
 function DeviceDetail() {
-  const isSideBarOpen = useSelector(
-    (state) => state.sideBarReducer.isSideBarOpen,
-  );
-
   const downloadQR = () => {
     const canvas = document.getElementById('qrcode');
     const pngUrl = canvas
@@ -23,10 +19,7 @@ function DeviceDetail() {
   };
 
   return (
-    <div
-      className="device-detail-content"
-      style={{ marginLeft: isSideBarOpen ? '230px' : '56px' }}
-    >
+    <div className="device-detail-content">
       <div className="device-info">
         <p>Device information</p>
         <div className="device-info-item">
