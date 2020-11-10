@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { handleResponse, handleError } from '../helpers/apiHelper';
 
-const baseURL = process.env.API_URL || 'http://api-java.dev-hrm.nals.vn/api';
+const baseURL = 'http://api-java.dev-hrm.nals.vn/api';
 
 export const instanceAxios = axios.create({
   baseURL,
