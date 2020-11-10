@@ -22,8 +22,7 @@ function HolidaySearchBox({ setCurrentYear, setCurrentPage }) {
   }
 
   function onCancel() {
-    setDefaultYear('2019');
-    console.log(defaultYear);
+    setCurrentValue('2020');
     setCurrentYear(2020);
   }
   return (
@@ -44,7 +43,11 @@ function HolidaySearchBox({ setCurrentYear, setCurrentPage }) {
           size={componentSize}
         >
           <Form.Item label="Year">
-            <Select onChange={onChange} defaultValue={defaultYear}>
+            <Select
+              value={currentValue}
+              onChange={onChange}
+              defaultValue={defaultYear}
+            >
               <Select.Option value="2025">2025</Select.Option>
               <Select.Option value="2024">2024</Select.Option>
               <Select.Option value="2023">2023</Select.Option>
