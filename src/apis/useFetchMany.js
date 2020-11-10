@@ -3,9 +3,8 @@ import { useCallback, useEffect } from 'react';
 
 import { getManyAction } from '../actions/commonAction';
 import { toLower } from '../helpers/apiHelper';
-import types from '../constants/apiResourceTypes';
 
-function useFetchMany(type = '', query) {
+function useFetchMany(type = '', defaultQuery = '') {
   const dispatch = useDispatch();
   const stringType = toLower(type);
   const { data, apiCallStatus } = useSelector((state) => {
@@ -15,15 +14,16 @@ function useFetchMany(type = '', query) {
     };
   }, shallowEqual);
 
-  const boundAction = useCallback(() => {
-    return dispatch(getManyAction(type, query));
-  }, [dispatch, type, query]);
+  const boundAction = useCallback(
+    (query) => {
+      return dispatch(getManyAction(type, query));
+    },
+    [dispatch, type],
+  );
 
   useEffect(() => {
-    if (!data || data.length === 0) {
-      boundAction();
-    }
-  }, [boundAction, data]);
+    boundAction(defaultQuery);
+  }, []);
 
   return [data, boundAction, apiCallStatus];
 }

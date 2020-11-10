@@ -19,11 +19,12 @@ export function getManyAction(type, objectQuery) {
 
 export function getAction(type) {
   return function (dispatch) {
-    const typeAction = `LOAD_${type}_SUCCESS`;
     const url = toLower(type);
     dispatch(beginApiCall());
     return get(url)
-      .then((res) => dispatch({ type: typeAction, payload: res.data }))
+      .then((res) => {
+        return res.data;
+      })
       .catch((err) => dispatch(apiCallError(err)));
   };
 }
@@ -33,7 +34,7 @@ export function createAction(type, body) {
     const typeAction = `CREATE_${type}_SUCCESS`;
     const url = toLower(type);
     dispatch(beginApiCall());
-    return post(typeAction, body)
+    return post(url, body)
       .then((res) => dispatch({ type: typeAction, payload: res.data }))
       .catch((err) => dispatch(apiCallError(err)));
   };

@@ -1,20 +1,24 @@
+/* eslint-disable consistent-return */
 import { Button, DatePicker, Form, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import parse from 'date-fns/parse';
 import moment from 'moment';
 
-import { togglePopup } from '../../actions/utilsAction';
 import constant from '../../constants/htmlConstants';
-import { callApi } from '../../apis/axiosService';
+import usePost from '../../apis/usePost';
+import usePut from '../../apis/usePut';
+import types from '../../constants/apiResourceTypes';
 import '../../css/HolidayRegistPopup.css';
 
-function HolidayRegistPopup(props) {
-  const { active, value } = props;
+function HolidayRegistPopup({
+  active,
+  value,
+  handleTogglePopupAdd = () => {},
+}) {
+  const [postHoliday, apiStatus] = usePost(types.HOLIDAYS);
+  const [putHoliday] = usePut(types.HOLIDAYS);
   const [holidayDate, setHolidayDate] = useState();
   const [notes, setNotes] = useState();
   const [form] = Form.useForm();
-  const dispatch = useDispatch();
   useEffect(() => {
     if (value !== undefined) {
       setHolidayDate(value.date);
@@ -32,30 +36,26 @@ function HolidayRegistPopup(props) {
   const handleChangeNote = (e) => {
     setNotes(e.target.value);
   };
-  const handleSaveAndQuit = () => {
+  const handleSaveAndQuit = async () => {
     form
       .validateFields()
-      .then(() => {
-        callApi({
-          url: '/holidays',
-          method: 'POST',
-          data: {
-            date: holidayDate.format('YYYY-MM-DD'),
-            notes,
-            updated_by: null,
-          },
-        })
-          .then((res) => {
-            if (res.data !== null) {
-              form.resetFields();
-              dispatch(togglePopup());
-              setHolidayDate('');
-              setNotes('');
-            }
-          })
-          .catch((err) => {
-            return err;
-          });
+      .then(async () => {
+        const newHoliday = {
+          date: holidayDate.format('YYYY-MM-DD'),
+          notes,
+          updated_by: null,
+        };
+        try {
+          const res = await postHoliday(newHoliday);
+          if (res.data !== null) {
+            form.resetFields();
+            handleTogglePopupAdd();
+            setHolidayDate('');
+            setNotes('');
+          }
+        } catch (error) {
+          return error;
+        }
       })
       .catch((errorInfo) => {
         return errorInfo;
@@ -64,26 +64,23 @@ function HolidayRegistPopup(props) {
   const handleSaveAndContinue = () => {
     form
       .validateFields()
-      .then(() => {
-        callApi({
-          url: '/holidays',
-          method: 'POST',
-          data: {
-            date: holidayDate.format('YYYY-MM-DD'),
-            notes,
-            updated_by: null,
-          },
-        })
-          .then((res) => {
-            if (res.data !== null) {
-              form.resetFields();
-              setHolidayDate('');
-              setNotes('');
-            }
-          })
-          .catch((err) => {
-            return err;
-          });
+      .then(async () => {
+        console.log(holidayDate, notes);
+        const newHoliday = {
+          date: holidayDate.format('YYYY-MM-DD'),
+          notes,
+          updated_by: null,
+        };
+        try {
+          const res = await postHoliday(newHoliday);
+          if (res.data !== null) {
+            form.resetFields();
+            setHolidayDate('');
+            setNotes('');
+          }
+        } catch (error) {
+          return error;
+        }
       })
       .catch((errorInfo) => {
         return errorInfo;
@@ -93,28 +90,24 @@ function HolidayRegistPopup(props) {
     if (value !== undefined) {
       form
         .validateFields()
-        .then(() => {
-          callApi({
-            url: '/holidays',
-            method: 'PUT',
-            data: {
-              id: value ? value.id : '',
-              date: holidayDate,
-              notes,
-              updated_by: null,
-            },
-          })
-            .then((res) => {
-              if (res.data !== null) {
-                form.resetFields();
-                dispatch(togglePopup());
-                setHolidayDate('');
-                setNotes('');
-              }
-            })
-            .catch((err) => {
-              return err;
-            });
+        .then(async () => {
+          const newHoliday = {
+            id: value ? value.id : '',
+            date: holidayDate,
+            notes,
+            updated_by: null,
+          };
+          try {
+            const res = await putHoliday(newHoliday);
+            if (res.data !== null) {
+              form.resetFields();
+              handleTogglePopupAdd();
+              setHolidayDate('');
+              setNotes('');
+            }
+          } catch (error) {
+            return error;
+          }
         })
         .catch((errorInfo) => {
           return errorInfo;
@@ -125,7 +118,7 @@ function HolidayRegistPopup(props) {
     form.resetFields();
     setHolidayDate('');
     setNotes('');
-    dispatch(togglePopup());
+    handleTogglePopupAdd();
   };
   return (
     <div className="holiday-regist-button">

@@ -3,7 +3,6 @@ import {
   CREATE_USER_SUCCESS,
   UPDATE_USER_SUCCESS,
   DELETE_USER_OPTIMISTIC,
-  LOAD_USER_SUCCESS,
 } from '../constants/actionTypes';
 
 import initialState from '../constants/initialState';

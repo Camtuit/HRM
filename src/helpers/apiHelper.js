@@ -9,7 +9,7 @@ export function handleError(error) {
 export function getQuery(object) {
   let query = '';
   Object.keys(object).map((key) => {
-    query += `${key}=${object.key}&`;
+    query += `${key}=${object[key]}&`;
   });
   return query.slice(0, -1);
 }

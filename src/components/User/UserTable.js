@@ -6,10 +6,10 @@ import '../../css/UserTable.css';
 import useFetchMany from '../../apis/useFetchMany';
 import types from '../../constants/apiResourceTypes';
 
-function UserTable({ querry, onSearch = () => {}, match }) {
+function UserTable({ query, onSearch = () => {}, match }) {
   const [users = [], loadAction, apiCallStatus] = useFetchMany(
     types.USERS,
-    querry,
+    query,
   );
   const usersData = users.map((user, index) => {
     const usersFiltered = {
