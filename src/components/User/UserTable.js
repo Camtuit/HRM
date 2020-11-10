@@ -83,7 +83,7 @@ function UserTable({ query, onSearch = () => {}, match }) {
     <div className="user-table">
       <Link to="/user">
         <Button className="user-table-button" type="primary">
-          Add new user
+          Add new
         </Button>
       </Link>
 
