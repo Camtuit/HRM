@@ -74,7 +74,34 @@ function SkillRegistInput(props) {
         return errorInfo;
       });
   };
-  const handleEditSkill = (id) => {};
+  const handleEditSkill = () => {
+    if (value !== undefined) {
+      form
+        .validateFields()
+        .then(() => {
+          callApi({
+            url: `/skills/${value.id}`,
+            method: 'PUT',
+            data: {
+              name: skillName,
+            },
+          })
+            .then((res) => {
+              if (res.data !== null) {
+                form.resetFields();
+                dispatch(togglePopup());
+                setSkillName('');
+              }
+            })
+            .catch((err) => {
+              return err;
+            });
+        })
+        .catch((errorInfo) => {
+          return errorInfo;
+        });
+    }
+  };
   const handleCancel = () => {
     form.resetFields();
     setSkillName('');
