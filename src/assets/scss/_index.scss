@@ -7,8 +7,10 @@
   }
   background-color: $background;
 }
-
-.container-search-bar {
+body {
+  background-color: $background;
+}
+.container-search-box {
   @include flex(row, stretch, center, wrap);
 }
 

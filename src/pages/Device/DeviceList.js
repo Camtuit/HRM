@@ -5,7 +5,7 @@ import { Button, Table, Space } from 'antd';
 
 import '../../css/DeviceList.css';
 import { devices } from '../../helpers/dumbData';
-import SearchBarDevice from './SearchBarDevice';
+import SearchBoxDevice from './SearchBoxDevice';
 import WrapperContent from '../../components/commons/WrapperContentPage';
 import AddDevicePopup from '../../components/AddDevicePopup';
 import DeviceActionsBar from '../../components/Device/DeviceActionsBar';
@@ -62,7 +62,7 @@ function DeviceList({ match }) {
       <WrapperContent>
         <h2 className="list-title">Device List</h2>
         <div className="container container-device">
-          <SearchBarDevice />
+          <SearchBoxDevice />
         </div>
         <div className="device-buttons">
           <Button
