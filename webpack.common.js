@@ -2,6 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
+const API_URL_SUB =
+  (process.env.API_URL &&
+    (process.env.API_URL.endsWith('api') || `${process.env.API_URL}/api`)) ||
+  'http://api-java.dev-hrm.nals.vn/api';
 const API_URL =
   (process.env.API_URL &&
     (process.env.API_URL.endsWith('api') || `${process.env.API_URL}/api`)) ||
@@ -19,6 +23,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
         API_URL: JSON.stringify(API_URL),
+        API_URL_SUB: JSON.stringify(API_URL_SUB),
       },
     }),
   ],

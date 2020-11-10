@@ -9,16 +9,19 @@ import '../../css/HolidayRegistPopup.css';
 
 function SkillRegistInput(props) {
   const { active, value } = props;
-  const [skillDate, setSkillDate] = useState('');
-  const [name, setName] = useState('');
+  const [skillName, setSkillName] = useState('');
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-
-  const handleChangeDatePicker = (date) => {
-    setSkillDate(date);
-  };
-  const handleChangeNote = (e) => {
-    setName(e.target.value);
+  useEffect(() => {
+    if (value !== undefined) {
+      setSkillName(value.name);
+      form.setFieldsValue({
+        skill: value.name,
+      });
+    }
+  }, [value, form]);
+  const handleChangeSkillName = (e) => {
+    setSkillName(e.target.value);
   };
   const handleSaveAndQuit = () => {
     form
@@ -28,16 +31,14 @@ function SkillRegistInput(props) {
           url: '/skills',
           method: 'POST',
           data: {
-            name,
-            updated_by: skillDate.format('YYYY-MM-DDT HH:mm:ss.sssZ'),
+            name: skillName,
           },
         })
           .then((res) => {
             if (res.data !== null) {
               form.resetFields();
               dispatch(togglePopup());
-              setSkillDate('');
-              setName('');
+              setSkillName('');
             }
           })
           .catch((err) => {
@@ -53,19 +54,16 @@ function SkillRegistInput(props) {
       .validateFields()
       .then(() => {
         callApi({
-          url: '/holidays',
+          url: '/skills',
           method: 'POST',
           data: {
-            date: skillDate.format('YYYY-MM-DD'),
-            name,
-            updated_by: skillDate.format('YYYY-MM-DDT HH:mm:ss.sssZ'),
+            name: skillName,
           },
         })
           .then((res) => {
             if (res.data !== null) {
               form.resetFields();
-              setSkillDate('');
-              setName('');
+              setSkillName('');
             }
           })
           .catch((err) => {
@@ -76,10 +74,37 @@ function SkillRegistInput(props) {
         return errorInfo;
       });
   };
+  const handleEditSkill = () => {
+    if (value !== undefined) {
+      form
+        .validateFields()
+        .then(() => {
+          callApi({
+            url: `/skills/${value.id}`,
+            method: 'PUT',
+            data: {
+              name: skillName,
+            },
+          })
+            .then((res) => {
+              if (res.data !== null) {
+                form.resetFields();
+                dispatch(togglePopup());
+                setSkillName('');
+              }
+            })
+            .catch((err) => {
+              return err;
+            });
+        })
+        .catch((errorInfo) => {
+          return errorInfo;
+        });
+    }
+  };
   const handleCancel = () => {
     form.resetFields();
-    setSkillDate('');
-    setName('');
+    setSkillName('');
     dispatch(togglePopup());
   };
   return (
@@ -91,24 +116,24 @@ function SkillRegistInput(props) {
         footer={
           value === undefined
             ? [
-                <Button htmlType="submit" onClick={handleSaveAndContinue}>
-                  {constant.BUTTON.SAVE_AND_CONTINUE}
+                <Button htmlType="submit" onClick={handleSaveAndQuit}>
+                  {constant.BUTTON.SAVE_AND_QUIT}
                 </Button>,
                 <Button
                   htmlType="submit"
                   type="primary"
-                  onClick={handleSaveAndQuit}
+                  onClick={handleSaveAndContinue}
                 >
-                  {constant.BUTTON.SAVE_AND_QUIT}
+                  {constant.BUTTON.SAVE_AND_CONTINUE}
                 </Button>,
               ]
             : [
                 <Button
                   htmlType="submit"
                   type="primary"
-                  onClick={handleSaveAndQuit}
+                  onClick={handleEditSkill}
                 >
-                  {constant.BUTTON.SAVE_AND_QUIT}
+                  {constant.BUTTON.SUBMIT}
                 </Button>,
               ]
         }
@@ -120,8 +145,16 @@ function SkillRegistInput(props) {
           form={form}
           onFinish={handleSaveAndQuit}
         >
-          <Form.Item label={constant.LABEL.NAME}>
-            <Input placeholder="Skill name" />
+          <Form.Item
+            name="skill"
+            label={constant.LABEL.NAME}
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input onChange={handleChangeSkillName} placeholder="Skill name" />
           </Form.Item>
         </Form>
       </Modal>

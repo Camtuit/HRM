@@ -1,82 +1,55 @@
+/* eslint-disable consistent-return */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Button, Tooltip } from 'antd';
 import axios from 'axios';
-import RemovePopupCommon from '../commons/RemovePopup';
 
+import RemovePopupCommon from '../commons/RemovePopup';
 import HolidayRegistPopup from './HolidayRegistPopup';
 import constant from '../../constants/htmlConstants';
-
+import useFetchMany from '../../apis/useFetchMany';
+import { get } from '../../apis/apiMethods';
+import useRemove from '../../apis/useRemove';
+import types from '../../constants/apiResourceTypes';
 import '../../css/HolidayTable.css';
-import { togglePopup } from '../../actions/utilsAction';
-import { callApi } from '../../apis/axiosService';
+import { meta } from '../../helpers/dumbData';
 
 function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
-  const [data, setData] = useState(null);
-  const [totalRecord, setTotalRecord] = useState(null);
-  const toggledPopup = useSelector((state) => state.toggledPopup);
+  const query = { page: currentPage, year: currentYear };
+  const [holidays = [], fetchHolidays] = useFetchMany(types.HOLIDAYS, query);
+  const [deleteHoliday] = useRemove(types.HOLIDAYS);
+  const [toggledPopup, setToggledPopup] = useState(false);
+  const [totalRecord, setTotalRecord] = useState(meta.pagination.total);
   const [valueHoliday, setValueHoliday] = useState();
-  const dispatch = useDispatch();
+  const dataFiltered = holidays.map(function (element, index) {
+    return {
+      key: element.id,
+      no: index + 1,
+      date: element.date,
+      note: element.notes,
+    };
+  });
   const handleTogglePopupAdd = () => {
-    setValueHoliday();
-    dispatch(togglePopup());
+    setTotalRecord(meta.pagination.total);
+    setToggledPopup(!toggledPopup);
   };
-  const handleTogglePopupEdit = (id) => {
-    callApi({
-      url: `/holidays/${id}`,
-      method: 'GET',
-    })
-      .then((res) => {
-        setValueHoliday(res.data);
-        dispatch(togglePopup());
-      })
-      .catch((err) => {
-        return err;
-      });
+  const handleTogglePopupEdit = async (id) => {
+    const res = await get('holidays', id);
+    try {
+      const holiday = res.data;
+      setValueHoliday(holiday);
+      handleTogglePopupAdd();
+    } catch (error) {
+      return error;
+    }
   };
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: ' http://api-java.dev-hrm.nals.vn/api/holidays',
-      params: {
-        page: currentPage,
-        year: currentYear,
-      },
-    })
-      .then(function (res) {
-        const currentData = res.data.data.map(function (element, index) {
-          return {
-            key: element.id,
-            no: index + 1,
-            date: element.date,
-            note: element.notes,
-          };
-        });
-        setData(currentData);
-        setTotalRecord(res.data.meta.pagination.total);
-      })
-      .catch(function (error) {
-        setData(null);
-      });
-  }, [currentYear]);
 
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
-    console.log(pagination);
   }
 
   const handleDeleteHoliday = (id) => {
-    callApi({
-      url: `/holidays/${id}`,
-      method: 'DELETE',
-    })
-      .then((res) => {
-        const idIndex = data.findIndex((x) => x.key === id);
-        data.splice(idIndex, 1);
-      })
-      .catch((err) => {
-        return err;
-      });
+    deleteHoliday(id);
   };
 
   const columns = [
@@ -138,7 +111,7 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
       <Table
         className="table"
         columns={columns}
-        dataSource={data}
+        dataSource={dataFiltered}
         onChange={onChange}
         pagination={{
           position: ['topRight', 'bottomRight'],
@@ -146,7 +119,11 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
           current: currentPage + 1,
         }}
       />
-      <HolidayRegistPopup active={toggledPopup} value={valueHoliday} />
+      <HolidayRegistPopup
+        active={toggledPopup}
+        value={valueHoliday}
+        handleTogglePopupAdd={handleTogglePopupAdd}
+      />
     </div>
   );
 }
