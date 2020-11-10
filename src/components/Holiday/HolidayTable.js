@@ -124,7 +124,6 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
 
   return (
     <div className="holiday-table">
-      <h2 className="list-title">Holiday list</h2>
       <Button
         className="user-table-button"
         type="primary"
