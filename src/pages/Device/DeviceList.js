@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Table, Space } from 'antd';
 
+import '../../css/DeviceList.css';
 import { devices } from '../../helpers/dumbData';
 import SearchBarDevice from './SearchBarDevice';
 import WrapperContent from '../../components/commons/WrapperContentPage';
@@ -59,26 +60,31 @@ function DeviceList({ match }) {
   return (
     <>
       <WrapperContent>
+        <h2 className="list-title">Device List</h2>
         <div className="container container-device">
-          <h2 className="list-title">Device List</h2>
           <SearchBarDevice />
-          <div className="device-buttons">
-            <Button
-              className="button new-device"
-              type="primary"
-              onClick={handleOnClickAdd}
-            >
-              {BUTTON.ADD}
-            </Button>
-          </div>
-          <div className="table device-table">
-            <Table columns={columnsDevice} dataSource={data} />
-          </div>
-          <div className="device-buttons">
-            <Button className="button export-device" type="primary">
-              Export
-            </Button>
-          </div>
+        </div>
+        <div className="device-buttons">
+          <Button
+            className="button new-device"
+            type="primary"
+            onClick={handleOnClickAdd}
+          >
+            {BUTTON.ADD}
+          </Button>
+
+          <Button className="button export-device" type="primary">
+            Export
+          </Button>
+        </div>
+        <div className="table device-table">
+          <Table
+            pagination={{
+              position: ['topRight', 'bottomRight'],
+            }}
+            columns={columnsDevice}
+            dataSource={data}
+          />
         </div>
       </WrapperContent>
       <AddDevicePopup

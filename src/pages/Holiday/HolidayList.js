@@ -10,6 +10,7 @@ function HolidayList() {
   const [currentPage, setCurrentPage] = useState(0);
   return (
     <WrapperContent className="holiday-list-content">
+      <h2 className="list-title">Holiday List</h2>
       <HolidaySearchBox
         setCurrentYear={setCurrentYear}
         setCurrentPage={setCurrentPage}

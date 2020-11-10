@@ -124,7 +124,6 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
 
   return (
     <div className="holiday-table">
-      <h2 className="list-title">Holiday list</h2>
       <Button
         className="user-table-button"
         type="primary"
@@ -137,10 +136,12 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
       </Button>
 
       <Table
+        className="table"
         columns={columns}
         dataSource={data}
         onChange={onChange}
         pagination={{
+          position: ['topRight', 'bottomRight'],
           total: totalRecord,
           current: currentPage + 1,
         }}

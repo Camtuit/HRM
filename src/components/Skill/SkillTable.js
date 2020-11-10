@@ -96,9 +96,8 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
   ];
   return (
     <div className="skill-table">
-      <h2 className="list-title">Skill list</h2>
       <Button
-        className="user-table-button"
+        className="skill-table-button"
         type="primary"
         onClick={handleTogglePopupAdd}
       >

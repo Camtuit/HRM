@@ -10,6 +10,7 @@ function SkillList() {
   const [currentName, setCurrentName] = useState('');
   return (
     <WrapperContent className="skill-list-content">
+      <h2 className="list-title">Skill List</h2>
       <SkillSearchBox
         setCurrentName={setCurrentName}
         setCurrentPage={setCurrentPage}

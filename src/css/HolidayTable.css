@@ -1,12 +1,14 @@
 .holiday-table {
-  margin: 20px;
+  margin: 40px 0px 0px 20px;
 }
-
+.table {
+  padding-right: 20px;
+}
 .holiday-table > button {
   margin-top: 10px;
 }
 .hodiday-table-button {
-  margin: 10px 0px;
+  margin: 10px 10px 0 0;
 }
 
 .hodiday-table-button > button {

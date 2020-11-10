@@ -104,6 +104,9 @@ export default function RequestDeviceTable({ match }) {
         className="table-data"
         columns={columns}
         dataSource={data}
+        pagination={{
+          position: ['topRight', 'bottomRight'],
+        }}
         size="small"
       />
     </div>

@@ -15,6 +15,7 @@ function UserList({ match }) {
 
   return (
     <WrapperContent className="user-list-content">
+      <h2 className="list-title">User List</h2>
       <UserSearchBox onSearch={handleSearchUsers} />
       <UserTable query={query} onSearch={handleSearchUsers} match={match} />
     </WrapperContent>

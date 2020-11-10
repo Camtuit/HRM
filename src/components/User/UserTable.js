@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Button } from 'antd';
 import { Link } from 'react-router-dom';
+import constant from '../../constants/htmlConstants';
 
 import '../../css/UserTable.css';
 import useFetchMany from '../../apis/useFetchMany';
@@ -80,8 +81,6 @@ function UserTable({ querry, onSearch = () => {}, match }) {
   function onChange(pagination, filters, sorter, extra) {}
   return (
     <div className="user-table">
-      <h2 className="list-title">User list</h2>
-
       <Link to="/user">
         <Button className="user-table-button" type="primary">
           Add new user
@@ -96,7 +95,14 @@ function UserTable({ querry, onSearch = () => {}, match }) {
         Export workdays
       </Button>
 
-      <Table columns={columns} dataSource={usersData} onChange={onChange} />
+      <Table
+        pagination={{
+          position: ['topRight', 'bottomRight'],
+        }}
+        columns={columns}
+        dataSource={usersData}
+        onChange={onChange}
+      />
     </div>
   );
 }
