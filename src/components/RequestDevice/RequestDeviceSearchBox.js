@@ -57,13 +57,22 @@ export default function RequestDeviceSearchBox() {
       </Row>
 
       <Row>
-        <Form.Item
-          className="request-search-box__item request-search-box__item--input"
-          label="Input date:"
-        >
-          <RangePicker className="input-picker" disabledDate={disabledDate} />
+        <Form.Item label={constant.LABEL.INPUT}>
+          <DatePicker
+            placeholder={constant.FORMAT_DATE}
+            format={constant.FORMAT_DATE}
+          />
+          <span> to </span>
+          <DatePicker
+            placeholder={constant.FORMAT_DATE}
+            format={constant.FORMAT_DATE}
+          />
         </Form.Item>
-        <Form.Item className="request-search-box__item request-search-box__item--quick-choose">
+
+        <Form.Item
+          label={constant.LABEL.QUICK_CHOOSE}
+          className="request-search-box__item request-search-box__item--quick-choose"
+        >
           <Select
             defaultValue="Quick choose"
             style={{ width: 200 }}
@@ -81,6 +90,7 @@ export default function RequestDeviceSearchBox() {
           </Select>
         </Form.Item>
       </Row>
+
       <Row className="request-search-box__buttons">
         <Button className="btn-cancel">{BUTTON.CANCEL}</Button>
         <Button type="primary" onClick={handleSearch} htmlType="submit">

@@ -18,6 +18,8 @@ const constants = {
     DAY_OFF: 'Day off',
     DATE: 'Date',
     NAME: 'Name',
+    QUICK_CHOOSE: 'Quick choose',
+    INPUT: 'Input',
     HOLDER: 'Holder',
     STATUS: 'Status',
     PO_NAME: "PO's Name",
