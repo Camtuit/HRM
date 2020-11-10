@@ -65,9 +65,8 @@ function HolidayRegistPopup({
     form
       .validateFields()
       .then(async () => {
-        console.log(holidayDate, notes);
         const newHoliday = {
-          date: holidayDate.format('YYYY-MM-DD'),
+          date: holidayDate.format('DD/MM/YYYY'),
           notes,
           updated_by: null,
         };
