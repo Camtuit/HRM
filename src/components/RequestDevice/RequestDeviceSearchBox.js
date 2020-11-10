@@ -25,78 +25,67 @@ export default function RequestDeviceSearchBox() {
   };
   return (
     <div className="search-box request-search-box">
-      <Row>
-        <Form.Item
-          className="request-search-box__item request-search-box__item--name"
-          label="Name:"
-          rules={[{ required: true }]}
-        >
-          <Input placeholder="Name" />
-        </Form.Item>
-
-        <Form.Item
-          className="input-request-device__item request-search-box__item--holder"
-          label="Holder:"
-        >
-          <Input placeholder="Holder name" />
-        </Form.Item>
-        <Form.Item
-          className="input-request-device__item request-search-box__item--status"
-          label="Status:"
-        >
-          <Select
-            defaultValue="all"
-            style={{ width: 200 }}
-            placeholder="Select a person"
-          >
-            <Option value="all">{constant.RADIO_CHOOSE.ALL}</Option>
-            <Option value="assigned">{constant.RADIO_CHOOSE.ASSIGNED}</Option>
-            <Option value="available">{constant.RADIO_CHOOSE.AVAILABLE}</Option>
-          </Select>
-        </Form.Item>
-      </Row>
-
-      <Row>
-        <Form.Item label={constant.LABEL.INPUT}>
-          <DatePicker
-            placeholder={constant.FORMAT_DATE}
-            format={constant.FORMAT_DATE}
-          />
-          <span> to </span>
-          <DatePicker
-            placeholder={constant.FORMAT_DATE}
-            format={constant.FORMAT_DATE}
-          />
-        </Form.Item>
-
-        <Form.Item
-          label={constant.LABEL.QUICK_CHOOSE}
-          className="request-search-box__item request-search-box__item--quick-choose"
-        >
-          <Select
-            defaultValue="Quick choose"
-            style={{ width: 200 }}
-            placeholder="Select a person"
-          >
-            <Option value="today">{constant.QUICK_CHOOSE.TODAY}</Option>
-            <Option value="thisWeek">{constant.QUICK_CHOOSE.THIS_WEEK}</Option>
-            <Option value="lastWeek">{constant.QUICK_CHOOSE.LAST_WEEK}</Option>
-            <Option value="thisMonth">
-              {constant.QUICK_CHOOSE.THIS_MONTH}h
-            </Option>
-            <Option value="lastMonth">
-              {constant.QUICK_CHOOSE.LAST_MONTH}
-            </Option>
-          </Select>
-        </Form.Item>
-      </Row>
-
-      <Row className="request-search-box__buttons">
-        <Button className="btn-cancel">{BUTTON.CANCEL}</Button>
-        <Button type="primary" onClick={handleSearch} htmlType="submit">
-          {BUTTON.SEARCH}
-        </Button>
-      </Row>
+      <Form layout="horizontal">
+        <Row>
+          <Col span={9}>
+            <Form.Item
+              className="search-box_item search-box_item--name"
+              label="Name"
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={1}></Col>
+          <Col span={6}>
+            <Form.Item
+              className="search-box_item search-box_item--hoder"
+              label="Holder"
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={1}></Col>
+          <Col span={5}>
+            <Form.Item
+              className="search-box_item search-box_item--status user-status-input"
+              label="Contract Status"
+            >
+              <Select>
+                <Select.Option value="demo">Signed</Select.Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={10}>
+            <Form.Item
+              className="search-box_item search-box_item--date"
+              label="Contract"
+            >
+              <DatePicker className="start-date" />
+              <span> to </span>
+              <DatePicker className="end-date" />
+            </Form.Item>
+          </Col>
+          <Col span={6}>
+            <Form.Item
+              className="search-box_item search-box_item--choose"
+              label="Quick choose"
+            >
+              <Select>
+                <Select.Option value="demo">Quick</Select.Option>
+                <Select.Option value="demo">Normal</Select.Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+        <div className="search-box-button">
+          <div className="buttons">
+            <Button>Cancel</Button>
+            <Button type="primary">Search</Button>
+          </div>
+        </div>
+      </Form>
     </div>
   );
 }

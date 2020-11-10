@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import '../../css/UserSearchBox.css';
-import { Form, Input, Button, Select, DatePicker } from 'antd';
+// import '../../css/UserSearchBox.css';
+import { Form, Input, Button, Select, DatePicker, Row, Col } from 'antd';
 
 function UserSearchBox() {
   const [componentSize, setComponentSize] = useState('default');
@@ -11,12 +11,6 @@ function UserSearchBox() {
   return (
     <div className="search-box user-search-box">
       <Form
-        labelCol={{
-          span: 4,
-        }}
-        wrapperCol={{
-          span: 14,
-        }}
         layout="horizontal"
         initialValues={{
           size: componentSize,
@@ -24,32 +18,56 @@ function UserSearchBox() {
         onValuesChange={onFormLayoutChange}
         size={componentSize}
       >
-        <Form.Item label="Name">
-          <Input />
-        </Form.Item>
-
-        <Form.Item label="Contract Status">
-          <Select>
-            <Select.Option value="demo">Signed</Select.Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item label="Contract">
-          <DatePicker />
-          <span> to </span>
-          <DatePicker />
-        </Form.Item>
-
-        <Form.Item label="Quick choose">
-          <Select>
-            <Select.Option value="demo">Quick</Select.Option>
-            <Select.Option value="demo">Normal</Select.Option>
-          </Select>
-        </Form.Item>
-
-        <div className="user-search-box-button">
-          <Button>Cancel</Button>
-          <Button type="primary">Search</Button>
+        <Row>
+          <Col span={9}>
+            <Form.Item
+              className="search-box_item search-box_item--name"
+              label="Name"
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={3}></Col>
+          <Col span={6}>
+            <Form.Item
+              className="search-box_item search-box_item--status user-status-input"
+              label="Contract Status"
+            >
+              <Select>
+                <Select.Option value="demo">Signed</Select.Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={10}>
+            <Form.Item
+              className="search-box_item search-box_item--date"
+              label="Contract"
+            >
+              <DatePicker className="start-date" />
+              <span> to </span>
+              <DatePicker className="end-date" />
+            </Form.Item>
+          </Col>
+          <Col span={2}></Col>
+          <Col span={6}>
+            <Form.Item
+              className="search-box_item search-box_item--choose"
+              label="Quick choose"
+            >
+              <Select>
+                <Select.Option value="demo">Quick</Select.Option>
+                <Select.Option value="demo">Normal</Select.Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+        <div className="search-box-button">
+          <div>
+            <Button>Cancel</Button>
+            <Button type="primary">Search</Button>
+          </div>
         </div>
       </Form>
     </div>
