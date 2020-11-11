@@ -1,14 +1,14 @@
 .user-search-box {
-    border: 1px solid #e3e3e3;
-    padding: 20px;
-    margin: 20px;
+  border: 1px solid #e3e3e3;
+  padding: 20px;
+  margin: 20px;
 }
 
 .user-search-box-button {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .user-search-box-button > button {
-    margin-left: 10px;
+  margin-left: 10px;
 }

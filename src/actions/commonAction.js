@@ -1,38 +1,61 @@
 /* eslint-disable func-names */
-import { get, remove, post, put } from '../apis/apiMethods';
+import { get, getMany, remove, post, put } from '../apis/apiMethods';
 import { apiCallError, beginApiCall } from './apiStatusAction';
+import types from '../constants/apiResourceTypes';
+import { toLower } from '../helpers/apiHelper';
 
-export function loadAction(typeResource) {
+export function getManyAction(type, objectQuery) {
   return function (dispatch) {
-    const typeAction = `LOAD_${typeResource}_SUCCESS`;
+    const typeAction = `LOAD_${type}_SUCCESS`;
+    const url = toLower(type);
     dispatch(beginApiCall());
-    return get(typeResource)
-      .then((data) => dispatch({ type: typeAction, payload: data }))
+    return getMany(url, objectQuery)
+      .then((res) => {
+        return dispatch({ type: typeAction, payload: res.data });
+      })
       .catch((err) => dispatch(apiCallError(err)));
   };
 }
 
-export function createAction(typeResource, typeAction, data) {
+export function getAction(type) {
   return function (dispatch) {
+    const url = toLower(type);
     dispatch(beginApiCall());
-    return post(typeResource, data)
-      .then((response) => dispatch({ type: typeAction, payload: response }))
+    return get(url)
+      .then((res) => {
+        return res.data;
+      })
       .catch((err) => dispatch(apiCallError(err)));
   };
 }
 
-export function updateAction(typeResource, typeAction, data) {
+export function createAction(type, body) {
   return function (dispatch) {
+    const typeAction = `CREATE_${type}_SUCCESS`;
+    const url = toLower(type);
     dispatch(beginApiCall());
-    return put(typeResource, data)
-      .then((response) => dispatch({ type: typeAction, payload: response }))
+    return post(url, body)
+      .then((res) => dispatch({ type: typeAction, payload: res.data }))
       .catch((err) => dispatch(apiCallError(err)));
   };
 }
 
-export function removeAction(typeResource, typeAction, id) {
+export function updateAction(type, data) {
   return function (dispatch) {
+    const typeAction = `UPDATE_${types}_SUCCESS`;
+    const url = toLower(type);
+    dispatch(beginApiCall());
+    return put(url, data)
+      .then((res) => dispatch({ type: typeAction, payload: res.data }))
+      .catch((err) => dispatch(apiCallError(err)));
+  };
+}
+
+export function removeAction(type, id) {
+  return function (dispatch) {
+    const typeAction = `DELETE_${types}_OPTIMISTIC`;
+    const url = toLower(types[typeAction]);
     dispatch({ type: typeAction, payload: id });
-    return remove(typeResource, id);
+    return remove(url, id);
   };
 }

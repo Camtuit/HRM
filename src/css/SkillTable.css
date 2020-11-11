@@ -1,9 +1,12 @@
 .skill-table {
-  padding: 20px 20px;
+  margin: 40px 0px 0px 20px;
 }
 .skill-table-action {
   display: flex;
   justify-content: space-around;
+}
+.table {
+  padding-right: 20px;
 }
 .skill-table-add {
   float: right;

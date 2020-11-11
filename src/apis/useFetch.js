@@ -1,29 +1,22 @@
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { loadAction } from '../actions/commonAction';
+import { getAction } from '../actions/commonAction';
+import { toLower } from '../helpers/apiHelper';
 
-function useFetch(props) {
-  const type = props.type.toLowerCase();
+function useFetch(type = '') {
   const dispatch = useDispatch();
-  const { data, apiCallStatus } = useSelector((state) => {
-    return {
-      data: state.type,
-      apiCallStatus: state.apiCallStatus,
-    };
-  }, shallowEqual);
+  const [data, setData] = useState(undefined);
+  const { apiCallStatus } = useSelector((state) => state.apiCallStatus);
 
-  const boundAction = useCallback(() => {
-    return dispatch(loadAction(type));
-  }, [dispatch, type]);
+  const boundAction = useCallback(
+    (id) => {
+      return dispatch(getAction(type));
+    },
+    [dispatch, type],
+  );
 
-  useEffect(() => {
-    if (!data || data.length === 0) {
-      boundAction();
-    }
-  }, [boundAction, data]);
-
-  return [type, boundAction, apiCallStatus];
+  return [data, boundAction, apiCallStatus];
 }
 
 export default useFetch;

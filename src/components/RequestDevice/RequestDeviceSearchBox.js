@@ -7,6 +7,11 @@ import constant from '../../constants/htmlConstants';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
+const layout = {
+  labelCol: { span: 5 },
+  wrapperCol: { span: 18 },
+};
+
 export default function RequestDeviceSearchBox() {
   const [componentSize, setComponentSize] = useState('default');
   const [getInput, setGetInput] = useState('');
@@ -25,68 +30,79 @@ export default function RequestDeviceSearchBox() {
   };
   return (
     <div className="search-box request-search-box">
-      <Row>
-        <Form.Item
-          className="request-search-box__item request-search-box__item--name"
-          label="Name:"
-          rules={[{ required: true }]}
-        >
-          <Input placeholder="Name" />
-        </Form.Item>
+      <Form layout="horizontal">
+        <Row>
+          <Col span={constant.GRID_COL.GRID_COL_8}>
+            <Form {...layout}>
+              <Form.Item
+                className="search-box_item search-box_item--name"
+                label={constant.LABEL.NAME}
+              >
+                <Input
+                  className="request-search-input"
+                  placeholder={constant.LABEL.NAME}
+                />
+              </Form.Item>
+              <Form.Item
+                className="search-box_item search-box_item--date"
+                label={constant.LABEL.CONTRACT}
+              >
+                <DatePicker className="start-date" />
+                <span> to </span>
+                <DatePicker className="end-date" />
+              </Form.Item>
+            </Form>
+          </Col>
 
-        <Form.Item
-          className="input-request-device__item request-search-box__item--holder"
-          label="Holder:"
-        >
-          <Input placeholder="Holder name" />
-        </Form.Item>
-        <Form.Item
-          className="input-request-device__item request-search-box__item--status"
-          label="Status:"
-        >
-          <Select
-            defaultValue="all"
-            style={{ width: 200 }}
-            placeholder="Select a person"
-          >
-            <Option value="all">{constant.RADIO_CHOOSE.ALL}</Option>
-            <Option value="assigned">{constant.RADIO_CHOOSE.ASSIGNED}</Option>
-            <Option value="available">{constant.RADIO_CHOOSE.AVAILABLE}</Option>
-          </Select>
-        </Form.Item>
-      </Row>
+          <Col span={constant.GRID_COL.GRID_COL_8}>
+            <Form {...layout}>
+              <Form.Item
+                className="search-box_item search-box_item--hoder"
+                label={constant.LABEL.HOLDER}
+              >
+                <Input
+                  style={{ marginLeft: '1rem' }}
+                  className="request-search-input"
+                  placeholder={constant.LABEL.HOLDER}
+                />
+              </Form.Item>
+              <Form.Item
+                className="search-box_item search-box_item--choose"
+                label={constant.LABEL.QUICK_CHOOSE}
+              >
+                <Select
+                  style={{ marginLeft: '1rem' }}
+                  placeholder={constant.LABEL.QUICK_CHOOSE}
+                >
+                  <Select.Option value="demo">Quick</Select.Option>
+                  <Select.Option value="demo">Normal</Select.Option>
+                </Select>
+              </Form.Item>
+            </Form>
+          </Col>
 
-      <Row>
-        <Form.Item
-          className="request-search-box__item request-search-box__item--input"
-          label="Input date:"
-        >
-          <RangePicker className="input-picker" disabledDate={disabledDate} />
-        </Form.Item>
-        <Form.Item className="request-search-box__item request-search-box__item--quick-choose">
-          <Select
-            defaultValue="Quick choose"
-            style={{ width: 200 }}
-            placeholder="Select a person"
-          >
-            <Option value="today">{constant.QUICK_CHOOSE.TODAY}</Option>
-            <Option value="thisWeek">{constant.QUICK_CHOOSE.THIS_WEEK}</Option>
-            <Option value="lastWeek">{constant.QUICK_CHOOSE.LAST_WEEK}</Option>
-            <Option value="thisMonth">
-              {constant.QUICK_CHOOSE.THIS_MONTH}h
-            </Option>
-            <Option value="lastMonth">
-              {constant.QUICK_CHOOSE.LAST_MONTH}
-            </Option>
-          </Select>
-        </Form.Item>
-      </Row>
-      <Row className="request-search-box__buttons">
-        <Button className="btn-cancel">{BUTTON.CANCEL}</Button>
-        <Button type="primary" onClick={handleSearch} htmlType="submit">
-          {BUTTON.SEARCH}
-        </Button>
-      </Row>
+          <Col span={constant.GRID_COL.GRID_COL_8}>
+            <Form {...layout}>
+              <Form.Item
+                className="search-box_item search-box_item--status user-status-input"
+                label={constant.LABEL.CONTRACT_STATUS}
+              >
+                <Select placeholder="Signed">
+                  <Option value="Signed">Signed</Option>
+                </Select>
+              </Form.Item>
+            </Form>
+          </Col>
+          <Col span={constant.GRID_COL.GRID_COL_8}></Col>
+          <Col span={constant.GRID_COL.GRID_COL_8}></Col>
+          <Col span={constant.GRID_COL.GRID_COL_8}>
+            <div className="search-box-button">
+              <Button style={{ marginRight: '0.8rem' }}>Cancel</Button>
+              <Button type="primary">Search</Button>
+            </div>
+          </Col>
+        </Row>
+      </Form>
     </div>
   );
 }

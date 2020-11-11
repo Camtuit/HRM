@@ -1,7 +1,7 @@
 /* Devices Page*/
 .container-device {
   @include flex(column);
-  margin: 0 20px;
+  // margin: 0 20px;
   h2 {
     @include flex(row, center, center);
     height: 50px;
@@ -19,11 +19,11 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .search-bar {
+  .search-box {
     padding: 20px;
     border: 1px solid $platinum;
-    border-radius: 5px;
-    box-shadow: 8px 8px 5px -5px $platinum;
+    // border-radius: 5px;
+    // box-shadow: 8px 8px 5px -5px $platinum;
     &__item {
       width: 30%;
     }

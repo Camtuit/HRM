@@ -9,7 +9,7 @@ function Login() {
       span: 8,
     },
     wrapperCol: {
-      span: 12,
+      span: 16,
     },
   };
   const tailLayout = {
@@ -39,7 +39,9 @@ function Login() {
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            label="Email"
+            className="form-item"
+            // label="Email"
+
             name="email"
             rules={[
               {
@@ -53,11 +55,11 @@ function Login() {
               },
             ]}
           >
-            <Input />
+            <Input placeholder="Email" />
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            className="form-item"
             name="password"
             rules={[
               {
@@ -66,16 +68,23 @@ function Login() {
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password placeholder="Password" />
           </Form.Item>
-          <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+
+          <Form.Item
+            {...tailLayout}
+            className="form-item-remember"
+            name="remember"
+            valuePropName="checked"
+          >
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
-          <Form.Item {...tailLayout}>
+
+          <div className="login-form-button">
             <Button type="primary" htmlType="submit">
               Login
             </Button>
-          </Form.Item>
+          </div>
         </Form>
       </div>
     </div>

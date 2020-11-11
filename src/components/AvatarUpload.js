@@ -7,9 +7,7 @@ const AvatarUpload = () => {
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
-  useEffect(() => {
-    console.log(fileList);
-  }, [fileList]);
+  useEffect(() => {}, [fileList]);
 
   const onPreview = async (file) => {
     let src = file.url;

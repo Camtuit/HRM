@@ -1,15 +1,67 @@
-import React, { useState } from 'react';
-import { Form, Table, Button, Modal, Input } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Form, Table, Button, Modal, Input, Tooltip } from 'antd';
 import '../../css/SkillTable.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 import SkillRegistInput from './SkillRegistInput';
-import SkillEditPopup from './SkillEditPopup';
 import RemovePopupCommon from '../commons/RemovePopup';
+import { togglePopup } from '../../actions/utilsAction';
+import constant from '../../constants/htmlConstants';
+import { callApi } from '../../apis/axiosService';
 
-function SkillTable() {
+function SkillTable({ currentName, currentPage, setCurrentPage }) {
   const [currentRecord, setCurrentRecord] = useState({});
-  const [panigationtop, setPanigationtop] = useState('topRight');
-  const [panigationbottom, setpanigationbottom] = useState('bottomRight');
+  const [totalRecord, setTotalRecord] = useState(null);
+  const [data, setData] = useState(null);
+  const toggledPopup = useSelector((state) => state.toggledPopup);
+  const [valueSkill, setValueSkill] = useState();
+  const dispatch = useDispatch();
+  const handleTogglePopupAdd = () => {
+    setValueSkill();
+    dispatch(togglePopup());
+  };
+  const handleTogglePopupEdit = (id) => {
+    callApi({
+      url: `/skills/${id}`,
+      method: 'GET',
+    })
+      .then((res) => {
+        setValueSkill(res.data);
+        dispatch(togglePopup());
+      })
+      .catch((err) => {
+        return err;
+      });
+  };
+  useEffect(() => {
+    axios({
+      method: 'GET',
+      url: 'http://api-java.dev-hrm.nals.vn/api/skills/',
+      params: {
+        // page: currentPage,
+        name: currentName,
+      },
+    })
+      .then((response) => {
+        const getData = response.data.data.map((elm, index) => {
+          return {
+            no: index + 1,
+            id: elm.id,
+            name: elm.name,
+            updated: elm.updated_at,
+          };
+        });
+        setData(getData);
+        setTotalRecord(response.data.meta.pagination.total);
+      })
+      .catch((err) => {
+        setData(null);
+      });
+  }, [currentName]);
+  async function onChange(pagination) {
+    await setCurrentPage(pagination.current - 1);
+  }
   const columns = [
     {
       title: 'No',
@@ -31,9 +83,16 @@ function SkillTable() {
       key: 'empty',
       fixed: 'right',
       width: 100,
-      render: () => (
+      render: (value) => (
         <div className="skill-table-action">
-          <SkillEditPopup record={currentRecord} />
+          <Tooltip title={constant.TOOLTIP.TITLE.EDIT}>
+            <span>
+              <i
+                onClick={(id) => handleTogglePopupEdit(value.id)}
+                className="fas fa-edit skill-popup-common-icon"
+              ></i>
+            </span>
+          </Tooltip>
           <RemovePopupCommon
             title="Delete skill"
             content="Are you sure delete"
@@ -43,84 +102,27 @@ function SkillTable() {
       ),
     },
   ];
-  const data = [
-    {
-      key: '1',
-      no: '1',
-      name: 'PHP',
-      updated: '10/10/2020 15:10:15',
-    },
-    {
-      key: '2',
-      no: '2',
-      name: 'Angular',
-      updated: '10/10/2020 15:10:15',
-    },
-    {
-      key: '3',
-      no: '3',
-      name: 'Reactjs',
-      updated: '10/10/2020 15:10:15',
-    },
-    {
-      key: '4',
-      no: '4',
-      name: 'Node',
-      updated: '10/10/2020 15:10:15',
-    },
-    {
-      key: '5',
-      no: '5',
-      name: 'Vuje',
-      updated: '10/10/2020 15:10:15',
-    },
-    {
-      key: '6',
-      no: '6',
-      name: 'Nodej',
-      updated: '10/10/2020 15:10:15',
-    },
-    {
-      key: '7',
-      no: '7',
-      name: 'css',
-      updated: '10/10/2020 15:10:15',
-    },
-    {
-      key: '8',
-      no: '8',
-      name: 'css',
-      updated: '10/10/2020 15:10:15',
-    },
-    {
-      key: '9',
-      no: '9',
-      name: 'css',
-      updated: '10/10/2020 15:10:15',
-    },
-    {
-      key: '10',
-      no: '10',
-      name: 'css',
-      updated: '10/10/2020 15:10:15',
-    },
-    {
-      key: '11',
-      no: '11',
-      name: 'css',
-      updated: '10/10/2020 15:10:15',
-    },
-  ];
-
   return (
     <div className="skill-table">
-      <SkillRegistInput />
+      <Button
+        className="skill-table-button"
+        type="primary"
+        onClick={handleTogglePopupAdd}
+      >
+        {constant.BUTTON.ADD}
+      </Button>
+      <SkillRegistInput active={toggledPopup} value={valueSkill} />
       <Table
         className="table"
         columns={columns}
         dataSource={data}
         size="small"
-        pagination={{ position: [panigationtop, panigationbottom] }}
+        onChange={onChange}
+        pagination={{
+          position: ['topRight', 'bottomRight'],
+          total: totalRecord,
+          current: currentPage + 1,
+        }}
         onRow={(record) => {
           return {
             onClick: () => {

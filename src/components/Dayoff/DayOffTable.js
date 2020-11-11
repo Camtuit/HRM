@@ -202,23 +202,19 @@ function DayOffTable() {
 
   return (
     <div className="dayoff-table">
-      <div className="dayoff-table-header">
-        <h2 className="list-title">Dayoff List</h2>
-        <div className="dayoff-table-button">
-          <Button
-            className="dayoff-table-button"
-            type="primary"
-            onClick={handleChangeAddNewDayOff}
-          >
-            {constant.BUTTON.ADD_NEW_DATE_OFF}
-          </Button>
-          <Button className="dayoff-table-button" type="primary">
-            {constant.BUTTON.EXPORT}
-          </Button>
-        </div>
-      </div>
+      <Button
+        className="dayoff-table-button"
+        type="primary"
+        onClick={handleChangeAddNewDayOff}
+      >
+        {constant.BUTTON.ADD_NEW_DATE_OFF}
+      </Button>
+      <Button className="dayoff-table-button" type="primary">
+        {constant.BUTTON.EXPORT}
+      </Button>
 
       <Table
+        classNamme="dayoff-table-layout"
         columns={COLUMNS}
         dataSource={DATA}
         onChange={handleChangeTable}

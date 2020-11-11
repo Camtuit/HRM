@@ -1,18 +1,40 @@
 import React from 'react';
-import '../../css/UserTable.css';
 import { Table, Button } from 'antd';
 import { Link } from 'react-router-dom';
+import constant from '../../constants/htmlConstants';
 
-function UserTable() {
+import '../../css/UserTable.css';
+import useFetchMany from '../../apis/useFetchMany';
+import types from '../../constants/apiResourceTypes';
+
+function UserTable({ query, onSearch = () => {}, match }) {
+  const [users = [], loadAction, apiCallStatus] = useFetchMany(
+    types.USERS,
+    query,
+  );
+  const usersData = users.map((user, index) => {
+    const usersFiltered = {
+      key: user.id,
+      full_name: user.full_name,
+      email: user.email,
+      phone_number: user.phone_number,
+      contract_date_begin: user.contract_date_begin,
+      contract_status: user.contract_status,
+    };
+    usersFiltered.number = index + 1;
+    usersFiltered.action = { id: user.id, status: user.status };
+    return usersFiltered;
+  });
+
   const columns = [
     {
       title: 'No',
-      dataIndex: 'no',
+      dataIndex: 'number',
     },
 
     {
       title: 'Name',
-      dataIndex: 'name',
+      dataIndex: 'full_name',
       sorter: {
         compare: (a, b) => a.name - b.name,
         multiple: 3,
@@ -26,12 +48,12 @@ function UserTable() {
 
     {
       title: 'Phone number',
-      dataIndex: 'phone',
+      dataIndex: 'phone_number',
     },
 
     {
       title: 'Contract day',
-      dataIndex: 'contractDay',
+      dataIndex: 'contract_date_begin',
       sorter: {
         compare: (a, b) => a.contractDay - b.contractDay,
         multiple: 1,
@@ -40,145 +62,28 @@ function UserTable() {
 
     {
       title: 'Contract status',
-      dataIndex: 'contractStatus',
+      dataIndex: 'contract_status',
+      render: (value) =>
+        value ? <span>Assigned</span> : <span>Available</span>,
     },
 
     {
       title: 'Action',
-      key: 'operation',
       fixed: 'right',
+      dataIndex: 'action',
       width: 100,
-      render: () => <a href="/#">Edit</a>,
-    },
-  ];
-
-  const data = [
-    {
-      key: '1',
-      no: '1',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-    {
-      key: '2',
-      no: '2',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-    {
-      key: '3',
-      no: '3',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-    {
-      key: '4',
-      no: '4',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-
-    {
-      key: '5',
-      no: '5',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-
-    {
-      key: '6',
-      no: '6',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-
-    {
-      key: '7',
-      no: '7',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-
-    {
-      key: '8',
-      no: '8',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-
-    {
-      key: '9',
-      no: '9',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-
-    {
-      key: '10',
-      no: '10',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-
-    {
-      key: '11',
-      no: '11',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
-    },
-
-    {
-      key: '12',
-      no: '12',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      phone: '0935799853',
-      contractDay: '20/10/2020',
-      contractStatus: 'signed',
+      render: (value) => (
+        <Link to={`${match.url !== '/' ? match.url : '/users'}/${value.id}`} />
+      ),
     },
   ];
 
   function onChange(pagination, filters, sorter, extra) {}
   return (
     <div className="user-table">
-      <h2 className="list-title">User list</h2>
-
       <Link to="/user">
         <Button className="user-table-button" type="primary">
-          Add new user
+          Add new
         </Button>
       </Link>
 
@@ -190,7 +95,14 @@ function UserTable() {
         Export workdays
       </Button>
 
-      <Table columns={columns} dataSource={data} onChange={onChange} />
+      <Table
+        pagination={{
+          position: ['topRight', 'bottomRight'],
+        }}
+        columns={columns}
+        dataSource={usersData}
+        onChange={onChange}
+      />
     </div>
   );
 }

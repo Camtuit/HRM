@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Button, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
-
+import '../../css/RequestTable.css';
 import RemovePopupCommon from '../commons/RemovePopup';
 import { requestDevices } from '../../helpers/dumbData';
 import { BUTTON } from '../../constants/textLabel';
@@ -15,7 +15,7 @@ export default function RequestDeviceTable({ match }) {
   });
   const columns = [
     {
-      title: 'No.',
+      title: 'No',
       dataIndex: 'number',
     },
     {
@@ -92,19 +92,20 @@ export default function RequestDeviceTable({ match }) {
 
   return (
     <div className="request-device-table">
-      <div className="request-device-table__buttons">
-        <Button className="request-device-table__add" type="primary">
-          <Link to="/request-device">{BUTTON.ADD}</Link>
-        </Button>
-        <Button className="request-device-table__export" type="primary">
-          {BUTTON.EXPORT}
-        </Button>
-      </div>
+      <Button className="request-device-table__add" type="primary">
+        <Link to="/request-device">{BUTTON.ADD}</Link>
+      </Button>
+      <Button className="request-device-table__export" type="primary">
+        {BUTTON.EXPORT}
+      </Button>
+
       <Table
-        className="table-data"
+        className="request-table-list"
         columns={columns}
         dataSource={data}
-        size="small"
+        pagination={{
+          position: ['topRight', 'bottomRight'],
+        }}
       />
     </div>
   );

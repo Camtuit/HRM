@@ -1,10 +1,13 @@
 .request-search-box {
   border: 1px solid #e3e3e3;
   padding: 20px;
-  margin: 20px 20px;
-  margin-top: 76px;
-  height: 180px;
+  margin: 20px;
+  height: 220px;
 }
+.ant-form-item-label {
+  text-align: left;
+}
+
 .request-search-box .request-input {
   padding-right: 15px;
 }
@@ -17,4 +20,23 @@
 }
 .request-search-box .request-search-box-button .btn-cancel {
   margin-right: 12px;
+}
+.ant-form-item-control-input {
+  display: flex;
+  justify-content: space-between;
+}
+.search-box_item--date .start-date {
+  width: 45.5%;
+}
+.search-box_item--date .end-date {
+  width: 47%;
+}
+
+@media screen and (max-width: 1240px) {
+  .search-box_item--date .end-date {
+    width: 48.8%;
+  }
+  .search-box_item .request-search-input {
+    width: 98%;
+  }
 }

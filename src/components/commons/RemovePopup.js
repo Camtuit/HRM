@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Modal, Tooltip } from 'antd';
 import '../../css/RemovePopupCommon.css';
 
-function RemovePopupCommon({ title, content, onOk }) {
+function RemovePopupCommon({ title, content, onOk, value }) {
   const [visible, setVisible] = useState(false);
   function showModal() {
     setVisible(true);

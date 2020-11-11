@@ -139,3 +139,14 @@ export const request = {
   number: '1',
   reason: 'Test',
 };
+
+export const meta = {
+  pagination: {
+    current_page: 0,
+    per_page: 9,
+    from: 1,
+    to: 9,
+    total: 9,
+    last_page: 1,
+  },
+};

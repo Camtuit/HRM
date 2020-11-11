@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../layouts/Header';
 import SideBar from '../layouts/SideBar';
 // User
+import UserRoutes from './UserRoutes';
 import UserList from '../pages/User/UserList';
 import UserRegist from '../pages/User/UserRegist';
 // Holiday
@@ -26,25 +27,26 @@ export default function HomeRoutes() {
     <>
       <Header />
       <Switch>
-        <Route exact path="/" component={UserList} />
         {/* Users */}
-        <Route exact path="/users" component={UserList} />
-        <Route exact path="/user" component={UserRegist} />
+        <Route path="/users" component={UserRoutes} />
+        <Route path="/user" component={UserRegist} />
         {/* Holiday */}
-        <Route exact path="/holidays" component={HolidayList} />
-        <Route exact path="/holiday" component={HolidayRegist} />
+        <Route path="/holidays" component={HolidayList} />
+        <Route path="/holiday" component={HolidayRegist} />
         {/* Skill */}
-        <Route exact path="/skills" component={SkillList} />
-        <Route exact path="/skill" component={SkillRegist} />
+        <Route path="/skills" component={SkillList} />
+        <Route path="/skill" component={SkillRegist} />
         {/* Day Off */}
-        <Route exact path="/dayoffs" component={DayOffList} />
-        <Route exact path="/dayoff" component={DayOffRegist} />
+        <Route path="/dayoffs" component={DayOffList} />
+        <Route path="/dayoff" component={DayOffRegist} />
         {/* Request Device */}
         <Route path="/request-devices" component={RequestDeviceRoutes} />
         <Route path="/request-device" component={RequestDeviceRegister} />
         {/* Device */}
         <Route path="/devices" component={DeviceRoute} />
         <Route path="/device" component={() => {}} />
+        {/* Home page */}
+        <Route path="/" component={UserList} />
       </Switch>
       <SideBar />
     </>
