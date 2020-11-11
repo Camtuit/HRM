@@ -9,7 +9,6 @@ import UserList from '../pages/User/UserList';
 import UserRegist from '../pages/User/UserRegist';
 // Holiday
 import HolidayList from '../pages/Holiday/HolidayList';
-import HolidayRegist from '../pages/Holiday/HolidayRegist';
 // Skill List
 import SkillList from '../pages/Skill/SkillList';
 import SkillRegist from '../pages/Skill/SkillRegist';
@@ -32,7 +31,6 @@ export default function HomeRoutes() {
         <Route path="/user" component={UserRegist} />
         {/* Holiday */}
         <Route path="/holidays" component={HolidayList} />
-        <Route path="/holiday" component={HolidayRegist} />
         {/* Skill */}
         <Route path="/skills" component={SkillList} />
         <Route path="/skill" component={SkillRegist} />
