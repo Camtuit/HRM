@@ -17,7 +17,12 @@ import '../../css/HolidayTable.css';
 import { togglePopup } from '../../actions/utilsAction';
 import { callApi } from '../../apis/axiosService';
 
-function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
+function HolidayTable({
+  currentYear,
+  currentPage,
+  setCurrentPage,
+  setCurrentYear,
+}) {
   const [data, setData] = useState(null);
   const [totalRecord, setTotalRecord] = useState(null);
   const toggledPopup = useSelector((state) => state.toggledPopup);
@@ -28,12 +33,16 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
     dispatch(togglePopup());
   };
   const handleTogglePopupEdit = (id) => {
-    callApi({
-      url: `/holidays/${id}`,
-      method: 'GET',
+    // callApi({
+    //   url: `/holidays/${id}`,
+    //   method: 'GET',
+    // })
+    axios({
+      method: 'get',
+      url: ` http://api-java.dev-hrm.nals.vn/api/holidays/${id}`,
     })
       .then((res) => {
-        setValueHoliday(res.data);
+        setValueHoliday(res.data.data);
         dispatch(togglePopup());
       })
       .catch((err) => {
@@ -64,7 +73,7 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
       .catch(function (error) {
         setData(null);
       });
-  }, [currentYear]);
+  }, [currentYear, currentPage]);
 
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
@@ -72,13 +81,19 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
   }
 
   const handleDeleteHoliday = (id) => {
-    callApi({
-      url: `/holidays/${id}`,
+    // callApi({
+    //   url: `/holidays/${id}`,
+    //   method: 'DELETE',
+    // })
+    axios({
       method: 'DELETE',
+      url: ` http://api-java.dev-hrm.nals.vn/api/holidays/${id}`,
     })
       .then((res) => {
         const idIndex = data.findIndex((x) => x.key === id);
         data.splice(idIndex, 1);
+        setCurrentPage('');
+        setCurrentYear(2020);
       })
       .catch((err) => {
         return err;
@@ -150,7 +165,12 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
           current: currentPage + 1,
         }}
       />
-      <HolidayRegistPopup active={toggledPopup} value={valueHoliday} />
+      <HolidayRegistPopup
+        active={toggledPopup}
+        value={valueHoliday}
+        setCurrentYear={setCurrentYear}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }

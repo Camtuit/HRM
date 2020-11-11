@@ -19,6 +19,7 @@ function HolidayList() {
         currentYear={currentYear}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        setCurrentYear={setCurrentYear}
       />
     </WrapperContent>
   );
