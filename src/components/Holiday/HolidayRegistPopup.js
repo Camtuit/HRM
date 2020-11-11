@@ -19,12 +19,13 @@ function HolidayRegistPopup({
   const [holidayDate, setHolidayDate] = useState();
   const [notes, setNotes] = useState();
   const [form] = Form.useForm();
+  console.log('value', value);
   useEffect(() => {
     if (value !== undefined) {
       setHolidayDate(value.date);
       setNotes(value.notes);
       form.setFieldsValue({
-        date: moment(value.date, 'DD-MM-YYYY'),
+        date: moment(value.date, 'MM/DD/YYYY'),
         notes: value.notes,
       });
     }
@@ -41,7 +42,7 @@ function HolidayRegistPopup({
       .validateFields()
       .then(async () => {
         const newHoliday = {
-          date: holidayDate.format('YYYY-MM-DD'),
+          date: holidayDate.format('DD/MM/YYYY'),
           notes,
           updated_by: null,
         };
@@ -62,6 +63,7 @@ function HolidayRegistPopup({
       });
   };
   const handleSaveAndContinue = () => {
+    console.log(holidayDate.format('DD/MM/YYYY'));
     form
       .validateFields()
       .then(async () => {
@@ -87,12 +89,13 @@ function HolidayRegistPopup({
   };
   const handleEditHoliday = (values) => {
     if (value !== undefined) {
+      console.log('ok', holidayDate);
       form
         .validateFields()
         .then(async () => {
           const newHoliday = {
             id: value ? value.id : '',
-            date: holidayDate,
+            date: holidayDate.format('DD/MM/YYYY'),
             notes,
             updated_by: null,
           };
