@@ -1,6 +1,9 @@
 .request-table {
   margin: 40px 0px 0px 20px;
 }
+.ant-spin-nested-loading {
+  padding-right: 2px;
+}
 .request-table-button {
   position: relative;
   top: 52px;

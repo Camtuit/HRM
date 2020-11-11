@@ -36,6 +36,8 @@ const constants = {
     TECHNICAL_SPECIFICATIONS: 'Technical specifications',
     NUMBER_OF_DEVICE: 'Number of device',
     EQUIPMENT_REQUIRED_REASON: 'Equipment required reason',
+    CONTRACT_STATUS: 'Contract Status',
+    CONTRACT: 'Contract',
   },
   GRID_COL: {
     GRID_COL_4: 4,
