@@ -118,11 +118,11 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
         dataSource={data}
         size="small"
         onChange={onChange}
-        pagination={{
-          position: ['topRight', 'bottomRight'],
-          total: totalRecord,
-          current: currentPage + 1,
-        }}
+        // pagination={{
+        //   position: ['topRight', 'bottomRight'],
+        //   total: totalRecord,
+        //   current: currentPage + 1,
+        // }}
         onRow={(record) => {
           return {
             onClick: () => {
