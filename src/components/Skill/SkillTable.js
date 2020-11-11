@@ -39,7 +39,7 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
       method: 'GET',
       url: 'http://api-java.dev-hrm.nals.vn/api/skills/',
       params: {
-        // page: currentPage,
+        page: currentPage,
         name: currentName,
       },
     })
