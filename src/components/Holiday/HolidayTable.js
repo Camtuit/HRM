@@ -2,16 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Button, Tooltip } from 'antd';
 import axios from 'axios';
+
+import moment from 'moment';
 import RemovePopupCommon from '../commons/RemovePopup';
 
 import HolidayRegistPopup from './HolidayRegistPopup';
 import constant from '../../constants/htmlConstants';
+import useFetchMany from '../../apis/useFetchMany';
+import { get } from '../../apis/apiMethods';
 
+import useRemove from '../../apis/useRemove';
+import types from '../../constants/apiResourceTypes';
 import '../../css/HolidayTable.css';
 import { togglePopup } from '../../actions/utilsAction';
 import { callApi } from '../../apis/axiosService';
 
-function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
+function HolidayTable({
+  currentYear,
+  currentPage,
+  setCurrentPage,
+  setCurrentYear,
+}) {
   const [data, setData] = useState(null);
   const [totalRecord, setTotalRecord] = useState(null);
   const toggledPopup = useSelector((state) => state.toggledPopup);
@@ -22,12 +33,16 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
     dispatch(togglePopup());
   };
   const handleTogglePopupEdit = (id) => {
-    callApi({
-      url: `/holidays/${id}`,
-      method: 'GET',
+    // callApi({
+    //   url: `/holidays/${id}`,
+    //   method: 'GET',
+    // })
+    axios({
+      method: 'get',
+      url: ` http://api-java.dev-hrm.nals.vn/api/holidays/${id}`,
     })
       .then((res) => {
-        setValueHoliday(res.data);
+        setValueHoliday(res.data.data);
         dispatch(togglePopup());
       })
       .catch((err) => {
@@ -58,7 +73,7 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
       .catch(function (error) {
         setData(null);
       });
-  }, [currentYear]);
+  }, [currentYear, currentPage]);
 
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
@@ -66,13 +81,19 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
   }
 
   const handleDeleteHoliday = (id) => {
-    callApi({
-      url: `/holidays/${id}`,
+    // callApi({
+    //   url: `/holidays/${id}`,
+    //   method: 'DELETE',
+    // })
+    axios({
       method: 'DELETE',
+      url: ` http://api-java.dev-hrm.nals.vn/api/holidays/${id}`,
     })
       .then((res) => {
         const idIndex = data.findIndex((x) => x.key === id);
         data.splice(idIndex, 1);
+        setCurrentPage('');
+        setCurrentYear(2020);
       })
       .catch((err) => {
         return err;
@@ -144,7 +165,12 @@ function HolidayTable({ currentYear, currentPage, setCurrentPage }) {
           current: currentPage + 1,
         }}
       />
-      <HolidayRegistPopup active={toggledPopup} value={valueHoliday} />
+      <HolidayRegistPopup
+        active={toggledPopup}
+        value={valueHoliday}
+        setCurrentYear={setCurrentYear}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }

@@ -1,30 +1,41 @@
 /* eslint-disable consistent-return */
-import { Button, DatePicker, Form, Input, Modal } from 'antd';
+import { Button, DatePicker, Form, Input, Modal, notification } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
-
+import axios from 'axios';
 import constant from '../../constants/htmlConstants';
 import usePost from '../../apis/usePost';
 import usePut from '../../apis/usePut';
 import types from '../../constants/apiResourceTypes';
 import '../../css/HolidayRegistPopup.css';
+import { togglePopup } from '../../actions/utilsAction';
+import Alert from '../commons/AlertCommon';
 
-function HolidayRegistPopup({
-  active,
-  value,
-  handleTogglePopupAdd = () => {},
-}) {
+function HolidayRegistPopup({ active, value, setCurrentYear, setCurrentPage }) {
   const [postHoliday, apiStatus] = usePost(types.HOLIDAYS);
   const [putHoliday] = usePut(types.HOLIDAYS);
   const [holidayDate, setHolidayDate] = useState();
   const [notes, setNotes] = useState();
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const handleTogglePopup = () => {
+    dispatch(togglePopup());
+  };
+  const handleToggleAlertSucces = () => {
+    notification.success({
+      className: 'notification-style',
+      message: <p>Oke</p>,
+      duration: 2,
+    });
+  };
+
   useEffect(() => {
     if (value !== undefined) {
       setHolidayDate(value.date);
       setNotes(value.notes);
       form.setFieldsValue({
-        date: moment(value.date, 'DD-MM-YYYY'),
+        date: moment(value.date, 'MM/DD/YYYY'),
         notes: value.notes,
       });
     }
@@ -41,17 +52,26 @@ function HolidayRegistPopup({
       .validateFields()
       .then(async () => {
         const newHoliday = {
-          date: holidayDate.format('YYYY-MM-DD'),
+          date: holidayDate.format('MM/DD/YYYY'),
           notes,
           updated_by: null,
         };
         try {
           const res = await postHoliday(newHoliday);
-          if (res.data !== null) {
+          if (res.type === 'CREATE_HOLIDAYS_SUCCESS') {
+            setCurrentYear('2020');
+            setCurrentPage('');
             form.resetFields();
-            handleTogglePopupAdd();
+            handleToggleAlertSucces();
+            handleTogglePopup();
             setHolidayDate('');
             setNotes('');
+          } else {
+            Alert({
+              type: 'ERROR',
+              title: 'Error',
+              content: 'Date already exists',
+            });
           }
         } catch (error) {
           return error;
@@ -66,16 +86,24 @@ function HolidayRegistPopup({
       .validateFields()
       .then(async () => {
         const newHoliday = {
-          date: holidayDate.format('DD/MM/YYYY'),
+          date: holidayDate.format('MM/DD/YYYY'),
           notes,
           updated_by: null,
         };
         try {
           const res = await postHoliday(newHoliday);
-          if (res.data !== null) {
+          if (res.type === 'CREATE_HOLIDAYS_SUCCESS') {
             form.resetFields();
+            setCurrentYear('2020');
+            setCurrentPage('');
             setHolidayDate('');
             setNotes('');
+          } else {
+            Alert({
+              type: 'ERROR',
+              title: 'Error',
+              content: 'Date already exists',
+            });
           }
         } catch (error) {
           return error;
@@ -89,21 +117,29 @@ function HolidayRegistPopup({
     if (value !== undefined) {
       form
         .validateFields()
-        .then(async () => {
+        .then(() => {
           const newHoliday = {
-            id: value ? value.id : '',
-            date: holidayDate,
+            date: value.date ?? holidayDate.format('MM/DD/YYYY'),
             notes,
             updated_by: null,
           };
           try {
-            const res = await putHoliday(newHoliday);
-            if (res.data !== null) {
-              form.resetFields();
-              handleTogglePopupAdd();
-              setHolidayDate('');
-              setNotes('');
-            }
+            axios({
+              method: 'PUT',
+              url: ` http://api-java.dev-hrm.nals.vn/api/holidays/${value.id}`,
+              data: newHoliday,
+            })
+              .then((res) => {
+                form.resetFields();
+                setCurrentPage('');
+                setCurrentYear('');
+                handleTogglePopup();
+                setHolidayDate('');
+                setNotes('');
+              })
+              .catch((err) => {
+                return err;
+              });
           } catch (error) {
             return error;
           }
@@ -117,7 +153,7 @@ function HolidayRegistPopup({
     form.resetFields();
     setHolidayDate('');
     setNotes('');
-    handleTogglePopupAdd();
+    handleTogglePopup();
   };
   return (
     <div className="holiday-regist-button">
