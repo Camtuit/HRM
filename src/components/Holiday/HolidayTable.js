@@ -125,7 +125,7 @@ function HolidayTable({
           </Tooltip>
           <RemovePopupCommon
             title="Delete request"
-            content="Are you sure delete"
+            content={`Are you sure delete ${value.date}: ${value.note}`}
             onOk={(id) => {
               handleDeleteHoliday(value.key);
             }}
