@@ -8,16 +8,34 @@ import '../../css/UserList.css';
 
 function UserList({ match }) {
   const [query, setQuery] = useState(undefined);
-
-  function handleSearchUsers(queryObject) {
-    setQuery(queryObject);
-  }
-
+  const [fullName, setFullName] = useState('');
+  const [contractStatus, setContractStatus] = useState('');
+  const [contractDateBegin, setContractDateBegin] = useState('');
+  const [contractDateEnd, setContractDateEnd] = useState('');
+  const [page, setPage] = useState('');
+  console.log('1', contractStatus);
   return (
     <WrapperContent className="user-list-content">
       <h2 className="list-title">User List</h2>
-      <UserSearchBox onSearch={handleSearchUsers} />
-      <UserTable query={query} onSearch={handleSearchUsers} match={match} />
+      <UserSearchBox
+        setPage={setPage}
+        setFullName={setFullName}
+        setContractStatus={setContractStatus}
+        setContractDateBegin={setContractDateBegin}
+        setContractDateEnd={setContractDateEnd}
+      />
+      <UserTable
+        fullName={fullName}
+        contractStatus={contractStatus}
+        contractDateBegin={contractDateBegin}
+        fullNacontractDateEndme={contractDateEnd}
+        page={page}
+        setPage={setPage}
+        setFullName={setFullName}
+        setContractStatus={setContractStatus}
+        setContractDateBegin={setContractDateBegin}
+        setContractDateEnd={setContractDateEnd}
+      />
     </WrapperContent>
   );
 }

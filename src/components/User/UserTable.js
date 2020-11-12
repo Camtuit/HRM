@@ -7,7 +7,15 @@ import '../../css/UserTable.css';
 import useFetchMany from '../../apis/useFetchMany';
 import types from '../../constants/apiResourceTypes';
 
-function UserTable({ query, onSearch = () => {}, match }) {
+function UserTable(props) {
+  const [currentPage, setCurrentPage] = useState(0);
+  const {
+    fullName,
+    contractStatus,
+    contractDateBegin,
+    contractDateEnd,
+    page,
+  } = props;
   const token =
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQ3OTRlZWFiMjc3NzdkNTU4YWI2ZGJlZmQyMzJjMDg4YmI5YjU3YzgwMWMzNzgzZjM4MmQ1NGEwZGQ0NDQ5OWVhZjA5YTgwOTQ1YWRkOGY3In0.eyJhdWQiOiIxIiwianRpIjoiZDc5NGVlYWIyNzc3N2Q1NThhYjZkYmVmZDIzMmMwODhiYjliNTdjODAxYzM3ODNmMzgyZDU0YTBkZDQ0NDk5ZWFmMDlhODA5NDVhZGQ4ZjciLCJpYXQiOjE2MDUxNjcxNjAsIm5iZiI6MTYwNTE2NzE2MCwiZXhwIjoxNjM2NzAzMTYwLCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.AE1eoB4maq39lqsJmiqGoV0Nf_ywSloPqT0LcPD62k2KjGygwsWukC0hVw1DaGq-WuEt8Bf3uiDCD58qlysmd25Ypjhwa83TfXDbLt_vtHTITQ2_BxbOPl4zciRoBbFjiOh31IDVmGl5oKgyCkzGLPVb1OtCLY6T85_3p915mC3BVUqkQfP-NeMgEfIBfJ9kgqLqpmJtvKpmlI6bKs30PefIachfqyE92lIVkR1-o702GsiHKv84sTjsB40EdmtO6tkZIdcXhogO2HkWxyWQPdIwcyyscrlF_P_tmz72LSkfRNZmQy2udgMXeEjWTq3JfIcQyAWD5vnQI8xftqataywVmwo-oTUJKwgvpwzsaWFczb32amI7Ani6-wVQA9NXKFdSNBfSrX4jxqSjif6H3-K_ZnWOzI02HwYtA_-ykzZsYxignorvw2wnkCZLNA1isNtW8Wpx16mxTNecXZHxszBW5mku1sKl3EueWzs3LzOt7ZRJdBRCmZtEmlAtbma8wM-6csAldjmxd-v0LuE-RbHHRl36LSMKRabpwRlAN8zxoeJ698b2-byVBFHTk5NhhQOksMy8rR6tpMayy-8ehufv3Cp0L48xLQJx3sb941kqSChMVozc1Ds0SDu3Qcj5iwkh0zrQ6nkTD1uCXCsfizCjQYxhLxAxajsyUhX5ukc';
   const [users, setUser] = useState([]);
@@ -18,24 +26,21 @@ function UserTable({ query, onSearch = () => {}, match }) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      params: {
+        full_name: fullName,
+        contract_status: contractStatus,
+        contract_date_begin: contractDateBegin,
+        contract_date_end: contractDateEnd,
+        page,
+      },
     })
       .then((response) => {
         setUser(response.data.data);
-        // const getData = response.data.data.map((elm, index) => {
-        //   return {
-        //     no: index + 1,
-        //     id: elm.id,
-        //     name: elm.name,
-        //     updated: elm.updated_at,
-        //   };
-        // });
-        // setData(getData);
-        // setTotalRecord(response.data.meta.pagination.total);
       })
       .catch((err) => {
         return err;
       });
-  }, []);
+  }, [page, fullName, contractStatus, contractDateBegin, contractDateEnd]);
   const usersData = users.map((user, index) => {
     const usersFiltered = {
       key: user.id,
@@ -87,8 +92,7 @@ function UserTable({ query, onSearch = () => {}, match }) {
     {
       title: 'Contract status',
       dataIndex: 'contract_status',
-      render: (value) =>
-        value ? <span>Assigned</span> : <span>Available</span>,
+      render: (value) => (value ? <span>Signed</span> : <span>Resigned</span>),
     },
 
     {

@@ -75,7 +75,7 @@ const constants = {
     SAVE_AND_CONTINUE: 'Save and Cotinue',
     SAVE_AND_QUIT: 'Save and Quit',
   },
-  FORMAT_DATE: 'DD-MM-YYYY',
+  FORMAT_DATE: 'DD/MM/YYYY',
   QUICK_CHOOSE: {
     TODAY: 'Today',
     THIS_WEEK: 'This week',
@@ -97,6 +97,10 @@ const constants = {
     MATERNITY_LEAVE: 'Maternity leave',
     WEDDING_VACATION: 'Wedding vacation',
     FUNERAL_LEAVE: 'Funeral leave',
+  },
+  CONTRACT_STATUS: {
+    SIGNED: 'Signed',
+    RESIGNED: 'Resigned',
   },
   TOOLTIP: {
     PLACEMENT: {
