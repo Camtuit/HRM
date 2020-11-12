@@ -16,8 +16,8 @@ function SkillSearchBox({ setCurrentName, setCurrentPage }) {
     setSearch(e.target.value);
   };
   const handleSearch = () => {
-    // setCurrentPage(0);
     setCurrentName(search);
+    setCurrentPage(0);
   };
   const handleCancel = () => {
     form.resetFields();
@@ -45,8 +45,13 @@ function SkillSearchBox({ setCurrentName, setCurrentPage }) {
               <Input onChange={handleChange} placeholder="Skill name" />
             </Form.Item>
 
-            <div className="user-search-box-button">
-              <Button onClick={handleCancel}>{constant.BUTTON.CANCEL}</Button>
+            <div
+              style={{ marginLeft: '0.8rem' }}
+              className="user-search-box-button"
+            >
+              <Button onClick={handleCancel} style={{ marginRight: '0.8rem' }}>
+                {constant.BUTTON.CANCEL}
+              </Button>
               <Button type="primary" onClick={handleSearch}>
                 {constant.BUTTON.SEARCH}
               </Button>

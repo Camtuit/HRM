@@ -6,14 +6,14 @@ import WrapperContent from '../../components/commons/WrapperContentPage';
 import '../../css/SkillList.css';
 
 function SkillList() {
-  const [currentPage, setCurrentPage] = useState(0);
   const [currentName, setCurrentName] = useState('');
+  const [currentPage, setCurrentPage] = useState(0);
   return (
     <WrapperContent className="skill-list-content">
       <h2 className="list-title">Skill List</h2>
       <SkillSearchBox
-        setCurrentName={setCurrentName}
         setCurrentPage={setCurrentPage}
+        setCurrentName={setCurrentName}
       />
       <SkillTable
         currentName={currentName}
