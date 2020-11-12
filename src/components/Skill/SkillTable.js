@@ -16,6 +16,7 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
   const [data, setData] = useState(null);
   const toggledPopup = useSelector((state) => state.toggledPopup);
   const [valueSkill, setValueSkill] = useState();
+
   const dispatch = useDispatch();
   const handleTogglePopupAdd = () => {
     setValueSkill();
@@ -58,13 +59,14 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
       .catch((err) => {
         setData(null);
       });
-  }, [currentName]);
+  }, [currentName, currentPage]);
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
+    console.log(pagination);
   }
   const columns = [
     {
-      title: 'No',
+      title: 'No.',
       dataIndex: 'no',
       key: 'no',
     },
@@ -102,6 +104,7 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
       ),
     },
   ];
+
   return (
     <div className="skill-table">
       <Button
@@ -116,13 +119,12 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
         className="table"
         columns={columns}
         dataSource={data}
-        size="small"
         onChange={onChange}
-        // pagination={{
-        //   position: ['topRight', 'bottomRight'],
-        //   total: totalRecord,
-        //   current: currentPage + 1,
-        // }}
+        pagination={{
+          position: ['topRight', 'bottomRight'],
+          total: totalRecord,
+          current: currentPage + 1,
+        }}
         onRow={(record) => {
           return {
             onClick: () => {
