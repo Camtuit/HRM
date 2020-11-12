@@ -114,7 +114,7 @@ function SkillTable({
           </Tooltip>
           <RemovePopupCommon
             title="Delete skill"
-            content="Are you sure delete"
+            content={`Are you sure delete ${value.name}`}
             onOk={() => {
               handleDeleteSkill(value.id);
             }}
