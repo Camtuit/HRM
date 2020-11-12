@@ -19,6 +19,7 @@ function SkillList() {
         currentName={currentName}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        setCurrentName={setCurrentName}
       />
     </WrapperContent>
   );

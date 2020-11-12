@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Table, Button, Modal, Input, Tooltip } from 'antd';
+import { Table, Button, Tooltip } from 'antd';
 import '../../css/SkillTable.css';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import SkillRegistInput from './SkillRegistInput';
 import RemovePopupCommon from '../commons/RemovePopup';
 import { togglePopup } from '../../actions/utilsAction';
 import constant from '../../constants/htmlConstants';
-import { callApi } from '../../apis/axiosService';
 
-function SkillTable({ currentName, currentPage, setCurrentPage }) {
+function SkillTable({
+  currentName,
+  currentPage,
+  setCurrentPage,
+  setCurrentName,
+}) {
   const [currentRecord, setCurrentRecord] = useState({});
   const [totalRecord, setTotalRecord] = useState(null);
   const [data, setData] = useState(null);
@@ -22,12 +25,12 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
     dispatch(togglePopup());
   };
   const handleTogglePopupEdit = (id) => {
-    callApi({
-      url: `/skills/${id}`,
+    axios({
       method: 'GET',
+      url: ` http://api-java.dev-hrm.nals.vn/api/skills/${id}`,
     })
       .then((res) => {
-        setValueSkill(res.data);
+        setValueSkill(res.data.data);
         dispatch(togglePopup());
       })
       .catch((err) => {
@@ -39,7 +42,7 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
       method: 'GET',
       url: 'http://api-java.dev-hrm.nals.vn/api/skills/',
       params: {
-        // page: currentPage,
+        page: currentPage,
         name: currentName,
       },
     })
@@ -58,10 +61,24 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
       .catch((err) => {
         setData(null);
       });
-  }, [currentName]);
+  }, [currentName, currentPage]);
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
   }
+  const handleDeleteSkill = (id) => {
+    axios({
+      method: 'DELETE',
+      url: ` http://api-java.dev-hrm.nals.vn/api/skills/${id}`,
+    })
+      .then((res) => {
+        const idIndex = data.findIndex((x) => x.key === id);
+        data.splice(idIndex, 1);
+        setCurrentPage('');
+      })
+      .catch((err) => {
+        return err;
+      });
+  };
   const columns = [
     {
       title: 'No',
@@ -96,7 +113,9 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
           <RemovePopupCommon
             title="Delete skill"
             content="Are you sure delete"
-            onOk={() => {}}
+            onOk={() => {
+              handleDeleteSkill(value.id);
+            }}
           />
         </div>
       ),
@@ -111,7 +130,12 @@ function SkillTable({ currentName, currentPage, setCurrentPage }) {
       >
         {constant.BUTTON.ADD}
       </Button>
-      <SkillRegistInput active={toggledPopup} value={valueSkill} />
+      <SkillRegistInput
+        active={toggledPopup}
+        value={valueSkill}
+        setCurrentName={setCurrentName}
+        setCurrentPage={setCurrentPage}
+      />
       <Table
         className="table"
         columns={columns}
