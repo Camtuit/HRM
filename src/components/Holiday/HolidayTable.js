@@ -32,11 +32,7 @@ function HolidayTable({
     setValueHoliday();
     dispatch(togglePopup());
   };
-  const handleTogglePopupEdit = (id) => {
-    // callApi({
-    //   url: `/holidays/${id}`,
-    //   method: 'GET',
-    // })
+  const handleTogglePopupEdit = async (id) => {
     axios({
       method: 'get',
       url: ` http://api-java.dev-hrm.nals.vn/api/holidays/${id}`,
@@ -81,10 +77,6 @@ function HolidayTable({
   }
 
   const handleDeleteHoliday = (id) => {
-    // callApi({
-    //   url: `/holidays/${id}`,
-    //   method: 'DELETE',
-    // })
     axios({
       method: 'DELETE',
       url: ` http://api-java.dev-hrm.nals.vn/api/holidays/${id}`,
