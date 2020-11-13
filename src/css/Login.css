@@ -25,7 +25,7 @@
 .login-form > h1 {
   text-align: center;
   color: #585ee6;
-  margin: 10px 0;
+  margin: 10px 0 20px 0;
 }
 
 .login-form-button {
@@ -43,4 +43,28 @@
 
 .form-item-remember {
   margin-bottom: 10px;
+}
+
+.login-caution {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.login-caution > p {
+  border: 1px solid#e1c4c8;
+  color: #8d2b33;
+  width: 240px;
+  background-color: #fedce0;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.login-caution > p > i {
+  float: right;
+  font-size: 16px;
+}
+
+.login-caution > p > i:hover {
+  color: red;
 }
