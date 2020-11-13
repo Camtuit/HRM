@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   background-color: #e1ebff;
-  background-image: url('https://lh3.googleusercontent.com/proxy/ozsqJqIZNbeV0v3azv3Dr4UdrDX3185YjOz9sE0WpYa8Y6aLDx00Eld7jVwDIeFVPudkYXWhE1Y_hLr37DcgU9Z2JQ8QvfRK8ZTMoBnSs_CNJggWG2BbQ4pgn9eY9enhVw');
+  background-image: url('https://lh3.googleusercontent.com/proxy/UlDtO94dz6YOog62M9B8-gQbY9t4vMS9gHAalT5xPe6QD0SHjVVxBEimgxFOHEaBc1qWimcMKVFoFq0zsbBfjrf_CkV1byELaXbjhf5aF21jap0QQUctQyC8leIvaM9cZw');
   background-size: cover;
 }
 
@@ -25,7 +25,7 @@
 .login-form > h1 {
   text-align: center;
   color: #585ee6;
-  margin: 10px 0;
+  margin: 10px 0 20px 0;
 }
 
 .login-form-button {
@@ -43,4 +43,28 @@
 
 .form-item-remember {
   margin-bottom: 10px;
+}
+
+.login-caution {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.login-caution > p {
+  border: 1px solid#e1c4c8;
+  color: #8d2b33;
+  width: 240px;
+  background-color: #fedce0;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.login-caution > p > i {
+  float: right;
+  font-size: 16px;
+}
+
+.login-caution > p > i:hover {
+  color: red;
 }

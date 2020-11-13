@@ -1,14 +1,21 @@
-import { Button, DatePicker, Form, Input, Modal } from 'antd';
+/* eslint-disable consistent-return */
+import { Button, Form, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import axios from 'axios';
 import { togglePopup } from '../../actions/utilsAction';
 import constant from '../../constants/htmlConstants';
-import { callApi } from '../../apis/axiosService';
 import '../../css/HolidayRegistPopup.css';
+import usePost from '../../apis/usePost';
+import usePut from '../../apis/usePut';
+import types from '../../constants/apiResourceTypes';
+import Alert from '../commons/AlertCommon';
 
 function SkillRegistInput(props) {
-  const { active, value } = props;
+  const { active, value, setCurrentName, setCurrentPage } = props;
+  const [postSkill, apiStatus] = usePost(types.SKILLS);
+  const [putSkill] = usePut(types.SKILLS);
   const [skillName, setSkillName] = useState('');
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -26,24 +33,26 @@ function SkillRegistInput(props) {
   const handleSaveAndQuit = () => {
     form
       .validateFields()
-      .then(() => {
-        callApi({
-          url: '/skills',
-          method: 'POST',
-          data: {
-            name: skillName,
-          },
-        })
-          .then((res) => {
-            if (res.data !== null) {
-              form.resetFields();
-              dispatch(togglePopup());
-              setSkillName('');
-            }
-          })
-          .catch((err) => {
-            return err;
-          });
+      .then(async () => {
+        const newSkill = {
+          name: skillName,
+        };
+        try {
+          const res = await postSkill(newSkill);
+          if (res.type === 'CREATE_SKILLS_SUCCESS') {
+            form.resetFields();
+            dispatch(togglePopup());
+            setSkillName('');
+          } else {
+            Alert({
+              type: 'ERROR',
+              title: 'Error',
+              content: 'Skill already exists',
+            });
+          }
+        } catch (error) {
+          return error;
+        }
       })
       .catch((errorInfo) => {
         return errorInfo;
@@ -52,23 +61,25 @@ function SkillRegistInput(props) {
   const handleSaveAndContinue = () => {
     form
       .validateFields()
-      .then(() => {
-        callApi({
-          url: '/skills',
-          method: 'POST',
-          data: {
-            name: skillName,
-          },
-        })
-          .then((res) => {
-            if (res.data !== null) {
-              form.resetFields();
-              setSkillName('');
-            }
-          })
-          .catch((err) => {
-            return err;
-          });
+      .then(async () => {
+        const newSkill = {
+          name: skillName,
+        };
+        try {
+          const res = await postSkill(newSkill);
+          if (res.type === 'CREATE_SKILLS_SUCCESS') {
+            form.resetFields();
+            setSkillName('');
+          } else {
+            Alert({
+              type: 'ERROR',
+              title: 'Error',
+              content: 'Skill already exists',
+            });
+          }
+        } catch (error) {
+          return error;
+        }
       })
       .catch((errorInfo) => {
         return errorInfo;
@@ -79,9 +90,9 @@ function SkillRegistInput(props) {
       form
         .validateFields()
         .then(() => {
-          callApi({
-            url: `/skills/${value.id}`,
+          axios({
             method: 'PUT',
+            url: ` http://api-java.dev-hrm.nals.vn/api/skills/${value.id}`,
             data: {
               name: skillName,
             },
@@ -91,9 +102,15 @@ function SkillRegistInput(props) {
                 form.resetFields();
                 dispatch(togglePopup());
                 setSkillName('');
+                setCurrentName('');
               }
             })
             .catch((err) => {
+              Alert({
+                type: 'ERROR',
+                title: 'Error',
+                content: 'Skill already exists',
+              });
               return err;
             });
         })
