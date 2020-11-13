@@ -51,7 +51,7 @@ function Login() {
 
   const onFinishFailed = (errorInfo) => {};
 
-  const rememberMe = (event) => {
+  const handleRememberMe = (event) => {
     if (event.target.checked === true) {
       setIsRememberMe(true);
     } else {
@@ -123,7 +123,7 @@ function Login() {
             className="form-item-remember"
             name="remember"
           >
-            <Checkbox onChange={rememberMe}>Remember me</Checkbox>
+            <Checkbox onChange={handleRememberMe}>Remember me</Checkbox>
           </Form.Item>
 
           <div className="login-form-button">
