@@ -12,8 +12,7 @@ function UserList({ match }) {
   const [contractStatus, setContractStatus] = useState('');
   const [contractDateBegin, setContractDateBegin] = useState('');
   const [contractDateEnd, setContractDateEnd] = useState('');
-  const [page, setPage] = useState('');
-  console.log('1', contractStatus);
+  const [page, setPage] = useState(0);
   return (
     <WrapperContent className="user-list-content">
       <h2 className="list-title">User List</h2>
@@ -28,7 +27,7 @@ function UserList({ match }) {
         fullName={fullName}
         contractStatus={contractStatus}
         contractDateBegin={contractDateBegin}
-        fullNacontractDateEndme={contractDateEnd}
+        contractDateEnd={contractDateEnd}
         page={page}
         setPage={setPage}
         setFullName={setFullName}

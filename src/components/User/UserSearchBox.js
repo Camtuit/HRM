@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Select, DatePicker, Row, Col } from 'antd';
+import moment from 'moment';
 import constants from '../../constants/htmlConstants';
 
 function UserSearchBox(props) {
   const {
-    setPage,
     setFullName,
     setContractStatus,
     setContractDateBegin,
@@ -19,20 +19,53 @@ function UserSearchBox(props) {
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
-  const handleChangeValueQuickChoose = (value) => {
+  const addDays = (dateObj, numDays) => {
+    dateObj.setDate(dateObj.getDate() + numDays);
+    return dateObj;
+  };
+  const minusDays = (dateObj, numDays) => {
+    dateObj.setDate(dateObj.getDate() - numDays);
+    return dateObj;
+  };
+  console.log(moment(new Date()));
+  const onChangeValueQuickChoose = (value) => {
     setQuickChooseValue(value);
+    switch (value) {
+      case 0:
+        setCurrentContractDateBegin(moment(new Date()));
+        setCurrentContractDateEnd(moment(new Date()));
+        break;
+      case 1:
+        setCurrentContractDateBegin(moment(new Date()));
+        setCurrentContractDateEnd(moment(addDays(new Date(), 7)));
+        break;
+      case 2:
+        setCurrentContractDateBegin(moment(minusDays(new Date(), 7)));
+        setCurrentContractDateEnd(moment(new Date()));
+        break;
+      case 3:
+        setCurrentContractDateBegin(moment(new Date()));
+        setCurrentContractDateEnd(moment(addDays(new Date(), 30)));
+        break;
+      case 4:
+        setCurrentContractDateBegin(moment(minusDays(new Date(), 30)));
+        setCurrentContractDateEnd(moment(new Date()));
+        break;
+      default:
+        break;
+    }
   };
 
-  const handleChangeContractStatus = (value) => {
+  const onChangeContractStatus = (value) => {
     setCurrentContractStatus(value);
   };
-  const handleChangeFullName = (e) => {
+  const onChangeFullName = (e) => {
     setCurrentFullName(e.target.value);
   };
-  const handleChangeContractDateBegin = (date) => {
+  const onChangeContractDateBegin = (date) => {
     setCurrentContractDateBegin(date);
   };
-  const handleChangeContractDateEnd = (date) => {
+  const onChangeContractDateEnd = (date) => {
     setCurrentContractDateEnd(date);
   };
   const handleSearchUser = () => {
@@ -46,6 +79,7 @@ function UserSearchBox(props) {
     setCurrentFullName('');
     setCurrentContractDateBegin('');
     setCurrentContractDateEnd('');
+    setQuickChooseValue();
     setContractStatus('');
     setFullName('');
     setContractDateBegin('');
@@ -56,6 +90,12 @@ function UserSearchBox(props) {
     <div className="search-box user-search-box">
       <Form
         layout="horizontal"
+        labelCol={{
+          span: constants.LABEL_COL.LABEL_COL_7,
+        }}
+        wrapperCol={{
+          span: constants.WRAPPER_COL.WRAPPER_COL_17,
+        }}
         initialValues={{
           size: componentSize,
         }}
@@ -68,17 +108,22 @@ function UserSearchBox(props) {
               className="search-box_item search-box_item--name"
               label={constants.LABEL.NAME}
             >
-              <Input value={currentFullName} onChange={handleChangeFullName} />
+              <Input
+                placeholder={constants.LABEL.NAME}
+                value={currentFullName}
+                onChange={onChangeFullName}
+              />
             </Form.Item>
           </Col>
-          <Col span={3}></Col>
-          <Col span={6}>
+          <Col span={2}></Col>
+          <Col span={9}>
             <Form.Item
               className="search-box_item search-box_item--status user-status-input"
-              label="Contract Status"
+              label={constants.LABEL.CONTRACT_STATUS}
             >
               <Select
-                onChange={handleChangeContractStatus}
+                placeholder={constants.LABEL.CONTRACT_STATUS}
+                onChange={onChangeContractStatus}
                 value={currentContractStatus}
               >
                 <Select.Option value="0">
@@ -99,7 +144,7 @@ function UserSearchBox(props) {
             >
               <DatePicker
                 value={currentContractDateBegin}
-                onChange={handleChangeContractDateBegin}
+                onChange={onChangeContractDateBegin}
                 format={constants.FORMAT_DATE}
                 placeholder={constants.FORMAT_DATE}
                 className="start-date"
@@ -107,21 +152,22 @@ function UserSearchBox(props) {
               <span> to </span>
               <DatePicker
                 value={currentContractDateEnd}
-                onChange={handleChangeContractDateEnd}
+                onChange={onChangeContractDateEnd}
                 format={constants.FORMAT_DATE}
                 placeholder={constants.FORMAT_DATE}
                 className="end-date"
               />
             </Form.Item>
           </Col>
-          <Col span={2}></Col>
-          <Col span={6}>
+          <Col span={1}></Col>
+          <Col span={9}>
             <Form.Item
               className="search-box_item search-box_item--choose"
-              label="Quick choose"
+              label={constants.LABEL.QUICK_CHOOSE}
             >
               <Select
-                onChange={handleChangeValueQuickChoose}
+                placeholder={constants.LABEL.QUICK_CHOOSE}
+                onChange={onChangeValueQuickChoose}
                 value={quickChooseValue}
               >
                 <Select.Option value={0}>
