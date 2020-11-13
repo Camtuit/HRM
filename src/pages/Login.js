@@ -1,16 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef, useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
-
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import '../css/Login.css';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [passWord, setPassWord] = useState('');
+  const [isRememberMe, setIsRememberMe] = useState(false);
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
   const history = useHistory();
+
   const layout = {
     labelCol: {
       span: 8,
@@ -26,31 +25,10 @@ function Login() {
     },
   };
 
-  const onValuesChange = (changedValues, allValues) => {
-    console.log(allValues);
-  };
-
   const onFinish = (values) => {
-    console.log(values);
-  };
-
-  const onFinishFailed = (errorInfo) => {};
-
-  const rememberMe = (event) => {
-    if (event.target.checked === true) {
-      localStorage.setItem('email', email);
-      localStorage.setItem('passWord', passWord);
-    } else {
-      localStorage.removeItem('email');
-      localStorage.removeItem('passWord');
-    }
-  };
-
-  function onSubmit(event) {
-    event.preventDefault();
     const data = {
-      email,
-      password: passWord,
+      email: values.email,
+      password: values.password,
     };
 
     axios
@@ -58,11 +36,29 @@ function Login() {
       .then((res) => {
         localStorage.setItem('token', res.data.meta.access_token);
         history.push('/users');
+        if (isRememberMe === true) {
+          localStorage.setItem('email', values.email);
+          localStorage.setItem('password', values.password);
+        } else {
+          localStorage.removeItem('email', values.email);
+          localStorage.removeItem('password', values.password);
+        }
       })
       .catch((err) => {
         setIsPasswordCorrect(false);
       });
-  }
+  };
+
+  const onFinishFailed = (errorInfo) => {};
+
+  const rememberMe = (event) => {
+    if (event.target.checked === true) {
+      setIsRememberMe(true);
+    } else {
+      setIsRememberMe(false);
+    }
+  };
+
   return (
     <div className="login">
       <div className="login-form">
@@ -82,19 +78,18 @@ function Login() {
         )}
 
         <Form
-          onValuesChange={onValuesChange}
           name="login"
           {...layout}
-          name="basic"
           initialValues={{
-            remember: true,
+            email: localStorage.getItem('email'),
+            password: localStorage.getItem('password'),
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
             className="form-item"
-            name="email"
+            name={['email']}
             rules={[
               {
                 required: true,
@@ -107,11 +102,7 @@ function Login() {
               },
             ]}
           >
-            <Input
-              placeholder="Email"
-              onChange={(event) => setEmail(event.target.value)}
-              defaultValue={localStorage.getItem('email')}
-            />
+            <Input placeholder="Email" />
           </Form.Item>
 
           <Form.Item
@@ -124,11 +115,7 @@ function Login() {
               },
             ]}
           >
-            <Input.Password
-              placeholder="Password"
-              onChange={(event) => setPassWord(event.target.value)}
-              defaultValue={localStorage.getItem('passWord')}
-            />
+            <Input.Password placeholder="Password" />
           </Form.Item>
 
           <Form.Item
@@ -140,7 +127,7 @@ function Login() {
           </Form.Item>
 
           <div className="login-form-button">
-            <Button type="primary" htmlType="submit" onClick={onSubmit}>
+            <Button type="primary" htmlType="submit">
               Login
             </Button>
           </div>
