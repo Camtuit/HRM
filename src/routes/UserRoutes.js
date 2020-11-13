@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import UserList from '../pages/User/UserList';
 import UserRegist from '../pages/User/UserRegist';
 
+
 export default function DeviceRoutes() {
   return (
     <Switch>

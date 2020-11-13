@@ -22,3 +22,12 @@
   margin-left: 5px;
   padding-bottom: 8px;
 }
+.dropdown-list-menu{
+  background-color: white;
+  display: block;
+  position: absolute;
+  top: 56px;
+  right: 0px;
+  width: 20%;
+  border: white solid 1px;
+}

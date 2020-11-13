@@ -57,9 +57,53 @@
   }
   .user-menu {
     cursor: pointer;
+    position: relative;
   }
-}
+  
 
 .nav {
   list-style: none;
+}
+
+.dropdown-list-menu{
+  position: absolute;
+  display: flex;
+  font-size: 20px;
+  top: 55px;
+  right: 0px;
+  margin-right: 20px;
+  background-color: #fafafa;
+  @include flex(row,column,center);
+  z-index: 1;
+
+  width: 200px; 
+}
+.dropdown-list-menu ul{
+    box-shadow: 0 7px 19px -1px hsl(0, 0%, 90%);
+  background-color: white;
+  padding-bottom: 10px;
+    
+}
+.dropdown-list-menu ul li{
+  font-size: 15px;
+  width: 100%;
+}
+.dropdown-list-menu ul li a{
+  color: black;
+}
+.dropdown-list-menu ul li:hover{
+  background-color: #f0f0f0;
+}
+.dropdown-list-menu ul li:first-child{
+  background-color: #fafafa;
+  margin-top: 0px;
+  color: gray ;
+  }
+.dropdown-list-menu ul li :last-child{
+  justify-content: center;
+
+  }
+.check-login-logout{
+  margin-bottom: 10px;
+  }
 }
