@@ -20,7 +20,8 @@ import RequestDeviceRegister from '../pages/RequestDevice/RequestDeviceRegister'
 import RequestDeviceRoutes from './RequestDeviceRoutes';
 // Device
 import DeviceRoute from './DeviceRoutes';
-
+// Profile
+import ProfileRoutes from './ProfileRoutes';
 export default function HomeRoutes() {
   return (
     <>
@@ -44,6 +45,7 @@ export default function HomeRoutes() {
         <Route path="/devices" component={DeviceRoute} />
         <Route path="/device" component={() => {}} />
         {/* Home page */}
+        <Route path= "/profile" component={ProfileRoutes} />
         <Route path="/" component={UserList} />
       </Switch>
       <SideBar />

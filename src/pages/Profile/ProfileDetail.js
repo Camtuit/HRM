@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
-import WrapperContent from '../../components/commons/WrapperContentPage';
-function ProfileDetail(){
-return(
-    <WrapperContent className= "profile-detail">
-      
-    </WrapperContent>
-) 
+import React from 'react';
+import WrapperContentPage from '../../components/commons/WrapperContentPage';
+import ProfileTable from '../../components/Profile/ProfileTable'
+export default function ProfileDetail(){
+    return(
+        <WrapperContentPage>
+               <h2 className="title-profile-detail">My Profile</h2>
+            <ProfileTable>
+            </ProfileTable>
+        </WrapperContentPage>
+        
+
+    ) 
 }
-export default ProfileDetail;
+

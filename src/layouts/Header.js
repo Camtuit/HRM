@@ -6,10 +6,10 @@ import { withRouter} from 'react-router-dom';
 import { toggleSideBar } from '../actions/utilsAction';
 import constanst from '../constants/htmlConstants';
 import ReactLogo from '../assets/images/nal_logo.svg';
-
+import textLabel, { LIST } from '../constants/textLabel';
 import { Menu, Dropdown, Icon,Button } from 'antd';
-
-
+import types from '../constants/apiResourceTypes';
+import { List } from 'antd/lib/form/Form';
 function Header() {
   const [name,setName] = useState('Phạm Thị Cẩm Tú');
   const [isProfileBoxOpen, setIsProfileBoxOpen] = useState(false);
@@ -29,7 +29,9 @@ function Header() {
     dispatch(toggleSideBar());
     
   };
-
+  const handleHoverMenuUser = ()=>{
+    setIsProfileBoxOpen(!isProfileBoxOpen);
+  }
   return (
     <header className="header">
       <div className="nav_logo" style={styleLogo}>
@@ -52,7 +54,7 @@ function Header() {
           role="button">
           <i className="fas fa-bars" />
         </div>
-        <div className="dropdown user-menu"  onClick={()=> setIsProfileBoxOpen(!isProfileBoxOpen)}>
+        <div className="dropdown user-menu"  onClick={handleHoverMenuUser}>
           <Avatar style={{border :isProfileBoxOpen? ' #0483f7 solid 2px' : 'none' }}
             alt="Avatar"
             size="large"
@@ -60,27 +62,25 @@ function Header() {
           />
           <i className="fas fa-sort-down" >
           </i>
-          
         </div>
         <div className="dropdown-list-menu" style={{display: isProfileBoxOpen? 'block' : 'none'}}  >
-              <Menu>
-                <Menu.Item key="0">
-                 Hi {name}
-                </Menu.Item>
-                <Menu.Item key="1">
-                  <Link   to = '/profile-detail/:id'>My Profile</Link>
-                </Menu.Item>
-                <Menu.Item key="2"><a href='/request-devices'>Request Device</a>
-                </Menu.Item>
-                <Menu.Item key="3"  > 
-                <Link  to = '/login'  className= "check-login-logout">Logout</Link>
-                </Menu.Item>
-            </Menu>
-            </div>
-      
+          <Menu >
+            <Menu.Item style = {{backgroundColor: isProfileBoxOpen? 'white' : '#e6f7ff' }}>
+              {LIST.Hi} {name}
+            </Menu.Item>
+            <Menu.Item  onClick={handleHoverMenuUser}>
+              <Link to = '/profile/details'>{LIST.MY_PROFILE}</Link>
+             </Menu.Item>
+            <Menu.Item > 
+              <Link  onClick={handleHoverMenuUser} to ='/request-devices'>{LIST.REQUEST_DEVICE}</Link>
+            </Menu.Item>
+            <Menu.Item   > 
+              <Link  to = '/login'  className= "check-login-logout">{LIST.LOGOUT}</Link>
+            </Menu.Item>
+          </Menu>
+        </div>
       </div>
     </header>
   );
 }
-
 export default withRouter(Header) ;
