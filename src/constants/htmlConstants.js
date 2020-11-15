@@ -123,6 +123,7 @@ const constants = {
       CENTER: 'center',
     },
   },
+  
 };
 
 export default constants;

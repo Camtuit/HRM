@@ -1,12 +1,10 @@
 import React from 'react';
 import WrapperContentPage from '../../components/commons/WrapperContentPage';
-import ProfileTable from '../../components/Profile/ProfileTable'
+import textLabel,{LIST} from '../../constants/textLabel';
 export default function ProfileDetail(){
     return(
         <WrapperContentPage>
-               <h2 className="title-profile-detail">My Profile</h2>
-            <ProfileTable>
-            </ProfileTable>
+               <h2 className="title-profile-detail">{LIST.MY_PROFILE}</h2>
         </WrapperContentPage>
         
 
