@@ -101,4 +101,7 @@
   .device-buttons {
     @include flex(row, flex-end, center);
   }
+  .device-detail-btn{
+    text-align: center;
+  }
 }

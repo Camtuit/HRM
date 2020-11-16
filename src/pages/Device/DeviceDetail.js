@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import QRCode from 'qrcode.react';
-import { Button } from 'antd';
+import {Row, Button, Col } from 'antd';
+import constants ,{BUTTON} from '../../constants/htmlConstants';
 import '../../css/DeviceDetail.css';
+import Assigned from '../../components/Device/Assigned'
 import WrapperContent from '../../components/commons/WrapperContentPage';
+import { format } from 'prettier';
 
 function DeviceDetail() {
   const downloadQR = () => {
@@ -18,6 +21,10 @@ function DeviceDetail() {
     downloadLink.click();
     document.body.removeChild(downloadLink);
   };
+  const [visible, setVisible] = useState(false);
+ const showModal = ()=>{
+    setVisible[true]
+  } 
 
   return (
     <WrapperContent>
@@ -33,7 +40,8 @@ function DeviceDetail() {
       </h2>
       <div className="device-detail-content">
         <div className="device-info">
-          <div className="device-info-item">
+         <div>
+         <div className="device-info-item">
             <div>Device name:</div> <div>Macbook Pro 15inch</div>
           </div>
 
@@ -48,9 +56,10 @@ function DeviceDetail() {
           <div className="device-info-item">
             <div>Holder:</div> <div>Nguyễn Văn A</div>
           </div>
+         </div>
         </div>
-
-        <div className="qr-code">
+      </div>
+      <div className="qr-code">
           <QRCode
             id="qrcode"
             value={window.location.href}
@@ -62,9 +71,15 @@ function DeviceDetail() {
             Download QR
           </Button>
         </div>
-      </div>
+      <div className = "device-detail-btn" >
+          <Assigned
+          title="Choose Holder User"
+            content="Holder:"
+            onOk={() => console.log('true')}
+          >
+          </Assigned>
+         </div>
     </WrapperContent>
   );
 }
-
 export default DeviceDetail;
