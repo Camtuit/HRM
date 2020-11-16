@@ -22,6 +22,7 @@ export default function ProfileTable(){
            contracStatus,remainingDaysOff , assignedDevice}= profileDetail;
     return(
       <Row gutter = {[16, 16]}>
+       
         <Col xs={{ span: 16, offset: 1 }} lg={{ span: 16, offset: 2 }}>
          <Form
             labelCol={{ span: 7 }}
@@ -72,6 +73,7 @@ export default function ProfileTable(){
             </Form.Item>
           </Form>
         </Col>
+      
       </Row>
     ) 
 }

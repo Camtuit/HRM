@@ -7,8 +7,9 @@
     font-size: 1.8rem;
     font-weight: 600;
 }
-.row-bnt{
-    display: flex;
-    flex-direction: row;
-    margin-left: 20px;
+.row-btn{
+    overflow: hidden;
+}
+.profile-detail{
+    overflow-x: hidden;
 }
