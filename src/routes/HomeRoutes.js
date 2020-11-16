@@ -22,31 +22,36 @@ import RequestDeviceRoutes from './RequestDeviceRoutes';
 import DeviceRoute from './DeviceRoutes';
 // Profile
 import ProfileRoutes from './ProfileRoutes';
+import PrivateRoute from '../components/commons/PrivateRoute';
+
 export default function HomeRoutes() {
   return (
     <>
       <Header />
       <Switch>
         {/* Users */}
-        <Route path="/users" component={UserRoutes} />
-        <Route path="/user" component={UserRegist} />
+        <PrivateRoute path="/users" component={UserRoutes} />
+        <PrivateRoute path="/user" component={UserRegist} />
         {/* Holiday */}
-        <Route path="/holidays" component={HolidayList} />
+        <PrivateRoute path="/holidays" component={HolidayList} />
         {/* Skill */}
-        <Route path="/skills" component={SkillList} />
-        <Route path="/skill" component={SkillRegist} />
+        <PrivateRoute path="/skills" component={SkillList} />
+        <PrivateRoute path="/skill" component={SkillRegist} />
         {/* Day Off */}
-        <Route path="/dayoffs" component={DayOffList} />
-        <Route path="/dayoff" component={DayOffRegist} />
+        <PrivateRoute path="/dayoffs" component={DayOffList} />
+        <PrivateRoute path="/dayoff" component={DayOffRegist} />
         {/* Request Device */}
-        <Route path="/request-devices" component={RequestDeviceRoutes} />
-        <Route path="/request-device" component={RequestDeviceRegister} />
+        <PrivateRoute path="/request-devices" component={RequestDeviceRoutes} />
+        <PrivateRoute
+          path="/request-device"
+          component={RequestDeviceRegister}
+        />
         {/* Device */}
-        <Route path="/devices" component={DeviceRoute} />
-        <Route path="/device" component={() => {}} />
+        <PrivateRoute path="/devices" component={DeviceRoute} />
+        <PrivateRoute path="/device" component={() => {}} />
         {/* Home page */}
-        <Route path= "/profile" component={ProfileRoutes} />
-        <Route path="/" component={UserList} />
+        <PrivateRoute path="/profile" component={ProfileRoutes} />
+        <PrivateRoute path="/" component={UserList} />
       </Switch>
       <SideBar />
     </>
