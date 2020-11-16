@@ -47,10 +47,10 @@ export default function HomeRoutes() {
           component={RequestDeviceRegister}
         />
         {/* Device */}
-        <PrivateRoute path="/devices" component={DeviceRoute} />
+        <Route path="/devices" component={DeviceRoute} />
         <PrivateRoute path="/device" component={() => {}} />
         {/* Home page */}
-        <PrivateRoute path="/profile" component={ProfileRoutes} />
+        <Route path="/profile" component={ProfileRoutes} />
         <PrivateRoute path="/" component={UserList} />
       </Switch>
       <SideBar />
