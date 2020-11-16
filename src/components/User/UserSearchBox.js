@@ -27,7 +27,6 @@ function UserSearchBox(props) {
     dateObj.setDate(dateObj.getDate() - numDays);
     return dateObj;
   };
-  console.log(moment(new Date()));
   const onChangeValueQuickChoose = (value) => {
     setQuickChooseValue(value);
     switch (value) {
