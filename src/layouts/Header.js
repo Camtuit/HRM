@@ -1,19 +1,19 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Avatar } from 'antd';
-import { withRouter} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { Avatar, Menu, Dropdown, Icon, Button } from 'antd';
+
+import { List } from 'antd/lib/form/Form';
 import { toggleSideBar } from '../actions/utilsAction';
 import constanst from '../constants/htmlConstants';
 import ReactLogo from '../assets/images/nal_logo.svg';
 import textLabel, { LIST } from '../constants/textLabel';
-import { Menu, Dropdown, Icon,Button } from 'antd';
 import types from '../constants/apiResourceTypes';
-import { List } from 'antd/lib/form/Form';
+
 function Header() {
-  const [name,setName] = useState('Phạm Thị Cẩm Tú');
+  const [name, setName] = useState('Phạm Thị Cẩm Tú');
   const [isProfileBoxOpen, setIsProfileBoxOpen] = useState(false);
-  const [checkLogin,setcheckLogin] = useState('Logout');
+  const [checkLogin, setcheckLogin] = useState('Logout');
   const toggledSideBar = useSelector((state) => state.toggledSideBar);
   const dispatch = useDispatch();
   const {
@@ -27,11 +27,10 @@ function Header() {
   };
   const handleToggleSidebar = () => {
     dispatch(toggleSideBar());
-    
   };
-  const handleHoverMenuUser = ()=>{
+  const handleHoverMenuUser = () => {
     setIsProfileBoxOpen(!isProfileBoxOpen);
-  }
+  };
   return (
     <header className="header">
       <div className="nav_logo" style={styleLogo}>
@@ -51,31 +50,43 @@ function Header() {
           className="sidebar-toggle"
           onClick={handleToggleSidebar}
           data-toggle="push-menu"
-          role="button">
+          role="button"
+        >
           <i className="fas fa-bars" />
         </div>
-        <div className="dropdown user-menu"  onClick={handleHoverMenuUser}>
-          <Avatar style={{border :isProfileBoxOpen? ' #0483f7 solid 2px' : 'none' }}
+        <div className="dropdown user-menu" onClick={handleHoverMenuUser}>
+          <Avatar
+            style={{ border: isProfileBoxOpen ? ' #0483f7 solid 2px' : 'none' }}
             alt="Avatar"
             size="large"
             src="https://www.flaticon.com/premium-icon/icons/svg/2202/2202112.svg"
           />
-          <i className="fas fa-sort-down" >
-          </i>
+          <i className="fas fa-sort-down"></i>
         </div>
-        <div className="dropdown-list-menu" style={{display: isProfileBoxOpen? 'block' : 'none'}}  >
-          <Menu >
-            <Menu.Item style = {{backgroundColor: isProfileBoxOpen? 'white' : '#e6f7ff' }}>
+        <div
+          className="dropdown-list-menu"
+          style={{ display: isProfileBoxOpen ? 'block' : 'none' }}
+        >
+          <Menu>
+            <Menu.Item
+              style={{
+                backgroundColor: isProfileBoxOpen ? 'white' : '#e6f7ff',
+              }}
+            >
               {LIST.Hi} {name}
             </Menu.Item>
-            <Menu.Item  onClick={handleHoverMenuUser}>
-              <Link to = '/profile/details'>{LIST.MY_PROFILE}</Link>
-             </Menu.Item>
-            <Menu.Item > 
-              <Link  onClick={handleHoverMenuUser} to ='/request-devices'>{LIST.REQUEST_DEVICE}</Link>
+            <Menu.Item onClick={handleHoverMenuUser}>
+              <Link to="/profile/details">{LIST.MY_PROFILE}</Link>
             </Menu.Item>
-            <Menu.Item   > 
-              <Link  to = '/login'  className= "check-login-logout">{LIST.LOGOUT}</Link>
+            <Menu.Item>
+              <Link onClick={handleHoverMenuUser} to="/request-devices">
+                {LIST.REQUEST_DEVICE}
+              </Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/login" className="check-login-logout">
+                {LIST.LOGOUT}
+              </Link>
             </Menu.Item>
           </Menu>
         </div>
@@ -83,4 +94,4 @@ function Header() {
     </header>
   );
 }
-export default withRouter(Header) ;
+export default withRouter(Header);

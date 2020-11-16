@@ -15,8 +15,7 @@ export const LIST = {
   SKILL: 'Skill',
   DEVICE: 'Device',
   REQUEST_DEVICE: 'Request Device',
-  MY_PROFILE : 'My Profile',
-  LOGOUT : 'Logout',
-  Hi : 'Hi'
-
+  MY_PROFILE: 'My Profile',
+  LOGOUT: 'Logout',
+  Hi: 'Hi',
 };
