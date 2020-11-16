@@ -155,6 +155,7 @@ function HolidayTable({
         pagination={{
           total: totalRecord,
           current: currentPage + 1,
+          position: ['topRight', 'bottomRight'],
         }}
       />
       <HolidayRegistPopup
