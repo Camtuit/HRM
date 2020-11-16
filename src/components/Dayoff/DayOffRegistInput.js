@@ -23,8 +23,8 @@ function DayOffRegistInput(props) {
   return (
     <div className="dayoff-regist-input">
       <Row>
-        <Col span={constant.GRID_COL.GRID_COL_4}></Col>
-        <Col span={constant.GRID_COL.GRID_COL_16}>
+        <Col span={constant.GRID_COL.GRID_COL_2}></Col>
+        <Col span={constant.GRID_COL.GRID_COL_20}>
           <Form
             {...constant.LAYOUT_ERROR_TEXT}
             labelCol={{
@@ -52,7 +52,7 @@ function DayOffRegistInput(props) {
                 },
               ]}
             >
-              <Input />
+              <Input placeholder={constant.LABEL.PO_NAME} />
             </Form.Item>
             <Form.Item
               label={constant.LABEL.PO_EMAIL}
@@ -64,7 +64,7 @@ function DayOffRegistInput(props) {
                 },
               ]}
             >
-              <Input />
+              <Input placeholder={constant.LABEL.PO_EMAIL} />
             </Form.Item>
             <Form.Item
               label={constant.LABEL.VACATION_FROM}
@@ -118,7 +118,7 @@ function DayOffRegistInput(props) {
                 },
               ]}
             >
-              <Select>
+              <Select placeholder={constant.LABEL.VACATION_TYPE}>
                 <Select.Option value="demo">
                   {constant.VACATION_TYPE.ANNUAL_LEAVE}
                 </Select.Option>
@@ -145,10 +145,10 @@ function DayOffRegistInput(props) {
                 },
               ]}
             >
-              <Input />
+              <Input placeholder={constant.LABEL.REASONS} />
             </Form.Item>
             <Form.Item label={constant.LABEL.NOTES}>
-              <Input />
+              <Input placeholder={constant.LABEL.NOTES} />
             </Form.Item>
             <div className="dayoff-regist-button">
               <Button onClick={handleContinueRegistHoliday}>
@@ -160,7 +160,7 @@ function DayOffRegistInput(props) {
             </div>
           </Form>
         </Col>
-        <Col span={constant.GRID_COL.GRID_COL_4}></Col>
+        <Col span={constant.GRID_COL.GRID_COL_2}></Col>
       </Row>
     </div>
   );

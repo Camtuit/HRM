@@ -40,13 +40,18 @@ const constants = {
     CONTRACT: 'Contract',
   },
   GRID_COL: {
+    GRID_COL_2: 2,
+    GRID_COL_3: 3,
     GRID_COL_4: 4,
     GRID_COL_5: 5,
+    GRID_COL_6: 6,
     GRID_COL_8: 8,
     GRID_COL_9: 9,
+    GRID_COL_10: 10,
     GRID_COL_12: 12,
     GRID_COL_13: 13,
     GRID_COL_16: 16,
+    GRID_COL_20: 20,
     GRID_COL_21: 21,
   },
   LABEL_COL: {
