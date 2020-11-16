@@ -37,7 +37,22 @@ const constants = {
     NUMBER_OF_DEVICE: 'Number of device',
     EQUIPMENT_REQUIRED_REASON: 'Equipment required reason',
     CONTRACT_STATUS: 'Contract Status',
-    CONTRACT: 'Contract',
+    CONTRACT: 'Contract'
+  },
+ LABEL_FROFILE : {
+    EMPLOYEE_CODE: 'Employee Code',
+    FULL_NAME : 'Full Name',
+    EMAIl : 'Email',
+    PHONE_NUMBER : 'Phone Number',
+    GENDER : 'Gender',
+    DATE_OF_BIRTH : 'Date of Birth',
+    PROJECT_NAME : 'Project Name',
+    SKILL_LIST : 'Skill List',
+    START_DATE : 'Start Date',
+    CONTRACT_DATE : 'Contract Date',
+    ASSIGNED_DEVICE : 'Assigned Device',
+    REMAINING_DAYS_OFFF : 'Remaining Day Off'
+  
   },
   GRID_COL: {
     GRID_COL_4: 4,
