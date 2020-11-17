@@ -31,6 +31,11 @@ function Header() {
   const handleHoverMenuUser = () => {
     setIsProfileBoxOpen(!isProfileBoxOpen);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+  };
+
   return (
     <header className="header">
       <div className="nav_logo" style={styleLogo}>
@@ -84,7 +89,11 @@ function Header() {
               </Link>
             </Menu.Item>
             <Menu.Item>
-              <Link to="/login" className="check-login-logout">
+              <Link
+                to="/login"
+                className="check-login-logout"
+                onClick={handleLogout}
+              >
                 {LIST.LOGOUT}
               </Link>
             </Menu.Item>
