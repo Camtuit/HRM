@@ -189,12 +189,10 @@ function UserSearchBox(props) {
           </Col>
         </Row>
         <div className="search-box-button">
-          <div>
-            <Button onClick={handleCancel}>{constants.BUTTON.CANCEL}</Button>
-            <Button type="primary" onClick={handleSearchUser}>
-              {constants.BUTTON.SEARCH}
-            </Button>
-          </div>
+          <Button onClick={handleCancel}>{constants.BUTTON.CANCEL}</Button>
+          <Button type="primary" onClick={handleSearchUser}>
+            {constants.BUTTON.SEARCH}
+          </Button>
         </div>
       </Form>
     </div>

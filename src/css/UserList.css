@@ -1,6 +1,9 @@
 .user-list-content {
-    margin-top: 70px;
-    margin-left: 56px;
-    transition: margin-left 0.3s;
+  margin-top: 70px;
+  margin-left: 56px;
+  transition: margin-left 0.3s;
 }
 
+.search-box-button > button {
+  margin-left: 10px;
+}
