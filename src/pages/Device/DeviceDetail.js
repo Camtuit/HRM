@@ -56,25 +56,26 @@ function DeviceDetail() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="qr-code">
-        <QRCode
-          id="qrcode"
-          value={window.location.href}
-          size={270}
-          level={'H'}
-          includeMargin={true}
-        />
-        <Button type="primary" onClick={downloadQR}>
-          Download QR
-        </Button>
-      </div>
-      <div className="device-detail-btn">
-        <Assigned
-          title="Choose Holder User"
-          content="Holder:"
-          onOk={() => console.log('true')}
-        ></Assigned>
+
+        <div className="qr-code">
+          <QRCode
+            id="qrcode"
+            value={window.location.href}
+            size={270}
+            level={'H'}
+            includeMargin={true}
+          />
+          <i class="fas fa-download"></i>
+        </div>
+        <div className="device-detail-btn">
+          <Assigned
+            title="Choose Holder User"
+            content="Holder:"
+            onOk={() => console.log('true')}
+          ></Assigned>
+
+          <Button>Return</Button>
+        </div>
       </div>
     </WrapperContent>
   );
