@@ -95,7 +95,7 @@ const constants = {
     EXPORT: 'Export',
     SAVE_AND_CONTINUE: 'Save and Cotinue',
     SAVE_AND_QUIT: 'Save and Quit',
-    ASSIGNED : 'Assigned'
+    ASSIGNED: 'Assigned',
   },
   FORMAT_DATE: 'DD/MM/YYYY',
   QUICK_CHOOSE: {
