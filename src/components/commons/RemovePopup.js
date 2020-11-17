@@ -30,7 +30,6 @@ function RemovePopupCommon({ title, content, onOk, value }) {
           setVisible(false);
         }}
         onCancel={handleCancel}
-        
       >
         <p style={{ textAlign: 'center' }}>{content}</p>
       </Modal>
