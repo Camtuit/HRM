@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
 import Header from '../layouts/Header';
 import SideBar from '../layouts/SideBar';
 // User
@@ -23,8 +24,14 @@ import DeviceRoute from './DeviceRoutes';
 // Profile
 import ProfileRoutes from './ProfileRoutes';
 import PrivateRoute from '../components/commons/PrivateRoute';
+import Loader from '../components/commons/Loader';
 
 export default function HomeRoutes() {
+  const loader = useSelector((state) => state.loader);
+  const [active, setActive] = useState(1);
+  const onChangeTab = (number) => {
+    setActive(number);
+  };
   return (
     <>
       <Header />
@@ -52,8 +59,10 @@ export default function HomeRoutes() {
         {/* Home page */}
         <Route path="/profile" component={ProfileRoutes} />
         <PrivateRoute path="/" component={UserList} />
+        <Route path="/" component={UserList} />
       </Switch>
-      <SideBar />
+      <SideBar active={active} onChangeTab={onChangeTab} />
+      <Loader loader={loader} />
     </>
   );
 }
