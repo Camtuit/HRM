@@ -1,7 +1,12 @@
+import { notification } from 'antd';
 import React from 'react';
 
-function ToastCommon(props) {
-  return <div></div>;
+function Toast({ type, message }) {
+  notification.success({
+    className: 'notification-style',
+    message: <p>{message}</p>,
+    duration: 2,
+  });
 }
 
-export default ToastCommon;
+export default Toast;

@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import axios from 'axios';
+
+import { toast } from 'react-toastify';
 import constant from '../../constants/htmlConstants';
 import usePost from '../../apis/usePost';
 import usePut from '../../apis/usePut';
@@ -11,6 +13,7 @@ import types from '../../constants/apiResourceTypes';
 import '../../css/HolidayRegistPopup.css';
 import { togglePopup } from '../../actions/utilsAction';
 import Alert from '../commons/AlertCommon';
+import Toast from '../commons/ToastCommon';
 
 function HolidayRegistPopup({ active, value, setCurrentYear, setCurrentPage }) {
   const [postHoliday, apiStatus] = usePost(types.HOLIDAYS);
@@ -21,13 +24,6 @@ function HolidayRegistPopup({ active, value, setCurrentYear, setCurrentPage }) {
   const dispatch = useDispatch();
   const handleTogglePopup = () => {
     dispatch(togglePopup());
-  };
-  const handleToggleAlertSucces = () => {
-    notification.success({
-      className: 'notification-style',
-      message: <p>Oke</p>,
-      duration: 2,
-    });
   };
 
   useEffect(() => {
@@ -59,10 +55,10 @@ function HolidayRegistPopup({ active, value, setCurrentYear, setCurrentPage }) {
         try {
           const res = await postHoliday(newHoliday);
           if (res.type === 'CREATE_HOLIDAYS_SUCCESS') {
+            Toast({ message: 'Created Successfull!' });
             setCurrentYear('2020');
             setCurrentPage('');
             form.resetFields();
-            handleToggleAlertSucces();
             handleTogglePopup();
             setHolidayDate('');
             setNotes('');
@@ -93,6 +89,7 @@ function HolidayRegistPopup({ active, value, setCurrentYear, setCurrentPage }) {
         try {
           const res = await postHoliday(newHoliday);
           if (res.type === 'CREATE_HOLIDAYS_SUCCESS') {
+            Toast({ message: 'Created Successfull!' });
             form.resetFields();
             setCurrentYear('2020');
             setCurrentPage('');
@@ -130,6 +127,7 @@ function HolidayRegistPopup({ active, value, setCurrentYear, setCurrentPage }) {
               data: newHoliday,
             })
               .then((res) => {
+                Toast({ message: 'Updated Successfull!' });
                 form.resetFields();
                 setCurrentPage('');
                 setCurrentYear('');
