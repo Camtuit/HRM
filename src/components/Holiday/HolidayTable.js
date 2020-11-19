@@ -3,19 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, Button, Tooltip } from 'antd';
 import axios from 'axios';
 
-import moment from 'moment';
 import RemovePopupCommon from '../commons/RemovePopup';
-
 import HolidayRegistPopup from './HolidayRegistPopup';
 import constant from '../../constants/htmlConstants';
-import useFetchMany from '../../apis/useFetchMany';
-import { get } from '../../apis/apiMethods';
-
-import useRemove from '../../apis/useRemove';
-import types from '../../constants/apiResourceTypes';
 import '../../css/HolidayTable.css';
 import { togglePopup } from '../../actions/utilsAction';
-import { callApi } from '../../apis/axiosService';
+import ButtonTableGroup from '../commons/ButtonTableGroup';
+import types from '../../constants/apiResourceTypes';
 
 function HolidayTable({
   currentYear,
@@ -137,16 +131,10 @@ function HolidayTable({
 
   return (
     <div className="holiday-table">
-      <Button
-        className="user-table-button"
-        type="primary"
-        onClick={handleTogglePopupAdd}
-      >
-        {constant.BUTTON.ADD}
-      </Button>
-      <Button className="user-table-button" type="primary">
-        {constant.BUTTON.EXPORT_FILE}
-      </Button>
+      <ButtonTableGroup
+        type={types.HOLIDAY}
+        handleAddButton={() => handleTogglePopupAdd()}
+      />
 
       <Table
         columns={columns}
