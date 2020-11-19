@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import axios from 'axios';
 
-import { toast } from 'react-toastify';
 import constant from '../../constants/htmlConstants';
 import usePost from '../../apis/usePost';
 import usePut from '../../apis/usePut';

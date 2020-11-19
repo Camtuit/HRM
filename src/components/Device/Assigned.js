@@ -72,9 +72,10 @@ export default function Addigned({ title, content, onOk }) {
               style={{ width: 200 }}
               onChange={handleChange}
             >
-              {users.map(function (element) {
-                return <Option value={element.key}>{element.name}</Option>;
-              })}
+              {users &&
+                users.map(function (element) {
+                  return <Option value={element.key}>{element.name}</Option>;
+                })}
             </Select>
           </Col>
         </Row>
