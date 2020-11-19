@@ -64,6 +64,9 @@
       width: 25px;
     }
   }
+  .active {
+    background-color: $orange;
+  }
   &__item:hover {
     color: $dark;
     background-color: $orange;

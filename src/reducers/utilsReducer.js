@@ -1,4 +1,6 @@
 import {
+  CALL_LOADER,
+  CLOSE_LOADER,
   SCREEN_RESIZE,
   TOGGLE_POPUP,
   TOGGLE_SIDE_BAR,
@@ -29,6 +31,28 @@ export function toggledPopup(state = initialState.toggledPopup, action) {
     case TOGGLE_POPUP:
       if (!action.payload) return state;
       return !state;
+    default:
+      return state;
+  }
+}
+
+export function loader(state = initialState.loader, action) {
+  switch (action.type) {
+    case CALL_LOADER:
+      return true;
+    case CLOSE_LOADER:
+      return false;
+    default:
+      return state;
+  }
+}
+
+export function changeActiveTab(state = initialState.activeLink, action) {
+  switch (action.type) {
+    case CALL_LOADER:
+      return true;
+    case CLOSE_LOADER:
+      return false;
     default:
       return state;
   }

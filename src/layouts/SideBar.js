@@ -12,16 +12,19 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
+import { Link, useHistory } from 'react-router-dom';
 import SideBarItem from '../components/commons/SideBarItem';
 import { LIST } from '../constants/textLabel';
 import { toggleSideBar } from '../actions/utilsAction';
 
-function SideBar() {
+function SideBar({ active, onChangeTab }) {
   const toggledSideBar = useSelector((state) => state.toggledSideBar);
   const dispatch = useDispatch();
   const handleToggleSidebar = () => {
     dispatch(toggleSideBar());
   };
+  const url = useHistory();
+  const pathName = url.location.pathname;
 
   return (
     <div className={`side-bar ${toggledSideBar ? 'expanded' : 'collapsed'}`}>
@@ -33,36 +36,83 @@ function SideBar() {
             icon={!toggledSideBar ? faPlus : faMinus}
           />
         </div>
-        <SideBarItem name={LIST.USER} path="/users">
-          <div className="icon-25">
-            <FontAwesomeIcon icon={faUser} />
+        <Link to="/users" onClick={() => onChangeTab(1)}>
+          <div
+            className={`side-bar__item ${
+              pathName === '/users' ? 'active' : ''
+            }`}
+          >
+            <div className="icon-25">
+              <FontAwesomeIcon icon={faUser} />
+            </div>
+            <span className="side-bar__title">{LIST.USER}</span>
           </div>
-        </SideBarItem>
-        <SideBarItem name={LIST.DAY_OFF} path="/dayoffs">
-          <div className="icon-25">
-            <FontAwesomeIcon icon={faCalendarDay} />
+        </Link>
+
+        <Link to="/dayoffs" onClick={() => onChangeTab(2)}>
+          <div
+            className={`side-bar__item ${
+              pathName === '/dayoffs' ? 'active' : ''
+            }`}
+          >
+            <div className="icon-25">
+              <FontAwesomeIcon icon={faCalendarDay} />
+            </div>
+            <span className="side-bar__title">{LIST.DAY_OFF}</span>
           </div>
-        </SideBarItem>
-        <SideBarItem name={LIST.HOLIDAY} path="/holidays">
-          <div className="icon-25">
-            <FontAwesomeIcon icon={faCalendar} />
+        </Link>
+        <Link to="/holidays">
+          <div
+            className={`side-bar__item ${
+              pathName === '/holidays' ? 'active' : ''
+            }`}
+          >
+            {' '}
+            <div className="icon-25">
+              <FontAwesomeIcon icon={faCalendar} />
+            </div>
+            <span className="side-bar__title">{LIST.HOLIDAY}</span>
           </div>
-        </SideBarItem>
-        <SideBarItem name={LIST.SKILL} path="/skills">
-          <div className="icon-25">
-            <FontAwesomeIcon icon={faCogs} />
+        </Link>
+        <Link to="/skills">
+          <div
+            className={`side-bar__item ${
+              pathName === '/skills' ? 'active' : ''
+            }`}
+          >
+            {' '}
+            <div className="icon-25">
+              <FontAwesomeIcon icon={faCogs} />
+            </div>
+            <span className="side-bar__title">{LIST.SKILL}</span>
           </div>
-        </SideBarItem>
-        <SideBarItem name={LIST.DEVICE} path="/devices">
-          <div className="icon-25">
-            <FontAwesomeIcon icon={faLaptopCode} />
+        </Link>
+        <Link to="/devices">
+          <div
+            className={`side-bar__item ${
+              pathName === '/devices' ? 'active' : ''
+            }`}
+          >
+            {' '}
+            <div className="icon-25">
+              <FontAwesomeIcon icon={faLaptopCode} />
+            </div>
+            <span className="side-bar__title">{LIST.DEVICE}</span>
           </div>
-        </SideBarItem>
-        <SideBarItem name={LIST.REQUEST_DEVICE} path="/request-devices">
-          <div className="icon-25">
-            <FontAwesomeIcon icon={faLaptopMedical} />
+        </Link>
+        <Link to="/request-devices">
+          <div
+            className={`side-bar__item ${
+              pathName === '/request-devices' ? 'active' : ''
+            }`}
+          >
+            {' '}
+            <div className="icon-25">
+              <FontAwesomeIcon icon={faLaptopMedical} />
+            </div>
+            <span className="side-bar__title">{LIST.REQUEST_DEVICE}</span>
           </div>
-        </SideBarItem>
+        </Link>
       </div>
     </div>
   );
