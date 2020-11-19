@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Select, DatePicker, Row, Col } from 'antd';
 import '../../css/SkillSearchBox.css';
 
-import { FormProvider } from 'antd/lib/form/context';
 import constant from '../../constants/htmlConstants';
 
 function SkillSearchBox({ setCurrentName, setCurrentPage }) {

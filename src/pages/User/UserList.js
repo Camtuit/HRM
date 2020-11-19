@@ -6,8 +6,7 @@ import WrapperContent from '../../components/commons/WrapperContentPage';
 
 import '../../css/UserList.css';
 
-function UserList({ match }) {
-  const [query, setQuery] = useState(undefined);
+function UserList() {
   const [fullName, setFullName] = useState('');
   const [contractStatus, setContractStatus] = useState('');
   const [contractDateBegin, setContractDateBegin] = useState('');
