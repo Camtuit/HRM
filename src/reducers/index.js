@@ -4,7 +4,12 @@ import apiCallStatus from './apiStatusReducer';
 import users from './userReducer';
 import holidays from './holidayReducer';
 import meta from './metaReducer';
-import { screenWidth, toggledSideBar, toggledPopup } from './utilsReducer';
+import {
+  screenWidth,
+  toggledSideBar,
+  toggledPopup,
+  loader,
+} from './utilsReducer';
 
 const rootReducer = combineReducers({
   users,
@@ -14,6 +19,7 @@ const rootReducer = combineReducers({
   screenWidth,
   toggledSideBar,
   toggledPopup,
+  loader,
 });
 
 export default rootReducer;

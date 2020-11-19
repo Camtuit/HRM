@@ -23,6 +23,8 @@ const initialState = {
   toggledSideBar: window.innerWidth >= deviceSizeFixed.laptop ? 1 : 0, // true => side bar is expanded, 0 => side bar is collapsed
   // toggledModal: false,
   toggledPopup: false,
+  loader: false,
+  activeLink: 1,
 };
 
 export default initialState;
