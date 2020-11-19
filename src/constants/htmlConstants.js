@@ -1,4 +1,5 @@
 const constants = {
+  PAGE_TITLE: 'HRM',
   WIDTH_SIDE_BAR: {
     FULL: '200px',
     SHORT: '56px',
@@ -89,6 +90,7 @@ const constants = {
     BACK: 'Back',
     ADD: 'Add new',
     EXPORT_FILE: 'Export File',
+    EXPORT_WORKDAYS: 'Export Workdays',
     ADD_NEW_DATE_OFF: 'Add new dayoff',
     EXPORT: 'Export',
     SAVE_AND_CONTINUE: 'Save and Cotinue',
@@ -144,6 +146,23 @@ const constants = {
       RIGHT: 'right',
       LEFT: 'left',
       CENTER: 'center',
+    },
+  },
+  REQUEST_TIMEOUT: 500,
+  ALERT_COMMON: {
+    TYPE: {
+      ERROR: 'ERROR',
+      SUCCESS: 'SUCCESS',
+      WARNING: 'WARNING',
+      INFO: 'INFO',
+      QUESTION: 'QUESTION',
+    },
+    TITLE: {
+      ERROR: 'Error',
+      SUCCESS: 'Success',
+      WARNING: 'Warning',
+      INFO: 'Info',
+      QUESTION: 'Question',
     },
   },
 };

@@ -3,19 +3,19 @@ import { Button, Form, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import axios from 'axios';
-import { togglePopup } from '../../actions/utilsAction';
+import {
+  callLoader,
+  closeLoader,
+  togglePopup,
+} from '../../actions/utilsAction';
 import constant from '../../constants/htmlConstants';
 import '../../css/HolidayRegistPopup.css';
-import usePost from '../../apis/usePost';
-import usePut from '../../apis/usePut';
-import types from '../../constants/apiResourceTypes';
 import Alert from '../commons/AlertCommon';
+import { createSkill, editSkillById } from '../../apis/skillApi';
+import { RESPONSE_CODE } from '../../constants/errorText';
+import Toast from '../commons/ToastCommon';
 
-function SkillRegistInput(props) {
-  const { active, value, setCurrentName, setCurrentPage } = props;
-  const [postSkill, apiStatus] = usePost(types.SKILLS);
-  const [putSkill] = usePut(types.SKILLS);
+function SkillRegistInput({ active, value }) {
   const [skillName, setSkillName] = useState('');
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -27,59 +27,111 @@ function SkillRegistInput(props) {
       });
     }
   }, [value, form]);
+  const handleRequestAPISaveandQuit = () => {
+    const newSkill = {
+      name: skillName,
+    };
+    try {
+      dispatch(callLoader());
+      createSkill(newSkill).then((response) => {
+        if (response !== RESPONSE_CODE[409]) {
+          setTimeout(() => {
+            dispatch(closeLoader());
+            Toast({ message: 'Created Successfull!' });
+            form.resetFields();
+            dispatch(togglePopup());
+            setSkillName('');
+          }, constant.REQUEST_TIMEOUT);
+        } else {
+          dispatch(closeLoader());
+          form.setFields([
+            {
+              name: 'skill',
+              errors: [RESPONSE_CODE[409]],
+            },
+          ]);
+        }
+      });
+    } catch (error) {
+      return error;
+    }
+  };
+  const handleRequestAPISaveAndContinue = () => {
+    const newSkill = {
+      name: skillName,
+    };
+    try {
+      dispatch(callLoader());
+      createSkill(newSkill).then((response) => {
+        if (response !== RESPONSE_CODE[409]) {
+          setTimeout(() => {
+            dispatch(closeLoader());
+            Toast({ message: 'Created Successfull!' });
+            form.resetFields();
+            setSkillName('');
+          }, constant.REQUEST_TIMEOUT);
+        } else {
+          dispatch(closeLoader());
+          form.setFields([
+            {
+              name: 'skill',
+              errors: [RESPONSE_CODE[409]],
+            },
+          ]);
+        }
+      });
+    } catch (error) {
+      return error;
+    }
+  };
+  const handleRequestAPIEditSkill = () => {
+    const skill = {
+      name: skillName,
+    };
+    try {
+      dispatch(callLoader());
+      editSkillById(value.id, skill).then((response) => {
+        if (response !== RESPONSE_CODE[409]) {
+          setTimeout(() => {
+            dispatch(closeLoader());
+            Toast({ message: 'Updated Successfull!' });
+            form.resetFields();
+            dispatch(togglePopup());
+            setSkillName('');
+          }, constant.REQUEST_TIMEOUT);
+        } else {
+          dispatch(closeLoader());
+          form.setFields([
+            {
+              name: 'skill',
+              errors: [RESPONSE_CODE[409]],
+            },
+          ]);
+        }
+      });
+    } catch (error) {
+      return error;
+    }
+  };
   const handleChangeSkillName = (e) => {
     setSkillName(e.target.value);
   };
   const handleSaveAndQuit = () => {
     form
       .validateFields()
-      .then(async () => {
-        const newSkill = {
-          name: skillName,
-        };
-        try {
-          const res = await postSkill(newSkill);
-          if (res.type === 'CREATE_SKILLS_SUCCESS') {
-            form.resetFields();
-            dispatch(togglePopup());
-            setSkillName('');
-          } else {
-            Alert({
-              type: 'ERROR',
-              title: 'Error',
-              content: 'Skill already exists',
-            });
-          }
-        } catch (error) {
-          return error;
-        }
+      .then(() => {
+        handleRequestAPISaveandQuit();
       })
       .catch((errorInfo) => {
         return errorInfo;
       });
   };
+
   const handleSaveAndContinue = () => {
     form
       .validateFields()
-      .then(async () => {
-        const newSkill = {
-          name: skillName,
-        };
-        try {
-          const res = await postSkill(newSkill);
-          if (res.type === 'CREATE_SKILLS_SUCCESS') {
-            form.resetFields();
-            setSkillName('');
-          } else {
-            Alert({
-              type: 'ERROR',
-              title: 'Error',
-              content: 'Skill already exists',
-            });
-          }
-        } catch (error) {
-          return error;
-        }
+      .then(() => {
+        handleRequestAPISaveAndContinue();
       })
       .catch((errorInfo) => {
         return errorInfo;
@@ -90,29 +142,7 @@ function SkillRegistInput(props) {
       form
         .validateFields()
         .then(() => {
-          axios({
-            method: 'PUT',
-            url: ` http://api-java.dev-hrm.nals.vn/api/skills/${value.id}`,
-            data: {
-              name: skillName,
-            },
-          })
-            .then((res) => {
-              if (res.data !== null) {
-                form.resetFields();
-                dispatch(togglePopup());
-                setSkillName('');
-                setCurrentName('');
-              }
-            })
-            .catch((err) => {
-              Alert({
-                type: 'ERROR',
-                title: 'Error',
-                content: 'Skill already exists',
-              });
-              return err;
-            });
+          handleRequestAPIEditSkill();
         })
         .catch((errorInfo) => {
           return errorInfo;

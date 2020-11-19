@@ -15,7 +15,6 @@ function useFetch(type = '') {
     },
     [dispatch, type],
   );
-  console.log(data);
   return [data, boundAction, apiCallStatus];
 }
 
