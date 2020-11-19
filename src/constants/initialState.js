@@ -25,6 +25,11 @@ const initialState = {
   toggledPopup: false,
   loader: false,
   activeLink: 1,
+  employee_status: {
+    inActive: 0,
+    active: 1,
+    all: 2,
+  },
 };
 
 export default initialState;
