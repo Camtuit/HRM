@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table, Tooltip } from 'antd';
 import '../../css/SkillTable.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { NormalModule } from 'webpack';
 import SkillRegistInput from './SkillRegistInput';
 import RemovePopupCommon from '../commons/RemovePopup';
 import {
@@ -32,6 +33,9 @@ function SkillTable({
   const [data, setData] = useState(null);
   const toggledPopup = useSelector((state) => state.toggledPopup);
   const [valueSkill, setValueSkill] = useState();
+  const [recordPerPage, setRecordPerpage] = useState(null);
+  const [page, setPage] = useState(null);
+  const [skills, setSkill] = useState([]);
   const dispatch = useDispatch();
   const handleTogglePopupAdd = () => {
     setValueSkill();
@@ -65,16 +69,10 @@ function SkillTable({
         displaySkills(currentPage, currentName)
           .then((response) => {
             if (response !== RESPONSE_CODE[404]) {
-              const getData = response.data.data.map((elm, index) => {
-                return {
-                  no: index + 1,
-                  id: elm.id,
-                  name: elm.name,
-                  updated: elm.updated_at,
-                };
-              });
-              setData(getData);
+              setSkill(response.data.data);
               setTotalRecord(response.data.meta.pagination.total);
+              setRecordPerpage(response.data.meta.pagination.per_page);
+              setPage(response.data.meta.pagination.current_page);
             } else {
               setData(null);
             }
@@ -85,9 +83,19 @@ function SkillTable({
       }
     } catch (err) {
       setData(null);
+      return err;
     }
   }, [currentPage, currentName, toggledPopup]);
-
+  const skillData = skills.map((elm, index) => {
+    const skillList = {
+      key: elm.id,
+      name: elm.name,
+      updated: elm.updated_at,
+    };
+    skillList.number = index + 1;
+    skillList.action = { id: elm.id, status: elm.status };
+    return skillList;
+  });
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
   }
@@ -109,23 +117,19 @@ function SkillTable({
   const columns = [
     {
       title: 'No.',
-      dataIndex: 'no',
-      key: 'no',
-      width: 100,
+      dataIndex: 'number',
     },
     {
       title: 'Name',
       dataIndex: 'name',
-      key: 'name',
     },
     {
       title: 'Updated at',
       dataIndex: 'updated',
-      key: 'updated',
     },
     {
       title: 'Action',
-      key: 'empty',
+      dataIndex: 'action',
       fixed: 'center',
       align: 'center',
       width: 100,
@@ -166,22 +170,16 @@ function SkillTable({
         setCurrentPage={setCurrentPage}
       />
       <Table
-        className="table"
-        columns={columns}
-        dataSource={data}
-        onChange={onChange}
         pagination={{
           position: ['topRight', 'bottomRight'],
           total: totalRecord,
           current: currentPage + 1,
+          pageSize: recordPerPage,
         }}
-        onRow={(record) => {
-          return {
-            onClick: () => {
-              setCurrentRecord(record);
-            },
-          };
-        }}
+        className="table"
+        columns={columns}
+        dataSource={skillData}
+        onChange={onChange}
       />
     </div>
   );
