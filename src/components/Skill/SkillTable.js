@@ -76,7 +76,6 @@ function SkillTable({
           .then((response) => {
             if (response !== RESPONSE_CODE[404]) {
               setSkillData(response.data.data);
-              console.log('pangi', response.data.meta.pagination);
               setTotalRecord(response.data.meta.pagination.total);
               setRecordPerPage(response.data.meta.pagination.per_page);
               setPage(response.data.meta.pagination.current_page);
@@ -95,6 +94,7 @@ function SkillTable({
   const getData = skillsData.map((elm, index) => {
     const skillLists = {
       number: index + page * recordPerPage + 1,
+      id: elm.id,
       name: elm.name,
       updated: elm.updated_at,
     };
@@ -105,13 +105,21 @@ function SkillTable({
   }
   const handleDeleteSkill = (id) => {
     try {
+      console.log(id);
       deleteSkillById(id).then((res) => {
         if (res !== RESPONSE_CODE[422]) {
           Toast({ message: 'Deleted Successfull!' });
-          const idIndex = skillsData.findIndex((x) => x.key === id);
-          skillsData.splice(idIndex, 1);
-          setCurrentPage('');
-          setCurrentName('');
+          // console.log('data', getData);
+          // console.log(
+          //   'hanlde',
+          //   getData.findIndex((x) => x.number === id),
+          // );
+          const idIndex = getData.findIndex((x) => x.id === id);
+          console.log('index', idIndex);
+          getData.splice(idIndex, 1);
+
+          // setCurrentPage('');
+          // setCurrentName('');
         }
       });
     } catch (error) {
@@ -153,7 +161,7 @@ function SkillTable({
           <RemovePopupCommon
             title="Delete skill"
             content={`Are you sure delete ${value.name}`}
-            onOk={() => {
+            onOk={(id) => {
               handleDeleteSkill(value.id);
             }}
           />
@@ -187,6 +195,7 @@ function SkillTable({
           current: currentPage + 1,
           pageSize: recordPerPage,
         }}
+        loading="false"
         onRow={(record) => {
           return {
             onClick: () => {
