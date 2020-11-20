@@ -4,13 +4,13 @@ import moment from 'moment';
 import constants from '../../constants/htmlConstants';
 import initialState from '../../constants/initialState';
 
-function UserSearchBox(props) {
-  const {
-    setFullName,
-    setContractStatus,
-    setContractDateBegin,
-    setContractDateEnd,
-  } = props;
+function UserSearchBox({
+  setFullName,
+  setContractStatus,
+  setContractDateBegin,
+  setContractDateEnd,
+  setEmployeeStatus,
+}) {
   const [componentSize, setComponentSize] = useState('default');
   const [quickChooseValue, setQuickChooseValue] = useState();
   const [currentContractStatus, setCurrentContractStatus] = useState();
@@ -83,17 +83,20 @@ function UserSearchBox(props) {
     setFullName(currentFullName);
     setContractDateBegin(currentContractDateBegin);
     setContractDateEnd(currentContractDateEnd);
+    setEmployeeStatus(currentEmployeeStatus);
   };
   const handleCancel = () => {
     setCurrentContractStatus();
     setCurrentFullName('');
     setCurrentContractDateBegin('');
     setCurrentContractDateEnd('');
+    setCurrentEmployeeStatus('');
     setQuickChooseValue();
     setContractStatus('');
     setFullName('');
     setContractDateBegin('');
     setContractDateEnd('');
+    setEmployeeStatus(1);
   };
 
   return (

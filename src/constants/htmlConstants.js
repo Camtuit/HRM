@@ -152,6 +152,10 @@ const constants = {
       TYPE: 'Type',
       PO_NAME: "PO's Name",
       ACTION: 'Action',
+      PHONE_NUMBER: 'Phone number',
+      CONTRACT_DAY: 'Contract day',
+      EMPLOYEE_STATUS: 'Employee status',
+      CONTRACT_STATUS: 'Contract status',
     },
     COLUMN_FIXED: {
       RIGHT: 'right',

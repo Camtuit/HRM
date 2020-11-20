@@ -28,7 +28,7 @@ const initialState = {
   employee_status: {
     inActive: 0,
     active: 1,
-    all: 2,
+    all: '',
   },
 };
 
