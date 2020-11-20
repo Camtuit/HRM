@@ -32,6 +32,7 @@ function SkillTable({
   const [recordPerPage, setRecordPerPage] = useState(null);
   const [page, setPage] = useState([]);
   const [skillsData, setSkillData] = useState([]);
+  const [getUrlPagination, setGetUrlPagination] = useState('');
   const toggledPopup = useSelector((state) => state.toggledPopup);
   const [valueSkill, setValueSkill] = useState();
   const dispatch = useDispatch();
@@ -68,6 +69,7 @@ function SkillTable({
           .then((response) => {
             if (response !== RESPONSE_CODE[404]) {
               setSkillData(response.data.data);
+              console.log('current', response.data.meta.pagination);
               setTotalRecord(response.data.meta.pagination.total);
               setRecordPerPage(response.data.meta.pagination.per_page);
               setPage(response.data.meta.pagination.current_page);
@@ -82,6 +84,7 @@ function SkillTable({
     } catch (err) {
       setSkillData(null);
     }
+    setGetUrlPagination(currentPage + 1);
   }, [currentPage, currentName, toggledPopup]);
   const getData = skillsData.map((elm, index) => {
     const skillLists = {
@@ -101,17 +104,9 @@ function SkillTable({
       deleteSkillById(id).then((res) => {
         if (res !== RESPONSE_CODE[422]) {
           Toast({ message: 'Deleted Successfull!' });
-          // console.log('data', getData);
-          // console.log(
-          //   'hanlde',
-          //   getData.findIndex((x) => x.number === id),
-          // );
           const idIndex = getData.findIndex((x) => x.id === id);
           console.log('index', idIndex);
           getData.splice(idIndex, 1);
-
-          // setCurrentPage('');
-          // setCurrentName('');
         }
       });
     } catch (error) {
