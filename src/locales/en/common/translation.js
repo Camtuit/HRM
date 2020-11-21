@@ -1,5 +1,8 @@
 const buttonCommon = {
   // common
+  MESSAGE: {
+    CREATED_SUCCCESSFULL: 'Created Successfull!',
+  },
   button: {
     add: 'Add new',
     export_file: 'Export file',
@@ -8,6 +11,9 @@ const buttonCommon = {
     search: 'Search',
     BACK: 'Back',
     SAVE: 'Save',
+    SUBMIT: 'Submit',
+    SAVE_AND_QUIT: 'Save and Quit',
+    SAVE_AND_CONTINUE: 'Save and Continue',
   },
   toolip: {
     PLACEMENT: {
@@ -20,7 +26,7 @@ const buttonCommon = {
   },
   TABLE: {
     COLUMN_TITLE: {
-      NO: 'No',
+      NO: 'No.',
       NAME: 'Name',
       EMAIL: 'Email',
       DATE_OFF: 'Date Off',
@@ -31,6 +37,7 @@ const buttonCommon = {
       ACTION: 'Action',
       PHONE_NUMBER: 'Phone number',
       CONTRACT_DAY: 'Contract day',
+      UPDATE: 'updated',
     },
     COLUMN_FIXED: {
       RIGHT: 'right',
@@ -97,6 +104,11 @@ const buttonCommon = {
     USER_REGIST: {
       AVATAR: 'Avatar',
     },
+  },
+  //skill page
+  Skill: {
+    NAME_SKILL: 'Skill name',
+    SKILL_LIST: 'Skill List',
   },
 };
 export default buttonCommon;
