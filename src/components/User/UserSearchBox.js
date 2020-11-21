@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Select, DatePicker, Row, Col } from 'antd';
 import moment from 'moment';
 import constants from '../../constants/htmlConstants';
+import { useTranslation } from 'react-i18next';
 
 function UserSearchBox(props) {
   const {
@@ -10,6 +11,7 @@ function UserSearchBox(props) {
     setContractDateBegin,
     setContractDateEnd,
   } = props;
+  const { t, i18n } = useTranslation();
   const [componentSize, setComponentSize] = useState('default');
   const [quickChooseValue, setQuickChooseValue] = useState();
   const [currentContractStatus, setCurrentContractStatus] = useState();
@@ -105,10 +107,10 @@ function UserSearchBox(props) {
           <Col span={9}>
             <Form.Item
               className="search-box_item search-box_item--name"
-              label={constants.LABEL.NAME}
+              label={t('LABEL.NAME')}
             >
               <Input
-                placeholder={constants.LABEL.NAME}
+                placeholder={t('LABEL.NAME')}
                 value={currentFullName}
                 onChange={onChangeFullName}
               />
@@ -118,18 +120,18 @@ function UserSearchBox(props) {
           <Col span={9}>
             <Form.Item
               className="search-box_item search-box_item--status user-status-input"
-              label={constants.LABEL.CONTRACT_STATUS}
+              label={t('TABLE.COLUMN_TITLE.STATUS')}
             >
               <Select
-                placeholder={constants.LABEL.CONTRACT_STATUS}
+                placeholder={t('TABLE.COLUMN_TITLE.STATUS')}
                 onChange={onChangeContractStatus}
                 value={currentContractStatus}
               >
                 <Select.Option value="0">
-                  {constants.CONTRACT_STATUS.RESIGNED}
+                  {t('RADIO_INPUT.SIGNED')}
                 </Select.Option>
                 <Select.Option value="1">
-                  {constants.CONTRACT_STATUS.SIGNED}
+                  {t('RADIO_INPUT.RESIGNED')}
                 </Select.Option>
               </Select>
             </Form.Item>

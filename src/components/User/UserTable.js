@@ -6,8 +6,10 @@ import moment from 'moment';
 import constant from '../../constants/htmlConstants';
 import '../../css/UserTable.css';
 import { displayUsers } from '../../apis/userApi';
+import { useTranslation } from 'react-i18next';
 
 function UserTable(props) {
+  const { t, i18n } = useTranslation();
   const [totalRecord, setTotalRecord] = useState(null);
   const {
     fullName,
@@ -50,12 +52,12 @@ function UserTable(props) {
 
   const columns = [
     {
-      title: 'No',
+      title: t('TABLE.COLUMN_TITLE.NO'),
       dataIndex: 'number',
     },
 
     {
-      title: 'Name',
+      title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'full_name',
       sorter: {
         compare: (a, b) => a.name - b.name,
@@ -64,17 +66,17 @@ function UserTable(props) {
     },
 
     {
-      title: 'Email',
+      title: t('TABLE.COLUMN_TITLE.EMAIL'),
       dataIndex: 'email',
     },
 
     {
-      title: 'Phone number',
+      title: t('TABLE.COLUMN_TITLE.PHONE_NUMBER'),
       dataIndex: 'phone_number',
     },
 
     {
-      title: 'Contract day',
+      title: t('TABLE.COLUMN_TITLE.CONTRACT_DAY'),
       dataIndex: 'contract_date_begin',
       sorter: {
         compare: (a, b) => a.contractDay - b.contractDay,
@@ -83,18 +85,18 @@ function UserTable(props) {
     },
 
     {
-      title: 'Contract status',
+      title: t('TABLE.COLUMN_TITLE.STATUS'),
       dataIndex: 'contract_status',
       render: (value) => (value ? <span>Signed</span> : <span>Resigned</span>),
     },
 
     {
-      title: 'Action',
+      title: t('TABLE.COLUMN_TITLE.ACTION'),
       fixed: 'right',
       dataIndex: 'action',
       width: 100,
       render: (value) => (
-        <Tooltip title={constant.TOOLTIP.TITLE.EDIT}>
+        <Tooltip title={t('toolip.TITLE.EDIT')}>
           <span>
             <i className="fas fa-edit skill-popup-common-icon"></i>
           </span>
@@ -110,16 +112,16 @@ function UserTable(props) {
     <div className="user-table">
       <Link to="/user">
         <Button className="user-table-button" type="primary">
-          Add new
+          {t('button.add')}
         </Button>
       </Link>
 
       <Button className="user-table-button" type="primary">
-        Export file
+        {t('button.export_file')}
       </Button>
 
       <Button className="user-table-button" type="primary">
-        Export workdays
+        {t('button.export_workdays')}
       </Button>
 
       <Table

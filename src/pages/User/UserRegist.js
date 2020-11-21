@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import '../../css/UserRegist.css';
 import AvatarUpload from '../../components/AvatarUpload';
 import WrapperContent from '../../components/commons/WrapperContentPage';
-
+import { useTranslation } from 'react-i18next';
 function UserRegist() {
   const [value, setValue] = useState(1);
-
+  const { t, i18n } = useTranslation();
   function onChange(e) {
     setValue(e.target.value);
   }
@@ -24,66 +24,64 @@ function UserRegist() {
             wrapperCol={{ span: 10 }}
             layout="horizontal"
           >
-            <Form.Item label="Employee Code">
-              <Input placeholder="Employee Code" />
+            <Form.Item label={t('LABEL.EMPLOYEE_CODE')}>
+              <Input placeholder={t('LABEL.EMPLOYEE_CODE')} />
             </Form.Item>
 
-            <Form.Item label="Full Name">
-              <Input placeholder="Full Name" />
+            <Form.Item label={t('LABEL.FULL_NAME')}>
+              <Input placeholder={t('LABEL.FULL_NAME')} />
             </Form.Item>
 
-            <Form.Item label="Email">
-              <Input placeholder="Email" />
+            <Form.Item label={t('LABEL.EMAIl')}>
+              <Input placeholder={t('LABEL.EMAIl')} />
             </Form.Item>
 
-            <Form.Item label="Phone Number">
-              <Input placeholder="Phone Number" />
+            <Form.Item label={t('LABEL.PHONE_NUMBER')}>
+              <Input placeholder={t('LABEL.PHONE_NUMBER')} />
             </Form.Item>
-
             <Form.Item label="Gender">
               <Radio.Group onChange={onChange} value={value}>
-                <Radio value={1}>Male</Radio>
-                <Radio value={2}>Female</Radio>
+                <Radio value={1}>{t('RADIO_INPUT.MALE')}</Radio>
+                <Radio value={2}>{t('RADIO_INPUT.FERMALE')}</Radio>
               </Radio.Group>
             </Form.Item>
-
-            <Form.Item label="Date of Birth">
-              <DatePicker />
+            <Form.Item label={t('LABEL.DATE_OF_BIRTH')}>
+              <DatePicker placeholder={t('LABEL.DATE_OF_BIRTH')} />
             </Form.Item>
 
-            <Form.Item label="Project Name">
-              <Input placeholder="Project Name" />
+            <Form.Item label={t('LABEL.PROJECT_NAME')}>
+              <Input placeholder={t('LABEL.PROJECT_NAME')} />
             </Form.Item>
 
-            <Form.Item label="Skill List">
-              <Input placeholder="Skill List" />
+            <Form.Item label={t('LABEL.SKILL_LIST')}>
+              <Input placeholder={t('LABEL.SKILL_LIST')} />
             </Form.Item>
 
-            <Form.Item label="Start Date">
-              <DatePicker />
+            <Form.Item label={t('LABEL.START_DATE')}>
+              <DatePicker placeholder={t('LABEL.START_DATE')} />
             </Form.Item>
 
-            <Form.Item label="Contract Date">
-              <DatePicker />
+            <Form.Item label={t('TABLE.COLUMN_TITLE.CONTRACT_DAY')}>
+              <DatePicker placeholder={t('LABEL.CONTRACT_DATE')} />
             </Form.Item>
 
-            <Form.Item label="Contract Status">
+            <Form.Item label={t('TABLE.COLUMN_TITLE.STATUS')}>
               <Radio.Group onChange={onChange} value={value}>
-                <Radio value={1}>Signed</Radio>
-                <Radio value={2}>Resigned</Radio>
+                <Radio value={1}>{t('RADIO_INPUT.SIGNED')}</Radio>
+                <Radio value={2}>{t('RADIO_INPUT.RESIGNED')}</Radio>
               </Radio.Group>
             </Form.Item>
 
-            <Form.Item label="Remaining Days Off">
-              <Input placeholder="Remaining Days Off" />
+            <Form.Item label={t('LABEL.REMAINING_DAYS_OFFF')}>
+              <Input placeholder={t('LABEL.REMAINING_DAYS_OFFF')} />
             </Form.Item>
 
             <div className="user-regist-form-button">
               <Link to="/users">
-                <Button>Back</Button>
+                <Button>{t('button.BACK')}</Button>
               </Link>
 
-              <Button type="primary">Save</Button>
+              <Button type="primary">{t('button.SAVE')}</Button>
             </div>
           </Form>
         </div>

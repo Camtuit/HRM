@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React from 'react';
 import types from '../../constants/apiResourceTypes';
-import constants from '../../constants/htmlConstants';
+import { useTranslation } from 'react-i18next';
 
 function ButtonTableGroup({
   type,
@@ -9,10 +9,11 @@ function ButtonTableGroup({
   handleExportFileButton,
   handleExportWorkdayButton,
 }) {
+  const { t, i18n } = useTranslation();
   const ButtonAdd = () => {
     return (
       <Button className="table-button" type="primary" onClick={handleAddButton}>
-        {constants.BUTTON.ADD}
+        {t('button.add')}
       </Button>
     );
   };
@@ -23,7 +24,7 @@ function ButtonTableGroup({
         type="primary"
         onClick={handleExportFileButton}
       >
-        {constants.BUTTON.EXPORT_FILE}
+        {t('buttonCommon.export_file')}
       </Button>
     );
   };
@@ -34,7 +35,7 @@ function ButtonTableGroup({
         type="primary"
         onClick={handleExportWorkdayButton}
       >
-        {constants.BUTTON.EXPORT_WORKDAYS}
+        {t('buttonCommon.export_workdays')}
       </Button>
     );
   };
