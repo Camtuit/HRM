@@ -80,6 +80,15 @@ const buttonCommon = {
     FERMALE: 'Female',
     SIGNED: 'Signed',
     RESIGNED: 'Resigned',
+    QUICK_CHOOSE: '  Quick choose',
+    ALL: 'All',
+    TODAY: 'Today',
+    THIS_WEEK: 'This week',
+    LAST_WEEK: 'Last week',
+    THIS_MONTH: 'This month',
+    LAST_MONTH: 'Last month',
+    AVAILABLE: 'Available',
+    INACTIVE: 'Inactive',
   },
 
   //page User

@@ -11,6 +11,7 @@ function UserSearchBox({
   setContractDateEnd,
   setEmployeeStatus,
 }) {
+  const { t, i18n } = useTranslation();
   const [componentSize, setComponentSize] = useState('default');
   const [quickChooseValue, setQuickChooseValue] = useState();
   const [currentContractStatus, setCurrentContractStatus] = useState();
@@ -18,7 +19,6 @@ function UserSearchBox({
   const [currentFullName, setCurrentFullName] = useState();
   const [currentContractDateBegin, setCurrentContractDateBegin] = useState();
   const [currentContractDateEnd, setCurrentContractDateEnd] = useState();
-  const { t, i18n } = useTranslation();
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
@@ -165,7 +165,7 @@ function UserSearchBox({
                   {t('RADIO_INPUT.AVAILABLE')}
                 </Select.Option>
                 <Select.Option value={initialState.employee_status.inActive}>
-                  {t('RADIO_INPUT.AVAILABLE')}
+                  {t('RADIO_INPUT.INACTIVE')}
                 </Select.Option>
               </Select>
             </Form.Item>
