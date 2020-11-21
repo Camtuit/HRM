@@ -7,7 +7,7 @@ import '../../css/UserTable.css';
 import { displayUsers } from '../../apis/userApi';
 import Toast from '../commons/ToastCommon';
 import initialState from '../../constants/initialState';
-
+import { useTranslation } from 'react-i18next';
 function UserTable({
   fullName,
   contractStatus,
@@ -17,6 +17,7 @@ function UserTable({
   page,
   setPage,
 }) {
+  const { t, i18n } = useTranslation();
   const [totalRecord, setTotalRecord] = useState(null);
   const [recordPerPage, setRecordPerPage] = useState(null);
   const [currentPage, setCurrentPage] = useState(null);
@@ -69,12 +70,12 @@ function UserTable({
   });
   const columns = [
     {
-      title: constant.TABLE.COLUMN_TITLE.NO,
+      title: t('TABLE.COLUMN_TITLE.NO'),
       dataIndex: 'number',
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.NAME,
+      title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'full_name',
       sorter: {
         compare: (a, b) => a.name - b.name,
@@ -83,17 +84,17 @@ function UserTable({
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.EMAIL,
+      title: t('LABEL.EMAIl'),
       dataIndex: 'email',
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.PHONE_NUMBER,
+      title: t('LABEL.PHONE_NUMBER'),
       dataIndex: 'phone_number',
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.CONTRACT_DAY,
+      title: t('LABEL.CONTRACT_DATE'),
       dataIndex: 'contract_date',
       sorter: {
         compare: (a, b) => a.contractDay - b.contractDay,
@@ -102,33 +103,33 @@ function UserTable({
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.EMPLOYEE_STATUS,
+      title: t('TABLE.COLUMN_TITLE.EMPLOYEE_STATUS'),
       dataIndex: 'employee_status',
       render: (value) => (
         <Select defaultValue={value} style={{ width: 100 }}>
           <Select.Option value={initialState.employee_status.active}>
-            {constant.EMPLOYEE_STATUS.AVAILABLE}
+            {t('RADIO_INPUT.AVAILABLE')}
           </Select.Option>
           <Select.Option value={initialState.employee_status.inActive}>
-            {constant.EMPLOYEE_STATUS.IN_ACTIVE}
+            {t('RADIO_INPUT.INACTIVE')}
           </Select.Option>
         </Select>
       ),
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.CONTRACT_STATUS,
+      title: t('TABLE.COLUMN_TITLE.STATUS'),
       dataIndex: 'contract_status',
       render: (value) => (value ? <span>Signed</span> : <span>Resigned</span>),
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.ACTION,
+      title: t('TABLE.COLUMN_TITLE.ACTION'),
       fixed: 'right',
       dataIndex: 'action',
       width: 100,
       render: (value) => (
-        <Tooltip title={constant.TOOLTIP.TITLE.EDIT}>
+        <Tooltip title={t('toolip.TITLE.EDIT')}>
           <span>
             <i className="fas fa-edit skill-popup-common-icon"></i>
           </span>

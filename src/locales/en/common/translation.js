@@ -27,7 +27,7 @@ const buttonCommon = {
       TYPE: 'Type',
       PO_NAME: "PO's Name",
       STATUS: 'Contract status',
-      EMPLOYEE_STATUS: 'Employee',
+      EMPLOYEE_STATUS: 'Employee status',
       ACTION: 'Action',
       PHONE_NUMBER: 'Phone number',
       CONTRACT_DAY: 'Contract day',
