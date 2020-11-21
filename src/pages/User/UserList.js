@@ -10,7 +10,8 @@ function UserList() {
   const [contractStatus, setContractStatus] = useState('');
   const [contractDateBegin, setContractDateBegin] = useState('');
   const [contractDateEnd, setContractDateEnd] = useState('');
-  const [page, setPage] = useState(0);
+  const [employeeStatus, setEmployeeStatus] = useState(1);
+  const [page, setPage] = useState(1);
   const { t, i18n } = useTranslation();
   return (
     <WrapperContent className="user-list-content">
@@ -21,14 +22,14 @@ function UserList() {
         setContractStatus={setContractStatus}
         setContractDateBegin={setContractDateBegin}
         setContractDateEnd={setContractDateEnd}
-        // setEmployeeStatus={setEmployeeStatus}
+        setEmployeeStatus={setEmployeeStatus}
       />
       <UserTable
         fullName={fullName}
         contractStatus={contractStatus}
         contractDateBegin={contractDateBegin}
         contractDateEnd={contractDateEnd}
-        // employeeStatus={employeeStatus}
+        employeeStatus={employeeStatus}
         page={page}
         setPage={setPage}
         setFullName={setFullName}
