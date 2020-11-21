@@ -2,7 +2,7 @@
 import { Button, Form, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import {
   callLoader,
   closeLoader,
@@ -16,6 +16,7 @@ import { RESPONSE_CODE } from '../../constants/errorText';
 import Toast from '../commons/ToastCommon';
 
 function SkillRegistInput({ active, value }) {
+  const { t, i18n } = useTranslation();
   const [skillName, setSkillName] = useState('');
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -164,14 +165,14 @@ function SkillRegistInput({ active, value }) {
           value === undefined
             ? [
                 <Button htmlType="submit" onClick={handleSaveAndQuit}>
-                  {constant.BUTTON.SAVE_AND_QUIT}
+                  {t('button.SAVE_AND_QUIT')}
                 </Button>,
                 <Button
                   htmlType="submit"
                   type="primary"
                   onClick={handleSaveAndContinue}
                 >
-                  {constant.BUTTON.SAVE_AND_CONTINUE}
+                  {t('button.SAVE_AND_CONTINUE')}
                 </Button>,
               ]
             : [
@@ -180,7 +181,7 @@ function SkillRegistInput({ active, value }) {
                   type="primary"
                   onClick={handleEditSkill}
                 >
-                  {constant.BUTTON.SUBMIT}
+                  {t('button.SUBMIT')}
                 </Button>,
               ]
         }
@@ -194,14 +195,17 @@ function SkillRegistInput({ active, value }) {
         >
           <Form.Item
             name="skill"
-            label={constant.LABEL.NAME}
+            label={t('LABEL.NAME')}
             rules={[
               {
                 required: true,
               },
             ]}
           >
-            <Input onChange={handleChangeSkillName} placeholder="Skill name" />
+            <Input
+              onChange={handleChangeSkillName}
+              placeholder={t('Skill.NAME_SKILL')}
+            />
           </Form.Item>
         </Form>
       </Modal>

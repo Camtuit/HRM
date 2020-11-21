@@ -4,6 +4,7 @@ import '../../css/SkillTable.css';
 import { useDispatch, useSelector } from 'react-redux';
 import SkillRegistInput from './SkillRegistInput';
 import RemovePopupCommon from '../commons/RemovePopup';
+import { useTranslation } from 'react-i18next';
 import {
   closeLoader,
   togglePopup,
@@ -27,6 +28,7 @@ function SkillTable({
   setCurrentPage,
   setCurrentName,
 }) {
+  const { t, i18n } = useTranslation();
   const [currentRecord, setCurrentRecord] = useState({});
   const [totalRecord, setTotalRecord] = useState(null);
   const [data, setData] = useState(null);
@@ -108,30 +110,30 @@ function SkillTable({
   };
   const columns = [
     {
-      title: 'No.',
+      title: t('TABLE.COLUMN_TITLE.NO'),
       dataIndex: 'no',
       key: 'no',
       width: 100,
     },
     {
-      title: 'Name',
+      title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: 'Updated at',
+      title: t('TABLE.COLUMN_TITLE.UPDATE'),
       dataIndex: 'updated',
       key: 'updated',
     },
     {
-      title: 'Action',
+      title: t('TABLE.COLUMN_TITLE.ACTION'),
       key: 'empty',
       fixed: 'center',
       align: 'center',
       width: 100,
       render: (value) => (
         <div className="skill-table-action">
-          <Tooltip title={constant.TOOLTIP.TITLE.EDIT}>
+          <Tooltip title={t('toolip.EDIT')}>
             <span>
               <i
                 onClick={(id) => handleTogglePopupEdit(value.id)}
