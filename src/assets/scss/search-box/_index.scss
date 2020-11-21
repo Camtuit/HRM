@@ -1,7 +1,7 @@
 .search-box {
   border: 1px solid #e3e3e3;
   margin: 0 20px;
-  padding: 30px;
+  padding: 15px 0px 0px 0px;
   &__item {
     // width: 20%;
   }
@@ -37,7 +37,6 @@
   }
   .search-box-button {
     @include flex(row, flex-end);
-    margin-top: -50px;
     .buttons {
       margin-left: auto;
     }

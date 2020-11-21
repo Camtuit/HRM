@@ -6,6 +6,7 @@ export async function displayUsers(
   contract_status,
   contract_date_end_from,
   contract_date_end_to,
+  active,
   page,
 ) {
   try {
@@ -15,6 +16,7 @@ export async function displayUsers(
         contract_status,
         contract_date_end_from,
         contract_date_end_to,
+        active,
         page,
       },
     });

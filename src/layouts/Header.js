@@ -42,10 +42,12 @@ function Header() {
         <Link to="/">
           <div className="wrapper-logo" style={styleWrapperLogo}>
             <ReactLogo className="logo" alt="Logo" />
-            {toggledSideBar && (
+            {toggledSideBar ? (
               <span>
                 <b>NAL</b>Hrm
               </span>
+            ) : (
+              ''
             )}
           </div>
         </Link>
