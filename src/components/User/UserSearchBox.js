@@ -3,7 +3,7 @@ import { Form, Input, Button, Select, DatePicker, Row, Col, Card } from 'antd';
 import moment from 'moment';
 import constants from '../../constants/htmlConstants';
 import initialState from '../../constants/initialState';
-
+import { useTranslation } from 'react-i18next';
 function UserSearchBox({
   setFullName,
   setContractStatus,
@@ -18,6 +18,7 @@ function UserSearchBox({
   const [currentFullName, setCurrentFullName] = useState();
   const [currentContractDateBegin, setCurrentContractDateBegin] = useState();
   const [currentContractDateEnd, setCurrentContractDateEnd] = useState();
+  const { t, i18n } = useTranslation();
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
@@ -119,10 +120,10 @@ function UserSearchBox({
           <Col xs={24} sm={24} md={24} lg={24} xl={8}>
             <Form.Item
               className="search-box_item search-box_item--name"
-              label={constants.LABEL.NAME}
+              label={t('LABEL.NAME')}
             >
               <Input
-                placeholder={constants.LABEL.NAME}
+                placeholder={t('LABEL.NAME')}
                 value={currentFullName}
                 onChange={onChangeFullName}
               />
@@ -131,18 +132,18 @@ function UserSearchBox({
           <Col xs={24} sm={24} md={24} lg={24} xl={8}>
             <Form.Item
               className="search-box_item search-box_item--status user-status-input"
-              label={constants.LABEL.CONTRACT_STATUS}
+              label={t('TABLE.COLUMN_TITLE.STATUS')}
             >
               <Select
-                placeholder={constants.LABEL.CONTRACT_STATUS}
+                placeholder={t('TABLE.COLUMN_TITLE.STATUS')}
                 onChange={onChangeContractStatus}
                 value={currentContractStatus}
               >
                 <Select.Option value="0">
-                  {constants.CONTRACT_STATUS.RESIGNED}
+                  {t('RADIO_INPUT.SIGNED')}
                 </Select.Option>
                 <Select.Option value="1">
-                  {constants.CONTRACT_STATUS.SIGNED}
+                  {t('RADIO_INPUT.RESIGNED')}
                 </Select.Option>
               </Select>
             </Form.Item>
@@ -150,21 +151,21 @@ function UserSearchBox({
           <Col xs={24} sm={24} md={24} lg={24} xl={8}>
             <Form.Item
               className="search-box_item search-box_item--status user-status-input"
-              label={constants.LABEL.EMPLOYEE_STATUS}
+              label={t('TABLE.COLUMN_TITLE.EMPLOYEE_STATUS')}
             >
               <Select
-                placeholder={constants.LABEL.EMPLOYEE_STATUS}
+                placeholder={t('TABLE.COLUMN_TITLE.EMPLOYEE_STATUS')}
                 onChange={onChangeEmployeeStatus}
                 value={currentEmployeeStatus}
               >
                 <Select.Option value={initialState.employee_status.all}>
-                  {constants.EMPLOYEE_STATUS.ALL}
+                  {t('RADIO_INPUT.ALL')}
                 </Select.Option>
                 <Select.Option value={initialState.employee_status.active}>
-                  {constants.EMPLOYEE_STATUS.AVAILABLE}
+                  {t('RADIO_INPUT.AVAILABLE')}
                 </Select.Option>
                 <Select.Option value={initialState.employee_status.inActive}>
-                  {constants.EMPLOYEE_STATUS.IN_ACTIVE}
+                  {t('RADIO_INPUT.AVAILABLE')}
                 </Select.Option>
               </Select>
             </Form.Item>
@@ -187,36 +188,36 @@ function UserSearchBox({
           <Col xs={24} sm={24} md={24} lg={24} xl={8}>
             <Form.Item
               className="search-box_item search-box_item--choose"
-              label={constants.LABEL.QUICK_CHOOSE}
+              label={t('RADIO_INPUT.QUICK_CHOOSE')}
             >
               <Select
-                placeholder={constants.LABEL.QUICK_CHOOSE}
+                placeholder={t('RADIO_INPUT.QUICK_CHOOSE')}
                 onChange={onChangeValueQuickChoose}
                 value={quickChooseValue}
               >
                 <Select.Option value={0}>
-                  {constants.QUICK_CHOOSE.TODAY}
+                  {t('RADIO_INPUT.TODAY')}
                 </Select.Option>
                 <Select.Option value={1}>
-                  {constants.QUICK_CHOOSE.THIS_WEEK}
+                  {t('RADIO_INPUT.THIS_WEEK')}
                 </Select.Option>
                 <Select.Option value={2}>
-                  {constants.QUICK_CHOOSE.LAST_WEEK}
+                  {t('RADIO_INPUT.LAST_WEEK')}
                 </Select.Option>
                 <Select.Option value={3}>
-                  {constants.QUICK_CHOOSE.THIS_MONTH}
+                  {t('RADIO_INPUT.THIS_MONTH')}
                 </Select.Option>
                 <Select.Option value={4}>
-                  {constants.QUICK_CHOOSE.LAST_MONTH}
+                  {t('RADIO_INPUT.LAST_MONTH')}
                 </Select.Option>
               </Select>
             </Form.Item>{' '}
           </Col>
           <Col xs={24} sm={24} md={24} lg={11} xl={8}>
             <div className="search-box-button">
-              <Button onClick={handleCancel}>{constants.BUTTON.CANCEL}</Button>
+              <Button onClick={handleCancel}> {t('button.search')}</Button>
               <Button type="primary" onClick={handleSearchUser}>
-                {constants.BUTTON.SEARCH}
+                {t('button.search')}
               </Button>
             </div>
           </Col>

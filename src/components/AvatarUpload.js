@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
+import { useTranslation } from 'react-i18next';
 
 const AvatarUpload = () => {
+  const { t, i18n } = useTranslation();
   const [fileList, setFileList] = useState([]);
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
   useEffect(() => {}, [fileList]);
-
   const onPreview = async (file) => {
     let src = file.url;
     if (!src) {
@@ -33,7 +34,7 @@ const AvatarUpload = () => {
       onPreview={onPreview}
       name="image"
     >
-      {fileList.length < 1 && '+ Avatar'}
+      {fileList.length < 1 && t('USER.USER_REGIST.AVATAR')}
     </Upload>
   );
 };
