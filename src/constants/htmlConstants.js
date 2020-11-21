@@ -38,6 +38,7 @@ const constants = {
     NUMBER_OF_DEVICE: 'Number of device',
     EQUIPMENT_REQUIRED_REASON: 'Equipment required reason',
     CONTRACT_STATUS: 'Contract Status',
+    EMPLOYEE_STATUS: 'Employee Status',
     CONTRACT: 'Contract',
   },
   LABEL_FROFILE: {
@@ -74,6 +75,8 @@ const constants = {
     LABEL_COL_3: 3,
     LABEL_COL_4: 4,
     LABEL_COL_5: 5,
+    LABEL_COL_6: 6,
+    LABEL_COL_7: 7,
     LABEL_COL_8: 8,
   },
   WRAPPER_COL: {
@@ -81,6 +84,8 @@ const constants = {
     WRAPPER_COL_10: 10,
     WRAPPER_COL_12: 12,
     WRAPPER_COL_15: 15,
+    WRAPPER_COL_17: 17,
+    WRAPPER_COL_18: 18,
     WRAPPER_COL_19: 19,
   },
   BUTTON: {
@@ -124,6 +129,11 @@ const constants = {
     SIGNED: 'Signed',
     RESIGNED: 'Resigned',
   },
+  EMPLOYEE_STATUS: {
+    ALL: 'All',
+    AVAILABLE: 'Available',
+    IN_ACTIVE: 'Inactive',
+  },
   TOOLTIP: {
     PLACEMENT: {
       TOP: 'top',
@@ -142,6 +152,10 @@ const constants = {
       TYPE: 'Type',
       PO_NAME: "PO's Name",
       ACTION: 'Action',
+      PHONE_NUMBER: 'Phone number',
+      CONTRACT_DAY: 'Contract day',
+      EMPLOYEE_STATUS: 'Employee status',
+      CONTRACT_STATUS: 'Contract status',
     },
     COLUMN_FIXED: {
       RIGHT: 'right',
