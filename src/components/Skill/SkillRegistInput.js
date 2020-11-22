@@ -3,21 +3,21 @@ import { Button, Form, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import {
-  callLoader,
-  closeLoader,
-  togglePopup,
-} from '../../actions/utilsAction';
+import { togglePopup } from '../../actions/utilsAction';
 import constant from '../../constants/htmlConstants';
 import '../../css/HolidayRegistPopup.css';
-import Alert from '../commons/AlertCommon';
 import { createSkill, editSkillById } from '../../apis/skillApi';
 import { RESPONSE_CODE } from '../../constants/errorText';
 import Toast from '../commons/ToastCommon';
-
 function SkillRegistInput({ active, value }) {
   const { t, i18n } = useTranslation();
+  const initialLoadings = {
+    [t('button.SAVE_AND_QUIT')]: false,
+    [t('button.SAVE_AND_CONTINUE')]: false,
+    [t('button.SUBMIT')]: false,
+  };
   const [skillName, setSkillName] = useState('');
+  const [loadings, setLoadings] = useState(initialLoadings);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,87 +28,79 @@ function SkillRegistInput({ active, value }) {
       });
     }
   }, [value, form]);
-  const handleRequestAPISaveandQuit = () => {
+
+  const handleLoading = (value) => {
+    const message =
+      value === t('button.SAVE_AND_QUIT') ||
+      value === t('button.SAVE_AND_CONTINUE')
+        ? 'Created Successfull!'
+        : 'Updated Successfull!';
+    const isSaveAndContinue = value === t('button.SAVE_AND_CONTINUE');
+    setTimeout(() => {
+      Toast({ message });
+      form.resetFields();
+      setSkillName('');
+      setLoadings(initialLoadings);
+      !isSaveAndContinue && dispatch(togglePopup());
+    }, constant.REQUEST_TIMEOUT);
+  };
+
+  const handleSetLoadings = (key) => {
+    setLoadings((loadings) => {
+      const newLoadings = { ...loadings };
+      newLoadings[key] = true;
+      return newLoadings;
+    });
+  };
+
+  const handleRequestAPISaveandQuit = (value) => {
     const newSkill = {
       name: skillName,
     };
     try {
-      dispatch(callLoader());
+      handleSetLoadings(value);
       createSkill(newSkill).then((response) => {
-        if (response !== RESPONSE_CODE[409]) {
-          setTimeout(() => {
-            dispatch(closeLoader());
-            Toast({ message: 'Created Successfull!' });
-            form.resetFields();
-            dispatch(togglePopup());
-            setSkillName('');
-          }, constant.REQUEST_TIMEOUT);
-        } else {
-          dispatch(closeLoader());
-          form.setFields([
-            {
-              name: 'skill',
-              errors: [RESPONSE_CODE[409]],
-            },
-          ]);
-        }
+        if (response !== RESPONSE_CODE[409]) handleLoading(value);
+        else handleExistSkill();
       });
     } catch (error) {
       return error;
     }
   };
-  const handleRequestAPISaveAndContinue = () => {
+
+  const handleExistSkill = () => {
+    setLoadings(initialLoadings);
+    form.setFields([
+      {
+        name: 'skill',
+        errors: [RESPONSE_CODE[409]],
+      },
+    ]);
+  };
+
+  const handleRequestAPISaveAndContinue = (value) => {
     const newSkill = {
       name: skillName,
     };
     try {
-      dispatch(callLoader());
+      handleSetLoadings(value);
       createSkill(newSkill).then((response) => {
-        if (response !== RESPONSE_CODE[409]) {
-          setTimeout(() => {
-            dispatch(closeLoader());
-            Toast({ message: 'Created Successfull!' });
-            form.resetFields();
-            setSkillName('');
-          }, constant.REQUEST_TIMEOUT);
-        } else {
-          dispatch(closeLoader());
-          form.setFields([
-            {
-              name: 'skill',
-              errors: [RESPONSE_CODE[409]],
-            },
-          ]);
-        }
+        if (response !== RESPONSE_CODE[409]) handleLoading(value);
+        else handleExistSkill();
       });
     } catch (error) {
       return error;
     }
   };
-  const handleRequestAPIEditSkill = () => {
+  const handleRequestAPIEditSkill = (value) => {
     const skill = {
       name: skillName,
     };
     try {
-      dispatch(callLoader());
+      handleSetLoadings(value);
       editSkillById(value.id, skill).then((response) => {
-        if (response !== RESPONSE_CODE[409]) {
-          setTimeout(() => {
-            dispatch(closeLoader());
-            Toast({ message: 'Updated Successfull!' });
-            form.resetFields();
-            dispatch(togglePopup());
-            setSkillName('');
-          }, constant.REQUEST_TIMEOUT);
-        } else {
-          dispatch(closeLoader());
-          form.setFields([
-            {
-              name: 'skill',
-              errors: [RESPONSE_CODE[409]],
-            },
-          ]);
-        }
+        if (response !== RESPONSE_CODE[409]) handleLoading(value);
+        else handleExistSkill();
       });
     } catch (error) {
       return error;
@@ -117,33 +109,35 @@ function SkillRegistInput({ active, value }) {
   const handleChangeSkillName = (e) => {
     setSkillName(e.target.value);
   };
-  const handleSaveAndQuit = () => {
+  const handleSaveAndQuit = (event) => {
+    const valueButton = event.target.value;
     form
       .validateFields()
       .then(() => {
-        handleRequestAPISaveandQuit();
+        handleRequestAPISaveandQuit(valueButton);
       })
       .catch((errorInfo) => {
         return errorInfo;
       });
   };
 
-  const handleSaveAndContinue = () => {
+  const handleSaveAndContinue = (event) => {
+    event.stopPropagation();
     form
       .validateFields()
       .then(() => {
-        handleRequestAPISaveAndContinue();
+        handleRequestAPISaveAndContinue(event.target.value);
       })
       .catch((errorInfo) => {
         return errorInfo;
       });
   };
-  const handleEditSkill = () => {
+  const handleEditSkill = (event) => {
     if (value !== undefined) {
       form
         .validateFields()
         .then(() => {
-          handleRequestAPIEditSkill();
+          handleRequestAPIEditSkill(event.target.value);
         })
         .catch((errorInfo) => {
           return errorInfo;
@@ -164,13 +158,20 @@ function SkillRegistInput({ active, value }) {
         footer={
           value === undefined
             ? [
-                <Button htmlType="submit" onClick={handleSaveAndQuit}>
+                <Button
+                  htmlType="submit"
+                  onClick={handleSaveAndQuit}
+                  loading={loadings[t('button.SAVE_AND_QUIT')]}
+                  value={t('button.SAVE_AND_QUIT')}
+                >
                   {t('button.SAVE_AND_QUIT')}
                 </Button>,
                 <Button
                   htmlType="submit"
                   type="primary"
                   onClick={handleSaveAndContinue}
+                  loading={loadings[t('button.SAVE_AND_CONTINUE')]}
+                  value={t('button.SAVE_AND_CONTINUE')}
                 >
                   {t('button.SAVE_AND_CONTINUE')}
                 </Button>,
@@ -180,6 +181,8 @@ function SkillRegistInput({ active, value }) {
                   htmlType="submit"
                   type="primary"
                   onClick={handleEditSkill}
+                  loading={loadings[t('button.SUBMIT')]}
+                  value={t('button.SUBMIT')}
                 >
                   {t('button.SUBMIT')}
                 </Button>,

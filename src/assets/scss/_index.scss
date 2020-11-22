@@ -73,3 +73,10 @@ fas.fa-trash-alt {
     margin-right: 10px;
   }
 }
+
+.ant-btn{
+  cursor: pointer;
+  span{
+    pointer-events: none;
+  }
+}
