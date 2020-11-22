@@ -35,9 +35,14 @@ function SkillTable({
   const toggledPopup = useSelector((state) => state.toggledPopup);
   const [valueSkill, setValueSkill] = useState();
   const dispatch = useDispatch();
+  const [isButtonLoading, setIsButtonLoading] = React.useState(false);
   const handleTogglePopupAdd = () => {
     setValueSkill();
     dispatch(togglePopup());
+    setIsButtonLoading(true);
+    setTimeout(() => {
+      setIsButtonLoading(false);
+    }, 500);
   };
   const handleTogglePopupEdit = (id) => {
     try {
@@ -64,7 +69,7 @@ function SkillTable({
   useEffect(() => {
     try {
       if (!toggledPopup) {
-        displaySkills(currentPage, currentName)
+        displaySkills(currentPage + 1, currentName)
           .then((response) => {
             if (response !== RESPONSE_CODE[404]) {
               const getData = response.data.data.map((elm, index) => {
@@ -133,7 +138,7 @@ function SkillTable({
       width: 100,
       render: (value) => (
         <div className="skill-table-action">
-          <Tooltip title={t('toolip.EDIT')}>
+          <Tooltip title={t('toolip.TITLE.EDIT')}>
             <span>
               <i
                 onClick={(id) => handleTogglePopupEdit(value.id)}

@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import loaderGif from '../../assets/images/loader.gif';
-
 function Loader(props) {
   const { loader } = props;
 
@@ -13,7 +11,7 @@ function Loader(props) {
   }, [loader]);
   return (
     <div className={`wrap-loader ${loader ? '' : 'd-none'}`}>
-      <img src={loaderGif} />
+      <i class="fa fa-spinner fa-spin"></i>
     </div>
   );
 }

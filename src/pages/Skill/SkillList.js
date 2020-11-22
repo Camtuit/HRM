@@ -5,6 +5,7 @@ import SkillTable from '../../components/Skill/SkillTable';
 import WrapperContent from '../../components/commons/WrapperContentPage';
 import '../../css/SkillList.css';
 import { useTranslation } from 'react-i18next';
+
 function SkillList() {
   const { t, i18n } = useTranslation();
   const [currentName, setCurrentName] = useState('');
