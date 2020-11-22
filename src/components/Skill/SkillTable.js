@@ -37,7 +37,7 @@ function SkillTable({
   const [skillsData, setSkillData] = useState([]);
   const [getUrlPagination, setGetUrlPagination] = useState('');
   const toggledPopup = useSelector((state) => state.toggledPopup);
-  const [valueSkill, setValueSkill] = useState();
+  const [valueSkill, setValueSkill] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
   const [isButtonLoading, setIsButtonLoading] = React.useState(false);
@@ -107,6 +107,7 @@ function SkillTable({
     };
     return skillLists;
   });
+
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
     history.push(`/skills?page=${pagination.current}`);
@@ -119,6 +120,7 @@ function SkillTable({
           Toast({ message: 'Deleted Successfull!' });
           const idIndex = getData.findIndex((x) => x.id === id);
           getData.splice(idIndex, 1);
+          setSkillData(getData);
           dispatch(closeLoader());
         }
       });
