@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button, Tooltip, Select } from 'antd';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
+
 import constant from '../../constants/htmlConstants';
 import '../../css/UserTable.css';
 import { displayUsers } from '../../apis/userApi';
 import Toast from '../commons/ToastCommon';
 import initialState from '../../constants/initialState';
-import { useTranslation } from 'react-i18next';
+
 function UserTable({
   fullName,
   contractStatus,
@@ -120,7 +122,8 @@ function UserTable({
     {
       title: t('TABLE.COLUMN_TITLE.STATUS'),
       dataIndex: 'contract_status',
-      render: (value) => (value ? <span>Signed</span> : <span>Resigned</span>),
+      render: (value) =>
+        value === 1 ? <span>Resigned</span> : <span>Signed</span>,
     },
 
     {
