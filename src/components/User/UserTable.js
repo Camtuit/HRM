@@ -30,8 +30,12 @@ function UserTable({
       displayUsers(
         fullName,
         contractStatus,
-        contractDateBegin ? moment(contractDateBegin).format('YYYY-MM-DD') : '',
-        contractDateEnd ? moment(contractDateEnd).format('YYYY-MM-DD') : '',
+        contractDateBegin
+          ? moment(contractDateBegin).format(constant.FORMAT_DATE_PARAM)
+          : '',
+        contractDateEnd
+          ? moment(contractDateEnd).format(constant.FORMAT_DATE_PARAM)
+          : '',
         employeeStatus,
         page,
         sort,
@@ -62,9 +66,9 @@ function UserTable({
       email: user.email,
       phone_number: user.phone_number,
       contract_date: user.contract_date_begin
-        ? `${moment(user.contract_date_begin).format('DD/MM/YYYY')} - ${moment(
-            user.contract_date_end,
-          ).format('DD/MM/YYYY')}`
+        ? `${moment(user.contract_date_begin).format(
+            constant.FORMAT_DATE,
+          )} - ${moment(user.contract_date_end).format(constant.FORMAT_DATE)}`
         : '',
       contract_status: user.contract_status,
       employee_status: user.active,

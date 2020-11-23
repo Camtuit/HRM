@@ -103,6 +103,7 @@ const constants = {
     ASSIGNED: 'Assigned',
   },
   FORMAT_DATE: 'DD/MM/YYYY',
+  FORMAT_DATE_PARAM: 'YYYY-MM-DD',
   QUICK_CHOOSE: {
     TODAY: 'Today',
     THIS_WEEK: 'This week',
