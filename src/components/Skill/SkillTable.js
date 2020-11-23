@@ -106,7 +106,7 @@ function SkillTable({
       setSkillData(null);
     }
     setGetUrlPagination(currentPage + 1);
-  }, [currentPage, currentName, toggledPopup]);
+  }, [currentPage, currentName, toggledPopup, sort, direct]);
   async function onChange(pagination, filters, sorters) {
     await setCurrentPage(pagination.current - 1);
     history.push(`/skills?page=${pagination.current}`);
