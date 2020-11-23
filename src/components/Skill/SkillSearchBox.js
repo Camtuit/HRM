@@ -48,12 +48,16 @@ function SkillSearchBox({ setCurrentName, setCurrentPage }) {
                 placeholder={t('Skill.NAME_SKILL')}
               />
             </Form.Item>
-
+            s{' '}
             <div
               style={{ marginLeft: '0.8rem' }}
               className="user-search-box-button"
             >
-              <Button onClick={handleCancel} style={{ marginRight: '0.8rem' }}>
+              <Button
+                onClick={handleCancel}
+                id="skills-cancel-box-button"
+                style={{ marginRight: '0.8rem' }}
+              >
                 {t('button.cancel')}
               </Button>
               <Button
