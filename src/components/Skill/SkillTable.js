@@ -40,6 +40,8 @@ function SkillTable({
   const [valueSkill, setValueSkill] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
+  const [sort, setSort] = useState(null);
+  const [direct, setDirect] = useState(null);
   const [isButtonLoading, setIsButtonLoading] = React.useState(false);
   const handleTogglePopupAdd = () => {
     setValueSkill();
@@ -74,7 +76,7 @@ function SkillTable({
   useEffect(() => {
     try {
       if (!toggledPopup) {
-        displaySkills(currentPage + 1, currentName)
+        displaySkills(currentPage + 1, currentName, sort, direct)
           .then((res) => {
             if (res !== RESPONSE_CODE[404]) {
               setSkillData(res.data.data);
@@ -96,7 +98,7 @@ function SkillTable({
     } catch (err) {
       setSkillData(null);
     }
-  }, [currentPage, currentName, toggledPopup]);
+  }, [currentPage, currentName, toggledPopup, sort, direct]);
   const getData = skillsData.map((elm, index) => {
     const skillLists = {
       number: index + page * recordPerPage - 9,
@@ -106,9 +108,15 @@ function SkillTable({
     };
     return skillLists;
   });
-  async function onChange(pagination) {
+  async function onChange(pagination, filters, sorters) {
     await setCurrentPage(pagination.current - 1);
     history.push(`/skills?page=${pagination.current}`);
+    setSort('name');
+    if (sorters.order === 'ascend') {
+      setDirect('asc');
+    } else {
+      setDirect('desc');
+    }
   }
   const handleDeleteSkill = (id) => {
     try {
@@ -136,6 +144,7 @@ function SkillTable({
     {
       title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'name',
+      sorter: {},
     },
     {
       title: t('TABLE.COLUMN_TITLE.UPDATE'),

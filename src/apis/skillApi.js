@@ -1,12 +1,14 @@
 import { RESPONSE_CODE } from '../constants/errorText';
 import axiosClient from '../helpers/axiosClient';
 
-export async function displaySkills(page, name) {
+export async function displaySkills(page, name, sort, direct) {
   try {
     return await axiosClient.get('skills', {
       params: {
         page,
         name,
+        sort,
+        direct,
       },
     });
   } catch (e) {
