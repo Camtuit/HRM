@@ -92,7 +92,7 @@ function UserSearchBox({
     setCurrentFullName('');
     setCurrentContractDateBegin('');
     setCurrentContractDateEnd('');
-    setCurrentEmployeeStatus('');
+    setCurrentEmployeeStatus(null);
     setQuickChooseValue();
     setContractStatus('');
     setFullName('');
