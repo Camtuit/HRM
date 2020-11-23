@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow, mount, render, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+<<<<<<< HEAD
+=======
+// import { expect } from 'chai';
+>>>>>>> 9cda6cc... [HRM-228] Create unit test for search skills
 import SkillSearchBox from '../components/Skill/SkillSearchBox';
 
 configure({ adapter: new Adapter() });
@@ -13,23 +17,37 @@ describe('render a div', () => {
   });
 });
 
+<<<<<<< HEAD
 describe('render a search button', () => {
   it('should display search Button', function () {
+=======
+describe('Button Search', () => {
+  it('should display Search Button', function () {
+>>>>>>> 9cda6cc... [HRM-228] Create unit test for search skills
     const wrapper = shallow(<SkillSearchBox />);
     const searchButton = wrapper.find('#skills-search-box-button');
     expect(searchButton.length).toBe(1);
   });
 });
 
+<<<<<<< HEAD
 describe('render a cancel button', () => {
   it('should display cancel Button', function () {
     const wrapper = shallow(<SkillSearchBox />);
     const cancelButton = wrapper.find('#skills-cancel-box-button');
     expect(cancelButton.length).toBe(1);
+=======
+describe('Button Cancel', () => {
+  it('should display Search Button', function () {
+    const wrapper = shallow(<SkillSearchBox />);
+    const searchButton = wrapper.find('#skills-search-box-button');
+    expect(searchButton.length).toBe(1);
+>>>>>>> 9cda6cc... [HRM-228] Create unit test for search skills
   });
 });
 
 describe('the rendered div', () => {
+<<<<<<< HEAD
   it('contains everything else that gets rendered', function () {
     const wrapper = shallow(<SkillSearchBox />);
     const searchButton = wrapper.find('div');
@@ -63,5 +81,11 @@ describe('event button cancel', () => {
     expect(wrapper.state().data).toBe('state1');
     wrapper.find('#skills-cancel-box-button').simulate('click');
     expect(wrapper.state().data).toBe('state2');
+=======
+  it('contains everything else that gets rendered', () => {
+    const wrapper = shallow(<SkillSearchBox />);
+    const searchButton = wrapper.find('div');
+    expect(searchButton.children()).toEqual(SkillSearchBox().children());
+>>>>>>> 9cda6cc... [HRM-228] Create unit test for search skills
   });
 });
