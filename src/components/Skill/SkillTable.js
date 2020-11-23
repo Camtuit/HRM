@@ -152,7 +152,7 @@ function SkillTable({
       width: 100,
       render: (value) => (
         <div className="skill-table-action">
-          <Tooltip title={t('toolip.EDIT')}>
+          <Tooltip title={t('toolip.TITLE.EDIT')}>
             <span>
               <i
                 onClick={(id) => handleTogglePopupEdit(value.id)}

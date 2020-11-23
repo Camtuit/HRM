@@ -3,17 +3,12 @@ import { Button, Form, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import {
-  callLoader,
-  closeLoader,
-  togglePopup,
-} from '../../actions/utilsAction';
+import { togglePopup } from '../../actions/utilsAction';
 import constant from '../../constants/htmlConstants';
 import '../../css/HolidayRegistPopup.css';
 import { createSkill, editSkillById } from '../../apis/skillApi';
 import { RESPONSE_CODE } from '../../constants/errorText';
 import Toast from '../commons/ToastCommon';
-
 function SkillRegistInput({ active, value }) {
   const { t, i18n } = useTranslation();
   const initialLoadings = {
