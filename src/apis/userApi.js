@@ -8,6 +8,8 @@ export async function displayUsers(
   contract_date_end_to,
   active,
   page,
+  sort,
+  direct,
 ) {
   try {
     return await axiosClientPHP.get('users', {
@@ -18,6 +20,8 @@ export async function displayUsers(
         contract_date_end_to,
         active,
         page,
+        sort,
+        direct,
       },
     });
   } catch (e) {

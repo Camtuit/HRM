@@ -31,8 +31,12 @@ function UserTable({
       displayUsers(
         fullName,
         contractStatus,
-        contractDateBegin ? moment(contractDateBegin).format('YYYY-MM-DD') : '',
-        contractDateEnd ? moment(contractDateEnd).format('YYYY-MM-DD') : '',
+        contractDateBegin
+          ? moment(contractDateBegin).format(constant.FORMAT_DATE_PARAM)
+          : '',
+        contractDateEnd
+          ? moment(contractDateEnd).format(constant.FORMAT_DATE_PARAM)
+          : '',
         employeeStatus,
         page,
         sort,
@@ -62,7 +66,11 @@ function UserTable({
       full_name: user.full_name,
       email: user.email,
       phone_number: user.phone_number,
-      contract_date: [user.contract_date_begin, ' ~ ', user.contract_date_end],
+      contract_date: user.contract_date_begin
+        ? `${moment(user.contract_date_begin).format(
+            constant.FORMAT_DATE,
+          )} - ${moment(user.contract_date_end).format(constant.FORMAT_DATE)}`
+        : '',
       contract_status: user.contract_status,
       employee_status: user.active,
       number: index + (currentPage - 1) * recordPerPage + 1,
@@ -79,10 +87,7 @@ function UserTable({
     {
       title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'full_name',
-      sorter: {
-        compare: (a, b) => a.name - b.name,
-        multiple: 3,
-      },
+      sorter: {},
     },
 
     {
@@ -143,9 +148,23 @@ function UserTable({
 
   async function onChangePage(pagination, filters, sorter, extra) {
     await setPage(pagination.current);
-    // console.log(sorter);
-    await setSort('contract_date');
-    await setDirect('asc');
+
+    // Set params
+    if (sorter.field === 'contract_date') {
+      if (sorter.order === 'descend') {
+        setSort('contract_date_end');
+        setDirect('desc');
+      } else if (sorter.order === 'ascend') {
+        setSort('contract_date_end');
+        setDirect('asc');
+      }
+    } else if (sorter.order === 'descend') {
+      setSort(sorter.field);
+      setDirect('desc');
+    } else if (sorter.order === 'ascend') {
+      setSort(sorter.field);
+      setDirect('asc');
+    }
   }
 
   return (
