@@ -5,7 +5,7 @@ import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
 import constant from '../../constants/htmlConstants';
-import '../../css/UserTable.css';
+// import '../../css/UserTable.css';
 import { displayUsers } from '../../apis/userApi';
 import Toast from '../commons/ToastCommon';
 import initialState from '../../constants/initialState';

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import UserSearchBox from '../../components/User/UserSearchBox';
 import UserTable from '../../components/User/UserTable';
 import WrapperContent from '../../components/commons/WrapperContentPage';
-import { useTranslation } from 'react-i18next';
 import '../../css/UserList.css';
+
 function UserList() {
   const [fullName, setFullName] = useState('');
   const [contractStatus, setContractStatus] = useState('');

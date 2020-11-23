@@ -221,7 +221,12 @@ function UserSearchBox({
                 {' '}
                 {t('button.cancel')}
               </Button>
-              <Button type="primary" onClick={handleSearchUser}>
+              <Button
+                type="primary"
+                onClick={handleSearchUser}
+                id="user-search-box-search-button"
+                data-test="buttonSearch"
+              >
                 {t('button.search')}
               </Button>
             </div>
