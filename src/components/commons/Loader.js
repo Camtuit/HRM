@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+
 function Loader(props) {
   const { loader } = props;
 
@@ -11,7 +12,7 @@ function Loader(props) {
   }, [loader]);
   return (
     <div className={`wrap-loader ${loader ? '' : 'd-none'}`}>
-      <i class="fa fa-spinner fa-spin"></i>
+      <i className="fa fa-spinner fa-spin"></i>
     </div>
   );
 }

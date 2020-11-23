@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/nal-solutions/hrm-fe.git"
   },
+  "transform": {
+    "\\.js$": "<rootDir>/node_modules/babel-jest"
+  },
   "author": "",
   "license": "ISC",
   "homepage": "https://bitbucket.org/nal-solutions/hrm-fe#readme",

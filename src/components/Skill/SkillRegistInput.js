@@ -9,6 +9,7 @@ import '../../css/HolidayRegistPopup.css';
 import { createSkill, editSkillById } from '../../apis/skillApi';
 import { RESPONSE_CODE } from '../../constants/errorText';
 import Toast from '../commons/ToastCommon';
+
 function SkillRegistInput({ active, value }) {
   const { t, i18n } = useTranslation();
   const initialLoadings = {
