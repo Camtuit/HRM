@@ -105,7 +105,6 @@ function SkillTable({
     } catch (err) {
       setSkillData(null);
     }
-    setGetUrlPagination(currentPage + 1);
   }, [currentPage, currentName, toggledPopup]);
   async function onChange(pagination, filters, sorters) {
     await setCurrentPage(pagination.current - 1);
@@ -190,7 +189,6 @@ function SkillTable({
           current: currentPage + 1,
           pageSize: recordPerPage,
         }}
-        loading="false"
         onRow={(record) => {
           return {
             onClick: () => {
