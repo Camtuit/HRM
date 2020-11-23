@@ -189,6 +189,7 @@ function SkillTable({
           current: currentPage + 1,
           pageSize: recordPerPage,
         }}
+        loading="false"
         onRow={(record) => {
           return {
             onClick: () => {
