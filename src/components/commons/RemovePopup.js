@@ -17,7 +17,7 @@ function RemovePopupCommon({ title, content, onOk, value }) {
       <Tooltip title="Delete">
         <span>
           <i
-            class="fas fa-trash-alt remove-popup-common-icon"
+            className="fas fa-trash-alt remove-popup-common-icon"
             onClick={showModal}
           ></i>
         </span>

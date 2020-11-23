@@ -29,13 +29,13 @@ function SkillTable({
   setCurrentPage,
   setCurrentName,
 }) {
+  const location = useLocation();
   const { t, i18n } = useTranslation();
   const [currentRecord, setCurrentRecord] = useState({});
   const [totalRecord, setTotalRecord] = useState(null);
   const [recordPerPage, setRecordPerPage] = useState(null);
-  const [page, setPage] = useState([]);
+  const [page, setPage] = useState();
   const [skillsData, setSkillData] = useState([]);
-  const [getUrlPagination, setGetUrlPagination] = useState('');
   const toggledPopup = useSelector((state) => state.toggledPopup);
   const [valueSkill, setValueSkill] = useState('');
   const dispatch = useDispatch();
@@ -73,13 +73,19 @@ function SkillTable({
       setSkillData(null);
     }
   };
+  console.log(location);
   useEffect(() => {
     try {
       if (!toggledPopup) {
         displaySkills(currentPage + 1, currentName, sort, direct)
           .then((res) => {
             if (res !== RESPONSE_CODE[404]) {
-              setSkillData(res.data.data);
+              const newData = res.data.data.map((item, index) => ({
+                ...item,
+                key: item.id,
+                number: index + page * recordPerPage,
+              }));
+              setSkillData(newData);
               setTotalRecord(res.data.meta.pagination.total);
               setRecordPerPage(res.data.meta.pagination.per_page);
               setPage(res.data.meta.pagination.current_page);
@@ -99,15 +105,7 @@ function SkillTable({
       setSkillData(null);
     }
   }, [currentPage, currentName, toggledPopup, sort, direct]);
-  const getData = skillsData.map((elm, index) => {
-    const skillLists = {
-      number: index + page * recordPerPage - 9,
-      id: elm.id,
-      name: elm.name,
-      updated: elm.updated_at,
-    };
-    return skillLists;
-  });
+
   async function onChange(pagination, filters, sorters) {
     await setCurrentPage(pagination.current - 1);
     history.push(`/skills?page=${pagination.current}`);
@@ -119,20 +117,8 @@ function SkillTable({
     }
   }
   const handleDeleteSkill = (id) => {
-    try {
-      dispatch(callLoader());
-      deleteSkillById(id).then((res) => {
-        if (res !== RESPONSE_CODE[422]) {
-          Toast({ message: 'Deleted Successfull!' });
-          const idIndex = getData.findIndex((x) => x.id === id);
-          getData.splice(idIndex, 1);
-          setSkillData(getData);
-          dispatch(closeLoader());
-        }
-      });
-    } catch (error) {
-      setSkillData(null);
-    }
+    const newData = skillsData.filter((item) => item.id !== id);
+    setSkillData(newData);
   };
   const columns = [
     {
@@ -148,7 +134,7 @@ function SkillTable({
     },
     {
       title: t('TABLE.COLUMN_TITLE.UPDATE'),
-      dataIndex: 'updated',
+      dataIndex: 'updated_at',
     },
     {
       title: t('TABLE.COLUMN_TITLE.ACTION'),
@@ -195,7 +181,7 @@ function SkillTable({
       <Table
         className="table"
         columns={columns}
-        dataSource={getData}
+        dataSource={skillsData}
         onChange={onChange}
         pagination={{
           position: ['topRight', 'bottomRight'],

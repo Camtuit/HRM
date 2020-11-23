@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Select, DatePicker, Row, Col } from 'antd';
-// import '../../css/SkillSearchBox.css';
+import '../../css/SkillSearchBox.css';
 import { useTranslation } from 'react-i18next';
 import constant from '../../constants/htmlConstants';
 
@@ -43,28 +43,19 @@ function SkillSearchBox({ setCurrentName, setCurrentPage }) {
           >
             <Form.Item name="search" label={t('LABEL.NAME')}>
               <Input
-                id="skill-input"
                 onChange={handleChange}
                 placeholder={t('Skill.NAME_SKILL')}
               />
             </Form.Item>
-            s{' '}
+
             <div
               style={{ marginLeft: '0.8rem' }}
               className="user-search-box-button"
             >
-              <Button
-                onClick={handleCancel}
-                id="skills-cancel-box-button"
-                style={{ marginRight: '0.8rem' }}
-              >
+              <Button onClick={handleCancel} style={{ marginRight: '0.8rem' }}>
                 {t('button.cancel')}
               </Button>
-              <Button
-                type="primary"
-                onClick={handleSearch}
-                id="skills-search-box-button"
-              >
+              <Button type="primary" onClick={handleSearch}>
                 {t('button.search')}
               </Button>
             </div>
