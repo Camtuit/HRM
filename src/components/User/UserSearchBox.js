@@ -90,15 +90,15 @@ function UserSearchBox({
   const handleCancel = () => {
     setCurrentContractStatus();
     setCurrentFullName('');
-    // setCurrentContractDateBegin('');
-    // setCurrentContractDateEnd('');
-    // setCurrentEmployeeStatus('');
-    // setQuickChooseValue();
-    // setContractStatus('');
-    // setFullName('');
-    // setContractDateBegin('');
-    // setContractDateEnd('');
-    // setEmployeeStatus(1);
+    setCurrentContractDateBegin('');
+    setCurrentContractDateEnd('');
+    setCurrentEmployeeStatus('');
+    setQuickChooseValue();
+    setContractStatus('');
+    setFullName('');
+    setContractDateBegin('');
+    setContractDateEnd('');
+    setEmployeeStatus(1);
   };
 
   return (
