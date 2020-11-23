@@ -75,12 +75,12 @@ function SkillTable({
     try {
       if (!toggledPopup) {
         displaySkills(currentPage + 1, currentName)
-          .then((response) => {
-            if (response !== RESPONSE_CODE[404]) {
-              setSkillData(response.data.data);
-              setTotalRecord(response.data.meta.pagination.total);
-              setRecordPerPage(response.data.meta.pagination.per_page);
-              setPage(response.data.meta.pagination.current_page);
+          .then((res) => {
+            if (res !== RESPONSE_CODE[404]) {
+              setSkillData(res.data.data);
+              setTotalRecord(res.data.meta.pagination.total);
+              setRecordPerPage(res.data.meta.pagination.per_page);
+              setPage(res.data.meta.pagination.current_page);
             } else {
               Alert({
                 type: constant.ALERT_COMMON.TYPE.ERROR,
@@ -136,12 +136,10 @@ function SkillTable({
     {
       title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'name',
-      key: 'name',
     },
     {
       title: t('TABLE.COLUMN_TITLE.UPDATE'),
       dataIndex: 'updated',
-      key: 'updated',
     },
     {
       title: t('TABLE.COLUMN_TITLE.ACTION'),
@@ -162,7 +160,7 @@ function SkillTable({
           <RemovePopupCommon
             title="Delete skill"
             content={`Are you sure delete ${value.name}`}
-            onOk={() => {
+            onOk={(id) => {
               handleDeleteSkill(value.id);
             }}
           />
