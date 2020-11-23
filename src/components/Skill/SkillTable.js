@@ -36,6 +36,7 @@ function SkillTable({
   const [recordPerPage, setRecordPerPage] = useState(null);
   const [page, setPage] = useState();
   const [skillsData, setSkillData] = useState([]);
+  const [getUrlPagination, setGetUrlPagination] = useState('');
   const toggledPopup = useSelector((state) => state.toggledPopup);
   const [valueSkill, setValueSkill] = useState('');
   const dispatch = useDispatch();
@@ -104,8 +105,8 @@ function SkillTable({
     } catch (err) {
       setSkillData(null);
     }
-  }, [currentPage, currentName, toggledPopup, sort, direct]);
-
+    setGetUrlPagination(currentPage + 1);
+  }, [currentPage, currentName, toggledPopup]);
   async function onChange(pagination, filters, sorters) {
     await setCurrentPage(pagination.current - 1);
     history.push(`/skills?page=${pagination.current}`);
