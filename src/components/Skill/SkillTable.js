@@ -112,10 +112,10 @@ function SkillTable({
     await setCurrentPage(pagination.current - 1);
     history.push(`/skills?page=${pagination.current}`);
     setSort('name');
-    if (sorters.order === 'ascend') {
-      setDirect('asc');
+    if (sorters.order === constant.SORT.ASCEND) {
+      setDirect(constant.SORT.ASC);
     } else {
-      setDirect('desc');
+      setDirect(constant.SORT.DESC);
     }
   }
   const handleDeleteSkill = (id) => {
