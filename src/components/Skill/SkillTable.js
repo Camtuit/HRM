@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Tooltip } from 'antd';
 import '../../css/SkillTable.css';
-import { useDispatch, useSelector, useHistory } from 'react-redux';
-import { NormalModule } from 'webpack';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation, useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import SkillRegistInput from './SkillRegistInput';
 import RemovePopupCommon from '../commons/RemovePopup';
@@ -107,7 +107,6 @@ function SkillTable({
     };
     return skillLists;
   });
-
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
     history.push(`/skills?page=${pagination.current}`);
@@ -138,15 +137,16 @@ function SkillTable({
     {
       title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'name',
+      key: 'name',
     },
     {
       title: t('TABLE.COLUMN_TITLE.UPDATE'),
       dataIndex: 'updated',
+      key: 'updated',
     },
     {
       title: t('TABLE.COLUMN_TITLE.ACTION'),
       key: 'empty',
-      dataIndex: 'action',
       fixed: 'center',
       align: 'center',
       width: 100,
@@ -163,7 +163,7 @@ function SkillTable({
           <RemovePopupCommon
             title="Delete skill"
             content={`Are you sure delete ${value.name}`}
-            onOk={(id) => {
+            onOk={() => {
               handleDeleteSkill(value.id);
             }}
           />
