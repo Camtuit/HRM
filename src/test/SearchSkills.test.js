@@ -13,7 +13,7 @@ describe('render a div', () => {
   });
 });
 
-describe('Button Search', () => {
+describe('render a search button', () => {
   it('should display search Button', function () {
     const wrapper = shallow(<SkillSearchBox />);
     const searchButton = wrapper.find('#skills-search-box-button');
@@ -21,7 +21,7 @@ describe('Button Search', () => {
   });
 });
 
-describe('Button Cancel', () => {
+describe('render a cancel button', () => {
   it('should display cancel Button', function () {
     const wrapper = shallow(<SkillSearchBox />);
     const cancelButton = wrapper.find('#skills-cancel-box-button');
@@ -37,7 +37,7 @@ describe('the rendered div', () => {
   });
 });
 
-describe('Input skills', () => {
+describe('render input tag skills', () => {
   it('should display input tag on the screen', function () {
     const result = shallow(<SkillSearchBox />);
     const nameInput = result.find('#skill-input').first();
@@ -45,5 +45,23 @@ describe('Input skills', () => {
       target: { value: 'java' },
     });
     expect(nameInput.prop('value')).toEqual('java');
+  });
+});
+
+describe('event button search', () => {
+  it('should Simulate button push events search', function () {
+    const wrapper = shallow(<SkillSearchBox />);
+    expect(wrapper.state().data).toBe('state1');
+    wrapper.find('#skills-search-box-button').simulate('click');
+    expect(wrapper.state().data).toBe('state2');
+  });
+});
+
+describe('event button cancel', () => {
+  it('should Simulate button push events cancel', function () {
+    const wrapper = shallow(<SkillSearchBox />);
+    expect(wrapper.state().data).toBe('state1');
+    wrapper.find('#skills-cancel-box-button').simulate('click');
+    expect(wrapper.state().data).toBe('state2');
   });
 });
