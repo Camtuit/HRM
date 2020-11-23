@@ -32,12 +32,11 @@ function SkillTable({
   const { t, i18n } = useTranslation();
   const [currentRecord, setCurrentRecord] = useState({});
   const [totalRecord, setTotalRecord] = useState(null);
-  const [data, setData] = useState(null);
+  const [recordPerPage, setRecordPerPage] = useState(null);
+  const [page, setPage] = useState([]);
+  const [skillsData, setSkillData] = useState([]);
   const toggledPopup = useSelector((state) => state.toggledPopup);
   const [valueSkill, setValueSkill] = useState();
-  const [recordPerPage, setRecordPerpage] = useState(null);
-  const [page, setPage] = useState(null);
-  const [skills, setSkill] = useState([]);
   const dispatch = useDispatch();
   const [isButtonLoading, setIsButtonLoading] = React.useState(false);
   const handleTogglePopupAdd = () => {
@@ -67,7 +66,7 @@ function SkillTable({
         }
       });
     } catch (error) {
-      setData(null);
+      setSkillData(null);
     }
   };
   useEffect(() => {
@@ -76,12 +75,13 @@ function SkillTable({
         displaySkills(currentPage + 1, currentName)
           .then((response) => {
             if (response !== RESPONSE_CODE[404]) {
-              setSkill(response.data.data);
+              setSkillData(response.data.data);
+              console.log('pangi', response.data.meta.pagination);
               setTotalRecord(response.data.meta.pagination.total);
-              setRecordPerpage(response.data.meta.pagination.per_page);
+              setRecordPerPage(response.data.meta.pagination.per_page);
               setPage(response.data.meta.pagination.current_page);
             } else {
-              setData(null);
+              setSkillData(null);
             }
           })
           .catch((error) => {
@@ -89,19 +89,16 @@ function SkillTable({
           });
       }
     } catch (err) {
-      setData(null);
-      return err;
+      setSkillData(null);
     }
   }, [currentPage, currentName, toggledPopup]);
-  const skillData = skills.map((elm, index) => {
-    const skillList = {
-      key: elm.id,
+  const getData = skillsData.map((elm, index) => {
+    const skillLists = {
+      number: index + page * recordPerPage + 1,
       name: elm.name,
       updated: elm.updated_at,
     };
-    skillList.number = index + 1;
-    skillList.action = { id: elm.id, status: elm.status };
-    return skillList;
+    return skillLists;
   });
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
@@ -111,14 +108,14 @@ function SkillTable({
       deleteSkillById(id).then((res) => {
         if (res !== RESPONSE_CODE[422]) {
           Toast({ message: 'Deleted Successfull!' });
-          const idIndex = data.findIndex((x) => x.key === id);
-          data.splice(idIndex, 1);
+          const idIndex = skillsData.findIndex((x) => x.key === id);
+          skillsData.splice(idIndex, 1);
           setCurrentPage('');
           setCurrentName('');
         }
       });
     } catch (error) {
-      setData(null);
+      setSkillData(null);
     }
   };
   const columns = [
@@ -180,16 +177,23 @@ function SkillTable({
         setCurrentPage={setCurrentPage}
       />
       <Table
+        className="table"
+        columns={columns}
+        dataSource={getData}
+        onChange={onChange}
         pagination={{
           position: ['topRight', 'bottomRight'],
           total: totalRecord,
           current: currentPage + 1,
           pageSize: recordPerPage,
         }}
-        className="table"
-        columns={columns}
-        dataSource={skillData}
-        onChange={onChange}
+        onRow={(record) => {
+          return {
+            onClick: () => {
+              setCurrentRecord(record);
+            },
+          };
+        }}
       />
     </div>
   );
