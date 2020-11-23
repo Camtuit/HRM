@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Table, Tooltip } from 'antd';
 import '../../css/SkillTable.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation, useParams } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import SkillRegistInput from './SkillRegistInput';
 import RemovePopupCommon from '../commons/RemovePopup';
-import { useTranslation } from 'react-i18next';
 import {
   closeLoader,
   togglePopup,
@@ -31,10 +32,14 @@ function SkillTable({
   const { t, i18n } = useTranslation();
   const [currentRecord, setCurrentRecord] = useState({});
   const [totalRecord, setTotalRecord] = useState(null);
-  const [data, setData] = useState(null);
+  const [recordPerPage, setRecordPerPage] = useState(null);
+  const [page, setPage] = useState([]);
+  const [skillsData, setSkillData] = useState([]);
+  const [getUrlPagination, setGetUrlPagination] = useState('');
   const toggledPopup = useSelector((state) => state.toggledPopup);
-  const [valueSkill, setValueSkill] = useState();
+  const [valueSkill, setValueSkill] = useState('');
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isButtonLoading, setIsButtonLoading] = React.useState(false);
   const handleTogglePopupAdd = () => {
     setValueSkill();
@@ -63,27 +68,25 @@ function SkillTable({
         }
       });
     } catch (error) {
-      setData(null);
+      setSkillData(null);
     }
   };
   useEffect(() => {
     try {
       if (!toggledPopup) {
         displaySkills(currentPage + 1, currentName)
-          .then((response) => {
-            if (response !== RESPONSE_CODE[404]) {
-              const getData = response.data.data.map((elm, index) => {
-                return {
-                  no: index + 1,
-                  id: elm.id,
-                  name: elm.name,
-                  updated: elm.updated_at,
-                };
-              });
-              setData(getData);
-              setTotalRecord(response.data.meta.pagination.total);
+          .then((res) => {
+            if (res !== RESPONSE_CODE[404]) {
+              setSkillData(res.data.data);
+              setTotalRecord(res.data.meta.pagination.total);
+              setRecordPerPage(res.data.meta.pagination.per_page);
+              setPage(res.data.meta.pagination.current_page);
             } else {
-              setData(null);
+              Alert({
+                type: constant.ALERT_COMMON.TYPE.ERROR,
+                title: constant.ALERT_COMMON.TITLE.ERROR,
+                content: RESPONSE_CODE[404],
+              });
             }
           })
           .catch((error) => {
@@ -91,44 +94,52 @@ function SkillTable({
           });
       }
     } catch (err) {
-      setData(null);
+      setSkillData(null);
     }
   }, [currentPage, currentName, toggledPopup]);
-
+  const getData = skillsData.map((elm, index) => {
+    const skillLists = {
+      number: index + page * recordPerPage - 9,
+      id: elm.id,
+      name: elm.name,
+      updated: elm.updated_at,
+    };
+    return skillLists;
+  });
   async function onChange(pagination) {
     await setCurrentPage(pagination.current - 1);
+    history.push(`/skills?page=${pagination.current}`);
   }
   const handleDeleteSkill = (id) => {
     try {
+      dispatch(callLoader());
       deleteSkillById(id).then((res) => {
         if (res !== RESPONSE_CODE[422]) {
           Toast({ message: 'Deleted Successfull!' });
-          const idIndex = data.findIndex((x) => x.key === id);
-          data.splice(idIndex, 1);
-          setCurrentPage('');
-          setCurrentName('');
+          const idIndex = getData.findIndex((x) => x.id === id);
+          getData.splice(idIndex, 1);
+          setSkillData(getData);
+          dispatch(closeLoader());
         }
       });
     } catch (error) {
-      setData(null);
+      setSkillData(null);
     }
   };
   const columns = [
     {
       title: t('TABLE.COLUMN_TITLE.NO'),
-      dataIndex: 'no',
+      dataIndex: 'number',
       key: 'no',
       width: 100,
     },
     {
       title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'name',
-      key: 'name',
     },
     {
       title: t('TABLE.COLUMN_TITLE.UPDATE'),
       dataIndex: 'updated',
-      key: 'updated',
     },
     {
       title: t('TABLE.COLUMN_TITLE.ACTION'),
@@ -149,7 +160,7 @@ function SkillTable({
           <RemovePopupCommon
             title="Delete skill"
             content={`Are you sure delete ${value.name}`}
-            onOk={() => {
+            onOk={(id) => {
               handleDeleteSkill(value.id);
             }}
           />
@@ -175,12 +186,13 @@ function SkillTable({
       <Table
         className="table"
         columns={columns}
-        dataSource={data}
+        dataSource={getData}
         onChange={onChange}
         pagination={{
           position: ['topRight', 'bottomRight'],
           total: totalRecord,
           current: currentPage + 1,
+          pageSize: recordPerPage,
         }}
         onRow={(record) => {
           return {
