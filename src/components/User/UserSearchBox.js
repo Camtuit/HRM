@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Select, DatePicker, Row, Col, Card } from 'antd';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 import constants from '../../constants/htmlConstants';
 import initialState from '../../constants/initialState';
-import { useTranslation } from 'react-i18next';
+
 function UserSearchBox({
   setFullName,
   setContractStatus,
@@ -16,7 +17,7 @@ function UserSearchBox({
   const [quickChooseValue, setQuickChooseValue] = useState();
   const [currentContractStatus, setCurrentContractStatus] = useState();
   const [currentEmployeeStatus, setCurrentEmployeeStatus] = useState();
-  const [currentFullName, setCurrentFullName] = useState();
+  const [currentFullName, setCurrentFullName] = useState('');
   const [currentContractDateBegin, setCurrentContractDateBegin] = useState();
   const [currentContractDateEnd, setCurrentContractDateEnd] = useState();
   const onFormLayoutChange = ({ size }) => {
@@ -89,15 +90,15 @@ function UserSearchBox({
   const handleCancel = () => {
     setCurrentContractStatus();
     setCurrentFullName('');
-    setCurrentContractDateBegin('');
-    setCurrentContractDateEnd('');
-    setCurrentEmployeeStatus('');
-    setQuickChooseValue();
-    setContractStatus('');
-    setFullName('');
-    setContractDateBegin('');
-    setContractDateEnd('');
-    setEmployeeStatus(1);
+    // setCurrentContractDateBegin('');
+    // setCurrentContractDateEnd('');
+    // setCurrentEmployeeStatus('');
+    // setQuickChooseValue();
+    // setContractStatus('');
+    // setFullName('');
+    // setContractDateBegin('');
+    // setContractDateEnd('');
+    // setEmployeeStatus(1);
   };
 
   return (
@@ -126,6 +127,7 @@ function UserSearchBox({
                 placeholder={t('LABEL.NAME')}
                 value={currentFullName}
                 onChange={onChangeFullName}
+                id="full-name-input"
               />
             </Form.Item>
           </Col>
@@ -215,7 +217,10 @@ function UserSearchBox({
           </Col>
           <Col xs={24} sm={24} md={24} lg={11} xl={8}>
             <div className="search-box-button">
-              <Button onClick={handleCancel}> {t('button.cancel')}</Button>
+              <Button onClick={handleCancel} id="user-search-box-clear-button">
+                {' '}
+                {t('button.cancel')}
+              </Button>
               <Button type="primary" onClick={handleSearchUser}>
                 {t('button.search')}
               </Button>
