@@ -37,7 +37,7 @@ const buttonCommon = {
       ACTION: 'Action',
       PHONE_NUMBER: 'Phone number',
       CONTRACT_DAY: 'Contract day',
-      UPDATE: 'updated',
+      UPDATE: 'Updated',
     },
     COLUMN_FIXED: {
       RIGHT: 'right',
@@ -98,14 +98,14 @@ const buttonCommon = {
     INACTIVE: 'Inactive',
   },
 
-  //page User
+  // page User
   USER: {
     USER_LIST: 'User List',
     USER_REGIST: {
       AVATAR: 'Avatar',
     },
   },
-  //skill page
+  // skill page
   Skill: {
     NAME_SKILL: 'Skill name',
     SKILL_LIST: 'Skill List',
