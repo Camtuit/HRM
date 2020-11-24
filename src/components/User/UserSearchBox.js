@@ -11,6 +11,7 @@ function UserSearchBox({
   setContractDateBegin,
   setContractDateEnd,
   setEmployeeStatus,
+  setPage,
 }) {
   const { t, i18n } = useTranslation();
   const [componentSize, setComponentSize] = useState('default');
@@ -68,9 +69,6 @@ function UserSearchBox({
   const onChangeFullName = (e) => {
     setCurrentFullName(e.target.value);
   };
-  const onChangeContractDateBegin = (date) => {
-    setCurrentContractDateBegin(date);
-  };
   const onChangeContractDate = (date) => {
     if (date) {
       setCurrentContractDateBegin(date[0]);
@@ -86,6 +84,7 @@ function UserSearchBox({
     setContractDateBegin(currentContractDateBegin);
     setContractDateEnd(currentContractDateEnd);
     setEmployeeStatus(currentEmployeeStatus);
+    setPage(1);
   };
   const handleCancel = () => {
     setCurrentContractStatus();
@@ -99,6 +98,7 @@ function UserSearchBox({
     setContractDateBegin('');
     setContractDateEnd('');
     setEmployeeStatus(1);
+    setPage(1);
   };
 
   return (
