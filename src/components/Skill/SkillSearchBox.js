@@ -19,7 +19,6 @@ function SkillSearchBox({ setCurrentName, setCurrentPage }) {
   };
   const handleSearch = () => {
     setCurrentName(search);
-    history.push(`/skills?name=${search}`);
     setCurrentPage(0);
     history.push(`/skills?name=${search}`);
   };
