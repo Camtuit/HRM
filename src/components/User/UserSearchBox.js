@@ -17,7 +17,7 @@ function UserSearchBox({
   const [componentSize, setComponentSize] = useState('default');
   const [quickChooseValue, setQuickChooseValue] = useState();
   const [currentContractStatus, setCurrentContractStatus] = useState();
-  const [currentEmployeeStatus, setCurrentEmployeeStatus] = useState();
+  const [currentEmployeeStatus, setCurrentEmployeeStatus] = useState(1);
   const [currentFullName, setCurrentFullName] = useState('');
   const [currentContractDateBegin, setCurrentContractDateBegin] = useState();
   const [currentContractDateEnd, setCurrentContractDateEnd] = useState();
@@ -91,7 +91,7 @@ function UserSearchBox({
     setCurrentFullName('');
     setCurrentContractDateBegin('');
     setCurrentContractDateEnd('');
-    setCurrentEmployeeStatus(null);
+    setCurrentEmployeeStatus(1);
     setQuickChooseValue();
     setContractStatus('');
     setFullName('');
