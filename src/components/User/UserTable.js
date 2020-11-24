@@ -37,9 +37,7 @@ function UserTable({
         contractDateEnd
           ? moment(contractDateEnd).format(constant.FORMAT_DATE_PARAM)
           : '',
-        employeeStatus === undefined || employeeStatus === null
-          ? 1
-          : employeeStatus,
+        employeeStatus === undefined || null ? 1 : employeeStatus,
         page,
         sort,
         direct,
