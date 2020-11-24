@@ -129,7 +129,9 @@ function SkillTable(props) {
         setSkillData(newData);
         dispatch(closeLoader());
       });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
   async function onChange(pagination, filters, sorters) {
     await setCurrentPage(pagination.current - 1);
