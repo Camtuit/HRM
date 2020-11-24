@@ -158,7 +158,7 @@ function SkillTable(props) {
             if (res !== RESPONSE_CODE[404]) {
               const newData = res.data.data.map((item, index) => ({
                 ...item,
-                updated_at: moment().format('DD/MM/YYYY, h:mm'),
+                updated_at: moment().format('DD/MM/YYYY, HH:MM'),
                 number:
                   index +
                   res.data.meta.pagination.current_page *
