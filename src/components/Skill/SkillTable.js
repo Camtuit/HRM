@@ -1,7 +1,7 @@
 /* eslint-disable radix */
 import '../../css/SkillTable.css';
 import React, { useEffect, useState } from 'react';
-import { Table, Tooltip } from 'antd';
+import { Button, Table, Tooltip } from 'antd';
 import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
@@ -51,23 +51,28 @@ function SkillTable(props) {
       title: t('TABLE.COLUMN_TITLE.NO'),
       dataIndex: 'number',
       key: 'no',
-      width: 100,
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
+      width: constant.TABLE.SKILL_COLUMN_WIDTH.NO,
     },
     {
       title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'name',
       sorter: {},
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
+      width: constant.TABLE.SKILL_COLUMN_WIDTH.NAME,
     },
     {
       title: t('TABLE.COLUMN_TITLE.UPDATE'),
       dataIndex: 'updated_at',
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
+      width: constant.TABLE.SKILL_COLUMN_WIDTH.UPDATED,
     },
     {
       title: t('TABLE.COLUMN_TITLE.ACTION'),
       key: 'empty',
       fixed: 'center',
-      align: 'center',
-      width: 100,
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
+      width: constant.TABLE.SKILL_COLUMN_WIDTH.ACTION,
       render: (value) => (
         <div className="skill-table-action">
           <Tooltip title={t('toolip.TITLE.EDIT')}>
@@ -182,11 +187,21 @@ function SkillTable(props) {
   }, [search, sort, direct, toggledPopup]);
 
   return (
-    <div className="skill-table">
-      <ButtonTableGroup
-        type={types.SKILL}
-        handleAddButton={() => handleTogglePopupAdd()}
-      />
+    <div className="data-table">
+      <div
+        className={`button-table-group ${
+          skillData.length === 0 ? 'no-data' : ''
+        }`}
+      >
+        <Button
+          className="data-table-button"
+          type="primary"
+          onClick={handleTogglePopupAdd}
+        >
+          {t('button.add')}
+        </Button>
+      </div>
+
       <SkillRegistInput
         active={toggledPopup}
         value={valueSkill}
@@ -197,6 +212,7 @@ function SkillTable(props) {
       />
       <Table
         className="table"
+        bordered
         columns={columns}
         rowKey={'id'}
         dataSource={skillData}

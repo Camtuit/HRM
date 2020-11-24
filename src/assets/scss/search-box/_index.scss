@@ -36,13 +36,14 @@
     height: 60px;
   }
   .ant-form {
-    padding-top: 10px
+    padding: 10px 0px 0px 30px
   }
   .ant-picker-range {
     width: 100%
   }
   .search-box-button {
     @include flex(row, flex-end);
+    padding-right: 8%;
     .buttons {
       margin-left: auto;
     }
