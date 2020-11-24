@@ -5,10 +5,8 @@ import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
 import constant from '../../constants/htmlConstants';
-import '../../css/UserTable.css';
 import { displayUsers, changeUserStatusById } from '../../apis/userApi';
 import Toast from '../commons/ToastCommon';
-import initialState from '../../constants/initialState';
 import ConfirmPopupCommon from '../commons/ConfirmPopupCommon';
 
 function UserTable({
@@ -72,7 +70,9 @@ function UserTable({
       key: user.id,
       full_name: user.full_name,
       email: user.email,
-      phone_number: user.phone_number,
+      phone_number: user.phone_number
+        .replace(/\D+/g, '')
+        .replace(/([0-9]{1,4})([0-9]{3})([0-9]{3}$)/gi, '$1 $2 $3'),
       contract_date: user.contract_date_begin
         ? `${moment(user.contract_date_begin).format(
             constant.FORMAT_DATE,
@@ -90,27 +90,39 @@ function UserTable({
     {
       title: t('TABLE.COLUMN_TITLE.NO'),
       dataIndex: 'number',
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
+      width: constant.TABLE.COLUMN_WIDTH.NO,
     },
 
     {
       title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'full_name',
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
       sorter: {},
+      width: constant.TABLE.COLUMN_WIDTH.NAME,
+      ellipsis: true,
     },
 
     {
       title: t('LABEL.EMAIl'),
       dataIndex: 'email',
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
+      width: constant.TABLE.COLUMN_WIDTH.EMAIL,
+      ellipsis: true,
     },
 
     {
       title: t('LABEL.PHONE_NUMBER'),
       dataIndex: 'phone_number',
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
+      width: constant.TABLE.COLUMN_WIDTH.PHONE_NUMBER,
     },
 
     {
       title: t('LABEL.CONTRACT_DATE'),
       dataIndex: 'contract_date',
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
+      width: constant.TABLE.COLUMN_WIDTH.CONTRACT_DATE,
       sorter: {
         compare: (a, b) => a.contractDay - b.contractDay,
         multiple: 1,
@@ -120,6 +132,7 @@ function UserTable({
     {
       title: t('TABLE.COLUMN_TITLE.EMPLOYEE_STATUS'),
       dataIndex: 'employee_status',
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
       render: (value) => (
         <Switch
           onClick={onEmployeeStatusChange}
@@ -133,6 +146,7 @@ function UserTable({
     {
       title: t('TABLE.COLUMN_TITLE.STATUS'),
       dataIndex: 'contract_status',
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
       render: (value) =>
         value === 1 ? <span>Resigned</span> : <span>Signed</span>,
     },
@@ -141,7 +155,8 @@ function UserTable({
       title: t('TABLE.COLUMN_TITLE.ACTION'),
       fixed: 'right',
       dataIndex: 'action',
-      width: 100,
+      width: constant.TABLE.COLUMN_WIDTH.ACTION,
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
       render: (value) => (
         <Tooltip title={t('toolip.TITLE.EDIT')}>
           <span>
@@ -207,20 +222,26 @@ function UserTable({
     };
   }
   return (
-    <div className="user-table">
-      <Link to="/user">
-        <Button className="user-table-button" type="primary">
-          {constant.BUTTON.ADD}
+    <div className="data-table">
+      <div
+        className={`button-table-group ${
+          usersData.length === 0 ? 'no-data' : ''
+        }`}
+      >
+        <Link to="/user">
+          <Button className="data-table-button" type="primary">
+            {constant.BUTTON.ADD}
+          </Button>
+        </Link>
+
+        <Button className="data-table-button" type="primary">
+          {constant.BUTTON.EXPORT_FILE}
         </Button>
-      </Link>
 
-      <Button className="user-table-button" type="primary">
-        {constant.BUTTON.EXPORT_FILE}
-      </Button>
-
-      <Button className="user-table-button" type="primary">
-        {constant.BUTTON.EXPORT_WORKDAYS}
-      </Button>
+        <Button className="data-table-button" type="primary">
+          {constant.BUTTON.EXPORT_WORKDAYS}
+        </Button>
+      </div>
 
       <Table
         pagination={{
@@ -229,6 +250,7 @@ function UserTable({
           pageSize: recordPerPage,
           position: ['topRight', 'bottomRight'],
         }}
+        bordered
         columns={columns}
         dataSource={usersData}
         onChange={onChangePage}

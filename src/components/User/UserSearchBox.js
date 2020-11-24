@@ -106,10 +106,10 @@ function UserSearchBox({
       <Form
         layout="horizontal"
         labelCol={{
-          span: constants.LABEL_COL.LABEL_COL_7,
+          span: constants.LABEL_COL.LABEL_COL_8,
         }}
         wrapperCol={{
-          span: constants.WRAPPER_COL.WRAPPER_COL_17,
+          span: constants.WRAPPER_COL.WRAPPER_COL_14,
         }}
         initialValues={{
           size: componentSize,

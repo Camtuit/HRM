@@ -33,7 +33,13 @@
     }
   }
   .ant-row {
-    height: 50px;
+    height: 60px;
+  }
+  .ant-form {
+    padding-top: 10px
+  }
+  .ant-picker-range {
+    width: 100%
   }
   .search-box-button {
     @include flex(row, flex-end);
