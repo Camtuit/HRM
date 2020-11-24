@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { RESPONSE_CODE } from '../constants/errorText';
 import axiosClientPHP from '../helpers/tempHelperApiPHP';
+import axiosClient from '../helpers/axiosClient';
 
 export async function displayUsers(
   full_name,
@@ -26,5 +28,18 @@ export async function displayUsers(
     });
   } catch (e) {
     return RESPONSE_CODE[404];
+  }
+}
+
+export async function changeUserStatusById(userId) {
+  const token = localStorage.getItem('token');
+  try {
+    return await axios({
+      method: 'patch',
+      url: `http://api-php.dev-hrm.nals.vn/api/users/${userId}`,
+      headers: { authorization: `Bearer ${token}` },
+    });
+  } catch (e) {
+    return e;
   }
 }

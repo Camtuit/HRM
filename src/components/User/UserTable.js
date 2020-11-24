@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Table, Button, Tooltip, Select } from 'antd';
+import React, { useEffect, useState, useRef } from 'react';
+import { Table, Button, Tooltip, Select, Modal, Switch } from 'antd';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
 import constant from '../../constants/htmlConstants';
-// import '../../css/UserTable.css';
-import { displayUsers } from '../../apis/userApi';
+import '../../css/UserTable.css';
+import { displayUsers, changeUserStatusById } from '../../apis/userApi';
 import Toast from '../commons/ToastCommon';
 import initialState from '../../constants/initialState';
+import ConfirmPopupCommon from '../commons/ConfirmPopupCommon';
 
 function UserTable({
   fullName,
@@ -26,6 +27,10 @@ function UserTable({
   const [users, setUser] = useState([]);
   const [sort, setSort] = useState(null);
   const [direct, setDirect] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [rerender, setRerender] = useState(false);
+
   useEffect(() => {
     try {
       displayUsers(
@@ -59,7 +64,9 @@ function UserTable({
     employeeStatus,
     sort,
     direct,
+    rerender,
   ]);
+
   const usersData = users.map((user, index) => {
     const usersFiltered = {
       key: user.id,
@@ -78,6 +85,7 @@ function UserTable({
     };
     return usersFiltered;
   });
+
   const columns = [
     {
       title: t('TABLE.COLUMN_TITLE.NO'),
@@ -113,14 +121,12 @@ function UserTable({
       title: t('TABLE.COLUMN_TITLE.EMPLOYEE_STATUS'),
       dataIndex: 'employee_status',
       render: (value) => (
-        <Select defaultValue={value} style={{ width: 100 }}>
-          <Select.Option value={initialState.employee_status.active}>
-            {t('RADIO_INPUT.AVAILABLE')}
-          </Select.Option>
-          <Select.Option value={initialState.employee_status.inActive}>
-            {t('RADIO_INPUT.INACTIVE')}
-          </Select.Option>
-        </Select>
+        <Switch
+          onClick={onEmployeeStatusChange}
+          checkedChildren="Available"
+          unCheckedChildren="Inactive"
+          checked={value}
+        />
       ),
     },
 
@@ -167,6 +173,39 @@ function UserTable({
     }
   }
 
+  function onEmployeeStatusChange(checked, event) {
+    setRerender(!rerender);
+    setIsPopupOpen(true);
+  }
+
+  function handleChangeUserStatus(value) {
+    setIsPopupOpen(false);
+
+    setRerender(!rerender);
+    changeUserStatusById(currentUser.userId)
+      .then(function (res) {
+        Toast({ message: 'Change Status Successfull!' });
+      })
+      .catch(function (error) {
+        Toast({ message: 'Change Status Fail!' });
+      });
+  }
+
+  function closePopup() {
+    setRerender(Math.random());
+    setIsPopupOpen(false);
+  }
+
+  function getCurrentUser(record) {
+    return {
+      onClick: (event) => {
+        setCurrentUser({
+          userId: record.key,
+          userName: record.full_name,
+        });
+      },
+    };
+  }
   return (
     <div className="user-table">
       <Link to="/user">
@@ -193,6 +232,15 @@ function UserTable({
         columns={columns}
         dataSource={usersData}
         onChange={onChangePage}
+        onRow={getCurrentUser}
+      />
+
+      <ConfirmPopupCommon
+        title={'Change Employee Status'}
+        content={`Do you want change status for user "${currentUser.userName}"?`}
+        visible={isPopupOpen}
+        handleOk={handleChangeUserStatus}
+        handleCancel={closePopup}
       />
     </div>
   );
