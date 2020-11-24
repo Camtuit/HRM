@@ -1,14 +1,16 @@
 /* eslint-disable consistent-return */
+import '../../css/HolidayRegistPopup.css';
 import { Button, Form, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { togglePopup } from '../../actions/utilsAction';
-import constant from '../../constants/htmlConstants';
-import '../../css/HolidayRegistPopup.css';
-import { createSkill, editSkillById } from '../../apis/skillApi';
+
 import { RESPONSE_CODE } from '../../constants/errorText';
+import constant from '../../constants/htmlConstants';
+
+import { createSkill, editSkillById } from '../../apis/skillApi';
 import Toast from '../commons/ToastCommon';
+import { togglePopup } from '../../actions/utilsAction';
 
 function SkillRegistInput({ active, value }) {
   const { t, i18n } = useTranslation();
