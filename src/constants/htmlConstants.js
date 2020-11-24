@@ -1,4 +1,10 @@
 const constants = {
+  SORT: {
+    ASCEND: 'ascend',
+    DESCEND: 'desnend',
+    ASC: 'asc',
+    DESC: 'desc',
+  },
   PAGE_TITLE: 'HRM',
   WIDTH_SIDE_BAR: {
     FULL: '200px',
