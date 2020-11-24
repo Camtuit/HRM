@@ -81,11 +81,20 @@ fas.fa-trash-alt {
   }
 }
 
-.user-table {
+.data-table {
   margin: 40px 20px 20px 20px;
-  .user-table-button {
+  .data-table-button {
     margin-right: 10px;
     margin-bottom: 10px;
+  }
+  .button-table-group {
+    position: relative;
+    width: fit-content;
+    margin: 10px 0px -50px;
+    z-index: 999;
+  }
+  .no-data {
+    margin-bottom: 15px;
   }
 }
 
