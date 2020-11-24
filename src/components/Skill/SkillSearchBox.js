@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Select, DatePicker, Row, Col } from 'antd';
-// import '../../css/SkillSearchBox.css';
+import '../../css/SkillSearchBox.css';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router';
 import constant from '../../constants/htmlConstants';
 
 function SkillSearchBox({ setCurrentName, setCurrentPage }) {
@@ -9,6 +10,7 @@ function SkillSearchBox({ setCurrentName, setCurrentPage }) {
   const [search, setSearch] = useState('');
   const [form] = Form.useForm();
   const { t, i18n } = useTranslation();
+  const history = useHistory();
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
@@ -18,11 +20,13 @@ function SkillSearchBox({ setCurrentName, setCurrentPage }) {
   const handleSearch = () => {
     setCurrentName(search);
     setCurrentPage(0);
+    history.push(`/skills?name=${search}`);
   };
   const handleCancel = () => {
     form.resetFields();
     setCurrentName('');
     setSearch('');
+    history.push(`/skills`);
   };
   return (
     <div className="search-box skill-search-box">
@@ -48,7 +52,6 @@ function SkillSearchBox({ setCurrentName, setCurrentPage }) {
                 placeholder={t('Skill.NAME_SKILL')}
               />
             </Form.Item>
-            s{' '}
             <div
               style={{ marginLeft: '0.8rem' }}
               className="user-search-box-button"

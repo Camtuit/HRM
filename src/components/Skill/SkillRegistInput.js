@@ -26,6 +26,7 @@ function SkillRegistInput({ active, value }) {
       setSkillName(value.name);
       form.setFieldsValue({
         skill: value.name,
+        key: value.id,
       });
     }
   }, [value, form]);
@@ -93,7 +94,7 @@ function SkillRegistInput({ active, value }) {
       return error;
     }
   };
-  const handleRequestAPIEditSkill = (value) => {
+  const handleRequestAPIEditSkill = (e) => {
     const skill = {
       name: skillName,
     };

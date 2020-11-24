@@ -1,42 +1,41 @@
+/* eslint-disable radix */
+import '../../css/SkillTable.css';
 import React, { useEffect, useState } from 'react';
 import { Table, Tooltip } from 'antd';
-import '../../css/SkillTable.css';
+import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import moment from 'moment';
+
 import SkillRegistInput from './SkillRegistInput';
-import RemovePopupCommon from '../commons/RemovePopup';
 import {
   closeLoader,
   togglePopup,
   callLoader,
 } from '../../actions/utilsAction';
-import constant from '../../constants/htmlConstants';
 import {
   deleteSkillById,
   displaySkills,
   fetchSkillById,
 } from '../../apis/skillApi';
+
+import types from '../../constants/apiResourceTypes';
+import constant from '../../constants/htmlConstants';
 import { RESPONSE_CODE } from '../../constants/errorText';
+
+import RemovePopupCommon from '../commons/RemovePopup';
+import Toast from '../commons/ToastCommon';
 import Alert from '../commons/AlertCommon';
 import ButtonTableGroup from '../commons/ButtonTableGroup';
-import types from '../../constants/apiResourceTypes';
-import Toast from '../commons/ToastCommon';
 
-function SkillTable({
-  currentName,
-  currentPage,
-  setCurrentPage,
-  setCurrentName,
-}) {
-  const location = useLocation();
+function SkillTable(props) {
+  const { search } = useLocation();
   const { t, i18n } = useTranslation();
   const [currentRecord, setCurrentRecord] = useState({});
   const [totalRecord, setTotalRecord] = useState(null);
   const [recordPerPage, setRecordPerPage] = useState(null);
-  const [page, setPage] = useState();
-  const [skillsData, setSkillData] = useState([]);
-  const [getUrlPagination, setGetUrlPagination] = useState('');
+  const [skillData, setSkillData] = useState([]);
   const toggledPopup = useSelector((state) => state.toggledPopup);
   const [valueSkill, setValueSkill] = useState('');
   const dispatch = useDispatch();
@@ -44,83 +43,9 @@ function SkillTable({
   const [sort, setSort] = useState(null);
   const [direct, setDirect] = useState(null);
   const [isButtonLoading, setIsButtonLoading] = React.useState(false);
-  const handleTogglePopupAdd = () => {
-    setValueSkill();
-    dispatch(togglePopup());
-    setIsButtonLoading(true);
-    setTimeout(() => {
-      setIsButtonLoading(false);
-    }, 500);
-  };
-  const handleTogglePopupEdit = (id) => {
-    try {
-      dispatch(callLoader());
-      fetchSkillById(id).then((res) => {
-        if (res !== RESPONSE_CODE[404]) {
-          setTimeout(() => {
-            dispatch(togglePopup());
-            setValueSkill(res.data.data);
-            dispatch(closeLoader());
-          }, constant.REQUEST_TIMEOUT);
-        } else {
-          Alert({
-            type: constant.ALERT_COMMON.TYPE.ERROR,
-            title: constant.ALERT_COMMON.TITLE.ERROR,
-            content: RESPONSE_CODE[404],
-          });
-        }
-      });
-    } catch (error) {
-      setSkillData(null);
-    }
-  };
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    try {
-      if (!toggledPopup) {
-        displaySkills(currentPage + 1, currentName, sort, direct)
-          .then((res) => {
-            if (res !== RESPONSE_CODE[404]) {
-              const newData = res.data.data.map((item, index) => ({
-                ...item,
-                key: item.id,
-                number: index + page * recordPerPage,
-              }));
-              setSkillData(newData);
-              setTotalRecord(res.data.meta.pagination.total);
-              setRecordPerPage(res.data.meta.pagination.per_page);
-              setPage(res.data.meta.pagination.current_page);
-            } else {
-              Alert({
-                type: constant.ALERT_COMMON.TYPE.ERROR,
-                title: constant.ALERT_COMMON.TITLE.ERROR,
-                content: RESPONSE_CODE[404],
-              });
-            }
-          })
-          .catch((error) => {
-            return error;
-          });
-      }
-    } catch (err) {
-      setSkillData(null);
-    }
-    setGetUrlPagination(currentPage + 1);
-  }, [currentPage, currentName, toggledPopup, sort, direct]);
-  async function onChange(pagination, filters, sorters) {
-    await setCurrentPage(pagination.current - 1);
-    history.push(`/skills?page=${pagination.current}`);
-    setSort('name');
-    if (sorters.order === constant.SORT.ASCEND) {
-      setDirect(constant.SORT.ASC);
-    } else {
-      setDirect(constant.SORT.DESC);
-    }
-  }
-  const handleDeleteSkill = (id) => {
-    const newData = skillsData.filter((item) => item.id !== id);
-    setSkillData(newData);
-  };
+  const { currentName, currentPage, setCurrentPage, setCurrentName } = props;
   const columns = [
     {
       title: t('TABLE.COLUMN_TITLE.NO'),
@@ -165,6 +90,95 @@ function SkillTable({
     },
   ];
 
+  const handleTogglePopupAdd = () => {
+    setValueSkill();
+    dispatch(togglePopup());
+    setIsButtonLoading(true);
+    setTimeout(() => {
+      setIsButtonLoading(false);
+    }, 500);
+  };
+  const handleTogglePopupEdit = (id) => {
+    try {
+      dispatch(callLoader());
+      fetchSkillById(id).then((res) => {
+        if (res !== RESPONSE_CODE[404]) {
+          setTimeout(() => {
+            dispatch(togglePopup());
+            setValueSkill(res.data.data);
+            dispatch(closeLoader());
+          }, constant.REQUEST_TIMEOUT);
+        } else {
+          Alert({
+            type: constant.ALERT_COMMON.TYPE.ERROR,
+            title: constant.ALERT_COMMON.TITLE.ERROR,
+            content: RESPONSE_CODE[404],
+          });
+        }
+      });
+    } catch (error) {
+      setSkillData(null);
+    }
+  };
+  const handleDeleteSkill = (id) => {
+    try {
+      dispatch(callLoader());
+      deleteSkillById(id).then((res) => {
+        Toast({ message: 'Deleted Successfull!' });
+        const newData = skillData.filter((item) => item.id !== id);
+        setSkillData(newData);
+        dispatch(closeLoader());
+      });
+    } catch (err) {}
+  };
+  async function onChange(pagination, filters, sorters) {
+    await setCurrentPage(pagination.current - 1);
+    history.push(`/skills?page=${pagination.current}`);
+    setSort('name');
+    if (sorters.order === constant.SORT.ASCEND) {
+      setDirect(constant.SORT.ASC);
+    } else {
+      setDirect(constant.SORT.DESC);
+    }
+  }
+
+  useEffect(() => {
+    const parsed = queryString.parse(search);
+    try {
+      if (!toggledPopup) {
+        displaySkills({ ...parsed, sort, direct })
+          .then((res) => {
+            if (res !== RESPONSE_CODE[404]) {
+              const newData = res.data.data.map((item, index) => ({
+                ...item,
+                updated_at: moment().format('DD/MM/YYYY, h:mm'),
+                number:
+                  index +
+                  res.data.meta.pagination.current_page *
+                    res.data.meta.pagination.per_page -
+                  9,
+              }));
+              setSkillData(newData);
+              setTotalRecord(res.data.meta.pagination.total);
+              setRecordPerPage(res.data.meta.pagination.per_page);
+              setPage(res.data.meta.pagination.current_page);
+            } else {
+              Alert({
+                type: constant.ALERT_COMMON.TYPE.ERROR,
+                title: constant.ALERT_COMMON.TITLE.ERROR,
+                content: RESPONSE_CODE[404],
+              });
+            }
+          })
+          .catch((error) => {
+            return error;
+          });
+      }
+    } catch (err) {
+      setSkillData([]);
+    }
+  }, [search, sort, direct, toggledPopup]);
+
   return (
     <div className="skill-table">
       <ButtonTableGroup
@@ -182,15 +196,15 @@ function SkillTable({
       <Table
         className="table"
         columns={columns}
-        dataSource={skillsData}
+        rowKey={'id'}
+        dataSource={skillData}
         onChange={onChange}
         pagination={{
           position: ['topRight', 'bottomRight'],
           total: totalRecord,
-          current: currentPage + 1,
+          current: parseInt(page),
           pageSize: recordPerPage,
         }}
-        loading="false"
         onRow={(record) => {
           return {
             onClick: () => {
