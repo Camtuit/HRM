@@ -74,7 +74,7 @@ function SkillTable({
       setSkillData(null);
     }
   };
-  console.log(location);
+
   useEffect(() => {
     try {
       if (!toggledPopup) {
