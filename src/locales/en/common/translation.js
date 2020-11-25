@@ -110,5 +110,12 @@ const buttonCommon = {
     NAME_SKILL: 'Skill name',
     SKILL_LIST: 'Skill List',
   },
+  //Error
+  error: {
+    error401: 'ACCES IS ALLOOWED ONLY FOR REGISTER USER',
+    please_Login: 'PLEASE LOGIN',
+    401: '401',
+    UNAUTHORIZED: 'UNAUTHORIZED',
+  },
 };
 export default buttonCommon;

@@ -4,7 +4,7 @@
     padding: 0;
     margin-top: 50px;
     box-shadow: 0 7px 19px -1px #e6e6e6;
-    background-color: #40ceff75;
+    background-color: #9dd3e575;
     padding:20px 50px 20px 50px;
   
 }
@@ -16,16 +16,19 @@
 
 .ing {
     color: aliceblue;
-    font-size: 256px;
+    font-size: 220px;
     text-align: center;
 }
 .p{
     color: aliceblue; 
-    font-size: 50px;
+    font-size: 35px;
     text-align: center;
 }
 .content-error-text {
     text-align: center;
-    color: dodgerblue;
+    color: darkblue;
 }
- 
+ .content-error div {
+     margin: auto; 
+     padding: 10px;
+ }
