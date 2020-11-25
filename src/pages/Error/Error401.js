@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Image, Button } from 'antd';
+import { Row, Col } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 function Error401() {
@@ -11,14 +11,14 @@ function Error401() {
       <header className="header-error">
         <div className="container-error">
           <Row>
-            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
               <div>
-                <h2 className="ing">{t('error.401')}</h2>
-                <p className="p"> {t('error.UNAUTHORIZED')}</p>
+                <h2 className="container-error-h2">{t('error.401')}</h2>
+                <p className="container-error-p"> {t('error.UNAUTHORIZED')}</p>
               </div>
             </Col>
-            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-              <Image src="https://img.pngio.com/online-statistics-manager-errors-png-400_300.png"></Image>
+            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+              <img src="https://img.pngio.com/online-statistics-manager-errors-png-400_300.png"></img>
             </Col>
           </Row>
         </div>
