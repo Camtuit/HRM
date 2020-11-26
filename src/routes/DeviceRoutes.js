@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import DeviceList from '../pages/Device/DeviceList';
 import DeviceDetails from '../pages/Device/DeviceDetail';
 
-export default function DeviceRoutes() {
+function DeviceRoutes() {
   return (
     <Switch>
       <Route exact path="/devices" component={DeviceList} />
@@ -12,3 +12,4 @@ export default function DeviceRoutes() {
     </Switch>
   );
 }
+export default DeviceRoutes;

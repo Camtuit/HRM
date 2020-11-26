@@ -7,5 +7,8 @@ const validation = {
   number: {
     range: '${label} must be between ${min} and ${max}',
   },
+  error: {
+    error_401: 'ACCES IS ALLOOWED ONLY FOR REGISTER USER',
+  },
 };
 export default validation;
