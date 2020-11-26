@@ -24,6 +24,7 @@ import DeviceRoute from './DeviceRoutes';
 import ProfileRoutes from './ProfileRoutes';
 import PrivateRoute from '../components/commons/PrivateRoute';
 import Loader from '../components/commons/Loader';
+
 export default function HomeRoutes() {
   const loader = useSelector((state) => state.loader);
   const [active, setActive] = useState(1);
@@ -43,7 +44,7 @@ export default function HomeRoutes() {
         <PrivateRoute path="/skills" component={SkillList} />
         <PrivateRoute path="/skill" component={SkillRegist} />
         {/* Day Off */}
-        <PrivateRoute path="/dayoffs" component={DayOffList} />
+        <PrivateRoute path="/days-off" component={DayOffList} />
         <PrivateRoute path="/dayoff" component={DayOffRegist} />
         {/* Request Device */}
         <PrivateRoute path="/request-devices" component={RequestDeviceRoutes} />

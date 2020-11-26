@@ -49,10 +49,10 @@ function SideBar({ active, onChangeTab }) {
           </div>
         </Link>
 
-        <Link to="/dayoffs" onClick={() => onChangeTab(2)}>
+        <Link to="/days-off" onClick={() => onChangeTab(2)}>
           <div
             className={`side-bar__item ${
-              pathName === '/dayoffs' || pathName === '/dayoff' ? 'active' : ''
+              pathName === '/days-off' || pathName === '/dayoff' ? 'active' : ''
             }`}
           >
             <div className="icon-25">

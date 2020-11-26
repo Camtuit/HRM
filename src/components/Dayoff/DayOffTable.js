@@ -1,17 +1,25 @@
+/* eslint-disable radix */
 import React, { useEffect, useState } from 'react';
 import { Button, Table, Tooltip } from 'antd';
 import '../../css/DayOffTable.css';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import axios from 'axios';
+import queryString from 'query-string';
 
 import Alert from '../commons/AlertCommon';
 import RemovePopupCommon from '../commons/RemovePopup';
+
 import constant from '../../constants/htmlConstants';
 import { RESPONSE_CODE } from '../../constants/errorText';
 
 function DayOffTable() {
+  const { search } = useLocation();
+  // console.log('search', useLocation());
   const history = useHistory();
   const [data, setData] = useState([]);
+  const [recordPerPage, setRecordPerPage] = useState(null);
+  const [totalPage, setTotalRecord] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const handleChangeAddNewDayOff = () => {
     history.push('/dayoff');
   };
@@ -23,11 +31,14 @@ function DayOffTable() {
     top: 'topRight',
     bottom: 'bottomRight',
   };
-  const handleChangeTable = (pagination, filters, sorter, extra) => {};
+  async function onChange(pagination, filters, sorter, extra) {
+    // await setCurrentPage(pagination.current - 1);
+    history.push(`/days-off?page=${pagination.current}`);
+  }
   const COLUMNS = [
     {
       title: constant.TABLE.COLUMN_TITLE.NO,
-      dataIndex: 'id',
+      dataIndex: 'number',
     },
 
     {
@@ -42,7 +53,7 @@ function DayOffTable() {
 
     {
       title: constant.TABLE.COLUMN_TITLE.DATE_OFF,
-      dataIndex: 'vacation_day_begin',
+      dataIndex: 'vacation_day',
       sorter: {
         compare: (a, b) => a.dayOff - b.dayOff,
         multiple: 1,
@@ -55,8 +66,8 @@ function DayOffTable() {
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.PO_NAME,
-      dataIndex: 'po_name',
+      title: constant.TABLE.COLUMN_TITLE.PO_EMAIL,
+      dataIndex: 'po_email',
     },
 
     {
@@ -82,16 +93,29 @@ function DayOffTable() {
     },
   ];
   useEffect(() => {
+    const parsed = queryString.parse(search);
+    console.log('parsed', parsed.page);
     try {
       axios
-        .get('https://5fbe81045923c90016e6b183.mockapi.io/api/dayoffs/dayOffs')
+        .get('http://35.198.210.77:8080/api/days-off', {
+          params: {
+            page: parsed.page,
+          },
+        })
         .then((res) => {
           if (res !== RESPONSE_CODE[404]) {
-            console.log(res.data);
-            const newData = res.data.map((item, index) => ({
+            const newData = res.data.data.map((item, index) => ({
               ...item,
+              number:
+                index +
+                res.data.meta.pagination.current_page *
+                  res.data.meta.pagination.per_page -
+                9,
             }));
             setData(newData);
+            setTotalRecord(res.data.meta.pagination.total);
+            setRecordPerPage(res.data.meta.pagination.per_page);
+            setCurrentPage(res.data.meta.pagination.current_page);
           } else {
             Alert({
               type: constant.ALERT_COMMON.TYPE.ERROR,
@@ -99,12 +123,15 @@ function DayOffTable() {
               content: RESPONSE_CODE[404],
             });
           }
+        })
+        .catch((error) => {
+          return error;
         });
     } catch (err) {
       setData([]);
-      console.log(err);
     }
-  }, []);
+  }, [search]);
+
   return (
     <div className="dayoff-table">
       <Button className="dayoff-table-button" type="primary">
@@ -114,11 +141,15 @@ function DayOffTable() {
       <Table
         rowKey={'id'}
         classNamme="dayoff-table-layout"
+        bordered
         columns={COLUMNS}
         dataSource={data}
-        onChange={handleChangeTable}
+        onChange={onChange}
         pagination={{
           position: [PAGINATION_POSITION.top, PAGINATION_POSITION.bottom],
+          pageSize: recordPerPage,
+          total: totalPage,
+          current: parseInt(currentPage),
         }}
       />
     </div>
