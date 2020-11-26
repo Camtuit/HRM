@@ -7,7 +7,7 @@ export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/error/401" component={ErrorRoutes} />
+        <Route path="/error" component={ErrorRoutes} />
         <Route exact path="/login" component={LoginRoutes} />
         <Route path="/" component={HomeRoutes} />
       </Switch>

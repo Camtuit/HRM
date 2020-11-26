@@ -115,7 +115,10 @@ const buttonCommon = {
     error401: 'ACCES IS ALLOOWED ONLY FOR REGISTER USER',
     please_Login: 'PLEASE LOGIN',
     401: '401',
+    403: '403',
     UNAUTHORIZED: 'UNAUTHORIZED',
+    ACCESS_DENIED: 'ACCESS DENIED ',
+    error403: 'YOU DO NOT HAVE PERMISSION TO ACCESS',
   },
 };
 export default buttonCommon;
