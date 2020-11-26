@@ -8,7 +8,6 @@ function Error403() {
   const { t, i18n } = useTranslation();
   return (
     <div className="Error">
-      <header></header>
       <header className="header-error">
         <div className="container-error">
           <Row>
