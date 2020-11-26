@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'antd';
 import { useTranslation } from 'react-i18next';
-import Error from '../../assets/images/error.png';
+import ErrorImg from '../../assets/images/error.png';
 function Error401() {
   const { t, i18n } = useTranslation();
   return (
@@ -17,7 +17,7 @@ function Error401() {
               </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-              <img src={Error}></img>
+              <img src={ErrorImg}></img>
             </Col>
           </Row>
         </div>
