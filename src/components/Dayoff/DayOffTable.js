@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Table, Tooltip } from 'antd';
 import '../../css/DayOffTable.css';
 import { useHistory } from 'react-router';
+import axios from 'axios';
+
+import Alert from '../commons/AlertCommon';
 import RemovePopupCommon from '../commons/RemovePopup';
 import constant from '../../constants/htmlConstants';
+import { RESPONSE_CODE } from '../../constants/errorText';
 
 function DayOffTable() {
   const history = useHistory();
+  const [data, setData] = useState([]);
   const handleChangeAddNewDayOff = () => {
     history.push('/dayoff');
   };
@@ -18,19 +23,16 @@ function DayOffTable() {
     top: 'topRight',
     bottom: 'bottomRight',
   };
+  const handleChangeTable = (pagination, filters, sorter, extra) => {};
   const COLUMNS = [
     {
       title: constant.TABLE.COLUMN_TITLE.NO,
-      dataIndex: 'no',
+      dataIndex: 'id',
     },
 
     {
       title: constant.TABLE.COLUMN_TITLE.NAME,
-      dataIndex: 'name',
-      sorter: {
-        compare: (a, b) => a.name - b.name,
-        multiple: 3,
-      },
+      dataIndex: 'full_name',
     },
 
     {
@@ -40,7 +42,7 @@ function DayOffTable() {
 
     {
       title: constant.TABLE.COLUMN_TITLE.DATE_OFF,
-      dataIndex: 'dateOff',
+      dataIndex: 'vacation_day_begin',
       sorter: {
         compare: (a, b) => a.dayOff - b.dayOff,
         multiple: 1,
@@ -49,12 +51,12 @@ function DayOffTable() {
 
     {
       title: constant.TABLE.COLUMN_TITLE.TYPE,
-      dataIndex: 'type',
+      dataIndex: 'vacation_type_name',
     },
 
     {
       title: constant.TABLE.COLUMN_TITLE.PO_NAME,
-      dataIndex: 'poName',
+      dataIndex: 'po_name',
     },
 
     {
@@ -79,144 +81,41 @@ function DayOffTable() {
       ),
     },
   ];
-
-  const DATA = [
-    {
-      key: '1',
-      no: '1',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-    {
-      key: '2',
-      no: '2',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-    {
-      key: '3',
-      no: '3',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-    {
-      key: '4',
-      no: '4',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '5',
-      no: '5',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '6',
-      no: '6',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '7',
-      no: '7',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '8',
-      no: '8',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '9',
-      no: '9',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '10',
-      no: '10',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '11',
-      no: '11',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '12',
-      no: '12',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-  ];
-  const handleChangeTable = (pagination, filters, sorter, extra) => {};
-
+  useEffect(() => {
+    try {
+      axios
+        .get('https://5fbe81045923c90016e6b183.mockapi.io/api/dayoffs/dayOffs')
+        .then((res) => {
+          if (res !== RESPONSE_CODE[404]) {
+            console.log(res.data);
+            const newData = res.data.map((item, index) => ({
+              ...item,
+            }));
+            setData(newData);
+          } else {
+            Alert({
+              type: constant.ALERT_COMMON.TYPE.ERROR,
+              title: constant.ALERT_COMMON.TITLE.ERROR,
+              content: RESPONSE_CODE[404],
+            });
+          }
+        });
+    } catch (err) {
+      setData([]);
+      console.log(err);
+    }
+  }, []);
   return (
     <div className="dayoff-table">
-      <Button
-        className="dayoff-table-button"
-        type="primary"
-        onClick={handleChangeAddNewDayOff}
-      >
-        {constant.BUTTON.ADD_NEW_DATE_OFF}
-      </Button>
       <Button className="dayoff-table-button" type="primary">
         {constant.BUTTON.EXPORT}
       </Button>
 
       <Table
+        rowKey={'id'}
         classNamme="dayoff-table-layout"
         columns={COLUMNS}
-        dataSource={DATA}
+        dataSource={data}
         onChange={handleChangeTable}
         pagination={{
           position: [PAGINATION_POSITION.top, PAGINATION_POSITION.bottom],
