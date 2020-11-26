@@ -39,7 +39,7 @@ function SideBar({ active, onChangeTab }) {
         <Link to="/users" onClick={() => onChangeTab(1)}>
           <div
             className={`side-bar__item ${
-              pathName === '/users' ? 'active' : ''
+              pathName === '/users' || pathName === '/user' ? 'active' : ''
             }`}
           >
             <div className="icon-25">
@@ -52,7 +52,7 @@ function SideBar({ active, onChangeTab }) {
         <Link to="/dayoffs" onClick={() => onChangeTab(2)}>
           <div
             className={`side-bar__item ${
-              pathName === '/dayoffs' ? 'active' : ''
+              pathName === '/dayoffs' || pathName === '/dayoff' ? 'active' : ''
             }`}
           >
             <div className="icon-25">
@@ -103,7 +103,9 @@ function SideBar({ active, onChangeTab }) {
         <Link to="/request-devices">
           <div
             className={`side-bar__item ${
-              pathName === '/request-devices' ? 'active' : ''
+              pathName === '/request-devices' || pathName === '/request-device'
+                ? 'active'
+                : ''
             }`}
           >
             {' '}
