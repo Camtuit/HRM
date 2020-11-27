@@ -1,10 +1,10 @@
 /* eslint-disable radix */
-import React, { useEffect, useState } from 'react';
-import { Button, Table, Tooltip } from 'antd';
 import '../../css/DayOffTable.css';
+import React, { useEffect, useState } from 'react';
+import { Breadcrumb, Button, Table, Tooltip } from 'antd';
 import { useHistory, useLocation } from 'react-router';
-import axios from 'axios';
 import queryString from 'query-string';
+import { useTranslation } from 'react-i18next';
 
 import Alert from '../commons/AlertCommon';
 import RemovePopupCommon from '../commons/RemovePopup';
@@ -12,17 +12,16 @@ import RemovePopupCommon from '../commons/RemovePopup';
 import constant from '../../constants/htmlConstants';
 import { RESPONSE_CODE } from '../../constants/errorText';
 
+import { displayDayOff, deleteDayOffById } from '../../apis/dayOffApi';
+
 function DayOffTable() {
   const { search } = useLocation();
-  // console.log('search', useLocation());
+  const { t, i18n } = useTranslation();
   const history = useHistory();
   const [data, setData] = useState([]);
   const [recordPerPage, setRecordPerPage] = useState(null);
   const [totalPage, setTotalRecord] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const handleChangeAddNewDayOff = () => {
-    history.push('/dayoff');
-  };
   const handleChangeEditDayOff = () => {
     history.push('/dayoff');
   };
@@ -32,27 +31,29 @@ function DayOffTable() {
     bottom: 'bottomRight',
   };
   async function onChange(pagination, filters, sorter, extra) {
-    // await setCurrentPage(pagination.current - 1);
     history.push(`/days-off?page=${pagination.current}`);
   }
+
   const COLUMNS = [
     {
-      title: constant.TABLE.COLUMN_TITLE.NO,
+      title: t('TABLE.COLUMN_TITLE.NO'),
       dataIndex: 'number',
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
+      width: constant.TABLE.SKILL_COLUMN_WIDTH.NO,
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.NAME,
+      title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'full_name',
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.EMAIL,
+      title: t('TABLE.COLUMN_TITLE.EMAIL'),
       dataIndex: 'email',
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.DATE_OFF,
+      title: t('TABLE.COLUMN_TITLE.DATE_OFF'),
       dataIndex: 'vacation_day',
       sorter: {
         compare: (a, b) => a.dayOff - b.dayOff,
@@ -61,26 +62,28 @@ function DayOffTable() {
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.TYPE,
-      dataIndex: 'vacation_type_name',
+      title: t('TABLE.COLUMN_TITLE.TYPE'),
+      dataIndex: 'session_day_off',
+      render: (value) => {
+        if (value === 1) return t('TABLE.COLUMN_TITLE.FULL_DAY');
+        if (value === 2) return t('TABLE.COLUMN_TITLE.MORNING');
+        return t('TABLE.COLUMN_TITLE.AFTERNOON');
+      },
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.PO_EMAIL,
+      title: t('TABLE.COLUMN_TITLE.PO_EMAIL'),
       dataIndex: 'po_email',
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.ACTION,
+      title: t('TABLE.COLUMN_TITLE.ACTION'),
       key: 'empty',
       fixed: constant.TABLE.COLUMN_FIXED.RIGHT,
       width: 100,
       render: () => (
         <div className="dayoff-table-action">
-          <Tooltip
-            placement={constant.TOOLTIP.PLACEMENT.TOP}
-            title={constant.TOOLTIP.TITLE.EDIT}
-          >
+          <Tooltip title={t('toolip.TITLE.EDIT')}>
             <i className="fas fa-edit" onClick={handleChangeEditDayOff} />
           </Tooltip>
           <RemovePopupCommon
@@ -92,16 +95,11 @@ function DayOffTable() {
       ),
     },
   ];
+
   useEffect(() => {
     const parsed = queryString.parse(search);
-    console.log('parsed', parsed.page);
     try {
-      axios
-        .get('http://35.198.210.77:8080/api/days-off', {
-          params: {
-            page: parsed.page,
-          },
-        })
+      displayDayOff({ ...parsed })
         .then((res) => {
           if (res !== RESPONSE_CODE[404]) {
             const newData = res.data.data.map((item, index) => ({
@@ -135,12 +133,12 @@ function DayOffTable() {
   return (
     <div className="dayoff-table">
       <Button className="dayoff-table-button" type="primary">
-        {constant.BUTTON.EXPORT}
+        {t('button.export_file')}
       </Button>
 
       <Table
         rowKey={'id'}
-        classNamme="dayoff-table-layout"
+        className="dayoff-table-layout"
         bordered
         columns={COLUMNS}
         dataSource={data}

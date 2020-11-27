@@ -32,12 +32,16 @@ const buttonCommon = {
       DATE_OFF: 'Date Off',
       TYPE: 'Type',
       PO_NAME: "PO's Name",
+      PO_EMAIL: "PO's Email",
       STATUS: 'Contract status',
       EMPLOYEE_STATUS: 'Employee status',
       ACTION: 'Action',
       PHONE_NUMBER: 'Phone number',
       CONTRACT_DAY: 'Contract day',
       UPDATE: 'Updated',
+      FULL_DAY: 'Full Day',
+      MORNING: 'Morning',
+      AFTERNOON: 'Afternoon',
     },
     COLUMN_FIXED: {
       RIGHT: 'right',
@@ -110,7 +114,7 @@ const buttonCommon = {
     NAME_SKILL: 'Skill name',
     SKILL_LIST: 'Skill List',
   },
-  //Error
+  // Error
   error: {
     error401: 'ACCES IS ALLOOWED ONLY FOR REGISTER USER',
     please_Login: 'PLEASE LOGIN',

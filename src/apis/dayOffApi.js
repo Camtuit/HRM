@@ -1,9 +1,9 @@
 import { RESPONSE_CODE } from '../constants/errorText';
 import axiosClient from '../helpers/axiosClient';
 
-export async function displaySkills(params) {
+export async function displayDayOff(params) {
   try {
-    return await axiosClient.get('dayoffs', {
+    return await axiosClient.get('days-off', {
       params,
     });
   } catch (e) {
@@ -11,33 +11,33 @@ export async function displaySkills(params) {
   }
 }
 
-export async function createSkill(dayoffs) {
+export async function createDayOff(dayoffs) {
   try {
-    return await axiosClient.post('dayoffs', dayoffs);
+    return await axiosClient.post('days-off', dayoffs);
   } catch (e) {
     return RESPONSE_CODE[409];
   }
 }
 
-export async function editSkillById(dayOffId, dayoffs) {
+export async function editDayOffById(dayOffId, dayoffs) {
   try {
-    return await axiosClient.put(`dayoffs/${dayOffId}`, dayoffs);
+    return await axiosClient.put(`days-off/${dayOffId}`, dayoffs);
   } catch (e) {
     return RESPONSE_CODE[409];
   }
 }
 
-export async function deleteSkillById(dayOffId) {
+export async function deleteDayOffById(dayOffId) {
   try {
-    return await axiosClient.delete(`dayoffs/${dayOffId}`);
+    return await axiosClient.delete(`days-off/${dayOffId}`);
   } catch (e) {
     return e;
   }
 }
 
-export async function fetchSkillById(dayOffId) {
+export async function fetchDayOffById(dayOffId) {
   try {
-    return await axiosClient.get(`skills/${dayOffId}`);
+    return await axiosClient.get(`days-off/${dayOffId}`);
   } catch (e) {
     return e;
   }
