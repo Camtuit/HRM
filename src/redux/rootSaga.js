@@ -1,5 +1,7 @@
+import { all } from 'redux-saga/effects';
+import skillSagas from './Skill/saga';
+
 function* rootSaga() {
-  yield true;
-  console.log('This is root saga');
+  yield all([skillSagas()]);
 }
 export default rootSaga;

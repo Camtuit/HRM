@@ -9,12 +9,13 @@ import constanst from '../constants/htmlConstants';
 import ReactLogo from '../assets/images/nal_logo.svg';
 import textLabel, { LIST } from '../constants/textLabel';
 import types from '../constants/apiResourceTypes';
+import AppActions from '../redux/App/action';
 
 function Header() {
   const [name, setName] = useState('Phạm Thị Cẩm Tú');
   const [isProfileBoxOpen, setIsProfileBoxOpen] = useState(false);
   const [checkLogin, setcheckLogin] = useState('Logout');
-  const toggledSideBar = useSelector((state) => state.toggledSideBar);
+  const toggledSideBar = useSelector((state) => state.App.toggledSideBar);
   const dispatch = useDispatch();
   const {
     WIDTH_SIDE_BAR: { FULL, SHORT },
@@ -26,7 +27,7 @@ function Header() {
     width: `transform: translateX(${toggledSideBar ? 0 : `-110%`}px)`,
   };
   const handleToggleSidebar = () => {
-    dispatch(toggleSideBar());
+    dispatch(AppActions.toggleSideBar());
   };
   const handleHoverMenuUser = () => {
     setIsProfileBoxOpen(!isProfileBoxOpen);

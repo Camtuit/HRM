@@ -10,7 +10,8 @@ import constant from '../../constants/htmlConstants';
 
 import { createSkill, editSkillById } from '../../apis/skillApi';
 import Toast from '../commons/ToastCommon';
-import { togglePopup } from '../../actions/utilsAction';
+// import { togglePopup } from '../../actions/utilsAction';
+import AppActions from '../../redux/App/action';
 
 function SkillRegistInput({ active, value }) {
   const { t, i18n } = useTranslation();
@@ -45,7 +46,7 @@ function SkillRegistInput({ active, value }) {
       form.resetFields();
       setSkillName('');
       setLoadings(initialLoadings);
-      !isSaveAndContinue && dispatch(togglePopup());
+      !isSaveAndContinue && dispatch(AppActions.clickTogglePopup());
     }, constant.REQUEST_TIMEOUT);
   };
 
@@ -151,7 +152,7 @@ function SkillRegistInput({ active, value }) {
   const handleCancel = () => {
     form.resetFields();
     setSkillName('');
-    dispatch(togglePopup());
+    dispatch(AppActions.clickTogglePopup());
   };
   return (
     <div className="skill-regist-button">

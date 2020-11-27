@@ -6,8 +6,8 @@ import { deviceSizeFixed } from '../../constants/deviceSize';
 function WrapperContentPage({ children }) {
   const { toggledSideBar, screenWidth } = useSelector((state) => {
     return {
-      toggledSideBar: state.toggledSideBar,
-      screenWidth: state.screenWidth,
+      toggledSideBar: state.App.toggledSideBar,
+      screenWidth: state.App.screenWidth,
     };
   });
   const isLaptop = window.innerWidth >= deviceSizeFixed.laptop;
