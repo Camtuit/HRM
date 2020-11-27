@@ -14,6 +14,7 @@ import {
   togglePopup,
   callLoader,
 } from '../../actions/utilsAction';
+import AppActions from '../../redux/App/action';
 import {
   deleteSkillById,
   displaySkills,
@@ -36,7 +37,7 @@ function SkillTable(props) {
   const [totalRecord, setTotalRecord] = useState(null);
   const [recordPerPage, setRecordPerPage] = useState(null);
   const [skillData, setSkillData] = useState([]);
-  const toggledPopup = useSelector((state) => state.toggledPopup);
+  const { clickedShowPopup } = useSelector((state) => state.App);
   const [valueSkill, setValueSkill] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
@@ -97,7 +98,7 @@ function SkillTable(props) {
 
   const handleTogglePopupAdd = () => {
     setValueSkill();
-    dispatch(togglePopup());
+    dispatch(AppActions.clickTogglePopup());
     setIsButtonLoading(true);
     setTimeout(() => {
       setIsButtonLoading(false);
@@ -109,7 +110,7 @@ function SkillTable(props) {
       fetchSkillById(id).then((res) => {
         if (res !== RESPONSE_CODE[404]) {
           setTimeout(() => {
-            dispatch(togglePopup());
+            dispatch(AppActions.clickTogglePopup());
             setValueSkill(res.data.data);
             dispatch(closeLoader());
           }, constant.REQUEST_TIMEOUT);
@@ -152,7 +153,7 @@ function SkillTable(props) {
   useEffect(() => {
     const parsed = queryString.parse(search);
     try {
-      if (!toggledPopup) {
+      if (!clickedShowPopup) {
         displaySkills({ ...parsed, sort, direct })
           .then((res) => {
             if (res !== RESPONSE_CODE[404]) {
@@ -183,7 +184,7 @@ function SkillTable(props) {
     } catch (err) {
       setSkillData([]);
     }
-  }, [search, sort, direct, toggledPopup]);
+  }, [search, sort, direct, clickedShowPopup]);
 
   return (
     <div className="data-table">
@@ -202,7 +203,7 @@ function SkillTable(props) {
       </div>
 
       <SkillRegistInput
-        active={toggledPopup}
+        active={clickedShowPopup}
         value={valueSkill}
         currentPage={currentPage}
         currentName={currentName}

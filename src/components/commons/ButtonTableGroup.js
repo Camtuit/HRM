@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React from 'react';
-import types from '../../constants/apiResourceTypes';
 import { useTranslation } from 'react-i18next';
+import types from '../../constants/apiResourceTypes';
 
 function ButtonTableGroup({
   type,

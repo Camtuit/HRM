@@ -16,12 +16,13 @@ import { Link, useHistory } from 'react-router-dom';
 import SideBarItem from '../components/commons/SideBarItem';
 import { LIST } from '../constants/textLabel';
 import { toggleSideBar } from '../actions/utilsAction';
+import AppActions from '../redux/App/action';
 
 function SideBar({ active, onChangeTab }) {
-  const toggledSideBar = useSelector((state) => state.toggledSideBar);
+  const toggledSideBar = useSelector((state) => state.App.toggledSideBar);
   const dispatch = useDispatch();
   const handleToggleSidebar = () => {
-    dispatch(toggleSideBar());
+    dispatch(AppActions.toggleSideBar());
   };
   const url = useHistory();
   const pathName = url.location.pathname;
