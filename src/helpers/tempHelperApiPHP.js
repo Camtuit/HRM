@@ -1,19 +1,31 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
 
-const subBaseURL = 'http://api-php.dev-hrm.nals.vn/api';
+const baseURL = 'http://api-php.dev-hrm.nals.vn/api';
 const axiosClientPHP = () => {
-  const defaultOptions = {
-    baseURL: subBaseURL,
-    headers: {
-      'Content-Type': 'application/json',
+  const headers = {};
+
+  if (localStorage.getItem('token')) {
+    headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  }
+
+  const instance = axios.create({
+    baseURL,
+    headers,
+  });
+
+  instance.interceptors.response.use(
+    function (response) {
+      return response;
     },
-  };
+    function (error) {
+      if (error.message === 'Request failed with status code 403') {
+        window.location = '/error/403';
+      }
+      return Promise.reject(error);
+    },
+  );
 
-  // Create instance
-  const instance = axios.create(defaultOptions);
-
-  // Set the AUTH token for any request
   instance.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     config.headers.Authorization = token ? `Bearer ${token}` : '';
