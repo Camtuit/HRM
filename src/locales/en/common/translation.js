@@ -120,5 +120,11 @@ const buttonCommon = {
     ACCESS_DENIED: 'ACCESS DENIED ',
     error403: 'YOU DO NOT HAVE PERMISSION TO ACCESS',
   },
+  //profile
+  profile: {
+    list_day_off: 'List day Off',
+    request_device: 'Request Device',
+    submit_day_off: 'Submit Day Off',
+  },
 };
 export default buttonCommon;
