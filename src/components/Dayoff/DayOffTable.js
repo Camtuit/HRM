@@ -1,15 +1,27 @@
-import React from 'react';
-import { Button, Table, Tooltip } from 'antd';
+/* eslint-disable radix */
 import '../../css/DayOffTable.css';
-import { useHistory } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { Breadcrumb, Button, Table, Tooltip } from 'antd';
+import { useHistory, useLocation } from 'react-router';
+import queryString from 'query-string';
+import { useTranslation } from 'react-i18next';
+
+import Alert from '../commons/AlertCommon';
 import RemovePopupCommon from '../commons/RemovePopup';
+
 import constant from '../../constants/htmlConstants';
+import { RESPONSE_CODE } from '../../constants/errorText';
+
+import { displayDayOff, deleteDayOffById } from '../../apis/dayOffApi';
 
 function DayOffTable() {
+  const { search } = useLocation();
+  const { t, i18n } = useTranslation();
   const history = useHistory();
-  const handleChangeAddNewDayOff = () => {
-    history.push('/dayoff');
-  };
+  const [data, setData] = useState([]);
+  const [recordPerPage, setRecordPerPage] = useState(null);
+  const [totalPage, setTotalRecord] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const handleChangeEditDayOff = () => {
     history.push('/dayoff');
   };
@@ -18,29 +30,31 @@ function DayOffTable() {
     top: 'topRight',
     bottom: 'bottomRight',
   };
+  async function onChange(pagination, filters, sorter, extra) {
+    history.push(`/days-off?page=${pagination.current}`);
+  }
+
   const COLUMNS = [
     {
-      title: constant.TABLE.COLUMN_TITLE.NO,
-      dataIndex: 'no',
+      title: t('TABLE.COLUMN_TITLE.NO'),
+      dataIndex: 'number',
+      align: constant.TABLE.COLUMN_FIXED.CENTER,
+      width: constant.TABLE.SKILL_COLUMN_WIDTH.NO,
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.NAME,
-      dataIndex: 'name',
-      sorter: {
-        compare: (a, b) => a.name - b.name,
-        multiple: 3,
-      },
+      title: t('TABLE.COLUMN_TITLE.NAME'),
+      dataIndex: 'full_name',
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.EMAIL,
+      title: t('TABLE.COLUMN_TITLE.EMAIL'),
       dataIndex: 'email',
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.DATE_OFF,
-      dataIndex: 'dateOff',
+      title: t('TABLE.COLUMN_TITLE.DATE_OFF'),
+      dataIndex: 'vacation_day',
       sorter: {
         compare: (a, b) => a.dayOff - b.dayOff,
         multiple: 1,
@@ -48,26 +62,28 @@ function DayOffTable() {
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.TYPE,
-      dataIndex: 'type',
+      title: t('TABLE.COLUMN_TITLE.TYPE'),
+      dataIndex: 'session_day_off',
+      render: (value) => {
+        if (value === 1) return t('TABLE.COLUMN_TITLE.FULL_DAY');
+        if (value === 2) return t('TABLE.COLUMN_TITLE.MORNING');
+        return t('TABLE.COLUMN_TITLE.AFTERNOON');
+      },
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.PO_NAME,
-      dataIndex: 'poName',
+      title: t('TABLE.COLUMN_TITLE.PO_EMAIL'),
+      dataIndex: 'po_email',
     },
 
     {
-      title: constant.TABLE.COLUMN_TITLE.ACTION,
+      title: t('TABLE.COLUMN_TITLE.ACTION'),
       key: 'empty',
       fixed: constant.TABLE.COLUMN_FIXED.RIGHT,
       width: 100,
       render: () => (
         <div className="dayoff-table-action">
-          <Tooltip
-            placement={constant.TOOLTIP.PLACEMENT.TOP}
-            title={constant.TOOLTIP.TITLE.EDIT}
-          >
+          <Tooltip title={t('toolip.TITLE.EDIT')}>
             <i className="fas fa-edit" onClick={handleChangeEditDayOff} />
           </Tooltip>
           <RemovePopupCommon
@@ -80,146 +96,58 @@ function DayOffTable() {
     },
   ];
 
-  const DATA = [
-    {
-      key: '1',
-      no: '1',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-    {
-      key: '2',
-      no: '2',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-    {
-      key: '3',
-      no: '3',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-    {
-      key: '4',
-      no: '4',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '5',
-      no: '5',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '6',
-      no: '6',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '7',
-      no: '7',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '8',
-      no: '8',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '9',
-      no: '9',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '10',
-      no: '10',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '11',
-      no: '11',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-
-    {
-      key: '12',
-      no: '12',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@gmail.com',
-      dateOff: '22-11-2020 ~ 22-11-2022',
-      type: 'Morning',
-      poName: 'po@nal.vn',
-    },
-  ];
-  const handleChangeTable = (pagination, filters, sorter, extra) => {};
+  useEffect(() => {
+    const parsed = queryString.parse(search);
+    try {
+      displayDayOff({ ...parsed })
+        .then((res) => {
+          if (res !== RESPONSE_CODE[404]) {
+            const newData = res.data.data.map((item, index) => ({
+              ...item,
+              number:
+                index +
+                res.data.meta.pagination.current_page *
+                  res.data.meta.pagination.per_page -
+                9,
+            }));
+            setData(newData);
+            setTotalRecord(res.data.meta.pagination.total);
+            setRecordPerPage(res.data.meta.pagination.per_page);
+            setCurrentPage(res.data.meta.pagination.current_page);
+          } else {
+            Alert({
+              type: constant.ALERT_COMMON.TYPE.ERROR,
+              title: constant.ALERT_COMMON.TITLE.ERROR,
+              content: RESPONSE_CODE[404],
+            });
+          }
+        })
+        .catch((error) => {
+          return error;
+        });
+    } catch (err) {
+      setData([]);
+    }
+  }, [search]);
 
   return (
     <div className="dayoff-table">
-      <Button
-        className="dayoff-table-button"
-        type="primary"
-        onClick={handleChangeAddNewDayOff}
-      >
-        {constant.BUTTON.ADD_NEW_DATE_OFF}
-      </Button>
       <Button className="dayoff-table-button" type="primary">
-        {constant.BUTTON.EXPORT}
+        {t('button.export_file')}
       </Button>
 
       <Table
-        classNamme="dayoff-table-layout"
+        rowKey={'id'}
+        className="dayoff-table-layout"
+        bordered
         columns={COLUMNS}
-        dataSource={DATA}
-        onChange={handleChangeTable}
+        dataSource={data}
+        onChange={onChange}
         pagination={{
           position: [PAGINATION_POSITION.top, PAGINATION_POSITION.bottom],
+          pageSize: recordPerPage,
+          total: totalPage,
+          current: parseInt(currentPage),
         }}
       />
     </div>

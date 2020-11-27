@@ -154,11 +154,12 @@ const constants = {
   },
   TABLE: {
     COLUMN_TITLE: {
-      NO: 'No',
+      NO: 'No.',
       NAME: 'Name',
       EMAIL: 'Email',
       DATE_OFF: 'Date Off',
       TYPE: 'Type',
+      PO_EMAIL: "PO's Email",
       PO_NAME: "PO's Name",
       ACTION: 'Action',
       PHONE_NUMBER: 'Phone number',
