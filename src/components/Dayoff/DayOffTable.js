@@ -104,7 +104,6 @@ function DayOffTable() {
 
   useEffect(() => {
     const parsed = queryString.parse(search);
-    console.log('sort', sort);
     try {
       displayDayOff({ ...parsed, sort, direct })
         .then((res) => {
