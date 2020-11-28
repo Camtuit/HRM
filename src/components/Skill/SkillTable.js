@@ -152,6 +152,7 @@ function SkillTable(props) {
 
   useEffect(() => {
     const parsed = queryString.parse(search);
+    console.log('sort', sort);
     try {
       if (!clickedShowPopup) {
         displaySkills({ ...parsed, sort, direct })

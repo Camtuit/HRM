@@ -69,7 +69,7 @@ function DayOffSearchBox() {
   };
   const handleSearch = () => {
     history.push(
-      `/dayoffs?full_name=${name}&date_off_from=${
+      `/days-off?full_name=${name}&date_off_from=${
         currentContractDateBegin &&
         currentContractDateBegin.format('DD/MM/YYYY')
       }&date_off_to=${

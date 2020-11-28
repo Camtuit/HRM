@@ -45,7 +45,7 @@ export default function HomeRoutes() {
         <PrivateRoute path="/skill" component={SkillRegist} />
         {/* Day Off */}
         <PrivateRoute path="/days-off" component={DayOffList} />
-        <PrivateRoute path="/dayoff" component={DayOffRegist} />
+        <PrivateRoute path="/dayoff/edit" component={DayOffRegist} />
         {/* Request Device */}
         <PrivateRoute path="/request-devices" component={RequestDeviceRoutes} />
         <PrivateRoute
