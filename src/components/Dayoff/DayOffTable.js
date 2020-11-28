@@ -16,21 +16,15 @@ import { displayDayOff, deleteDayOffById } from '../../apis/dayOffApi';
 
 function DayOffTable() {
   const { search } = useLocation();
+
   const { t, i18n } = useTranslation();
   const history = useHistory();
   const [data, setData] = useState([]);
-<<<<<<< HEAD
   const [recordPerPage, setRecordPerPage] = useState(null);
   const [totalPage, setTotalRecord] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [sort, setSort] = useState(null);
   const [direct, setDirect] = useState(null);
-=======
-  console.log('data', search);
-  const handleChangeAddNewDayOff = () => {
-    history.push('/dayoff');
-  };
->>>>>>> d31fefb... [HRM-260] Update api for search box
   const handleChangeEditDayOff = () => {
     history.push('/dayoff/edit');
   };
