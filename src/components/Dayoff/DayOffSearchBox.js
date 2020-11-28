@@ -83,7 +83,7 @@ function DayOffSearchBox() {
     setName('');
     setCurrentContractDateEnd('');
     setQuickChooseValue('');
-    history.push(`/dayoffs`);
+    history.push(`/days-off`);
   };
   return (
     <div className="search-box user-search-box">
