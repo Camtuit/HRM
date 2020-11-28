@@ -34,7 +34,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.js|\.jsx$/,
+        test: /\.js$|\.jsx$/,
         exclude: /node_modules/,
         use: [
           {
@@ -46,6 +46,7 @@ module.exports = {
           },
         ],
       },
+
       {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
