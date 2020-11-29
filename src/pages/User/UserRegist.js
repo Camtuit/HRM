@@ -12,6 +12,7 @@ function UserRegist() {
   const { t, i18n } = useTranslation();
   function onChange(e) {
     setValue(e.target.value);
+    console.log(value);
   }
   return (
     <div className="user-regist">

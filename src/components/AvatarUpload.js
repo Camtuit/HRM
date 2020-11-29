@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import { useTranslation } from 'react-i18next';
+import { fetchUserDetail } from '../apis/ProfileUserApi';
+import { RESPONSE_CODE } from '../constants/errorText';
+import Toast from './commons/ToastCommon';
 
 const AvatarUpload = () => {
   const { t, i18n } = useTranslation();
@@ -9,6 +12,7 @@ const AvatarUpload = () => {
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
+  console.log(fileList);
   useEffect(() => {}, [fileList]);
   const onPreview = async (file) => {
     let src = file.url;
@@ -27,7 +31,7 @@ const AvatarUpload = () => {
 
   return (
     <Upload
-      action="http://3.138.207.155:8080/api/upload"
+      action="http://api-php.dev-hrm.nals.vn/api/api/upload/"
       listType="picture-card"
       fileList={fileList}
       onChange={onChange}

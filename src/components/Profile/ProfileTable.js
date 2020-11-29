@@ -4,9 +4,11 @@ import Toast from '../commons/ToastCommon';
 import { useTranslation } from 'react-i18next';
 import { RESPONSE_CODE } from '../../constants/errorText';
 import { fetchUserDetail } from '../../apis/ProfileUserApi';
+import AvatarUpload from '../AvatarUpload';
+import Avatar from 'antd/lib/avatar/avatar';
 
 export default function ProfileTable() {
-  const [idUsers, setIdUsers] = useState('15');
+  const [idUsers, setIdUsers] = useState('5');
   const [userDetail, setUserDeatail] = useState('');
   const { t, i18n } = useTranslation();
 
@@ -35,6 +37,10 @@ export default function ProfileTable() {
   };
   return (
     <div className="content-profile-detail">
+      <div className="content-profile-detail-avatar">
+        <AvatarUpload></AvatarUpload>
+        <img src={userDetail.avatar} alt="avatar" />
+      </div>
       <div className="content-profile-detail-form">
         <Form {...layout} name="nest-messages">
           <Form.Item label={t('LABEL.EMPLOYEE_CODE')}>
