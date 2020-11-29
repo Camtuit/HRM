@@ -1,80 +1,88 @@
-import React from 'react';
-import constants ,{LABLE, LABLE_FROFILE} from '../../constants/htmlConstants';
-import { Form, Input, Button, Image, Row,Col} from 'antd';
-export default function ProfileTable(){
-   const profileDetail= {
-      employeeCode: 'Nals001',
-      fullName: 'Pham Thi Cam Tu',
-      emaill : 'tuptc@nail.vn',
-      phoneNumber : '0393222020',
-      gender : 'Fale',
-      dateOfBirth : '03/04/1998',
-      projectName : 'Nal HRM',
-      skillList : 'HTML/CSS', 
-      startDate : '07/11/2020',
-      contractDate : '16/11/2020',
-      contracStatus : 'Signed',
-       assignedDevice: ' Mac_29',
-      remainingDaysOff : '2'
-   }
-  const { employeeCode,fullName, emaill,phoneNumber,gender,
-          dateOfBirth,projectName,skillList,startDate,contractDate,
-           contracStatus,remainingDaysOff , assignedDevice}= profileDetail;
-    return(
-      <Row gutter = {[16, 16]}>
-       
-        <Col xs={{ span: 16, offset: 1 }} lg={{ span: 16, offset: 2 }}>
-         <Form
-            labelCol={{ span: 7 }}
-            wrapperCol={{ span: 10 }}
-            layout="horizontal"
-          >
-           <Form.Item label={constants.LABEL_FROFILE.EMPLOYEE_CODE} >
-              <Input defaultValue={profileDetail.employeeCode} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.FULL_NAME} >
-              <Input  defaultValue={profileDetail.fullName} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.EMAIl} >
-              <Input  defaultValue={profileDetail.emaill} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.PHONE_NUMBER} >
-              <Input  defaultValue={profileDetail.phoneNumber} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.GENDER} >
-              <Input  defaultValue={profileDetail.gender} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.DATE_OF_BIRTH} >
-              <Input  defaultValue={profileDetail.dateOfBirth} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.PROJECT_NAME} >
-              <Input  defaultValue={profileDetail.projectName} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.SKILL_LIST} >
-              <Input  defaultValue={profileDetail.skillList} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.START_DATE} >
-              <Input  defaultValue={profileDetail.startDate} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.CONTRACT_DATE} >
-              <Input  defaultValue={profileDetail.contractDate} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL.CONTRACT_STATUS} >
-              <Input  defaultValue={profileDetail.contracStatus} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.START_DATE} >
-              <Input  defaultValue={profileDetail.startDate} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.REMAINING_DAYS_OFFF} >
-              <Input  defaultValue={profileDetail.remainingDaysOff} readOnly/>
-            </Form.Item>
-            <Form.Item label={constants.LABEL_FROFILE.ASSIGNED_DEVICE} >
-              <Input  defaultValue={profileDetail.assignedDevice} readOnly/>
-            </Form.Item>
-          </Form>
-        </Col>
-      
-      </Row>
-    ) 
-}
+import React, { useState, useEffect } from 'react';
+import { Form } from 'antd';
+import Toast from '../commons/ToastCommon';
+import { useTranslation } from 'react-i18next';
+import { RESPONSE_CODE } from '../../constants/errorText';
+import { fetchUserDetail } from '../../apis/ProfileUserApi';
 
+export default function ProfileTable() {
+  const [idUsers, setIdUsers] = useState('15');
+  const [userDetail, setUserDeatail] = useState('');
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    try {
+      fetchUserDetail(idUsers).then((res) => {
+        if (res !== RESPONSE_CODE[404]) {
+          setUserDeatail(res.data.data);
+          console.log(res.data.data.skills);
+        } else {
+          console.log('error');
+        }
+      });
+    } catch (e) {
+      Toast({ message: e });
+    }
+  }, []);
+
+  const layout = {
+    labelCol: {
+      span: 4,
+    },
+    wrapperCol: {
+      span: 6,
+    },
+  };
+  return (
+    <div className="content-profile-detail">
+      <div className="content-profile-detail-form">
+        <Form {...layout} name="nest-messages">
+          <Form.Item label={t('LABEL.EMPLOYEE_CODE')}>
+            <p>{userDetail.employee_code} </p>
+          </Form.Item>
+          <Form.Item label={t('LABEL.FULL_NAME')}>
+            <p>{userDetail.full_name} </p>
+          </Form.Item>
+          <Form.Item label={t('LABEL.EMAIl')}>
+            <p>{userDetail.email} </p>
+          </Form.Item>
+          <Form.Item label={t('LABEL.PHONE_NUMBER')}>
+            <p>{userDetail.phone_number}</p>
+          </Form.Item>
+          <Form.Item label={t('LABEL.GENDER')}>
+            <p> {userDetail.gender ? ' female' : 'male'}</p>
+          </Form.Item>
+          <Form.Item label={t('LABEL.PROJECT_NAME')}>
+            <p> {userDetail.project}</p>
+          </Form.Item>
+          <Form.Item label={t('LABEL.DATE_OF_BIRTH')}>
+            <p> {userDetail.birthday}</p>
+          </Form.Item>
+          <Form.Item label={t('LABEL.SKILL_LIST')}>
+            {userDetail.skills &&
+              userDetail.skills.map((skill) => {
+                return <p>{skill.name}</p>;
+              })}
+          </Form.Item>
+          <Form.Item label={t('LABEL.START_DATE')}>
+            <p>{userDetail.start_date}</p>
+          </Form.Item>
+          <Form.Item label={t('LABEL.CONTRACT_DATE')}>
+            {userDetail.skills &&
+              userDetail.contracts.map((contract) => {
+                return (
+                  <p>
+                    {contract.contract_date_begin} {' ~ '}{' '}
+                    {contract.contract_date_end}
+                  </p>
+                );
+              })}
+          </Form.Item>
+          <Form.Item label={t('LABEL.REMAINING_DAYS_OFFF')}>
+            <p>{userDetail.remaining_days_off}</p>
+          </Form.Item>
+        </Form>
+      </div>
+    </div>
+  );
+}
