@@ -98,6 +98,7 @@ const constants = {
   },
   BUTTON: {
     CANCEL: 'Cancel',
+    CLEAR: 'Clear',
     SEARCH: 'Search',
     SUBMIT: 'Submit',
     BACK: 'Back',

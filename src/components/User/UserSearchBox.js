@@ -81,6 +81,7 @@ function UserSearchBox({
   const handleSearchUser = () => {
     setContractStatus(currentContractStatus);
     setFullName(currentFullName);
+    console.log(currentContractDateBegin);
     setContractDateBegin(currentContractDateBegin);
     setContractDateEnd(currentContractDateEnd);
     setEmployeeStatus(currentEmployeeStatus);

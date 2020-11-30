@@ -16,24 +16,23 @@ import { displayDayOff, deleteDayOffById } from '../../apis/dayOffApi';
 
 function DayOffTable() {
   const { search } = useLocation();
+
   const { t, i18n } = useTranslation();
   const history = useHistory();
   const [data, setData] = useState([]);
   const [recordPerPage, setRecordPerPage] = useState(null);
   const [totalPage, setTotalRecord] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sort, setSort] = useState(null);
+  const [direct, setDirect] = useState(null);
   const handleChangeEditDayOff = () => {
-    history.push('/dayoff');
+    history.push('/dayoff/edit');
   };
   const handleChangeRemoveDayOff = () => {};
   const PAGINATION_POSITION = {
     top: 'topRight',
     bottom: 'bottomRight',
   };
-  async function onChange(pagination, filters, sorter, extra) {
-    history.push(`/days-off?page=${pagination.current}`);
-  }
-
   const COLUMNS = [
     {
       title: t('TABLE.COLUMN_TITLE.NO'),
@@ -45,6 +44,7 @@ function DayOffTable() {
     {
       title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'full_name',
+      sorter: {},
     },
 
     {
@@ -55,10 +55,7 @@ function DayOffTable() {
     {
       title: t('TABLE.COLUMN_TITLE.DATE_OFF'),
       dataIndex: 'vacation_day',
-      sorter: {
-        compare: (a, b) => a.dayOff - b.dayOff,
-        multiple: 1,
-      },
+      sorter: {},
     },
 
     {
@@ -95,11 +92,20 @@ function DayOffTable() {
       ),
     },
   ];
+  async function onChange(pagination, filters, sorter, extra) {
+    history.push(`/days-off?page=${pagination.current}`);
+    setSort('fullName');
+    if (sorter.order === constant.SORT.ASCEND) {
+      setDirect(constant.SORT.ASC);
+    } else {
+      setDirect(constant.SORT.DESC);
+    }
+  }
 
   useEffect(() => {
     const parsed = queryString.parse(search);
     try {
-      displayDayOff({ ...parsed })
+      displayDayOff({ ...parsed, sort, direct })
         .then((res) => {
           if (res !== RESPONSE_CODE[404]) {
             const newData = res.data.data.map((item, index) => ({
@@ -128,7 +134,7 @@ function DayOffTable() {
     } catch (err) {
       setData([]);
     }
-  }, [search]);
+  }, [search, sort, direct]);
 
   return (
     <div className="dayoff-table">
