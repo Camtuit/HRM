@@ -45,7 +45,7 @@ function UserTable({
         sort,
         direct,
       ).then((res) => {
-        if (res) {
+        if (res.status === 200) {
           setUser(res.data.data);
           setTotalRecord(res.data.meta.pagination.total);
           setRecordPerPage(res.data.meta.pagination.per_page);
