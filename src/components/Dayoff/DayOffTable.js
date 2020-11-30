@@ -36,9 +36,8 @@ function DayOffTable() {
     try {
       dispatch(callLoader());
       deleteDayOffById(id).then((res) => {
-        console.log(res);
         Toast({ message: t('MESSAGE.Deleted_Successfull') });
-        const newData = data.filter((item) => item != id);
+        const newData = data.filter((item) => item.id !== id);
         setData(newData);
         dispatch(closeLoader());
       });
