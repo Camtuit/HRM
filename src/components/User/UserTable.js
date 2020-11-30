@@ -28,7 +28,7 @@ function UserTable({
   const [currentUser, setCurrentUser] = useState({});
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [rerender, setRerender] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     try {
       displayUsers(
@@ -45,10 +45,13 @@ function UserTable({
         sort,
         direct,
       ).then((res) => {
-        setUser(res.data.data);
-        setTotalRecord(res.data.meta.pagination.total);
-        setRecordPerPage(res.data.meta.pagination.per_page);
-        setCurrentPage(res.data.meta.pagination.current_page);
+        if (res) {
+          setUser(res.data.data);
+          setTotalRecord(res.data.meta.pagination.total);
+          setRecordPerPage(res.data.meta.pagination.per_page);
+          setCurrentPage(res.data.meta.pagination.current_page);
+        }
+        setIsLoading(false);
       });
     } catch (e) {
       Toast({ message: e });
@@ -257,6 +260,7 @@ function UserTable({
         dataSource={usersData}
         onChange={onChangePage}
         onRow={getCurrentUser}
+        loading={isLoading}
       />
 
       <ConfirmPopupCommon

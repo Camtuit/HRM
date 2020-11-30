@@ -29,6 +29,7 @@ function DayOffTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sort, setSort] = useState(null);
   const [direct, setDirect] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const handleChangeEditDayOff = () => {
     history.push('/dayoff/edit');
   };
@@ -145,6 +146,7 @@ function DayOffTable() {
               content: RESPONSE_CODE[404],
             });
           }
+          setIsLoading(false);
         })
         .catch((error) => {
           return error;
@@ -173,6 +175,7 @@ function DayOffTable() {
           total: totalPage,
           current: parseInt(currentPage),
         }}
+        loading={isLoading}
       />
     </div>
   );

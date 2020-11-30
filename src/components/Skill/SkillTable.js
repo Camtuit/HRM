@@ -45,7 +45,7 @@ function SkillTable(props) {
   const [direct, setDirect] = useState(null);
   const [isButtonLoading, setIsButtonLoading] = React.useState(false);
   const [page, setPage] = useState(1);
-
+  const [isLoading, setIsLoading] = useState(true);
   const { currentName, currentPage, setCurrentPage, setCurrentName } = props;
   const columns = [
     {
@@ -152,7 +152,6 @@ function SkillTable(props) {
 
   useEffect(() => {
     const parsed = queryString.parse(search);
-    console.log('sort', sort);
     try {
       if (!clickedShowPopup) {
         displaySkills({ ...parsed, sort, direct })
@@ -177,6 +176,7 @@ function SkillTable(props) {
                 content: RESPONSE_CODE[404],
               });
             }
+            setIsLoading(false);
           })
           .catch((error) => {
             return error;
@@ -231,6 +231,7 @@ function SkillTable(props) {
             },
           };
         }}
+        loading={isLoading}
       />
     </div>
   );

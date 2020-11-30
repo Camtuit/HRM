@@ -35,13 +35,12 @@ function Login() {
       .post(' http://api-php.dev-hrm.nals.vn/api/auth/login', data)
       .then((res) => {
         localStorage.setItem('token', res.data.meta.access_token);
-        history.push('/users');
-        if (isRememberMe === true) {
-          localStorage.setItem('email', values.email);
-          localStorage.setItem('password', values.password);
+        localStorage.setItem('user-id', res.data.data.id);
+
+        if (res.data.data.email === 'member@gmail.com') {
+          history.push('/profile/details');
         } else {
-          localStorage.removeItem('email', values.email);
-          localStorage.removeItem('password', values.password);
+          history.push('/users');
         }
       })
       .catch((err) => {
@@ -118,11 +117,7 @@ function Login() {
             <Input.Password placeholder="Password" />
           </Form.Item>
 
-          <Form.Item
-            {...tailLayout}
-            className="form-item-remember"
-            name="remember"
-          >
+          <Form.Item className="form-item-remember" name="remember">
             <Checkbox onChange={handleRememberMe}>Remember me</Checkbox>
           </Form.Item>
 
