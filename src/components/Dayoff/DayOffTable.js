@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Breadcrumb, Button, Table, Tooltip } from 'antd';
 import { useHistory, useLocation } from 'react-router';
 import queryString from 'query-string';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import Alert from '../commons/AlertCommon';
@@ -13,12 +14,15 @@ import constant from '../../constants/htmlConstants';
 import { RESPONSE_CODE } from '../../constants/errorText';
 
 import { displayDayOff, deleteDayOffById } from '../../apis/dayOffApi';
+import { callLoader, closeLoader } from '../../actions/utilsAction';
+import Toast from '../commons/ToastCommon';
 
 function DayOffTable() {
   const { search } = useLocation();
 
   const { t, i18n } = useTranslation();
   const history = useHistory();
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [recordPerPage, setRecordPerPage] = useState(null);
   const [totalPage, setTotalRecord] = useState(null);
@@ -28,7 +32,20 @@ function DayOffTable() {
   const handleChangeEditDayOff = () => {
     history.push('/dayoff/edit');
   };
-  const handleChangeRemoveDayOff = () => {};
+  const handleDeleteDayOff = (id) => {
+    try {
+      dispatch(callLoader());
+      deleteDayOffById(id).then((res) => {
+        console.log(res);
+        Toast({ message: t('MESSAGE.Deleted_Successfull') });
+        const newData = data.filter((item) => item != id);
+        setData(newData);
+        dispatch(closeLoader());
+      });
+    } catch (error) {
+      Toast({ message: error });
+    }
+  };
   const PAGINATION_POSITION = {
     top: 'topRight',
     bottom: 'bottomRight',
@@ -78,15 +95,17 @@ function DayOffTable() {
       key: 'empty',
       fixed: constant.TABLE.COLUMN_FIXED.RIGHT,
       width: 100,
-      render: () => (
+      render: (value) => (
         <div className="dayoff-table-action">
           <Tooltip title={t('toolip.TITLE.EDIT')}>
             <i className="fas fa-edit" onClick={handleChangeEditDayOff} />
           </Tooltip>
           <RemovePopupCommon
-            title="Delete request"
-            content="Are you sure delete"
-            onOk={() => console.log('true')}
+            title={t('MESSAGE.delete_request')}
+            content={`${t('MESSAGE.delete')} ${value.full_name}`}
+            onOk={(id) => {
+              handleDeleteDayOff(value.id);
+            }}
           />
         </div>
       ),
