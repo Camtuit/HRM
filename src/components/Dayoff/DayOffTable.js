@@ -16,7 +16,6 @@ import { displayDayOff, deleteDayOffById } from '../../apis/dayOffApi';
 
 function DayOffTable() {
   const { search } = useLocation();
-
   const { t, i18n } = useTranslation();
   const history = useHistory();
   const [data, setData] = useState([]);

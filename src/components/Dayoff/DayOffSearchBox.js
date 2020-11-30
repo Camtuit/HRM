@@ -112,7 +112,7 @@ function DayOffSearchBox() {
               <Input onChange={handleChange} placeholder="Name" />
             </Form.Item>
           </Col>
-          <Col span={3}></Col>
+          <Col span={7}></Col>
           <Col span={6}>
             <Form.Item
               className="search-box_item search-box_item--choose"
@@ -156,7 +156,7 @@ function DayOffSearchBox() {
               />
             </Form.Item>
           </Col>
-          <Col span={3}></Col>
+          <Col span={7}></Col>
           <Col span={6}>
             <div className="search-box-button">
               <Button onClick={handleClear}>{t('button.clear')}</Button>
