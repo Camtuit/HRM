@@ -2,7 +2,7 @@
    width: 150px;
 }
 .title-profile-detail{
-    margin-top: 20px;
+    margin: 20px;
     color: #68ae00;
     font-size: 1.8rem;
     font-weight: 600;
@@ -17,9 +17,30 @@ label {
     float: right;
 }
 .content-profile-detail-form p {
- 
-    margin-left: 50px;
+ margin-left: 50px;
 }
+
+
+.content-profile-detail-avatar-image{
+    width : 156px;
+    height :156px;
+    border-radius: 156px ;
+}
+.content-profile-detail-avatar{
+    width: 40%;
+    display: inline-flex;
+    padding: 4em 15em;
+ 
+    
+}
+.content-profile-detail-avatar-button{
+    padding-top: 3em;
+    padding-left: 4em;
+ 
+    
+}
+
+
 
 
 

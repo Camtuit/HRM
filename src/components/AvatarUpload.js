@@ -5,14 +5,16 @@ import { useTranslation } from 'react-i18next';
 import { fetchUserDetail } from '../apis/ProfileUserApi';
 import { RESPONSE_CODE } from '../constants/errorText';
 import Toast from './commons/ToastCommon';
+import { Children } from 'react';
 
-const AvatarUpload = () => {
+const AvatarUpload = (props) => {
   const { t, i18n } = useTranslation();
   const [fileList, setFileList] = useState([]);
-  const onChange = ({ fileList: newFileList }) => {
+  const onChange = ({ fileList: newFileList, file }) => {
     setFileList(newFileList);
+    console.log(file.name);
   };
-  console.log(fileList);
+
   useEffect(() => {}, [fileList]);
   const onPreview = async (file) => {
     let src = file.url;
@@ -28,17 +30,19 @@ const AvatarUpload = () => {
     const imgWindow = window.open(src);
     imgWindow.document.write(image.outerHTML);
   };
-
   return (
     <Upload
-      action="http://api-php.dev-hrm.nals.vn/api/api/upload/"
+      action="http://api-php.dev-hrm.nals.vn/"
       listType="picture-card"
       fileList={fileList}
       onChange={onChange}
       onPreview={onPreview}
       name="image"
     >
-      {fileList.length < 1 && t('USER.USER_REGIST.AVATAR')}
+      {fileList.length < 1 && (
+        <img src={fileList} alt="avatar" style={{ width: '100%' }} />
+      )}
+      <img src={this.props.avatar} />
     </Upload>
   );
 };

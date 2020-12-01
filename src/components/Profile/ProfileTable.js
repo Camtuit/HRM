@@ -1,23 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import { Form } from 'antd';
+import { Button, Form } from 'antd';
 import Toast from '../commons/ToastCommon';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { RESPONSE_CODE } from '../../constants/errorText';
 import { fetchUserDetail } from '../../apis/ProfileUserApi';
-import AvatarUpload from '../AvatarUpload';
-import Avatar from 'antd/lib/avatar/avatar';
-
+import { Upload } from 'antd';
+import { closeLoader, callLoader } from '../../actions/utilsAction';
+import { UploadAvatarUser } from '../../apis/userApi';
 export default function ProfileTable() {
-  const [idUsers, setIdUsers] = useState('5');
+  const [idUsers, setIdUsers] = useState('15');
   const [userDetail, setUserDeatail] = useState('');
   const { t, i18n } = useTranslation();
+  const [fileList, setFileList] = useState([]);
+  const [files, setFiles] = useState([]);
+  const [avatar, setAvatar] = useState('');
+  const onChange = ({ fileList: newFileList, file }) => {
+    setFileList(newFileList);
+    file.response && setFiles(file.response.data.link);
+  };
+  const id = JSON.stringify(localStorage.getItem('user-id'));
+  console.log(id);
+
+  const handleUpLoadAvatar = () => {
+    try {
+      const avatar = `http://api-php.dev-hrm.nals.vn/${files}`;
+      UploadAvatarUser(idUsers, avatar).then((res) => {
+        if (res !== RESPONSE_CODE[404]) {
+          setAvatar(res.data.data.avatar);
+        }
+        console.log('avatar: ', avatar);
+      });
+    } catch (error) {
+      setAvatar(null);
+    }
+  };
 
   useEffect(() => {
     try {
       fetchUserDetail(idUsers).then((res) => {
         if (res !== RESPONSE_CODE[404]) {
           setUserDeatail(res.data.data);
-          console.log(res.data.data.skills);
         } else {
           console.log('error');
         }
@@ -25,8 +48,7 @@ export default function ProfileTable() {
     } catch (e) {
       Toast({ message: e });
     }
-  }, []);
-
+  }, [avatar]);
   const layout = {
     labelCol: {
       span: 4,
@@ -35,12 +57,31 @@ export default function ProfileTable() {
       span: 6,
     },
   };
+
   return (
     <div className="content-profile-detail">
       <div className="content-profile-detail-avatar">
-        <AvatarUpload></AvatarUpload>
-        <img src={userDetail.avatar} alt="avatar" />
+        <Upload
+          action="http://api-php.dev-hrm.nals.vn/api/upload"
+          listType="picture-card"
+          fileList={fileList}
+          onChange={onChange}
+          name="image"
+        >
+          {fileList.length < 1 && (
+            <img
+              src={userDetail.avatar}
+              alt="avatar"
+              style={{ width: '156px', height: '156px', borderRadius: '156px' }}
+            />
+          )}
+        </Upload>
+        <div className="content-profile-detail-avatar-button">
+          {' '}
+          <Button onClick={handleUpLoadAvatar}>{t('button.SAVE')}</Button>
+        </div>
       </div>
+
       <div className="content-profile-detail-form">
         <Form {...layout} name="nest-messages">
           <Form.Item label={t('LABEL.EMPLOYEE_CODE')}>

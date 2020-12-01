@@ -43,3 +43,14 @@ export async function changeUserStatusById(userId) {
     return e;
   }
 }
+export async function UploadAvatarUser(userId, avatar) {
+  console.log(avatar);
+  const params = {
+    avatar: avatar,
+  };
+  try {
+    return await axiosClientPHP.put(`users/${userId}`, params);
+  } catch (e) {
+    return RESPONSE_CODE[409];
+  }
+}

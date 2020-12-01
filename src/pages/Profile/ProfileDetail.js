@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Row, Col } from 'antd';
+import { Image, Row, Col, Button } from 'antd';
 import WrapperContentPage from '../../components/commons/WrapperContentPage';
 import textLabel, { LIST } from '../../constants/textLabel';
 import ProfileTable from '../../components/Profile/ProfileTable';
@@ -9,21 +9,12 @@ export default function ProfileDetail() {
   return (
     <WrapperContentPage>
       <div className="profile-detail">
-        <Row gutter={[16, 16]}>
-          <Col xs={{ span: 16, offset: 1 }} lg={{ span: 4, offset: 2 }}>
-            {' '}
-            <h2 span={6} className="title-profile-detail">
-              {LIST.MY_PROFILE}
-            </h2>
-          </Col>
-          <Col xs={{ span: 16, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-            <Image
-              span={10}
-              src="https://www.flaticon.com/premium-icon/icons/svg/2202/2202112.svg"
-              width="150px"
-            ></Image>
-          </Col>
-        </Row>
+        <div className="profile-detail-header">
+          <h2 span={6} className="title-profile-detail">
+            {LIST.MY_PROFILE}
+          </h2>
+        </div>
+
         <ProfileTable />
         <ProfileButton />
       </div>
