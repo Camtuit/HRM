@@ -5,6 +5,7 @@ import '../../css/UserRegist.css';
 import { useTranslation } from 'react-i18next';
 import AvatarUpload from '../../components/AvatarUpload';
 import WrapperContent from '../../components/commons/WrapperContentPage';
+import HeaderLink from '../../components/commons/HeaderLink';
 
 function UserRegist() {
   const [value, setValue] = useState(1);
@@ -15,6 +16,12 @@ function UserRegist() {
   return (
     <div className="user-regist">
       <div className="user-regist-content">
+        <HeaderLink
+          routes={[
+            { path: '/users', title: 'User list' },
+            { path: '/user', title: 'Add new user' },
+          ]}
+        />
         <div className="user-regist-form">
           <div className="user-regist-form-avatar">
             <AvatarUpload />

@@ -23,6 +23,7 @@ import validation from '../../constants/validation';
 import { createDayOff } from '../../apis/dayOffApi';
 import { RESPONSE_CODE } from '../../constants/errorText';
 
+<<<<<<< HEAD
 import {
   closeLoader,
   togglePopup,
@@ -40,6 +41,35 @@ function DayOffRegistInput({ value }) {
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
+=======
+function DayOffRegistInput({ value }) {
+  const { Option } = Select;
+  const [componentSize, setComponentSize] = useState('default');
+  const history = useHistory();
+  const [valueInput, setValueInput] = useState({});
+  const [valueInput, setValueInput] = useState({});
+  const [valueQuickChoose, setValueQuickChoose] = useState('');
+  const [valueDate, setValueDate] = useState('');
+  const onFormLayoutChange = ({ size }) => {
+    setComponentSize(size);
+  };
+  const handleChangeChoose = (value) => {
+    valueQuickChoose(value);
+  };
+  const handleChange = (e) => {
+    setValueInput(e.target.value);
+  };
+  const onChangeDate = (date) => {
+    valueDate(date);
+  };
+  const handleSubmit = (value) => {
+    const newDate= {
+      name: valueInput,
+      email:
+    }
+  };
+
+>>>>>>> eaff8aa... [HRM-268] Create add day off
   const handleCancel = () => {
     history.push('/profile/details');
   };
@@ -106,7 +136,14 @@ function DayOffRegistInput({ value }) {
                 },
               ]}
             >
+<<<<<<< HEAD
               <Input placeholder={t('LABEL.PO_NAME')} />
+=======
+              <Input
+                onChange={handleChange}
+                placeholder={constant.LABEL.PO_NAME}
+              />
+>>>>>>> eaff8aa... [HRM-268] Create add day off
             </Form.Item>
             <Form.Item
               label={t('LABEL.PO_EMAIL')}
@@ -118,10 +155,83 @@ function DayOffRegistInput({ value }) {
                 },
               ]}
             >
+<<<<<<< HEAD
               <Input placeholder={t('LABEL.PO_EMAIL')} />
             </Form.Item>
             <Form.Item label={constant.LABEL.DAY} name="days_off_lists">
               <Form.List name="days_off_lists">
+=======
+              <Input
+                onChange={handleChange}
+                placeholder={constant.LABEL.PO_EMAIL}
+              />
+            </Form.Item>
+
+            <Form.Item
+              label={constant.LABEL.DAY}
+              name="vacationDateFrom"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <div className="day-of-regist-input-last-form">
+                <Space
+                  style={{ display: 'flex', marginBottom: 8 }}
+                  align="baseline"
+                >
+                  <Form.Item rules={[{ required: true }]}>
+                    <DatePicker
+                      placeholder={constant.FORMAT_DATE}
+                      format={constant.FORMAT_DATE}
+                      onChange={onChangeDate}
+                    />
+                  </Form.Item>
+                  <Form.Item rules={[{ required: true }]}>
+                    <Select
+                      onChange={handleChangeChoose}
+                      placeholder={constant.RADIO_CHOOSE.ALL}
+                      style={{ width: 200 }}
+                    >
+                      <Option value={1}>
+                        {constant.SELECT_CHOOSE.FUll_DAY}
+                      </Option>
+                      <Option value={2}>
+                        {constant.SELECT_CHOOSE.MORNING}
+                      </Option>
+                      <Option value={3}>
+                        {constant.SELECT_CHOOSE.AFTERNOON}
+                      </Option>
+                    </Select>
+                  </Form.Item>
+                  <Form.Item rules={[{ required: true }]}>
+                    <Select
+                      placeholder={constant.VACATION_TYPE.VACATION_TITLE}
+                      style={{ width: 200 }}
+                    >
+                      <Option value={1}>
+                        {constant.VACATION_TYPE.ANNUAL_LEAVE}
+                      </Option>
+                      <Option value={2}>
+                        {constant.VACATION_TYPE.UNPAID_LEAVE}
+                      </Option>
+                      <Option value={3}>
+                        {constant.VACATION_TYPE.MATERNITY_LEAVE}
+                      </Option>
+                      <Option value={4}>
+                        {constant.VACATION_TYPE.WEDDING_VACATION}
+                      </Option>
+                      <Option value={5}>
+                        {constant.VACATION_TYPE.FUNERAL_LEAVE}
+                      </Option>
+                    </Select>
+                  </Form.Item>
+                </Space>
+              </div>
+
+              <Form.List name="users">
+>>>>>>> eaff8aa... [HRM-268] Create add day off
                 {(fields, { add, remove }) => (
                   <>
                     {fields.map((field, index) => (
@@ -217,6 +327,7 @@ function DayOffRegistInput({ value }) {
                 },
               ]}
             >
+<<<<<<< HEAD
               <Input placeholder={t('LABEL.REASONS')} />
             </Form.Item>
             <Form.Item name="notes" label={t('LABEL.NOTES')}>
@@ -226,6 +337,23 @@ function DayOffRegistInput({ value }) {
               <Button onClick={handleCancel}> {t('button.cancel')}</Button>
               <Button type="primary" htmlType="submit">
                 {t('button.SUBMIT')}
+=======
+              <Input
+                onChange={handleChange}
+                placeholder={constant.LABEL.REASONS}
+              />
+            </Form.Item>
+            <Form.Item label={constant.LABEL.NOTES}>
+              <Input
+                onChange={handleChange}
+                placeholder={constant.LABEL.NOTES}
+              />
+            </Form.Item>
+            <div className="dayoff-regist-button">
+              <Button onClick={handleCancel}>{constant.BUTTON.CANCEL}</Button>
+              <Button onClick={handleSubmit} type="primary" htmlType="submit">
+                {constant.BUTTON.SUBMIT}
+>>>>>>> eaff8aa... [HRM-268] Create add day off
               </Button>
             </div>
           </Form>
