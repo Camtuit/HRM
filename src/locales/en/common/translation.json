@@ -7,6 +7,7 @@
   },
   "button": {
     "add": "Add new",
+    "remove": "Remove",
     "export_file": "Export file",
     "export_workdays": "Export workdays",
     "cancel": "Cancel",
@@ -27,6 +28,14 @@
       "EDIT": "Edit",
       "ADD": "Add"
     }
+  },
+  "VACATION": {
+    "VACATION_TYPE": "Vacation Type",
+    "ANNUAL_LEAVE": "Annual Leave",
+    "UNPAID_LEAVE": "Unpaired Leave",
+    "MATERNITY_LEAVE": "Maternity Leave",
+    "WEDDING_VACATION": "Wedding Vacation",
+    "FUNERAL_LEAVE": "Fundamental Leave"
   },
   "TABLE": {
     "COLUMN_TITLE": {
@@ -61,8 +70,8 @@
     "INPUT": "Input",
     "HOLDER": "Holder",
     "STATUS": "Status",
-    "PO_NAME": "POs Name",
-    "PO_EMAIL": "POs Email",
+    "PO_NAME": "PO's Name",
+    "PO_EMAIL": "PO's Email",
     "VACATION_FROM": "Vacation Days From",
     "VACATION_TO": "Vacation Days To",
     "MORINING_AFTERNOON_ALLDAY": "Morning|Afternoon|All day",
