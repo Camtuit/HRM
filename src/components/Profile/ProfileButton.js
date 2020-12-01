@@ -27,7 +27,7 @@ export default function ProfileButton() {
           </Link>
         </Col>
         <Col xs={8} sm={8} md={6} lg={6} xl={4}>
-          <Link to="/dayoffs">
+          <Link to="/dayoff">
             <Button type="primary" className="btn-profile">
               {t('profile.submit_day_off')}
             </Button>
