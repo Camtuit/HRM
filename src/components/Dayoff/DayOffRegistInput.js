@@ -46,27 +46,62 @@ function DayOffRegistInput({ value }) {
   const { Option } = Select;
   const [componentSize, setComponentSize] = useState('default');
   const history = useHistory();
-  const [valueInput, setValueInput] = useState({});
-  const [valueInput, setValueInput] = useState({});
+  const [valueName, setValueName] = useState('');
+  const [valueEmail, setValueEmail] = useState('');
+  const [valueReason, setValueReason] = useState('');
+  const [valueNote, setValueNote] = useState('');
   const [valueQuickChoose, setValueQuickChoose] = useState('');
   const [valueDate, setValueDate] = useState('');
+  const [vacation, setVacation] = useState('');
+  const [valueDateMore, setValueDateMore] = useState('');
+  const [valueChooice, setValueChooice] = useState('');
+  const [valueVacationMore, setValueVacationMore] = useState('');
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
-  const handleChangeChoose = (value) => {
-    valueQuickChoose(value);
+  const handleChangeName = (e) => {
+    setValueName(e.target.value);
   };
-  const handleChange = (e) => {
-    setValueInput(e.target.value);
+  const handleChangeEmail = (e) => {
+    setValueEmail(e.target.value);
+  };
+  const handleChangeReason = (e) => {
+    setValueReason(e.target.value);
+  };
+  const handleChangeNote = (e) => {
+    setValueNote(e.target.value);
   };
   const onChangeDate = (date) => {
-    valueDate(date);
+    setValueDate(date);
+  };
+  const handleChangeChoose = (valueChoose) => {
+    setValueQuickChoose(valueChoose);
+  };
+  const handleVacationType = (valueVacation) => {
+    setVacation(valueVacation);
+  };
+  const handleDateMore = (valueMore) => {
+    setValueDateMore(valueMore);
+  };
+  const handleChooseMore = (valueChoose) => {
+    setValueChooice(valueChoose);
+  };
+  const handleVacationMore = (valueVacation) => {
+    setValueVacationMore(valueVacation);
   };
   const handleSubmit = (value) => {
-    const newDate= {
-      name: valueInput,
-      email:
-    }
+    const newDate = {
+      name: valueName,
+      email: valueEmail,
+      date: valueDate,
+      choice: valueQuickChoose,
+      vacationType: vacation,
+      dateMore: valueDateMore,
+      choiceMore: valueChooice,
+      vacationMore: valueVacationMore,
+      reason: valueReason,
+      note: valueNote,
+    };
   };
 
 >>>>>>> eaff8aa... [HRM-268] Create add day off
@@ -140,7 +175,7 @@ function DayOffRegistInput({ value }) {
               <Input placeholder={t('LABEL.PO_NAME')} />
 =======
               <Input
-                onChange={handleChange}
+                onChange={handleChangeName}
                 placeholder={constant.LABEL.PO_NAME}
               />
 >>>>>>> eaff8aa... [HRM-268] Create add day off
@@ -162,7 +197,7 @@ function DayOffRegistInput({ value }) {
               <Form.List name="days_off_lists">
 =======
               <Input
-                onChange={handleChange}
+                onChange={handleChangeEmail}
                 placeholder={constant.LABEL.PO_EMAIL}
               />
             </Form.Item>
@@ -209,6 +244,7 @@ function DayOffRegistInput({ value }) {
                     <Select
                       placeholder={constant.VACATION_TYPE.VACATION_TITLE}
                       style={{ width: 200 }}
+                      onChange={handleVacationType}
                     >
                       <Option value={1}>
                         {constant.VACATION_TYPE.ANNUAL_LEAVE}
@@ -248,6 +284,7 @@ function DayOffRegistInput({ value }) {
                             rules={[{ required: true }]}
                           >
                             <DatePicker
+                              onChange={handleDateMore}
                               placeholder={constant.FORMAT_DATE}
                               format={constant.FORMAT_DATE}
                               style={{ width: 200 }}
@@ -260,8 +297,14 @@ function DayOffRegistInput({ value }) {
                             rules={[{ required: true }]}
                           >
                             <Select
+<<<<<<< HEAD
                               placeholder={t('RADIO_INPUT.ALL')}
                               style={{ width: 190 }}
+=======
+                              onChange={handleChooseMore}
+                              placeholder={constant.RADIO_CHOOSE.ALL}
+                              style={{ width: 200 }}
+>>>>>>> 9c46829... [HRM-268] Fix day off regis Input
                             >
                               <Option value={1}>
                                 {t('TABLE.COLUMN_TITLE.FULL_DAY')}
@@ -339,13 +382,13 @@ function DayOffRegistInput({ value }) {
                 {t('button.SUBMIT')}
 =======
               <Input
-                onChange={handleChange}
+                onChange={handleChangeReason}
                 placeholder={constant.LABEL.REASONS}
               />
             </Form.Item>
             <Form.Item label={constant.LABEL.NOTES}>
               <Input
-                onChange={handleChange}
+                onChange={handleChangeNote}
                 placeholder={constant.LABEL.NOTES}
               />
             </Form.Item>
