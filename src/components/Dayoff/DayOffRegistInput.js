@@ -14,6 +14,7 @@ import {
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import moment from 'moment';
+<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -22,6 +23,12 @@ import constant from '../../constants/htmlConstants';
 import validation from '../../constants/validation';
 import { createDayOff } from '../../apis/dayOffApi';
 import { RESPONSE_CODE } from '../../constants/errorText';
+=======
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import constant from '../../constants/htmlConstants';
+import validation from '../../constants/validation';
+import { createDayOff } from '../../apis/dayOffApi';
+>>>>>>> 3cc7cf0... [HRM-268] Fix role member day off
 
 <<<<<<< HEAD
 import {
@@ -46,19 +53,11 @@ function DayOffRegistInput({ value }) {
   const { Option } = Select;
   const [componentSize, setComponentSize] = useState('default');
   const history = useHistory();
-  const [valueName, setValueName] = useState('');
-  const [valueEmail, setValueEmail] = useState('');
-  const [valueReason, setValueReason] = useState('');
-  const [valueNote, setValueNote] = useState('');
-  const [valueQuickChoose, setValueQuickChoose] = useState('');
-  const [valueDate, setValueDate] = useState('');
-  const [vacation, setVacation] = useState('');
-  const [valueDateMore, setValueDateMore] = useState('');
-  const [valueChooice, setValueChooice] = useState('');
-  const [valueVacationMore, setValueVacationMore] = useState('');
+  const [data, setData] = useState('');
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
+<<<<<<< HEAD
   const handleChangeName = (e) => {
     setValueName(e.target.value);
   };
@@ -116,6 +115,15 @@ function DayOffRegistInput({ value }) {
   const onFinish = (values) => {
     const getUserId = {
       user_id: localStorage.getItem('user-id'),
+=======
+  const handleCancel = () => {
+    history.push('/profile/details');
+  };
+  const handleDate = () => {};
+  const onFinish = (values) => {
+    const fetchId = {
+      user_id: 1,
+>>>>>>> 3cc7cf0... [HRM-268] Fix role member day off
     };
     const dayOffList = {};
     dayOffList.days_off_lists = values.days_off_lists.map(function (element) {
@@ -125,6 +133,7 @@ function DayOffRegistInput({ value }) {
         vacation_type_id: element.vacation_type_id,
       };
     });
+<<<<<<< HEAD
     const newData = { ...values, ...dayOffList, ...getUserId };
     createDayOff(newData).then((response) => {
       if (response !== RESPONSE_CODE[404]) {
@@ -139,6 +148,15 @@ function DayOffRegistInput({ value }) {
       }
     });
   };
+=======
+    const newData = { ...values, ...dayOffList, ...fetchId };
+    console.log('value', newData);
+    createDayOff(newData).then((response) => {
+      history.push('profile/details');
+    });
+  };
+
+>>>>>>> 3cc7cf0... [HRM-268] Fix role member day off
   return (
     <div className="dayoff-regist-input">
       <Row>
@@ -163,7 +181,11 @@ function DayOffRegistInput({ value }) {
             initialValues={{ days_off_lists: [''] }}
           >
             <Form.Item
+<<<<<<< HEAD
               label={t('LABEL.PO_NAME')}
+=======
+              label={constant.LABEL.PO_NAME}
+>>>>>>> 3cc7cf0... [HRM-268] Fix role member day off
               name="po_name"
               rules={[
                 {
@@ -171,6 +193,7 @@ function DayOffRegistInput({ value }) {
                 },
               ]}
             >
+<<<<<<< HEAD
 <<<<<<< HEAD
               <Input placeholder={t('LABEL.PO_NAME')} />
 =======
@@ -182,6 +205,12 @@ function DayOffRegistInput({ value }) {
             </Form.Item>
             <Form.Item
               label={t('LABEL.PO_EMAIL')}
+=======
+              <Input placeholder={constant.LABEL.PO_NAME} />
+            </Form.Item>
+            <Form.Item
+              label={constant.LABEL.PO_EMAIL}
+>>>>>>> 3cc7cf0... [HRM-268] Fix role member day off
               name="po_email"
               rules={[
                 {
@@ -190,6 +219,7 @@ function DayOffRegistInput({ value }) {
                 },
               ]}
             >
+<<<<<<< HEAD
 <<<<<<< HEAD
               <Input placeholder={t('LABEL.PO_EMAIL')} />
             </Form.Item>
@@ -268,6 +298,12 @@ function DayOffRegistInput({ value }) {
 
               <Form.List name="users">
 >>>>>>> eaff8aa... [HRM-268] Create add day off
+=======
+              <Input placeholder={constant.LABEL.PO_EMAIL} />
+            </Form.Item>
+            <Form.Item label={constant.LABEL.DAY} name="days_off_lists">
+              <Form.List name="days_off_lists">
+>>>>>>> 3cc7cf0... [HRM-268] Fix role member day off
                 {(fields, { add, remove }) => (
                   <>
                     {fields.map((field, index) => (
@@ -284,7 +320,7 @@ function DayOffRegistInput({ value }) {
                             rules={[{ required: true }]}
                           >
                             <DatePicker
-                              onChange={handleDateMore}
+                              onChange={handleDate}
                               placeholder={constant.FORMAT_DATE}
                               format={constant.FORMAT_DATE}
                               style={{ width: 200 }}
@@ -298,10 +334,13 @@ function DayOffRegistInput({ value }) {
                           >
                             <Select
 <<<<<<< HEAD
+<<<<<<< HEAD
                               placeholder={t('RADIO_INPUT.ALL')}
                               style={{ width: 190 }}
 =======
                               onChange={handleChooseMore}
+=======
+>>>>>>> 3cc7cf0... [HRM-268] Fix role member day off
                               placeholder={constant.RADIO_CHOOSE.ALL}
                               style={{ width: 200 }}
 >>>>>>> 9c46829... [HRM-268] Fix day off regis Input
@@ -363,13 +402,18 @@ function DayOffRegistInput({ value }) {
 
             <Form.Item
               label={constant.LABEL.REASONS}
+<<<<<<< HEAD
               name={t('LABEL.REASONS')}
+=======
+              name="reasons"
+>>>>>>> 3cc7cf0... [HRM-268] Fix role member day off
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
+<<<<<<< HEAD
 <<<<<<< HEAD
               <Input placeholder={t('LABEL.REASONS')} />
             </Form.Item>
@@ -385,16 +429,16 @@ function DayOffRegistInput({ value }) {
                 onChange={handleChangeReason}
                 placeholder={constant.LABEL.REASONS}
               />
+=======
+              <Input placeholder={constant.LABEL.REASONS} />
+>>>>>>> 3cc7cf0... [HRM-268] Fix role member day off
             </Form.Item>
-            <Form.Item label={constant.LABEL.NOTES}>
-              <Input
-                onChange={handleChangeNote}
-                placeholder={constant.LABEL.NOTES}
-              />
+            <Form.Item name="notes" label={constant.LABEL.NOTES}>
+              <Input placeholder={constant.LABEL.NOTES} />
             </Form.Item>
             <div className="dayoff-regist-button">
               <Button onClick={handleCancel}>{constant.BUTTON.CANCEL}</Button>
-              <Button onClick={handleSubmit} type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit">
                 {constant.BUTTON.SUBMIT}
 >>>>>>> eaff8aa... [HRM-268] Create add day off
               </Button>
