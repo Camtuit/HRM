@@ -7,6 +7,7 @@
   },
   "button": {
     "add": "Add new",
+    "addNewDayOff": "Add new day off",
     "remove": "Remove",
     "export_file": "Export file",
     "export_workdays": "Export workdays",

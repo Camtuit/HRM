@@ -43,11 +43,14 @@ function DayOffRegistInput({ value }) {
   const handleCancel = () => {
     history.push('/profile/details');
   };
+  const hanldeChangeValue = (changedValues, allValues) => {};
   useEffect(() => {
     window.onbeforeunload = () => {
-      return dispatch(callLoader());
+      if (isData) {
+        return dispatch(callLoader());
+      }
     };
-  });
+  }, []);
   const onFinish = (values) => {
     const getUserId = {
       user_id: localStorage.getItem('user-id'),
@@ -76,6 +79,7 @@ function DayOffRegistInput({ value }) {
   };
   return (
     <div className="dayoff-regist-input">
+      <h2 className="list-title">{t('button.addNewDayOff')}</h2>
       <Row>
         <Col span={constant.GRID_COL.GRID_COL_2}></Col>
         <Col span={constant.GRID_COL.GRID_COL_16}>
@@ -96,6 +100,7 @@ function DayOffRegistInput({ value }) {
             size={componentSize}
             onFinish={onFinish}
             initialValues={{ days_off_lists: [''] }}
+            onValuesChange={hanldeChangeValue}
           >
             <Form.Item
               label={t('LABEL.PO_NAME')}
@@ -135,7 +140,12 @@ function DayOffRegistInput({ value }) {
                             {...field}
                             name={[field.name, 'vacation_day']}
                             fieldKey={[field.fieldKey, 'vacation_day']}
-                            rules={[{ required: true }]}
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Vacation day is request',
+                              },
+                            ]}
                           >
                             <DatePicker
                               placeholder={constant.FORMAT_DATE}
@@ -147,7 +157,12 @@ function DayOffRegistInput({ value }) {
                             {...field}
                             name={[field.name, 'session_day_id']}
                             fieldKey={[field.fieldKey, 'session_day_id']}
-                            rules={[{ required: true }]}
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Session day is request',
+                              },
+                            ]}
                           >
                             <Select
                               placeholder={t('RADIO_INPUT.ALL')}
@@ -168,7 +183,12 @@ function DayOffRegistInput({ value }) {
                             {...field}
                             name={[field.name, 'vacation_type_id']}
                             fieldKey={[field.fieldKey, 'vacation_type_id']}
-                            rules={[{ required: true }]}
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Vacation type is request',
+                              },
+                            ]}
                           >
                             <Select
                               placeholder={t('VACATION.VACATION_TYPE')}
