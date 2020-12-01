@@ -45,11 +45,13 @@ function UserTable({
         sort,
         direct,
       ).then((res) => {
-        setUser(res.data.data);
-        setTotalRecord(res.data.meta.pagination.total);
-        setRecordPerPage(res.data.meta.pagination.per_page);
-        setCurrentPage(res.data.meta.pagination.current_page);
-        console.log(res.data.data);
+        if (res.status === 200) {
+          setUser(res.data.data);
+          setTotalRecord(res.data.meta.pagination.total);
+          setRecordPerPage(res.data.meta.pagination.per_page);
+          setCurrentPage(res.data.meta.pagination.current_page);
+        }
+        setIsLoading(false);
       });
     } catch (e) {
       Toast({ message: e });
