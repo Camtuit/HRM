@@ -22,6 +22,7 @@ const constants = {
     },
   },
   LABEL: {
+    DAY: 'Vacation Day',
     DAY_OFF: 'Day off',
     DATE: 'Date',
     NAME: 'Name',
@@ -61,6 +62,11 @@ const constants = {
     ASSIGNED_DEVICE: 'Assigned Device',
     REMAINING_DAYS_OFFF: 'Remaining Day Off',
   },
+  SELECT_CHOOSE: {
+    FUll_DAY: 'Full day',
+    MORNING: 'Morning',
+    AFTERNOON: 'Afternoon',
+  },
   GRID_COL: {
     GRID_COL_2: 2,
     GRID_COL_3: 3,
@@ -72,6 +78,8 @@ const constants = {
     GRID_COL_10: 10,
     GRID_COL_12: 12,
     GRID_COL_13: 13,
+    GRID_COL_14: 14,
+    GRID_COL_15: 15,
     GRID_COL_16: 16,
     GRID_COL_20: 20,
     GRID_COL_21: 21,
@@ -102,6 +110,7 @@ const constants = {
     SEARCH: 'Search',
     SUBMIT: 'Submit',
     BACK: 'Back',
+    REMOVE: 'Remove',
     ADD: 'Add new',
     EXPORT_FILE: 'Export File',
     EXPORT_WORKDAYS: 'Export Workdays',
@@ -129,6 +138,7 @@ const constants = {
     AVAILABLE: 'Available',
   },
   VACATION_TYPE: {
+    VACATION_TITLE: 'Vacation Type',
     ANNUAL_LEAVE: 'Annual leave',
     UNPAID_LEAVE: 'Unpaid leave',
     MATERNITY_LEAVE: 'Maternity leave',

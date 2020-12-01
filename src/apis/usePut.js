@@ -5,7 +5,7 @@ import { updateAction } from '../actions/commonAction';
 
 function usePut(type = '') {
   const dispatch = useDispatch();
-  const { apiCallStatus } = useSelector((state) => state.apiCallStatus);
+  // const { apiCallStatus } = useSelector((state) => state.apiCallStatus);
 
   const boundAction = useCallback(
     (data) => {
@@ -14,7 +14,7 @@ function usePut(type = '') {
     [dispatch, type],
   );
 
-  return [boundAction, apiCallStatus];
+  return [boundAction];
 }
 
 export default usePut;

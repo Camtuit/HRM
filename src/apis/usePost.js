@@ -5,7 +5,7 @@ import { createAction } from '../actions/commonAction';
 
 function usePost(type = '') {
   const dispatch = useDispatch();
-  const { apiCallStatus } = useSelector((state) => state.apiCallStatus);
+  // const { apiCallStatus } = useSelector((state) => state.apiCallStatus);
 
   const boundAction = useCallback(
     (data) => {
@@ -13,7 +13,7 @@ function usePost(type = '') {
     },
     [dispatch, type],
   );
-  return [boundAction, apiCallStatus];
+  return [boundAction];
 }
 
 export default usePost;
