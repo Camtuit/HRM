@@ -42,7 +42,6 @@ const AvatarUpload = (props) => {
       {fileList.length < 1 && (
         <img src={fileList} alt="avatar" style={{ width: '100%' }} />
       )}
-      <img src={this.props.avatar} />
     </Upload>
   );
 };

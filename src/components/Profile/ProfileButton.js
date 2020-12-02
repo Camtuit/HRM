@@ -13,7 +13,7 @@ export default function ProfileButton() {
           {' '}
         </Col>
         <Col xs={8} sm={8} md={6} lg={6} xl={4}>
-          <Link to="/holidays">
+          <Link to="/days-off">
             <Button type="primary" className="btn-profile">
               {t('profile.list_day_off')}
             </Button>

@@ -20,27 +20,56 @@ label {
  margin-left: 50px;
 }
 
-
 .content-profile-detail-avatar-image{
     width : 156px;
-    height :156px;
-    border-radius: 156px ;
+    height: auto;
+  
 }
 .content-profile-detail-avatar{
-    width: 40%;
     display: inline-flex;
-    padding: 4em 15em;
+    height: auto;
+    width: 35%;
+    text-align: right;
+    position: relative;
+    padding: 20px;
  
-    
+.ant-upload-list-picture-card-container{
+    width: 156px;
+    height: 156px;
+    margin: 0;
+   
+   }
+   .ant-upload-list-picture-card-container .ant-upload-list-item-list-type-picture-card {
+       border-radius: 156px;
+       height: 100%;
+       width: 100%;
+       padding: 0px;
+   }
+   .ant-upload-list-picture-card .ant-upload-select-picture-card{
+       height: 156px;
+       width: 156px;
+       border-radius: 156px;   
+   }
+    .ant-upload-list-item-list-type-picture-card img {
+        width: 100%;
+        height: auto;   
+        max-width:100%;
+        border-radius: 156px;
+           
+    }
+   .btn-avata-profile{
+        position: relative;
+        top: 85px;
+        right: 107px;
+        .content-profile-detail-avatar-button{
+            background-color: transparent;
+          
+        }
+        
+   }
+   
+      
 }
-.content-profile-detail-avatar-button{
-    padding-top: 3em;
-    padding-left: 4em;
- 
-    
-}
-
-
 
 
 

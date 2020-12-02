@@ -3,7 +3,9 @@
     "CREATED_SUCCCESSFULL": "Created Successfull!",
     "Deleted_Successfull": "Deleted Successfully!",
     "delete": "Are you sure delete day off",
-    "delete_request": "Delete Day Off"
+    "delete_request": "Delete Day Off",
+    "error_typefile_avatar": "You can only upload JPG/PNG file!",
+    "error_size_avatar": "Image must smaller than 2MB!"
   },
   "button": {
     "add": "Add new",

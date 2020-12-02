@@ -5,9 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { RESPONSE_CODE } from '../../constants/errorText';
 import { fetchUserDetail } from '../../apis/ProfileUserApi';
-import { Upload } from 'antd';
+import { Upload, message } from 'antd';
 import { closeLoader, callLoader } from '../../actions/utilsAction';
 import { UploadAvatarUser } from '../../apis/userApi';
+
 export default function ProfileTable() {
   const [idUsers, setIdUsers] = useState('15');
   const [userDetail, setUserDeatail] = useState('');
@@ -15,12 +16,18 @@ export default function ProfileTable() {
   const [fileList, setFileList] = useState([]);
   const [files, setFiles] = useState([]);
   const [avatar, setAvatar] = useState('');
+  const [checkShowButton, setCheckShowButton] = useState(false);
+
   const onChange = ({ fileList: newFileList, file }) => {
     setFileList(newFileList);
-    file.response && setFiles(file.response.data.link);
+    setCheckShowButton(false);
+    if (file.status === 'done') {
+      file.response && setFiles(file.response.data.link);
+      setCheckShowButton(true);
+    } else if (file.status === 'uploading') {
+      setCheckShowButton(false);
+    }
   };
-  const id = JSON.stringify(localStorage.getItem('user-id'));
-  console.log(id);
 
   const handleUpLoadAvatar = () => {
     try {
@@ -28,12 +35,23 @@ export default function ProfileTable() {
       UploadAvatarUser(idUsers, avatar).then((res) => {
         if (res !== RESPONSE_CODE[404]) {
           setAvatar(res.data.data.avatar);
+          setCheckShowButton(false);
         }
-        console.log('avatar: ', avatar);
       });
     } catch (error) {
       setAvatar(null);
     }
+  };
+  const beforeUpload = (file) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      Toast({ message: t('MESSAGE.error_typefile_avatar') });
+    }
+    const isSizeLM2M = file.size / 1024 / 1024 < 2;
+    if (!isSizeLM2M) {
+      Toast({ message: t('MESSAGE.error_size_avatar') });
+    }
+    return isJpgOrPng && isSizeLM2M;
   };
 
   useEffect(() => {
@@ -41,6 +59,7 @@ export default function ProfileTable() {
       fetchUserDetail(idUsers).then((res) => {
         if (res !== RESPONSE_CODE[404]) {
           setUserDeatail(res.data.data);
+          setAvatar(res.data.data.avatar);
         } else {
           console.log('error');
         }
@@ -64,9 +83,11 @@ export default function ProfileTable() {
         <Upload
           action="http://api-php.dev-hrm.nals.vn/api/upload"
           listType="picture-card"
-          fileList={fileList}
+          showUploadList={true}
           onChange={onChange}
+          beforeUpload={beforeUpload}
           name="image"
+          className="avatar-uploader"
         >
           {fileList.length < 1 && (
             <img
@@ -76,12 +97,15 @@ export default function ProfileTable() {
             />
           )}
         </Upload>
-        <div className="content-profile-detail-avatar-button">
-          {' '}
-          <Button onClick={handleUpLoadAvatar}>{t('button.SAVE')}</Button>
+        <div className="btn-avata-profile">
+          <Button
+            className="content-profile-detail-avatar-button"
+            onClick={handleUpLoadAvatar}
+          >
+            {checkShowButton ? t('button.SAVE') : ''}
+          </Button>
         </div>
       </div>
-
       <div className="content-profile-detail-form">
         <Form {...layout} name="nest-messages">
           <Form.Item label={t('LABEL.EMPLOYEE_CODE')}>
