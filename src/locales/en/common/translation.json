@@ -1,9 +1,9 @@
 {
   "MESSAGE": {
     "CREATED_SUCCCESSFULL": "Created Successfull!",
-    "Deleted_Successfull": "Deleted Successfull!",
-    "delete": "Are you sure delete",
-    "title": "Delete request"
+    "Deleted_Successfull": "Deleted Successfully!",
+    "delete": "Are you sure delete day off",
+    "delete_request": "Delete Day Off"
   },
   "button": {
     "add": "Add new",

@@ -102,7 +102,7 @@ function DayOffTable() {
           </Tooltip>
           <RemovePopupCommon
             title={t('MESSAGE.delete_request')}
-            content={`${t('MESSAGE.delete')} ${value.full_name}`}
+            content={`${t('MESSAGE.delete')} ${value.vacation_day}?`}
             onOk={(id) => {
               handleDeleteDayOff(value.id);
             }}
