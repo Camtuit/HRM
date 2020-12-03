@@ -4,11 +4,13 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import '../css/Login.css';
+import { useTranslation } from 'react-i18next';
 
 function Login() {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
   const history = useHistory();
+  const [t, i18n] = useTranslation();
 
   const layout = {
     labelCol: {
@@ -35,7 +37,7 @@ function Login() {
       .post(' http://api-php.dev-hrm.nals.vn/api/auth/login', data)
       .then((res) => {
         localStorage.setItem('token', res.data.meta.access_token);
-        localStorage.setItem('user-id', res.data.data.id);
+        localStorage.setItem('user', JSON.stringify(res.data.data));
 
         if (res.data.data.email === 'member@gmail.com') {
           history.push('/profile/details');
@@ -61,13 +63,14 @@ function Login() {
   return (
     <div className="login">
       <div className="login-form">
-        <h3>Human Resources Management</h3>
-        <h1>NALS</h1>
+        <h3>{t('login.title-login')}</h3>
+        <h1>{t('login.nals')}</h1>
 
         {!isPasswordCorrect && (
           <div className="login-caution">
             <p>
-              Incorrect email or password.{' '}
+              {' '}
+              {t('login.error')}
               <i
                 class="fas fa-times"
                 onClick={() => setIsPasswordCorrect(true)}
