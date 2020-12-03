@@ -59,12 +59,18 @@ label {
     }
    .btn-avata-profile{
         position: relative;
-        top: 85px;
-        right: 107px;
+        top: 128px;
+        right: 138px;
         .content-profile-detail-avatar-button{
             background-color: transparent;
-          
-        }
+            border: none;
+            order: none;
+            border-top: 1px solid #d9d9d9;
+            width: 120px;
+            background-color: #fafafa;
+            font-size: 15px;
+                
+                }
         
    }
    
