@@ -17,6 +17,7 @@ function Header() {
   const [checkLogin, setcheckLogin] = useState('Logout');
   const toggledSideBar = useSelector((state) => state.App.toggledSideBar);
   const dispatch = useDispatch();
+
   const {
     WIDTH_SIDE_BAR: { FULL, SHORT },
   } = constanst;
@@ -29,10 +30,14 @@ function Header() {
   const handleToggleSidebar = () => {
     dispatch(AppActions.toggleSideBar());
   };
-  const handleHoverMenuUser = () => {
-    setIsProfileBoxOpen(!isProfileBoxOpen);
-  };
 
+  onclick = function (e) {
+    if (e.target.matches('#avatar img')) {
+      setIsProfileBoxOpen(!isProfileBoxOpen);
+    } else {
+      setIsProfileBoxOpen(false);
+    }
+  };
   const handleLogout = () => {
     localStorage.removeItem('token');
   };
@@ -62,14 +67,15 @@ function Header() {
         >
           <i className="fas fa-bars" />
         </div>
-        <div className="dropdown user-menu" onClick={handleHoverMenuUser}>
+        <div className="dropdown user-menu">
           <Avatar
             style={{ border: isProfileBoxOpen ? ' #0483f7 solid 2px' : 'none' }}
             alt="Avatar"
             size="large"
             src="https://www.flaticon.com/premium-icon/icons/svg/2202/2202112.svg"
+            id="avatar"
           />
-          <i className="fas fa-sort-down"></i>
+          <i className="fas fa-sort-down avatar"></i>
         </div>
         <div
           className="dropdown-list-menu"
@@ -83,13 +89,11 @@ function Header() {
             >
               {LIST.Hi} {name}
             </Menu.Item>
-            <Menu.Item onClick={handleHoverMenuUser}>
+            <Menu.Item>
               <Link to="/profile/details">{LIST.MY_PROFILE}</Link>
             </Menu.Item>
             <Menu.Item>
-              <Link onClick={handleHoverMenuUser} to="/request-devices">
-                {LIST.REQUEST_DEVICE}
-              </Link>
+              <Link to="/request-devices">{LIST.REQUEST_DEVICE}</Link>
             </Menu.Item>
             <Menu.Item>
               <Link

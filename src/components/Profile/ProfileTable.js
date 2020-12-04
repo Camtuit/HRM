@@ -8,6 +8,7 @@ import { fetchUserDetail } from '../../apis/ProfileUserApi';
 import { Upload, message } from 'antd';
 import { closeLoader, callLoader } from '../../actions/utilsAction';
 import { UploadAvatarUser } from '../../apis/userApi';
+import { useHistory } from 'react-router-dom';
 
 export default function ProfileTable() {
   const [idUsers, setIdUsers] = useState('15');
@@ -17,7 +18,7 @@ export default function ProfileTable() {
   const [files, setFiles] = useState([]);
   const [avatar, setAvatar] = useState('');
   const [checkShowButton, setCheckShowButton] = useState(false);
-
+  const history = useHistory();
   const onChange = ({ fileList: newFileList, file }) => {
     setFileList(newFileList);
     setCheckShowButton(false);
@@ -36,6 +37,8 @@ export default function ProfileTable() {
         if (res !== RESPONSE_CODE[404]) {
           setAvatar(res.data.data.avatar);
           setCheckShowButton(false);
+          history.push('/profile/details');
+          location.reload();
         }
       });
     } catch (error) {
@@ -132,7 +135,7 @@ export default function ProfileTable() {
           <Form.Item label={t('LABEL.SKILL_LIST')}>
             {userDetail.skills &&
               userDetail.skills.map((skill) => {
-                return <p>{skill.name}</p>;
+                return <p key={skill.id}>{skill.name}</p>;
               })}
           </Form.Item>
           <Form.Item label={t('LABEL.START_DATE')}>
@@ -142,7 +145,7 @@ export default function ProfileTable() {
             {userDetail.skills &&
               userDetail.contracts.map((contract) => {
                 return (
-                  <p>
+                  <p key={contract.id}>
                     {contract.contract_date_begin} {' ~ '}{' '}
                     {contract.contract_date_end}
                   </p>
