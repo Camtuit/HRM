@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Select, Row, Col } from 'antd';
+import { Button, DatePicker, Form, Input, Select, Card, Row, Col } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
@@ -86,7 +86,7 @@ function DayOffSearchBox() {
     history.push(`/days-off`);
   };
   return (
-    <div className="search-box user-search-box">
+    <Card className="search-box">
       <Form
         form={form}
         layout="horizontal"
@@ -102,26 +102,38 @@ function DayOffSearchBox() {
         onValuesChange={onFormLayoutChange}
         size={componentSize}
       >
-        <Row>
-          <Col span={9}>
+        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={24} md={24} lg={24} xl={8}>
             <Form.Item
               className="search-box_item search-box_item--name"
-              label="Name"
+              label={t('day_off.name')}
               name="name"
             >
-              <Input onChange={handleChange} placeholder="Name" />
+              <Input onChange={handleChange} placeholder={t('day_off.name')} />
             </Form.Item>
           </Col>
-          <Col span={7}></Col>
-          <Col span={6}>
+          <Col xs={24} sm={24} md={24} lg={11} xl={8}>
+            <Form.Item
+              className="search-box_item search-box_item--date"
+              label={t('day_off.day_off')}
+            >
+              <DatePicker.RangePicker
+                value={[currentContractDateBegin, currentContractDateEnd]}
+                placeholder={[constant.FORMAT_DATE, constant.FORMAT_DATE]}
+                onChange={onChangeContractDate}
+                format={constant.FORMAT_DATE}
+              />
+            </Form.Item>
+          </Col>
+          <Col xs={24} sm={24} md={24} lg={24} xl={8}>
             <Form.Item
               className="search-box_item search-box_item--choose"
-              label="Quick choose"
+              label={t('RADIO_INPUT.QUICK_CHOOSE')}
             >
               <Select
                 value={quickChooseValue}
                 onChange={onChangeValueQuickChoose}
-                placeholder={t('RADIO_INPUT.QUICK_CHOOSE')}
+                placeholder={t('day_off.quick_choose')}
               >
                 <Select.Option value={0}>
                   {t('RADIO_INPUT.TODAY')}
@@ -143,21 +155,8 @@ function DayOffSearchBox() {
           </Col>
         </Row>
         <Row>
-          <Col span={9}>
-            <Form.Item
-              className="search-box_item search-box_item--date"
-              label="Contract"
-            >
-              <DatePicker.RangePicker
-                value={[currentContractDateBegin, currentContractDateEnd]}
-                placeholder={[constant.FORMAT_DATE, constant.FORMAT_DATE]}
-                onChange={onChangeContractDate}
-                format={constant.FORMAT_DATE}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={7}></Col>
-          <Col span={6}>
+          <Col xs={24} sm={24} md={24} lg={11} xl={16}></Col>
+          <Col xs={24} sm={24} md={24} lg={11} xl={8}>
             <div className="search-box-button">
               <Button onClick={handleClear}>{t('button.clear')}</Button>
               <Button type="primary" onClick={handleSearch}>
@@ -167,7 +166,7 @@ function DayOffSearchBox() {
           </Col>
         </Row>
       </Form>
-    </div>
+    </Card>
   );
 }
 

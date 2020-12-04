@@ -147,5 +147,11 @@
     "nals": "NALS",
     "title-login": "Human Resources Management",
     "error": "Incorrect email or password."
+  },
+  "day_off": {
+    "day_off_list": "Day off list",
+    "name": "Name",
+    "day_off": "Day Off",
+    "quick_choose": "Quick selection of day off"
   }
 }

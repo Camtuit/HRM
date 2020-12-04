@@ -25,7 +25,7 @@ function DayOffTable() {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [recordPerPage, setRecordPerPage] = useState(null);
-  const [totalPage, setTotalRecord] = useState(null);
+  const [totalPage, setTotalRecord] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [sort, setSort] = useState(null);
   const [direct, setDirect] = useState(null);
@@ -136,7 +136,10 @@ function DayOffTable() {
                 9,
             }));
             setData(newData);
-            setTotalRecord(res.data.meta.pagination.total);
+            // console.log(res.data.meta.pagination.total);
+            // setTotalRecord(res.data.meta.pagination.total);
+            // console.log(totalPage);
+
             setRecordPerPage(res.data.meta.pagination.per_page);
             setCurrentPage(res.data.meta.pagination.current_page);
           } else {
@@ -157,14 +160,14 @@ function DayOffTable() {
   }, [search, sort, direct]);
 
   return (
-    <div className="dayoff-table">
-      <Button className="dayoff-table-button" type="primary">
-        {t('button.export_file')}
-      </Button>
-
+    <div className="data-table">
+      <div className="button-table-group">
+        <Button className="data-table-button" type="primary">
+          {t('button.export_file')}
+        </Button>
+      </div>
       <Table
         rowKey={'id'}
-        className="dayoff-table-layout"
         bordered
         columns={COLUMNS}
         dataSource={data}
