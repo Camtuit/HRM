@@ -12,7 +12,6 @@ const AvatarUpload = (props) => {
   const [fileList, setFileList] = useState([]);
   const onChange = ({ fileList: newFileList, file }) => {
     setFileList(newFileList);
-    console.log(file.name);
   };
 
   useEffect(() => {}, [fileList]);

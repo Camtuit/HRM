@@ -44,7 +44,6 @@ export async function changeUserStatusById(userId) {
   }
 }
 export async function UploadAvatarUser(userId, avatar) {
-  console.log(avatar);
   const params = {
     avatar: avatar,
   };

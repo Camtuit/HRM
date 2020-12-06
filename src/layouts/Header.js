@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, useHistory } from 'react-router-dom';
 import { Avatar, Menu, Dropdown, Icon, Button } from 'antd';
 
 import { List } from 'antd/lib/form/Form';
@@ -12,12 +12,14 @@ import types from '../constants/apiResourceTypes';
 import AppActions from '../redux/App/action';
 
 function Header() {
+  const history = useHistory();
   const [name, setName] = useState('Phạm Thị Cẩm Tú');
   const [isProfileBoxOpen, setIsProfileBoxOpen] = useState(false);
   const [checkLogin, setcheckLogin] = useState('Logout');
   const toggledSideBar = useSelector((state) => state.App.toggledSideBar);
   const dispatch = useDispatch();
 
+  const userData = JSON.parse(localStorage.getItem('user'));
   const {
     WIDTH_SIDE_BAR: { FULL, SHORT },
   } = constanst;
@@ -40,6 +42,7 @@ function Header() {
   };
   const handleLogout = () => {
     localStorage.removeItem('token');
+    history.push('/login');
   };
 
   return (
@@ -72,7 +75,7 @@ function Header() {
             style={{ border: isProfileBoxOpen ? ' #0483f7 solid 2px' : 'none' }}
             alt="Avatar"
             size="large"
-            src="https://www.flaticon.com/premium-icon/icons/svg/2202/2202112.svg"
+            src={userData.avatar}
             id="avatar"
           />
           <i className="fas fa-sort-down avatar"></i>

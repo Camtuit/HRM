@@ -1,15 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import '../css/Login.css';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginRequest, loginLoad } from '../actions/loginAction';
+import constants from '../constants/htmlConstants';
 
-function Login() {
+export default function Login() {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
   const history = useHistory();
+  const dispatch = useDispatch();
   const [t, i18n] = useTranslation();
 
   const layout = {
@@ -32,25 +36,46 @@ function Login() {
       email: values.email,
       password: values.password,
     };
+    dispatch(loginLoad(data));
 
-    axios
-      .post(' http://api-php.dev-hrm.nals.vn/api/auth/login', data)
-      .then((res) => {
-        localStorage.setItem('token', res.data.meta.access_token);
-        localStorage.setItem('user', JSON.stringify(res.data.data));
+    //   axios
+    //     .post(' http://api-php.dev-hrm.nals.vn/api/auth/login', data)
+    //     .then((res) => {
+    //       localStorage.setItem('token', res.data.meta.access_token);
+    //       localStorage.setItem('user', JSON.stringify(res.data.data));
 
-        if (res.data.data.email === 'member@gmail.com') {
-          history.push('/profile/details');
-        } else {
-          history.push('/users');
-        }
-      })
-      .catch((err) => {
-        setIsPasswordCorrect(false);
-      });
+    //       if (res.data.data.email === 'member@gmail.com') {
+    //         history.push('/profile/details');
+    //       } else {
+    //         history.push('/users');
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       setIsPasswordCorrect(false);
+    //     });
   };
 
-  const onFinishFailed = (errorInfo) => {};
+  const { token, userData, status } = useSelector((state) => {
+    return {
+      token: state.Login.data && state.Login.data.data.meta.access_token,
+      userData: state.Login.data && state.Login.data.data.data,
+      status: state.Login.data && state.Login.data.status,
+      error: state.Login.data && state.Login.data.data.meta.errors,
+    };
+  });
+  if (status === 200) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(userData));
+
+    if (userData.email === 'admin@gmail.com') {
+      history.push('/users');
+    } else {
+      history.push('/profile/details');
+      console.log('222');
+    }
+  }
+  console.log(userData);
+  useEffect(() => {}, [token, userData, status]);
 
   const handleRememberMe = (event) => {
     if (event.target.checked === true) {
@@ -87,7 +112,7 @@ function Login() {
             password: localStorage.getItem('password'),
           }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          // onFinishFailed={onFinishFailed}
         >
           <Form.Item
             className="form-item"
@@ -134,5 +159,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

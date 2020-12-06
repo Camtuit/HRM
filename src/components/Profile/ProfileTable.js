@@ -11,7 +11,6 @@ import { UploadAvatarUser } from '../../apis/userApi';
 import { useHistory } from 'react-router-dom';
 
 export default function ProfileTable() {
-  const [idUsers, setIdUsers] = useState('15');
   const [userDetail, setUserDeatail] = useState('');
   const { t, i18n } = useTranslation();
   const [fileList, setFileList] = useState([]);
@@ -19,6 +18,8 @@ export default function ProfileTable() {
   const [avatar, setAvatar] = useState('');
   const [checkShowButton, setCheckShowButton] = useState(false);
   const history = useHistory();
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log();
   const onChange = ({ fileList: newFileList, file }) => {
     setFileList(newFileList);
     setCheckShowButton(false);
@@ -33,10 +34,11 @@ export default function ProfileTable() {
   const handleUpLoadAvatar = () => {
     try {
       const avatar = `http://api-php.dev-hrm.nals.vn/${files}`;
-      UploadAvatarUser(idUsers, avatar).then((res) => {
+      UploadAvatarUser(user.id, avatar).then((res) => {
         if (res !== RESPONSE_CODE[404]) {
           setAvatar(res.data.data.avatar);
           setCheckShowButton(false);
+          localStorage.setItem('user', JSON.stringify(res.data.data));
           history.push('/profile/details');
           location.reload();
         }
@@ -59,7 +61,7 @@ export default function ProfileTable() {
 
   useEffect(() => {
     try {
-      fetchUserDetail(idUsers).then((res) => {
+      fetchUserDetail(user.id).then((res) => {
         if (res !== RESPONSE_CODE[404]) {
           setUserDeatail(res.data.data);
           setAvatar(res.data.data.avatar);
