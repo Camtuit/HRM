@@ -35,6 +35,7 @@ function SkillRegistInput({ active, value }) {
   }, [value, form]);
 
   const handleLoading = (value) => {
+    console.log('valuessss', value);
     const message =
       value === t('button.SAVE_AND_QUIT') ||
       value === t('button.SAVE_AND_CONTINUE')

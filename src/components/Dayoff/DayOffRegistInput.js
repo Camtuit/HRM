@@ -49,6 +49,9 @@ function DayOffRegistInput({ value }) {
     if (current < moment(Date.now())) {
       return true;
     }
+    if (current > moment('31/01/2021')) {
+      return true;
+    }
     return false;
   }
   const handleChangeValue = (changedValues, allValues) => {
@@ -118,10 +121,11 @@ function DayOffRegistInput({ value }) {
     }
   };
   const handleLoading = (value) => {
+    console.log('object', value);
     const message =
-      value === t('button.SUBMIT') || value === t('button.SAVE_AND_CONTINUE')
+      value === t('button.SUBMIT')
         ? 'Created Successfull!'
-        : 'Updated Successfull!';
+        : 'Fail Successfull!';
     setTimeout(() => {
       Toast({ message });
       form.resetFields();
@@ -130,6 +134,7 @@ function DayOffRegistInput({ value }) {
   };
 
   const handleSetLoadings = (key) => {
+    console.log('keyyyyyyy', key);
     setLoadings((loadings) => {
       const newLoadings = { ...loadings };
       newLoadings[key] = true;
@@ -138,15 +143,6 @@ function DayOffRegistInput({ value }) {
   };
   const onFinish = (value) => {
     const dayOffList = value.days_off_lists;
-    const findDuplicates = (arr) =>
-      arr.filter((item, index) => arr.indexOf(item) !== index);
-    const vacationDayList = dayOffList.map((item) => {
-      return moment(item.vacation_day).format('DD/MM/YYYY');
-    });
-    if (dayOffList.length > 1 && findDuplicates(vacationDayList).length > 0) {
-      setIsDayOffDuplicated(true);
-    } else setIsDayOffDuplicated(false);
-
     const getUserId = {
       user_id: localStorage.getItem('user-id'),
     };
@@ -175,10 +171,9 @@ function DayOffRegistInput({ value }) {
           if (errorEmail) {
             handleEmailError(errorEmail);
           }
+          console.log(e.response);
           const convert = convertObjErrToArray(e.response.data.meta.errors);
           if (convert?.length > 0) handleError(convert);
-          const errorRemaningDay = e.response;
-          console.log(errorRemaningDay);
         });
     } catch (error) {
       return error;
@@ -197,7 +192,7 @@ function DayOffRegistInput({ value }) {
           {
             sessDay: errors[`days_off_lists.${indexOf}.session_day_id`],
             vacationDay: errors[`days_off_lists.${indexOf}.vacation_day`],
-            vacationType: errors[`days_off_lists.${indexOf}`],
+            vacationType: errors[`days_off_lists.${indexOf}.vacation_type_id`],
           },
         ]);
         j++;
@@ -213,7 +208,7 @@ function DayOffRegistInput({ value }) {
       },
     ]);
   };
-  const handleError = (convertErr, mailErr) => {
+  const handleError = (convertErr) => {
     setLoadings(initialLoadings);
     if (localStorage && localStorage.getItem('values')) {
       for (let i = 0; i < convertErr.length; i++) {
@@ -236,7 +231,7 @@ function DayOffRegistInput({ value }) {
               Number(convertErr[i][0]),
               'vacation_type_id',
             ],
-            errors: [`${convertErr[i][1].message}`],
+            errors: [`${convertErr[i][1].vacationType.message}`],
           },
         ]);
       }
