@@ -15,7 +15,7 @@ export async function createDayOff(dayoffs) {
   try {
     return await axiosClient.post('days-off', dayoffs);
   } catch (e) {
-    return RESPONSE_CODE[409];
+    return e;
   }
 }
 

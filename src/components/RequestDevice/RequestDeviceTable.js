@@ -60,7 +60,7 @@ export default function RequestDeviceTable({ match }) {
         <div className="request-table-action">
           <Tooltip placement="top" title="Approve">
             <span>
-              <i class="fas fa-check-square"></i>
+              <i Name="fas fa-check-square"></i>
             </span>
           </Tooltip>
 
@@ -68,7 +68,7 @@ export default function RequestDeviceTable({ match }) {
             <Tooltip placement="top" title="View">
               <Link to={`${match.url}/${value.id}`}>
                 <span>
-                  <i class="far fa-eye"></i>
+                  <i className="far fa-eye"></i>
                 </span>
               </Link>
             </Tooltip>
@@ -76,7 +76,7 @@ export default function RequestDeviceTable({ match }) {
 
           <Tooltip placement="top" title="Reject">
             <span>
-              <i class="fas fa-window-close"></i>
+              <i className="fas fa-window-close"></i>
             </span>
           </Tooltip>
 

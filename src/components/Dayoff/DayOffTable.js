@@ -137,7 +137,7 @@ function DayOffTable() {
             }));
             setData(newData);
             // console.log(res.data.meta.pagination.total);
-            // setTotalRecord(res.data.meta.pagination.total);
+            setTotalRecord(res.data.meta.pagination.total);
             // console.log(totalPage);
 
             setRecordPerPage(res.data.meta.pagination.per_page);
