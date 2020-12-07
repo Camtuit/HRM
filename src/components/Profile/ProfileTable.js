@@ -19,7 +19,7 @@ export default function ProfileTable() {
   const [checkShowButton, setCheckShowButton] = useState(false);
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log();
+
   const onChange = ({ fileList: newFileList, file }) => {
     setFileList(newFileList);
     setCheckShowButton(false);

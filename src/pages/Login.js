@@ -95,7 +95,6 @@ export default function Login() {
             password: localStorage.getItem('password'),
           }}
           onFinish={onFinish}
-          // onFinishFailed={onFinishFailed}
         >
           <Form.Item
             className="form-item"
