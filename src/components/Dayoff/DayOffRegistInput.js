@@ -16,7 +16,7 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Prompt } from 'react-router-dom';
-
+import axios from 'axios';
 import constant from '../../constants/htmlConstants';
 import { createDayOff } from '../../apis/dayOffApi';
 import { RESPONSE_CODE } from '../../constants/errorText';
@@ -32,6 +32,9 @@ function DayOffRegistInput({ value }) {
   const [visible, setVisible] = useState(!!localStorage.getItem('values'));
   const [componentSize, setComponentSize] = useState('default');
   const [visibleAdd, setVisibleAdd] = useState(true);
+  const [isAddNewButtonEnable, setIsAddNewButtonEnable] = useState(false);
+  const [isDayOffDuplicated, setIsDayOffDuplicated] = useState(false);
+  const [emailError, setEmailError] = useState('');
   const history = useHistory();
   const [form] = Form.useForm();
   const initialLoadings = {
@@ -42,37 +45,38 @@ function DayOffRegistInput({ value }) {
   const handleCancel = () => {
     history.push('/profile/details');
   };
+  function disabledDate(current) {
+    if (current < moment(Date.now())) {
+      return true;
+    }
+    return false;
+  }
   const handleChangeValue = (changedValues, allValues) => {
     localStorage.setItem('values', JSON.stringify(allValues));
-    const allValue = allValues.days_off_lists;
-    for (let i = 0; i < allValue.length; i++) {
-      if (
-        allValue[i] !== undefined &&
-        allValue[i].vacation_day &&
-        allValue[i].session_day_id &&
-        allValue[i].vacation_type_id
-      ) {
-        setVisibleAdd(false);
-      } else {
-        setVisibleAdd(true);
-      }
+    const dayOffList = allValues.days_off_lists;
+    const lastDayOff = dayOffList[dayOffList.length - 1];
+    if (!lastDayOff) {
+      setIsAddNewButtonEnable(false);
+    } else if (JSON.stringify(lastDayOff) === '{}') {
+      setIsAddNewButtonEnable(true);
+    } else if (
+      lastDayOff.session_day_id &&
+      lastDayOff.vacation_day &&
+      lastDayOff.vacation_type_id
+    ) {
+      setIsAddNewButtonEnable(true);
+    } else {
+      setIsAddNewButtonEnable(false);
     }
-    // validation the same date
-    // console.log('allValues', allValues.days_off_lists);
-    // const arrayValue = allValues.days_off_lists;
-    // const sameValue = arrayValue.map((item) => {
-    //   console.log('map', item);
-    //   return item.vacation_day;
-    // });
-    // const isDuplicate = sameValue.some((item, i) => {
-    //   return sameValue.indexOf(item) !== i;
-    // });
-    // console.log(isDuplicate);
   };
 
   const handleOk = () => {
     if (localStorage && localStorage.getItem('values')) {
       const dataInput = JSON.parse(localStorage.getItem('values'));
+      const lastDayOff =
+        dataInput.days_off_lists[dataInput.days_off_lists.length - 1];
+      const dayOffList = dataInput.days_off_lists;
+      const count = lastDayOff ? dayOffList.length : dayOffList.length - 1;
       form.setFieldsValue({
         po_name: dataInput.po_name,
         po_email: dataInput.po_email,
@@ -80,36 +84,49 @@ function DayOffRegistInput({ value }) {
         notes: dataInput.notes,
       });
 
-      for (let i = 0; i < dataInput.days_off_lists.length; i++) {
-        form.setFields([
-          {
-            name: ['days_off_lists', i, 'vacation_day'],
-            value: moment(dataInput.days_off_lists[i].vacation_day),
-          },
+      for (let i = 0; i < count; i += 1) {
+        const fieldUpdates = [
           {
             name: ['days_off_lists', i, 'session_day_id'],
-            value: dataInput.days_off_lists[i].session_day_id,
+            value: dayOffList[i].session_day_id,
           },
           {
             name: ['days_off_lists', i, 'vacation_type_id'],
-            value: dataInput.days_off_lists[i].vacation_type_id,
+            value: dayOffList[i].vacation_type_id,
           },
-        ]);
-        setVisibleAdd(false);
+        ];
+        if (dayOffList[i].vacation_day) {
+          fieldUpdates.push({
+            name: ['days_off_lists', i, 'vacation_day'],
+            value: moment(dayOffList[i].vacation_day),
+          });
+        }
+        form.setFields(fieldUpdates);
+      }
+      if (!lastDayOff) {
+        setIsAddNewButtonEnable(true);
+      } else if (
+        lastDayOff.session_day_id !== undefined &&
+        lastDayOff.vacation_day !== undefined &&
+        lastDayOff.vacation_type_id !== undefined
+      ) {
+        setIsAddNewButtonEnable(true);
+      } else {
+        setIsAddNewButtonEnable(false);
       }
       setVisible(false);
     }
   };
   const handleLoading = (value) => {
-    // const message =
-    //   value === t('button.SUBMIT') || value === t('button.SAVE_AND_CONTINUE')
-    //     ? 'Created Successfull!'
-    //     : 'Updated Successfull!';
-    // setTimeout(() => {
-    //   Toast({ message });
-    //   form.resetFields();
-    //   setLoadings(initialLoadings);
-    // }, constant.REQUEST_TIMEOUT);
+    const message =
+      value === t('button.SUBMIT') || value === t('button.SAVE_AND_CONTINUE')
+        ? 'Created Successfull!'
+        : 'Updated Successfull!';
+    setTimeout(() => {
+      Toast({ message });
+      form.resetFields();
+      setLoadings(initialLoadings);
+    }, constant.REQUEST_TIMEOUT);
   };
 
   const handleSetLoadings = (key) => {
@@ -119,48 +136,107 @@ function DayOffRegistInput({ value }) {
       return newLoadings;
     });
   };
-  const onFinish = (values) => {
-    // const getUserId = {
-    //   user_id: localStorage.getItem('user-id'),
-    // };
-    // const dayOffList = {};
-    // dayOffList.days_off_lists = values.days_off_lists.map(function (
-    //   element,
-    //   key,
-    // ) {
-    //   return {
-    //     index: key.length,
-    //     vacation_day: moment(element.vacation_day).format(constant.FORMAT_DATE),
-    //     session_day_id: element.session_day_id,
-    //     vacation_type_id: element.vacation_type_id,
-    //   };
-    // });
-    // const newData = { ...values, ...dayOffList, ...getUserId };
-    // try {
-    //   handleSetLoadings(value);
-    //   createDayOff(newData).then((response) => {
-    //     if (response !== RESPONSE_CODE[409]) handleLoading(value);
-    //     else {
-    //       console.log('errors', response);
-    //       handleError();
-    //     }
-    //   });
-    // } catch (error) {
-    //   return error;
-    // }
+  const onFinish = (value) => {
+    const dayOffList = value.days_off_lists;
+    const findDuplicates = (arr) =>
+      arr.filter((item, index) => arr.indexOf(item) !== index);
+    const vacationDayList = dayOffList.map((item) => {
+      return moment(item.vacation_day).format('DD/MM/YYYY');
+    });
+    if (dayOffList.length > 1 && findDuplicates(vacationDayList).length > 0) {
+      setIsDayOffDuplicated(true);
+    } else setIsDayOffDuplicated(false);
+
+    const getUserId = {
+      user_id: localStorage.getItem('user-id'),
+    };
+    const dayOff = {};
+    dayOff.days_off_lists = value.days_off_lists.map(function (element, key) {
+      return {
+        index: key.length,
+        vacation_day: moment(element.vacation_day).format(constant.FORMAT_DATE),
+        session_day_id: element.session_day_id,
+        vacation_type_id: element.vacation_type_id,
+      };
+    });
+    const newData = { ...value, ...dayOff, ...getUserId };
+    try {
+      handleSetLoadings(value);
+      axios
+        .post('http://api-java.dev-hrm.nals.vn/api/days-off', newData)
+        .then((res) => {
+          if (res !== RESPONSE_CODE[409]) {
+            handleLoading(value);
+            localStorage.removeItem('values');
+          }
+        })
+        .catch((e) => {
+          const errorEmail = e.response.data.meta.errors.po_email;
+          if (errorEmail) {
+            handleEmailError(errorEmail);
+          }
+          const convert = convertObjErrToArray(e.response.data.meta.errors);
+          if (convert?.length > 0) handleError(convert);
+          const errorRemaningDay = e.response;
+          console.log(errorRemaningDay);
+        });
+    } catch (error) {
+      return error;
+    }
   };
-  const handleError = () => {
+
+  function convertObjErrToArray(errors) {
+    const newArray = [];
+    const objArr = Object.keys(errors).map((key) => [key, errors[key]]);
+    let j = 0;
+    for (let i = 0; i < objArr.length; i += 2) {
+      const indexOf = objArr[j][0].split('.')[1];
+      if (indexOf) {
+        newArray.push([
+          indexOf,
+          {
+            sessDay: errors[`days_off_lists.${indexOf}.session_day_id`],
+            vacationDay: errors[`days_off_lists.${indexOf}.vacation_day`],
+            vacationType: errors[`days_off_lists.${indexOf}`],
+          },
+        ]);
+        j++;
+      }
+    }
+    return newArray;
+  }
+  const handleEmailError = (errorEmail) => {
+    form.setFields([
+      {
+        name: 'po_email',
+        errors: [errorEmail?.message || 'email is not valid'],
+      },
+    ]);
+  };
+  const handleError = (convertErr, mailErr) => {
+    setLoadings(initialLoadings);
     if (localStorage && localStorage.getItem('values')) {
-      const dataInput = JSON.parse(localStorage.getItem('values'));
-      for (let i = 0; i < dataInput.days_off_lists.length; i++) {
+      for (let i = 0; i < convertErr.length; i++) {
         form.setFields([
           {
-            name: ['days_off_lists', i, 'vacation_day'],
-            errors: [RESPONSE_CODE[409]],
+            name: ['days_off_lists', Number(convertErr[i][0]), 'vacation_day'],
+            errors: [`${convertErr[i][1].vacationDay.message}`],
           },
           {
-            name: ['days_off_lists', i, 'session_day_id'],
-            errors: [RESPONSE_CODE[409]],
+            name: [
+              'days_off_lists',
+              Number(convertErr[i][0]),
+              'session_day_id',
+            ],
+            errors: [`${convertErr[i][1].sessDay.message}`],
+          },
+          {
+            name: [
+              'days_off_lists',
+              Number(convertErr[i][0]),
+              'vacation_type_id',
+            ],
+            errors: [`${convertErr[i][1].message}`],
           },
         ]);
       }
@@ -169,6 +245,17 @@ function DayOffRegistInput({ value }) {
   const onCancel = () => {
     localStorage.removeItem('values');
     setVisible(false);
+  };
+  const handleSubmit = (event) => {
+    const valueButton = event.target.value;
+    form
+      .validateFields()
+      .then(() => {
+        onFinish(valueButton);
+      })
+      .catch((errorInfo) => {
+        return errorInfo;
+      });
   };
   return (
     <div className="dayoff-regist-input">
@@ -224,14 +311,14 @@ function DayOffRegistInput({ value }) {
               <Input placeholder={t('LABEL.PO_EMAIL')} />
             </Form.Item>
 
-            <Form.Item label={constant.LABEL.DAY} name="days_off">
+            <Form.Item label={constant.LABEL.DAY}>
               <Form.List name="days_off_lists">
                 {(fields, { add, remove }) => {
                   return (
                     <div>
                       {fields.map((field, index) => {
                         return (
-                          <Row>
+                          <Row key={index}>
                             <div className="day-of-regist-input-last-form">
                               <Space
                                 key={field.key}
@@ -251,6 +338,7 @@ function DayOffRegistInput({ value }) {
                                     ]}
                                   >
                                     <DatePicker
+                                      disabledDate={disabledDate}
                                       placeholder={constant.FORMAT_DATE}
                                       format={constant.FORMAT_DATE}
                                       style={{ width: 200 }}
@@ -332,12 +420,17 @@ function DayOffRegistInput({ value }) {
                                 ) : null}
                               </Space>
                             </div>
-                            {/* {handleError()} */}
                           </Row>
                         );
                       })}
                       <Form.Item>
-                        <Button onClick={() => add()} disabled={visibleAdd}>
+                        {isDayOffDuplicated && (
+                          <p style={{ color: 'red' }}>Duplicate</p>
+                        )}
+                        <Button
+                          onClick={() => add()}
+                          disabled={!isAddNewButtonEnable}
+                        >
                           {t('button.add')}
                         </Button>
                       </Form.Item>
@@ -367,8 +460,8 @@ function DayOffRegistInput({ value }) {
                 type="primary"
                 htmlType="submit"
                 loading={loadings[t('button.SUBMIT')]}
+                onClick={handleSubmit}
                 value={t('button.SUBMIT')}
-                onClick={handleLoading}
               >
                 {t('button.SUBMIT')}
               </Button>
