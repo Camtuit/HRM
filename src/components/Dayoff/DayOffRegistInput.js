@@ -37,6 +37,7 @@ function DayOffRegistInput({ value }) {
   const [emailError, setEmailError] = useState('');
   const history = useHistory();
   const [form] = Form.useForm();
+  const [loadingBtn, setLoadingBtn] = useState(false);
   const initialLoadings = {
     [t('button.SUBMIT')]: false,
   };
@@ -47,6 +48,9 @@ function DayOffRegistInput({ value }) {
   };
   function disabledDate(current) {
     if (current < moment(Date.now())) {
+      return true;
+    }
+    if (current > moment('31/01/2021')) {
       return true;
     }
     return false;
@@ -118,10 +122,9 @@ function DayOffRegistInput({ value }) {
     }
   };
   const handleLoading = (value) => {
+    console.log('object', value);
     const message =
-      value === t('button.SUBMIT') || value === t('button.SAVE_AND_CONTINUE')
-        ? 'Created Successfull!'
-        : 'Updated Successfull!';
+      value === t('button.SUBMIT') ? 'Faill errors' : 'Created Successfull!';
     setTimeout(() => {
       Toast({ message });
       form.resetFields();
@@ -137,16 +140,8 @@ function DayOffRegistInput({ value }) {
     });
   };
   const onFinish = (value) => {
+    setLoadingBtn(true);
     const dayOffList = value.days_off_lists;
-    const findDuplicates = (arr) =>
-      arr.filter((item, index) => arr.indexOf(item) !== index);
-    const vacationDayList = dayOffList.map((item) => {
-      return moment(item.vacation_day).format('DD/MM/YYYY');
-    });
-    if (dayOffList.length > 1 && findDuplicates(vacationDayList).length > 0) {
-      setIsDayOffDuplicated(true);
-    } else setIsDayOffDuplicated(false);
-
     const getUserId = {
       user_id: localStorage.getItem('user-id'),
     };
@@ -165,20 +160,20 @@ function DayOffRegistInput({ value }) {
       axios
         .post('http://api-java.dev-hrm.nals.vn/api/days-off', newData)
         .then((res) => {
+          setLoadingBtn(false);
           if (res !== RESPONSE_CODE[409]) {
             handleLoading(value);
             localStorage.removeItem('values');
           }
         })
         .catch((e) => {
+          setLoadingBtn(false);
           const errorEmail = e.response.data.meta.errors.po_email;
           if (errorEmail) {
             handleEmailError(errorEmail);
           }
           const convert = convertObjErrToArray(e.response.data.meta.errors);
           if (convert?.length > 0) handleError(convert);
-          const errorRemaningDay = e.response;
-          console.log(errorRemaningDay);
         });
     } catch (error) {
       return error;
@@ -197,7 +192,7 @@ function DayOffRegistInput({ value }) {
           {
             sessDay: errors[`days_off_lists.${indexOf}.session_day_id`],
             vacationDay: errors[`days_off_lists.${indexOf}.vacation_day`],
-            vacationType: errors[`days_off_lists.${indexOf}`],
+            vacationType: errors[`days_off_lists.${indexOf}.vacation_type_id`],
           },
         ]);
         j++;
@@ -213,11 +208,11 @@ function DayOffRegistInput({ value }) {
       },
     ]);
   };
-  const handleError = (convertErr, mailErr) => {
+  const handleError = (convertErr) => {
     setLoadings(initialLoadings);
     if (localStorage && localStorage.getItem('values')) {
       for (let i = 0; i < convertErr.length; i++) {
-        form.setFields([
+        const fieldsErr = [
           {
             name: ['days_off_lists', Number(convertErr[i][0]), 'vacation_day'],
             errors: [`${convertErr[i][1].vacationDay.message}`],
@@ -230,15 +225,23 @@ function DayOffRegistInput({ value }) {
             ],
             errors: [`${convertErr[i][1].sessDay.message}`],
           },
-          {
+        ];
+        if (convertErr[i][1].vacationType) {
+          fieldsErr.push({
             name: [
               'days_off_lists',
               Number(convertErr[i][0]),
               'vacation_type_id',
             ],
-            errors: [`${convertErr[i][1].message}`],
-          },
-        ]);
+            errors: [
+              `${
+                convertErr[i][1].vacationType?.message || 'some thing wrong'
+              } `,
+            ],
+          });
+        }
+
+        form.setFields(fieldsErr);
       }
     }
   };
@@ -459,7 +462,7 @@ function DayOffRegistInput({ value }) {
               <Button
                 type="primary"
                 htmlType="submit"
-                loading={loadings[t('button.SUBMIT')]}
+                loading={loadingBtn}
                 onClick={handleSubmit}
                 value={t('button.SUBMIT')}
               >

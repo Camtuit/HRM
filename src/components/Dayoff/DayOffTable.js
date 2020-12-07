@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { Breadcrumb, Button, Table, Tooltip } from 'antd';
 import { useHistory, useLocation } from 'react-router';
 import queryString from 'query-string';
-import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import Alert from '../commons/AlertCommon';
@@ -14,42 +13,27 @@ import constant from '../../constants/htmlConstants';
 import { RESPONSE_CODE } from '../../constants/errorText';
 
 import { displayDayOff, deleteDayOffById } from '../../apis/dayOffApi';
-import { callLoader, closeLoader } from '../../actions/utilsAction';
-import Toast from '../commons/ToastCommon';
 
 function DayOffTable() {
   const { search } = useLocation();
-
   const { t, i18n } = useTranslation();
   const history = useHistory();
-  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [recordPerPage, setRecordPerPage] = useState(null);
-  const [totalPage, setTotalRecord] = useState();
+  const [totalPage, setTotalRecord] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sort, setSort] = useState(null);
-  const [direct, setDirect] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const handleChangeEditDayOff = () => {
-    history.push('/dayoff/edit');
+    history.push('/dayoff');
   };
-  const handleDeleteDayOff = (id) => {
-    try {
-      dispatch(callLoader());
-      deleteDayOffById(id).then((res) => {
-        Toast({ message: t('MESSAGE.Deleted_Successfull') });
-        const newData = data.filter((item) => item.id !== id);
-        setData(newData);
-        dispatch(closeLoader());
-      });
-    } catch (error) {
-      Toast({ message: error });
-    }
-  };
+  const handleChangeRemoveDayOff = () => {};
   const PAGINATION_POSITION = {
     top: 'topRight',
     bottom: 'bottomRight',
   };
+  async function onChange(pagination, filters, sorter, extra) {
+    history.push(`/days-off?page=${pagination.current}`);
+  }
+
   const COLUMNS = [
     {
       title: t('TABLE.COLUMN_TITLE.NO'),
@@ -61,7 +45,6 @@ function DayOffTable() {
     {
       title: t('TABLE.COLUMN_TITLE.NAME'),
       dataIndex: 'full_name',
-      sorter: {},
     },
 
     {
@@ -72,7 +55,10 @@ function DayOffTable() {
     {
       title: t('TABLE.COLUMN_TITLE.DATE_OFF'),
       dataIndex: 'vacation_day',
-      sorter: {},
+      sorter: {
+        compare: (a, b) => a.dayOff - b.dayOff,
+        multiple: 1,
+      },
     },
 
     {
@@ -95,36 +81,25 @@ function DayOffTable() {
       key: 'empty',
       fixed: constant.TABLE.COLUMN_FIXED.RIGHT,
       width: 100,
-      render: (value) => (
+      render: () => (
         <div className="dayoff-table-action">
           <Tooltip title={t('toolip.TITLE.EDIT')}>
             <i className="fas fa-edit" onClick={handleChangeEditDayOff} />
           </Tooltip>
           <RemovePopupCommon
-            title={t('MESSAGE.delete_request')}
-            content={`${t('MESSAGE.delete')} ${value.vacation_day}?`}
-            onOk={(id) => {
-              handleDeleteDayOff(value.id);
-            }}
+            title="Delete request"
+            content="Are you sure delete"
+            onOk={() => console.log('true')}
           />
         </div>
       ),
     },
   ];
-  async function onChange(pagination, filters, sorter, extra) {
-    history.push(`/days-off?page=${pagination.current}`);
-    setSort('fullName');
-    if (sorter.order === constant.SORT.ASCEND) {
-      setDirect(constant.SORT.ASC);
-    } else {
-      setDirect(constant.SORT.DESC);
-    }
-  }
 
   useEffect(() => {
     const parsed = queryString.parse(search);
     try {
-      displayDayOff({ ...parsed, sort, direct })
+      displayDayOff({ ...parsed })
         .then((res) => {
           if (res !== RESPONSE_CODE[404]) {
             const newData = res.data.data.map((item, index) => ({
@@ -136,10 +111,7 @@ function DayOffTable() {
                 9,
             }));
             setData(newData);
-            // console.log(res.data.meta.pagination.total);
             setTotalRecord(res.data.meta.pagination.total);
-            // console.log(totalPage);
-
             setRecordPerPage(res.data.meta.pagination.per_page);
             setCurrentPage(res.data.meta.pagination.current_page);
           } else {
@@ -149,7 +121,6 @@ function DayOffTable() {
               content: RESPONSE_CODE[404],
             });
           }
-          setIsLoading(false);
         })
         .catch((error) => {
           return error;
@@ -157,17 +128,17 @@ function DayOffTable() {
     } catch (err) {
       setData([]);
     }
-  }, [search, sort, direct]);
+  }, [search]);
 
   return (
-    <div className="data-table">
-      <div className="button-table-group">
-        <Button className="data-table-button" type="primary">
-          {t('button.export_file')}
-        </Button>
-      </div>
+    <div className="dayoff-table">
+      <Button className="dayoff-table-button" type="primary">
+        {t('button.export_file')}
+      </Button>
+      {console.log('ok')}
       <Table
         rowKey={'id'}
+        className="dayoff-table-layout"
         bordered
         columns={COLUMNS}
         dataSource={data}
@@ -178,7 +149,6 @@ function DayOffTable() {
           total: totalPage,
           current: parseInt(currentPage),
         }}
-        loading={isLoading}
       />
     </div>
   );
