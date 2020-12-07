@@ -7,7 +7,7 @@ function PrivateRoute({ path, component }) {
   return token ? (
     <Route exact path={path} component={component} />
   ) : (
-    <Redirect to="/login" />
+    <Redirect to="/error/401" />
   );
 }
 

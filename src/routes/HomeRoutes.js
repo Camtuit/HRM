@@ -56,6 +56,7 @@ export default function HomeRoutes() {
         <Route path="/devices" component={DeviceRoute} />
         <PrivateRoute path="/device" component={() => {}} />
         {/* Home page */}
+        <PrivateRoute path="/profile" component={ProfileRoutes} />
         <Route path="/profile" component={ProfileRoutes} />
         <PrivateRoute path="/" component={UserList} />
         <Route path="/" component={UserList} />
