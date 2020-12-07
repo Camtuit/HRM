@@ -153,5 +153,10 @@
     "name": "Name",
     "day_off": "Day Off",
     "quick_choose": "Quick selection of day off"
+  },
+  "profile": {
+    "my_profile": "My profile",
+    "request_divice": "Request divice",
+    "logout": "Logout"
   }
 }

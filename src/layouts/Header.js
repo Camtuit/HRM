@@ -10,9 +10,11 @@ import ReactLogo from '../assets/images/nal_logo.svg';
 import textLabel, { LIST } from '../constants/textLabel';
 import types from '../constants/apiResourceTypes';
 import AppActions from '../redux/App/action';
+import { useTranslation } from 'react-i18next';
 
 function Header() {
   const history = useHistory();
+  const [t, i18n] = useTranslation();
   const [name, setName] = useState('Phạm Thị Cẩm Tú');
   const [isProfileBoxOpen, setIsProfileBoxOpen] = useState(false);
   const [checkLogin, setcheckLogin] = useState('Logout');
@@ -42,6 +44,7 @@ function Header() {
   };
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     history.push('/login');
   };
 
@@ -53,7 +56,7 @@ function Header() {
             <ReactLogo className="logo" alt="Logo" />
             {toggledSideBar ? (
               <span>
-                <b>NAL</b>Hrm
+                <b>{t('login.nals')}</b>Hrm
               </span>
             ) : (
               ''
@@ -90,13 +93,13 @@ function Header() {
                 backgroundColor: isProfileBoxOpen ? 'white' : '#e6f7ff',
               }}
             >
-              {LIST.Hi} {name}
+              {LIST.Hi} {userData.full_name}
             </Menu.Item>
             <Menu.Item>
-              <Link to="/profile/details">{LIST.MY_PROFILE}</Link>
+              <Link to="/profile/details">{t('profile.my_profile')}</Link>
             </Menu.Item>
             <Menu.Item>
-              <Link to="/request-devices">{LIST.REQUEST_DEVICE}</Link>
+              <Link to="/request-devices">{t('profile.request_divice')}</Link>
             </Menu.Item>
             <Menu.Item>
               <Link
@@ -104,7 +107,7 @@ function Header() {
                 className="check-login-logout"
                 onClick={handleLogout}
               >
-                {LIST.LOGOUT}
+                {t('profile.logout')}
               </Link>
             </Menu.Item>
           </Menu>

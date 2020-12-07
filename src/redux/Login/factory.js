@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const factories = {
   Login: (data) => {
     const url = process.env.API_URL || 'http://api-php.dev-hrm.nals.vn/api';

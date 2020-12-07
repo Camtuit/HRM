@@ -37,22 +37,6 @@ export default function Login() {
       password: values.password,
     };
     dispatch(loginLoad(data));
-
-    //   axios
-    //     .post(' http://api-php.dev-hrm.nals.vn/api/auth/login', data)
-    //     .then((res) => {
-    //       localStorage.setItem('token', res.data.meta.access_token);
-    //       localStorage.setItem('user', JSON.stringify(res.data.data));
-
-    //       if (res.data.data.email === 'member@gmail.com') {
-    //         history.push('/profile/details');
-    //       } else {
-    //         history.push('/users');
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       setIsPasswordCorrect(false);
-    //     });
   };
 
   const { token, userData, status } = useSelector((state) => {
@@ -71,10 +55,9 @@ export default function Login() {
       history.push('/users');
     } else {
       history.push('/profile/details');
-      console.log('222');
     }
   }
-  console.log(userData);
+
   useEffect(() => {}, [token, userData, status]);
 
   const handleRememberMe = (event) => {
