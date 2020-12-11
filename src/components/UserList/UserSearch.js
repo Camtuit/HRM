@@ -106,6 +106,7 @@ function UserSearch() {
               placeholder={t('TABLE.COLUMN_TITLE.STATUS')}
               class="form-control"
             >
+              <option value=""> {t('TABLE.COLUMN_TITLE.STATUS')}</option>
               <option value="0"> {t('RADIO_INPUT.SIGNED')}</option>
               <option value="1"> {t('RADIO_INPUT.RESIGNED')}</option>
             </select>
@@ -127,7 +128,7 @@ function UserSearch() {
                 {' '}
                 {t('RADIO_INPUT.ALL')}
               </option>
-              <option value={initialState.employee_status.active}>
+              <option selected value={initialState.employee_status.active}>
                 {' '}
                 {t('RADIO_INPUT.AVAILABLE')}
               </option>
@@ -163,11 +164,12 @@ function UserSearch() {
               placeholder={t('TABLE.COLUMN_TITLE.STATUS')}
               className="form-control"
             >
-              <option value="0"> {t('RADIO_INPUT.TODAY')}</option>
-              <option value="1"> {t('RADIO_INPUT.THIS_WEEK')}</option>
-              <option value="2"> {t('RADIO_INPUT.LAST_WEEK')}</option>
-              <option value="3"> {t('RADIO_INPUT.THIS_MONTH')}</option>
-              <option value="4"> {t('RADIO_INPUT.LAST_MONTH')}</option>
+              <option> {t('RADIO_INPUT.QUICK_CHOOSE')}</option>
+              <option value={0}> {t('RADIO_INPUT.TODAY')}</option>
+              <option value={1}> {t('RADIO_INPUT.THIS_WEEK')}</option>
+              <option value={2}> {t('RADIO_INPUT.LAST_WEEK')}</option>
+              <option value={3}> {t('RADIO_INPUT.THIS_MONTH')}</option>
+              <option value={4}> {t('RADIO_INPUT.LAST_MONTH')}</option>
             </select>
           </div>
         </div>

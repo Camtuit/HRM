@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { Button, Tooltip, Modal, Switch } from 'antd';
-import { useHistory } from 'react-router';
 import UserSearch from '../UserSearch';
 import constant from '../../../constants/htmlConstants';
 import ComponentTheadTable from './ComponentTheahTable';
@@ -34,7 +33,6 @@ function Index({
   const [rerender, setRerender] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState({});
-  const history = useHistory();
 
   const [page, setPage] = useState(1);
   console.log(page);
@@ -104,7 +102,6 @@ function Index({
           setTotalRecord(res.data.meta.pagination.total);
           setRecordPerPage(res.data.meta.pagination.per_page);
           setCurrentPage(res.data.meta.pagination.current_page);
-
           setLastPage(res.data.meta.pagination.last_page);
         }
         setIsLoading(false);

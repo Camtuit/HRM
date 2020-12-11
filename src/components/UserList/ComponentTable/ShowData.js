@@ -10,7 +10,6 @@ import constant from '../../../constants/htmlConstants';
 function ShowData(props) {
   const { usersDatas, columns, currentPage, recordPerPage } = props;
   const history = useHistory();
-  console.log(usersDatas);
   const [currentUser, setCurrentUser] = useState({});
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [rerender, setRerender] = useState(false);
@@ -31,7 +30,6 @@ function ShowData(props) {
       return c.dataIndex;
     });
 
-  console.log(usersDatas);
   const userDataTable =
     usersDatas &&
     usersDatas.map((user, index) => {

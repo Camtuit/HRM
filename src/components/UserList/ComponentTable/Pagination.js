@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 function Pagination(props) {
   const { userData, currentPage, newsPerPage, lastPage, onChagnePage } = props;
+
   const [currentPages, setCurrentPage] = useState('');
   const chosePage = (numberPage) => {
-    // setCurrentPage(Number(event.target.id));
-    console.log(numberPage);
     onChagnePage(numberPage);
   };
 

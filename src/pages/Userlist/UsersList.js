@@ -9,8 +9,9 @@ function UsersList() {
   return (
     <div>
       <WrapperContent>
-        <UserSearch> </UserSearch>
-        {/* <UserSearchBox /> */}
+        <h2 className="list-title">{t('USER.USER_LIST')}</h2>
+        <UserSearch />
+
         <Index />
       </WrapperContent>
     </div>
