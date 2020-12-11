@@ -5,6 +5,7 @@ import Header from '../layouts/Header';
 import SideBar from '../layouts/SideBar';
 // User
 import UserRoutes from './UserRoutes';
+import UsersList from '../pages/Userlist/UsersList';
 import UserList from '../pages/User/UserList';
 import UserRegist from '../pages/User/UserRegist';
 // Holiday
@@ -38,6 +39,8 @@ export default function HomeRoutes() {
         {/* Users */}
         <PrivateRoute path="/users" component={UserRoutes} />
         <PrivateRoute path="/user" component={UserRegist} />
+        <PrivateRoute path="/userslist" component={UsersList} />
+
         {/* Holiday */}
         <PrivateRoute path="/holidays" component={HolidayList} />
         {/* Skill */}
@@ -56,8 +59,10 @@ export default function HomeRoutes() {
         <Route path="/devices" component={DeviceRoute} />
         <PrivateRoute path="/device" component={() => {}} />
         {/* Home page */}
-        <PrivateRoute path="/profile" component={ProfileRoutes} />
         <Route path="/profile" component={ProfileRoutes} />
+        <PrivateRoute path="/profile" component={ProfileRoutes} />
+
+        <Route path="/userlist" component={UsersList} />
         <PrivateRoute path="/" component={UserList} />
         <Route path="/" component={UserList} />
       </Switch>

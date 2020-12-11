@@ -45,7 +45,7 @@ export async function changeUserStatusById(userId) {
 }
 export async function UploadAvatarUser(userId, avatar) {
   const params = {
-    avatar: avatar,
+    avatar,
   };
   try {
     return await axiosClientPHP.put(`users/${userId}`, params);

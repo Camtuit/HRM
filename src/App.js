@@ -9,7 +9,7 @@ const store = configureStore();
 
 function App() {
   return (
-    <div className="container">
+    <div>
       <ReduxProvider store={store}>
         <Routes />
       </ReduxProvider>

@@ -1,0 +1,70 @@
+.search-box {
+    border: 1px solid #e3e3e3;
+    margin: 0 20px;
+    padding: 15px 0px 0px 0px;
+    &__item {
+      // width: 20%;
+    }
+    &__item--name,
+    &__item--input {
+      // width: 40%;
+    }
+    &__item--holder,
+    &__item--quick-choose {
+      // margin-left: 20px;
+      // width: 30%;
+    }
+    &__item--quick-choose {
+      // justify-self: flex-end;
+    }
+    &__item--status {
+      // margin-left: 20px;
+    }
+    &__item--status.user-status-input {
+      margin-left: 40px;
+    }
+    .input-picker {
+      // width: 100%;
+    }
+    &__buttons {
+      .btn-cancel {
+        // margin-left: auto;
+        // margin-right: 15px;
+      }
+    }
+    .ant-row {
+      height: 60px;
+    }
+    .ant-form {
+      padding: 10px 0px 0px 30px
+    }
+    .ant-picker-range {
+      width: 100%
+    }
+    .search-box-button {
+      @include flex(row, flex-end);
+      padding-right: 8%;
+      .buttons {
+        margin-left: auto;
+      }
+    }
+    @include laptop() {
+      &__item {
+        // width: 30%;
+      }
+      &__item--name,
+      &__item--input {
+        // width: 40%;
+      }
+      &__item--status {
+        // width: 25%;
+        // margin-left: auto;
+      }
+      &__item--holder {
+        // width: 25%;
+      }
+    }
+  }
+.ant-picker-range{
+   padding: 6px 12px;
+}  

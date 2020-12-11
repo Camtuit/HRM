@@ -88,18 +88,19 @@ function UserSearchBox({
     setPage(1);
   };
   const handleCancel = () => {
-    setCurrentContractStatus();
-    setCurrentFullName('');
-    setCurrentContractDateBegin('');
-    setCurrentContractDateEnd('');
-    setCurrentEmployeeStatus(1);
-    setQuickChooseValue();
-    setContractStatus('');
-    setFullName('');
-    setContractDateBegin('');
-    setContractDateEnd('');
-    setEmployeeStatus(1);
-    setPage(1);
+    document.getElementById('myForm').reset();
+    // setCurrentContractStatus();
+    // setCurrentFullName('');
+    // setCurrentContractDateBegin('');
+    // setCurrentContractDateEnd('');
+    // setCurrentEmployeeStatus(1);
+    // setQuickChooseValue();
+    // setContractStatus('');
+    // setFullName('');
+    // setContractDateBegin('');
+    // setContractDateEnd('');
+    // setEmployeeStatus(1);
+    // setPage(1);
   };
 
   return (

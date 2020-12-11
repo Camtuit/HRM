@@ -67,7 +67,7 @@ function UserTable({
     direct,
     rerender,
   ]);
-
+  console.log(page);
   const usersData = users.map((user, index) => {
     const usersFiltered = {
       key: user.id,

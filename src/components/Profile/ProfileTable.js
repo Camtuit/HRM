@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form } from 'antd';
-import Toast from '../commons/ToastCommon';
+import { Button, Form, Upload, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import Toast from '../commons/ToastCommon';
 import { RESPONSE_CODE } from '../../constants/errorText';
 import { fetchUserDetail } from '../../apis/ProfileUserApi';
-import { Upload, message } from 'antd';
+
 import { closeLoader, callLoader } from '../../actions/utilsAction';
 import { UploadAvatarUser } from '../../apis/userApi';
-import { useHistory } from 'react-router-dom';
 
 export default function ProfileTable() {
   const [userDetail, setUserDeatail] = useState('');

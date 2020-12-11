@@ -1,4 +1,5 @@
 import LoginType from './action';
+
 const { LOGIN_REQUEST, LOGIN_ERROR, LOGIN_SUCCESS, LOGIN_LOAD } = LoginType;
 const initState = {
   loading: false,
