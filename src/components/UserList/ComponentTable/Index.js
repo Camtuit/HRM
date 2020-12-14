@@ -10,11 +10,9 @@ import { displayUsers, changeUserStatusById } from '../../../apis/userApi';
 import Toast from '../../commons/ToastCommon';
 import ConfirmPopupCommon from '../../commons/ConfirmPopupCommon';
 
-import Pagination from './Pagination';
+import Pagination from '../../commons/Pagination';
 import TheadCommon from '../../commons/TheadCommon ';
 import TbodyCommon from '../../commons/TbodyCommon';
-
-
 
 function Index({
   fullName,
@@ -100,7 +98,7 @@ function Index({
 
       return usersFiltered;
     });
-   
+
   const column = [
     {
       title: t('TABLE.COLUMN_TITLE.NO'),
@@ -130,22 +128,23 @@ function Index({
     {
       title: t('TABLE.COLUMN_TITLE.EMPLOYEE_STATUS'),
       dataIndex: 'employee_status',
-      render: (usersData , record) => {
-        return <Switch
-          onChange={(checked) => hanldOnChange(record, checked)}
-          checkedChildren="Available"
-          unCheckedChildren="Inactive"
-         checked={usersData}
-        /> 
-      }
+      render: (usersData, record) => {
+        return (
+          <Switch
+            onChange={(checked) => hanldOnChange(record, checked)}
+            checkedChildren="Available"
+            unCheckedChildren="Inactive"
+            checked={usersData}
+          />
+        );
+      },
     },
     {
       title: t('TABLE.COLUMN_TITLE.STATUS'),
       dataIndex: 'contract_status',
-      render : (value)=>{
-      return(value === 1 ? <span>Resigned</span> : <span>Signed</span>)
-        
-      }
+      render: (value) => {
+        return value === 1 ? <span>Resigned</span> : <span>Signed</span>;
+      },
     },
 
     {
@@ -154,44 +153,43 @@ function Index({
       action: true,
       render: (text, record) => {
         return (
-        <Tooltip title={t('toolip.TITLE.EDIT')}>
-          <span>
-            <i className="fas fa-edit skill-popup-common-icon"></i>
-          </span>
-        </Tooltip>
+          <Tooltip title={t('toolip.TITLE.EDIT')}>
+            <span>
+              <i className="fas fa-edit skill-popup-common-icon"></i>
+            </span>
+          </Tooltip>
         );
-      }
+      },
     },
   ];
-    const hanldSortor = (direct, sortor)=>{
-    setDirect(sortor? 'desc': 'asc');
-    setSort(direct ? 'contract_status' : 'full_name' )
-    }
-    function hanldOnChange(usersData, checked) {
-      setCurrentUser(usersData.action);
-      console.log(usersData);
-      setRerender(!rerender);
-      setIsPopupOpen(true);
-    }
-   
-    function closePopup() {
-      setRerender(Math.random());
-      setIsPopupOpen(false);
-    }
-    const handleChangeUserStatus = () => {
-      setIsPopupOpen(false);
-      setRerender(!rerender);
-  console.log(currentUser);
-      changeUserStatusById(currentUser.id)
-        .then((res) => {
-          Toast({ message: 'Change Status Successfull!' });
-          history.push('/userslist');
-          location.reload();
-        })
-        .catch((error) => {
-          Toast({ message: 'Change Status Successfull!' });
-        });
-    };
+  const hanldSortor = (direct, sortor) => {
+    setSort(direct);
+    setDirect(sortor ? 'desc' : 'asc');
+  };
+
+  function hanldOnChange(usersData, checked) {
+    setCurrentUser(usersData.action);
+    setRerender(!rerender);
+    setIsPopupOpen(true);
+  }
+
+  function closePopup() {
+    setRerender(Math.random());
+    setIsPopupOpen(false);
+  }
+  const handleChangeUserStatus = () => {
+    setIsPopupOpen(false);
+    setRerender(!rerender);
+    changeUserStatusById(currentUser.id)
+      .then((res) => {
+        Toast({ message: 'Change Status Successfull!' });
+        history.push('/userslist');
+        location.reload();
+      })
+      .catch((error) => {
+        Toast({ message: 'Change Status Successfull!' });
+      });
+  };
   return (
     <>
       <div className="search-box">
@@ -227,22 +225,26 @@ function Index({
         </div>
         <div>
           <table className="table table-light table-bordered table-hover">
-            <TheadCommon columns={column} onChangeSortor = {(direct,sortor) => hanldSortor(direct,sortor)} />
-            <TbodyCommon usersDatas={usersData}
+            <TheadCommon
+              columns={column}
+              onChangeSortor={(direct, sortor) => hanldSortor(direct, sortor)}
+            />
+            <TbodyCommon
+              usersDatas={usersData}
               columns={column}
               currentPage={currentPage}
-              newsPerPage={recordPerPage} />
-             
+              newsPerPage={recordPerPage}
+            />
           </table>
           <ConfirmPopupCommon
-                title={'Change Employee Status'}
-                content={`Would you like to change the status of "${currentUser.useName}"?`}
-                visible={isPopupOpen}
-                handleOk={handleChangeUserStatus}
-                handleCancel={closePopup}
-              />
+            title={'Change Employee Status'}
+            content={`Would you like to change the status of "${currentUser.useName}"?`}
+            visible={isPopupOpen}
+            handleOk={handleChangeUserStatus}
+            handleCancel={closePopup}
+          />
         </div>
-        <div style={{ paddingTop: ' 20px ' }}>
+        <div style={{ paddingTop: '20px' }}>
           <Pagination
             onChagnePage={(numberPage) => setPage(numberPage)}
             userData={users}
