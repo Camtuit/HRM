@@ -176,7 +176,7 @@ function UserSearch() {
 
         <div className="col-4">
           <div className="search-box-button">
-            <button className="btn btn-outline-primary" onclick={hanldReset}>
+            <button className="btn btn-outline-primary" onClick={hanldReset}>
               Reset
             </button>
             <button className="btn btn-primary">{t('button.search')}</button>

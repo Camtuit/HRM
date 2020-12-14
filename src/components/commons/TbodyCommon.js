@@ -7,14 +7,14 @@ function TbodyCommon(props) {
   const userDataTable =
     usersDatas &&
     usersDatas.map((user, index) => {
-      const cols = columns.map((col) => {
+      const cols = columns.map((col, key) => {
         if (col.render) {
-          return <td>{col.render(user[col.dataIndex], user)}</td>;
+          return <td key = {key}>{col.render(user[col.dataIndex], user)}</td>;
         }
-        return <td>{user[col.dataIndex]}</td>;
+        return <td key = {key}>{user[col.dataIndex]}</td>;
       });
 
-      return <tr>{cols}</tr>;
+      return <tr key={index}>{cols}</tr>;
     });
 
 

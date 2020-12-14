@@ -6,15 +6,14 @@ import moment from 'moment';
 import { Button, Tooltip, Modal, Switch } from 'antd';
 import UserSearch from '../UserSearch';
 import constant from '../../../constants/htmlConstants';
-import ComponentTheadTable from './ComponentTheahTable';
 import { displayUsers, changeUserStatusById } from '../../../apis/userApi';
 import Toast from '../../commons/ToastCommon';
 import ConfirmPopupCommon from '../../commons/ConfirmPopupCommon';
-import ShowData from './ShowData';
+
 import Pagination from './Pagination';
 import TheadCommon from '../../commons/TheadCommon ';
 import TbodyCommon from '../../commons/TbodyCommon';
-// import ConfirmPopupCommon from '../../commons/ConfirmPopupCommon';
+
 
 
 function Index({
@@ -233,14 +232,15 @@ function Index({
               columns={column}
               currentPage={currentPage}
               newsPerPage={recordPerPage} />
-              <ConfirmPopupCommon
+             
+          </table>
+          <ConfirmPopupCommon
                 title={'Change Employee Status'}
-                content={`Do you want change status for user "${currentUser.useName}"?`}
+                content={`Would you like to change the status of "${currentUser.useName}"?`}
                 visible={isPopupOpen}
                 handleOk={handleChangeUserStatus}
                 handleCancel={closePopup}
               />
-          </table>
         </div>
         <div style={{ paddingTop: ' 20px ' }}>
           <Pagination
